@@ -16,7 +16,8 @@ struct ClueBoxStyle: View {
         ZStack {
             RoundedRectangle(cornerRadius: 20)
                 .foregroundStyle(boxColour)
-                .frame(width: 80, height: 80)
+                .aspectRatio(1, contentMode: .fit)
+                //.frame(width: 80, height: 80)
             Text(clueBoxText)
                 .foregroundStyle(textColour)
                 .font(.system(size: 13, weight: .bold, design: .rounded))

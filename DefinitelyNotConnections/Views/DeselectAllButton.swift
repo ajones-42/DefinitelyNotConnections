@@ -14,14 +14,7 @@ struct DeselectAllButton: View {
         Button {
             connectionsGameModel.deselectAll()
         } label: {
-            ZStack {
-                RoundedRectangle(cornerRadius: 20)
-                    .foregroundStyle(connectionsGameModel.deselectAllBoxColour)
-                    .frame(width: 80, height: 40)
-                Text("Deselect All")
-                    .foregroundStyle(connectionsGameModel.deselectAllTextColour)
-                    .font(.system(size: 13, weight: .bold, design: .rounded))
-            }
+            NormalButton(text: "Deselect All", boxColour: connectionsGameModel.deselectAllBoxColour, textColour: connectionsGameModel.deselectAllTextColour)
         }
     }
 }

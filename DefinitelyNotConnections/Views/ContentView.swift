@@ -14,6 +14,7 @@ struct ContentView: View {
             Text("Create four groups of four!")
                 .foregroundStyle(.black)
             ClueBoxGrid(connectionsGameModel: $connectionsGameModel)
+                .padding(.horizontal)
             MistakesRemaining(connectionsGameModel: $connectionsGameModel)
             HStack {
                 DeselectAllButton(connectionsGameModel: $connectionsGameModel)
