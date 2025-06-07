@@ -8,17 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var connectionsGameModel: ConnectionsGameModel = ConnectionsGameModel()
+    let connectionsGameViewModel: ConnectionsGameViewModel
+
     var body: some View {
         VStack {
             Text("Create four groups of four!")
                 .foregroundStyle(.black)
-            ClueBoxGrid(connectionsGameModel: $connectionsGameModel)
+            ClueBoxGrid(connectionsGameViewModel: connectionsGameViewModel)
                 .padding(.horizontal)
-            MistakesRemaining(connectionsGameModel: $connectionsGameModel)
+            MistakesRemaining(connectionsGameViewModel: connectionsGameViewModel)
             HStack {
-                DeselectAllButton(connectionsGameModel: $connectionsGameModel)
-                SubmitButton(connectionsGameModel: $connectionsGameModel)
+                DeselectAllButton(connectionsGameViewModel: connectionsGameViewModel)
+                SubmitButton(connectionsGameViewModel: connectionsGameViewModel)
             }
         }
     }
@@ -26,6 +27,7 @@ struct ContentView: View {
 
 
 #Preview {
-    ContentView()
+    let connectionsGameViewModel: ConnectionsGameViewModel = ConnectionsGameViewModel()
+    ContentView(connectionsGameViewModel: connectionsGameViewModel)
 }
 

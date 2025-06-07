@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct SubmitButton: View {
-    @Binding var connectionsGameModel: ConnectionsGameModel
+    //@Environment(ConnectionsGameViewModel.self) private var connectionsGameViewModel: ConnectionsGameViewModel
+    let connectionsGameViewModel: ConnectionsGameViewModel
     
     var body: some View {
         Button {
-            connectionsGameModel.clickSubmit()
+            connectionsGameViewModel.clickSubmit()
         } label: {
-            NormalButton(text: "Submit", boxColour: connectionsGameModel.submitBoxColour, textColour: connectionsGameModel.submitTextColour)
+            NormalButton(text: "Submit", boxColour: connectionsGameViewModel.submitBoxColour, textColour: connectionsGameViewModel.submitTextColour)
         }
     }
 }

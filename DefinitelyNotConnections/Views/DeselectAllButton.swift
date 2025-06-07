@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct DeselectAllButton: View {
-    @Binding var connectionsGameModel: ConnectionsGameModel
+    // @Environment(ConnectionsGameViewModel.self) private var connectionsGameViewModel: ConnectionsGameViewModel
+    let connectionsGameViewModel: ConnectionsGameViewModel
     
     var body: some View {
         Button {
-            connectionsGameModel.deselectAll()
+            connectionsGameViewModel.clickDeselectAll()
         } label: {
-            NormalButton(text: "Deselect All", boxColour: connectionsGameModel.deselectAllBoxColour, textColour: connectionsGameModel.deselectAllTextColour)
+            NormalButton(text: "Deselect All", boxColour: connectionsGameViewModel.deselectAllBoxColour, textColour: connectionsGameViewModel.deselectAllTextColour)
         }
     }
 }

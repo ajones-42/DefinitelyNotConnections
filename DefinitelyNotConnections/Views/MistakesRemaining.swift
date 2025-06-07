@@ -8,23 +8,24 @@
 import SwiftUI
 
 struct MistakesRemaining: View {
-    @Binding var connectionsGameModel: ConnectionsGameModel
+    //@Environment(ConnectionsGameViewModel.self) private var connectionsGameViewModel: ConnectionsGameViewModel
+    let connectionsGameViewModel: ConnectionsGameViewModel
     
     var body: some View {
         HStack {
             Text("Mistakes remaining:")
                 .fontWeight(.semibold)
             Circle()
-                .foregroundStyle(connectionsGameModel.mistakesRemainingCircle1Colour)
+                .foregroundStyle(connectionsGameViewModel.mistakesRemainingCircle1Colour)
                 .frame(width: 15)
             Circle()
-                .foregroundStyle(connectionsGameModel.mistakesRemainingCircle2Colour)
+                .foregroundStyle(connectionsGameViewModel.mistakesRemainingCircle2Colour)
                 .frame(width: 15)
             Circle()
-                .foregroundStyle(connectionsGameModel.mistakesRemainingCircle3Colour)
+                .foregroundStyle(connectionsGameViewModel.mistakesRemainingCircle3Colour)
                 .frame(width: 15)
             Circle()
-                .foregroundStyle(connectionsGameModel.mistakesRemainingCircle4Colour)
+                .foregroundStyle(connectionsGameViewModel.mistakesRemainingCircle4Colour)
                 .frame(width: 15)
         }
     }
