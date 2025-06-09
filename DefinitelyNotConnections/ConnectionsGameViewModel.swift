@@ -44,6 +44,10 @@ class ConnectionsGameViewModel {
         connectionsGameModel.clueBoxes
     }
     
+    var categories: [ConnectionsGameModel.Category] {
+        connectionsGameModel.categories
+    }
+    
     func clickClueBox(clueBox: ConnectionsGameModel.ClueBox) {
         connectionsGameModel.clickBox(clueBox: clueBox)
     }

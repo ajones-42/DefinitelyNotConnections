@@ -12,12 +12,19 @@ struct ClueBoxGrid: View {
     let connectionsGameViewModel: ConnectionsGameViewModel
     
     var body: some View {
-        LazyVGrid(columns: [GridItem(), GridItem(), GridItem(), GridItem()]) {
-            ForEach(connectionsGameViewModel.clueBoxes) { clueBox in
-                ClueBoxStyle(clueBox: clueBox)
-                    .onTapGesture {
-                        connectionsGameViewModel.clickClueBox(clueBox: clueBox)
-                    }
+        VStack {
+            ForEach(connectionsGameViewModel.categories) { category in
+                if category.isCompleted {
+                    CompletedCategory(category: category)
+                }
+            }
+            LazyVGrid(columns: [GridItem(), GridItem(), GridItem(), GridItem()]) {
+                ForEach(connectionsGameViewModel.clueBoxes) { clueBox in
+                    ClueBoxStyle(clueBox: clueBox)
+                        .onTapGesture {
+                            connectionsGameViewModel.clickClueBox(clueBox: clueBox)
+                        }
+                }
             }
         }
     }
