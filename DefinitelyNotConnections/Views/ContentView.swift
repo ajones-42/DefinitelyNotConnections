@@ -18,6 +18,7 @@ struct ContentView: View {
                 .padding(.horizontal)
             MistakesRemaining(connectionsGameViewModel: connectionsGameViewModel)
             HStack {
+                ShuffleButton(connectionsGameViewModel: connectionsGameViewModel)
                 DeselectAllButton(connectionsGameViewModel: connectionsGameViewModel)
                 SubmitButton(connectionsGameViewModel: connectionsGameViewModel)
             }

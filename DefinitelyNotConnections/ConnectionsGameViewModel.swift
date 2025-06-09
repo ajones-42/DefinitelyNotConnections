@@ -64,4 +64,8 @@ class ConnectionsGameViewModel {
             connectionsGameModel.submit()
         }
     }
+    
+    func clickShuffle() {
+        connectionsGameModel.shuffleClueBoxes()
+    }
 }

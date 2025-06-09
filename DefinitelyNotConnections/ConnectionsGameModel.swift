@@ -28,6 +28,7 @@ class ConnectionsGameModel {
         for category in categories {
             self.clueBoxes.append(contentsOf: category.clueBoxes)
         }
+        shuffleClueBoxes()
     }
 
     static func getCategories() -> [Category] {
@@ -59,7 +60,6 @@ class ConnectionsGameModel {
             self.name = name
             self.clueBoxes = ConnectionsGameModel.Category.createClueBoxes(boxTexts: boxTexts, offset: id)
             self.colour = colour
-            //self.isCompleted = false
             self.id = id
         }
         
@@ -117,5 +117,9 @@ class ConnectionsGameModel {
         for index in clueBoxes.indices {
             clueBoxes[index].isSelected = false
         }
+    }
+    
+    func shuffleClueBoxes() {
+        self.clueBoxes.shuffle()
     }
 }
