@@ -11,9 +11,10 @@ import SwiftUI
 @Observable
 class ConnectionsGameModel {
     private(set) var categories: [Category]
+    private(set) var completedCategories: [Category] = []
     
-    private(set) var clueBoxes: [ClueBox]
-    var selectedBoxes: [ClueBox] {
+    private(set) var clueBoxes: [Category.ClueBox]
+    var selectedBoxes: [Category.ClueBox] {
         self.clueBoxes.filter { $0.isSelected == true }
     }
     var numSelectedBoxes: Int {
@@ -23,33 +24,55 @@ class ConnectionsGameModel {
     
     init() {
         self.categories = ConnectionsGameModel.getCategories()
-        self.clueBoxes = ConnectionsGameModel.getClues()
+        self.clueBoxes = []
+        for category in categories {
+            self.clueBoxes.append(contentsOf: category.clueBoxes)
+        }
     }
-    
-    static func getClues() -> [ClueBox] {
-        return [ClueBox(text: "Clue0", id: 0), ClueBox(text: "Clue1", id: 1), ClueBox(text: "Clue2", id: 2), ClueBox(text: "Clue3", id: 3), ClueBox(text: "Clue4", id: 4), ClueBox(text: "Clue5", id: 5), ClueBox(text: "Clue6", id: 6), ClueBox(text: "Clue7", id: 7), ClueBox(text: "Clue8", id: 8), ClueBox(text: "Clue9", id: 9), ClueBox(text: "Clue10", id: 10), ClueBox(text: "Clue11", id: 11), ClueBox(text: "Clue12", id: 12), ClueBox(text: "Clue13", id: 13), ClueBox(text: "Clue14", id: 14), ClueBox(text: "Clue15", id: 15)]
-    }
-    
+
     static func getCategories() -> [Category] {
-        return [Category(name: "Category0", boxIDs: [0,1,2,3], boxTexts: ["Clue0", "Clue1", "Clue2", "Clue3"], colour: .yellow, id: 0), Category(name: "Category1", boxIDs: [4,5,6,7], boxTexts: ["Clue4", "Clue5", "Clue6", "Clue7"], colour: .green, id: 1), Category(name: "Category2", boxIDs: [8,9,10,11], boxTexts: ["Clue8", "Clue9", "Clue10", "Clue11"], colour: .blue, id: 2), Category(name: "Category3", boxIDs: [12,13,14,15], boxTexts: ["Clue12", "Clue13", "Clue14", "Clue15"], colour: .purple, id: 3)]
-    }
-    
-    struct ClueBox: Identifiable {
-        let text: String
-        var isSelected: Bool = false
-        var isCompleted: Bool = false
-        let id: Int
+        return [Category(name: "Category0", boxTexts: ["Clue0", "Clue1", "Clue2", "Clue3"], colour: .yellow, id: 0), Category(name: "Category1", boxTexts: ["Clue4", "Clue5", "Clue6", "Clue7"], colour: .green, id: 1), Category(name: "Category2", boxTexts: ["Clue8", "Clue9", "Clue10", "Clue11"], colour: .blue, id: 2), Category(name: "Category3", boxTexts: ["Clue12", "Clue13", "Clue14", "Clue15"], colour: .purple, id: 3)]
     }
     
     struct Category: Identifiable {
+        @Observable
+        class ClueBox: Identifiable {
+            let text: String
+            var isSelected: Bool = false {
+                willSet {
+                    print("Selected \(id)")
+                }
+            }
+            let id: Int
+            
+            init(text: String, id: Int) {
+                self.text = text
+                self.id = id
+            }
+        }
         let name: String
-        let boxIDs: [Int]
-        let boxTexts: [String]
+        var clueBoxes: [ClueBox]
         let colour: Color
-        var isCompleted: Bool = false
         let id: Int
         
+        init(name: String, boxTexts: [String], colour: Color, id: Int) {
+            self.name = name
+            self.clueBoxes = ConnectionsGameModel.Category.createClueBoxes(boxTexts: boxTexts, offset: id)
+            self.colour = colour
+            //self.isCompleted = false
+            self.id = id
+        }
+        
+        static func createClueBoxes(boxTexts: [String], offset: Int) -> [ClueBox] {
+            var tmpClueBoxes: [ClueBox] = []
+            for (i, boxText) in boxTexts.enumerated() {
+                tmpClueBoxes.append(ClueBox(text: boxText, id: i+4*offset))
+            }
+            return tmpClueBoxes
+        }
+        
         func concatBoxTexts() -> String {
+            let boxTexts = clueBoxes.map({ $0.text })
             return boxTexts.joined(separator: ", ")
         }
     }
@@ -58,7 +81,7 @@ class ConnectionsGameModel {
         return clueBoxes.firstIndex(where: { $0.id == id })
     }
     
-    func clickBox(clueBox: ClueBox) {
+    func clickBox(clueBox: Category.ClueBox) {
         if let boxIndex = getClueBoxIndex(id: clueBox.id) {
             clueBoxes[boxIndex].isSelected.toggle()
         }
@@ -73,11 +96,12 @@ class ConnectionsGameModel {
         // This might be easier if clueBoxes: Set<ClueBox>, but then toggling isSelected can't be done as it is now.
         // Probably wants some factoring out
         var correct: Bool = false
-        for categoryIndex in categories.indices {
+        for (categoryIndex, category) in categories.enumerated() {
             let selectedBoxIDs: [Int] = selectedBoxes.map({ $0.id }).sorted()
-            if selectedBoxIDs == categories[categoryIndex].boxIDs.sorted() {
-                correct.toggle()
-                categories[categoryIndex].isCompleted = true
+            if selectedBoxIDs == category.clueBoxes.map({$0.id}).sorted() {
+                correct = true
+                let completedCategory: Category = categories.remove(at: categoryIndex)
+                completedCategories.append(completedCategory)
                 for selectedBoxId in selectedBoxIDs {
                     if let boxIndex = getClueBoxIndex(id: selectedBoxId) {
                         clueBoxes.remove(at: boxIndex)

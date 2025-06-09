@@ -13,7 +13,7 @@ struct CompletedCategory: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 20)
-                .frame(width: 320, height: 80)
+                .frame(width: 360, height: 80)
                 .foregroundStyle(category.colour)
             VStack {
                 Text(category.name)

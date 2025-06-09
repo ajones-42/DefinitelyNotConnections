@@ -40,15 +40,15 @@ class ConnectionsGameViewModel {
         (connectionsGameModel.numSelectedBoxes > 0) ? .white : .black
     }
     
-    var clueBoxes: [ConnectionsGameModel.ClueBox] {
+    var clueBoxes: [ConnectionsGameModel.Category.ClueBox] {
         connectionsGameModel.clueBoxes
     }
     
-    var categories: [ConnectionsGameModel.Category] {
-        connectionsGameModel.categories
+    var completedCategories: [ConnectionsGameModel.Category] {
+        connectionsGameModel.completedCategories
     }
     
-    func clickClueBox(clueBox: ConnectionsGameModel.ClueBox) {
+    func clickClueBox(clueBox: ConnectionsGameModel.Category.ClueBox) {
         connectionsGameModel.clickBox(clueBox: clueBox)
     }
     

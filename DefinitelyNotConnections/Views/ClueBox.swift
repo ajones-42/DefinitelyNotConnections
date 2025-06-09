@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ClueBoxStyle: View {
-    var clueBox: ConnectionsGameModel.ClueBox
+    var clueBox: ConnectionsGameModel.Category.ClueBox
     
     var body: some View {
         ZStack {

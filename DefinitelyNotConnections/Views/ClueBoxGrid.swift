@@ -13,10 +13,8 @@ struct ClueBoxGrid: View {
     
     var body: some View {
         VStack {
-            ForEach(connectionsGameViewModel.categories) { category in
-                if category.isCompleted {
-                    CompletedCategory(category: category)
-                }
+            ForEach(connectionsGameViewModel.completedCategories) { category in
+                CompletedCategory(category: category)
             }
             LazyVGrid(columns: [GridItem(), GridItem(), GridItem(), GridItem()]) {
                 ForEach(connectionsGameViewModel.clueBoxes) { clueBox in
