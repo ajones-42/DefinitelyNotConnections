@@ -49,7 +49,9 @@ class ConnectionsGameViewModel {
     }
     
     func clickClueBox(clueBox: ConnectionsGameModel.Category.ClueBox) {
-        connectionsGameModel.clickBox(clueBox: clueBox)
+        if connectionsGameModel.numSelectedBoxes < 4 || clueBox.isSelected {
+            connectionsGameModel.clickBox(clueBox: clueBox)
+        }
     }
     
     func clickDeselectAll() {
