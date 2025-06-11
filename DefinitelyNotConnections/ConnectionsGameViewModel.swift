@@ -24,6 +24,10 @@ class ConnectionsGameViewModel {
         (connectionsGameModel.numMistakesRemaining > 3) ? .black : .white
     }
     
+    var numMistakesRemaining: Int {
+        connectionsGameModel.numMistakesRemaining
+    }
+    
     var submitBoxColour: Color {
         (connectionsGameModel.numSelectedBoxes == 4) ? .black : .white
     }
@@ -69,5 +73,9 @@ class ConnectionsGameViewModel {
     
     func clickShuffle() {
         connectionsGameModel.shuffleClueBoxes()
+    }
+    
+    func resetNumMistakesRemaining() {
+        connectionsGameModel.resetNumMistakesRemaining()
     }
 }

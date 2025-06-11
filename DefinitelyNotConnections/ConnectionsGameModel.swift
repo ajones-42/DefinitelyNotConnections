@@ -122,4 +122,8 @@ class ConnectionsGameModel {
     func shuffleClueBoxes() {
         self.clueBoxes.shuffle()
     }
+    
+    func resetNumMistakesRemaining() {
+        self.numMistakesRemaining = 4
+    }
 }
