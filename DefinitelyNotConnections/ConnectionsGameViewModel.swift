@@ -11,6 +11,8 @@ import SwiftUI
 class ConnectionsGameViewModel {
     @State private var connectionsGameModel: ConnectionsGameModel = ConnectionsGameModel()
     
+    
+    // All colours should probably be defined in views tracking a boolean defined here
     var mistakesRemainingCircle1Colour: Color {
         (connectionsGameModel.numMistakesRemaining > 0) ? .black : .white
     }
@@ -29,19 +31,19 @@ class ConnectionsGameViewModel {
     }
     
     var submitBoxColour: Color {
-        (connectionsGameModel.numSelectedBoxes == 4) ? .black : .white
+        (connectionsGameModel.numSelectedBoxes == 4) ? Color(UIColor.systemGray) : Color(UIColor.systemGray6)
     }
     
     var submitTextColour: Color {
-        (connectionsGameModel.numSelectedBoxes == 4) ? .white : .black
+        (connectionsGameModel.numSelectedBoxes == 4) ? .white : Color(UIColor.systemGray4)
     }
     
     var deselectAllBoxColour: Color {
-        (connectionsGameModel.numSelectedBoxes > 0) ? .black : .white
+        (connectionsGameModel.numSelectedBoxes > 0) ? Color(UIColor.systemGray) : Color(UIColor.systemGray6)
     }
     
     var deselectAllTextColour: Color {
-        (connectionsGameModel.numSelectedBoxes > 0) ? .white : .black
+        (connectionsGameModel.numSelectedBoxes > 0) ? .white : Color(UIColor.systemGray4)
     }
     
     var clueBoxes: [ConnectionsGameModel.Category.ClueBox] {

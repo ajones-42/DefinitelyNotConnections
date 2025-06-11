@@ -15,7 +15,7 @@ struct ShuffleButton: View {
         Button {
             connectionsGameViewModel.clickShuffle()
         } label: {
-            NormalButton(text: "Shuffle", boxColour: .black, textColour: .white)
+            NormalButton(text: "Shuffle", boxColour: Color(UIColor.systemGray), textColour: .white)
         }
     }
 }
