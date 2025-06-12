@@ -12,21 +12,30 @@ struct MistakesRemaining: View {
     let connectionsGameViewModel: ConnectionsGameViewModel
     
     var body: some View {
+        let shape = Circle().frame(width: 15)
         HStack {
             Text("Mistakes remaining:")
                 .fontWeight(.semibold)
-            Circle()
-                .foregroundStyle(connectionsGameViewModel.mistakesRemainingCircle1Colour)
-                .frame(width: 15)
-            Circle()
-                .foregroundStyle(connectionsGameViewModel.mistakesRemainingCircle2Colour)
-                .frame(width: 15)
-            Circle()
-                .foregroundStyle(connectionsGameViewModel.mistakesRemainingCircle3Colour)
-                .frame(width: 15)
-            Circle()
-                .foregroundStyle(connectionsGameViewModel.mistakesRemainingCircle4Colour)
-                .frame(width: 15)
+            if connectionsGameViewModel.mistakesRemainingCircle1Shown {
+                shape.foregroundStyle(.foreground)
+            } else {
+                shape.foregroundStyle(.background)
+            }
+            if connectionsGameViewModel.mistakesRemainingCircle2Shown {
+                shape.foregroundStyle(.foreground)
+            } else {
+                shape.foregroundStyle(.background)
+            }
+            if connectionsGameViewModel.mistakesRemainingCircle3Shown {
+                shape.foregroundStyle(.foreground)
+            } else {
+                shape.foregroundStyle(.background)
+            }
+            if connectionsGameViewModel.mistakesRemainingCircle4Shown {
+                shape.foregroundStyle(.foreground)
+            } else {
+                shape.foregroundStyle(.background)
+            }
         }
     }
 }

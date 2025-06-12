@@ -13,17 +13,17 @@ class ConnectionsGameViewModel {
     
     
     // All colours should probably be defined in views tracking a boolean defined here
-    var mistakesRemainingCircle1Colour: Color {
-        (connectionsGameModel.numMistakesRemaining > 0) ? .black : .white
+    var mistakesRemainingCircle1Shown: Bool {
+        (numMistakesRemaining > 0) ? true : false
     }
-    var mistakesRemainingCircle2Colour: Color {
-        (connectionsGameModel.numMistakesRemaining > 1) ? .black : .white
+    var mistakesRemainingCircle2Shown: Bool {
+        (numMistakesRemaining > 1) ? true : false
     }
-    var mistakesRemainingCircle3Colour: Color {
-        (connectionsGameModel.numMistakesRemaining > 2) ? .black : .white
+    var mistakesRemainingCircle3Shown: Bool {
+        (numMistakesRemaining > 2) ? true : false
     }
-    var mistakesRemainingCircle4Colour: Color {
-        (connectionsGameModel.numMistakesRemaining > 3) ? .black : .white
+    var mistakesRemainingCircle4Shown: Bool {
+        (numMistakesRemaining > 3) ? true : false
     }
     
     var numMistakesRemaining: Int {
