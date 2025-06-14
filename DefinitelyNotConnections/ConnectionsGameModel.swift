@@ -93,24 +93,51 @@ class ConnectionsGameModel {
     }
     
     func checkSelection() {
-        // This might be easier if clueBoxes: Set<ClueBox>, but then toggling isSelected can't be done as it is now.
-        // Probably wants some factoring out
         var correct: Bool = false
+        let selectedBoxIDs: [Int] = selectedBoxes.map({ $0.id })
         for (categoryIndex, category) in categories.enumerated() {
-            let selectedBoxIDs: [Int] = selectedBoxes.map({ $0.id }).sorted()
-            if selectedBoxIDs == category.clueBoxes.map({$0.id}).sorted() {
+            let numSameSelections: Int = checkNumSameSelections(selectedIDs: selectedBoxIDs, categoryIDs: category.clueBoxes.map({$0.id}))
+            switch numSameSelections {
+            case 4:
+                completeCategory(categoryIndex: categoryIndex)
+                removeSelectedBoxes(selectedBoxIDs: selectedBoxIDs)
                 correct = true
-                let completedCategory: Category = categories.remove(at: categoryIndex)
-                completedCategories.append(completedCategory)
-                for selectedBoxId in selectedBoxIDs {
-                    if let boxIndex = getClueBoxIndex(id: selectedBoxId) {
-                        clueBoxes.remove(at: boxIndex)
-                    }
-                }
-            break
+                break
+            case 3:
+                // One away
+                break
+            case 2:
+                // No need to check further if 2 are correct
+                break
+            default:
+                // Keep checking for 0 or 1 correct
+                continue
             }
         }
         if !correct { numMistakesRemaining -= 1 }
+    }
+    
+    func checkNumSameSelections(selectedIDs: [Int], categoryIDs: [Int]) -> Int {
+        let sortedSelectedIDs = selectedIDs.sorted()
+        let sortedCategoryIDs = categoryIDs.sorted()
+        var numSameSelections: Int = 0
+        for (index, ID) in sortedSelectedIDs.enumerated() {
+            numSameSelections += (sortedCategoryIDs[index] == ID) ? 1 : 0
+        }
+        return numSameSelections
+    }
+    
+    func completeCategory(categoryIndex: Int) {
+        let completedCategory: Category = categories.remove(at: categoryIndex)
+        completedCategories.append(completedCategory)
+    }
+    
+    func removeSelectedBoxes(selectedBoxIDs: [Int]) {
+        for selectedBoxId in selectedBoxIDs {
+            if let boxIndex = getClueBoxIndex(id: selectedBoxId) {
+                clueBoxes.remove(at: boxIndex)
+            }
+        }
     }
     
     func deselectAll() {
