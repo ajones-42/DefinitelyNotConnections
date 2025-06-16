@@ -30,6 +30,10 @@ class ConnectionsGameViewModel {
         connectionsGameModel.numMistakesRemaining
     }
     
+    var oneAway: Bool {
+        connectionsGameModel.oneAway
+    }
+    
     var submitBoxColour: Color {
         (connectionsGameModel.numSelectedBoxes == 4) ? Color(UIColor.systemGray) : Color(UIColor.systemGray6)
     }

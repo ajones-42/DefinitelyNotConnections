@@ -21,6 +21,7 @@ class ConnectionsGameModel {
         self.selectedBoxes.count
     }
     var numMistakesRemaining: Int = 4
+    var oneAway: Bool = false
     
     init() {
         self.categories = ConnectionsGameModel.getCategories()
@@ -39,11 +40,7 @@ class ConnectionsGameModel {
         @Observable
         class ClueBox: Identifiable {
             let text: String
-            var isSelected: Bool = false {
-                willSet {
-                    print("Selected \(id)")
-                }
-            }
+            var isSelected: Bool = false
             let id: Int
             
             init(text: String, id: Int) {
@@ -72,18 +69,18 @@ class ConnectionsGameModel {
         }
         
         func concatBoxTexts() -> String {
-            let boxTexts = clueBoxes.map({ $0.text })
+            let boxTexts = self.clueBoxes.map({ $0.text })
             return boxTexts.joined(separator: ", ")
         }
     }
     
     func getClueBoxIndex(id: Int) -> Int? {
-        return clueBoxes.firstIndex(where: { $0.id == id })
+        return self.clueBoxes.firstIndex(where: { $0.id == id })
     }
     
     func clickBox(clueBox: Category.ClueBox) {
         if let boxIndex = getClueBoxIndex(id: clueBox.id) {
-            clueBoxes[boxIndex].isSelected.toggle()
+            self.clueBoxes[boxIndex].isSelected.toggle()
         }
     }
     
@@ -94,55 +91,53 @@ class ConnectionsGameModel {
     
     func checkSelection() {
         var correct: Bool = false
-        let selectedBoxIDs: [Int] = selectedBoxes.map({ $0.id })
-        for (categoryIndex, category) in categories.enumerated() {
+        let selectedBoxIDs: [Int] = self.selectedBoxes.map({ $0.id })
+        categoryLoop: for (categoryIndex, category) in self.categories.enumerated() {
             let numSameSelections: Int = checkNumSameSelections(selectedIDs: selectedBoxIDs, categoryIDs: category.clueBoxes.map({$0.id}))
             switch numSameSelections {
             case 4:
                 completeCategory(categoryIndex: categoryIndex)
                 removeSelectedBoxes(selectedBoxIDs: selectedBoxIDs)
                 correct = true
-                break
+                break categoryLoop
             case 3:
-                // One away
-                break
+                self.oneAway.toggle()
+                break categoryLoop
             case 2:
                 // No need to check further if 2 are correct
-                break
+                break categoryLoop
             default:
                 // Keep checking for 0 or 1 correct
-                continue
+                continue categoryLoop
             }
         }
-        if !correct { numMistakesRemaining -= 1 }
+        if !correct { self.numMistakesRemaining -= 1 }
     }
     
     func checkNumSameSelections(selectedIDs: [Int], categoryIDs: [Int]) -> Int {
-        let sortedSelectedIDs = selectedIDs.sorted()
-        let sortedCategoryIDs = categoryIDs.sorted()
         var numSameSelections: Int = 0
-        for (index, ID) in sortedSelectedIDs.enumerated() {
-            numSameSelections += (sortedCategoryIDs[index] == ID) ? 1 : 0
+        for selectedID in selectedIDs {
+            numSameSelections += (categoryIDs.contains(selectedID)) ? 1 : 0
         }
         return numSameSelections
     }
     
     func completeCategory(categoryIndex: Int) {
-        let completedCategory: Category = categories.remove(at: categoryIndex)
-        completedCategories.append(completedCategory)
+        let completedCategory: Category = self.categories.remove(at: categoryIndex)
+        self.completedCategories.append(completedCategory)
     }
     
     func removeSelectedBoxes(selectedBoxIDs: [Int]) {
         for selectedBoxId in selectedBoxIDs {
             if let boxIndex = getClueBoxIndex(id: selectedBoxId) {
-                clueBoxes.remove(at: boxIndex)
+                self.clueBoxes.remove(at: boxIndex)
             }
         }
     }
     
     func deselectAll() {
         for index in clueBoxes.indices {
-            clueBoxes[index].isSelected = false
+            self.clueBoxes[index].isSelected = false
         }
     }
     

@@ -12,8 +12,10 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
+            OneAway()
+                .show(for: .seconds(2), trigger: connectionsGameViewModel.oneAway)
             Text("Create four groups of four!")
-                .foregroundStyle(.black)
+                .foregroundStyle(.foreground)
             ClueBoxGrid(connectionsGameViewModel: connectionsGameViewModel)
                 .padding(.horizontal)
             MistakesRemaining(connectionsGameViewModel: connectionsGameViewModel)

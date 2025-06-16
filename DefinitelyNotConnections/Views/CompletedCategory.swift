@@ -18,7 +18,9 @@ struct CompletedCategory: View {
             VStack {
                 Text(category.name)
                     .fontWeight(.semibold)
+                    .foregroundStyle(.black)
                 Text(category.concatBoxTexts())
+                    .foregroundStyle(.black)
             }
         }
     }
