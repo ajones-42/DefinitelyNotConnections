@@ -8,12 +8,11 @@
 import SwiftUI
 
 struct ShuffleButton: View {
-    //@Environment(ConnectionsGameViewModel.self) private var connectionsGameViewModel: ConnectionsGameViewModel
-    let connectionsGameViewModel: ConnectionsGameViewModel
+    @Environment(ConnectionsGameModel.self) private var connectionsGameModel: ConnectionsGameModel
     
     var body: some View {
         Button {
-            connectionsGameViewModel.clickShuffle()
+            connectionsGameModel.shuffleClueBoxes()
         } label: {
             NormalButton(text: "Shuffle", boxColour: Color(UIColor.systemGray), textColour: .white)
         }

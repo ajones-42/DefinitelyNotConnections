@@ -9,11 +9,12 @@ import SwiftUI
 
 @main
 struct DefinitelyNotConnectionsApp: App {
-    let connectionsGameViewModel: ConnectionsGameViewModel = ConnectionsGameViewModel()
+    @State private var connectionsGameModel: ConnectionsGameModel = ConnectionsGameModel()
     
     var body: some Scene {
         WindowGroup {
-            ContentView(connectionsGameViewModel: connectionsGameViewModel)
+            ContentView()
+                .environment(connectionsGameModel)
         }
     }
 }

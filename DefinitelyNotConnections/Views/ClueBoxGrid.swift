@@ -8,19 +8,18 @@
 import SwiftUI
 
 struct ClueBoxGrid: View {
-    //@Environment(ConnectionsGameViewModel.self) private var connectionsGameViewModel: ConnectionsGameViewModel
-    let connectionsGameViewModel: ConnectionsGameViewModel
+    @Environment(ConnectionsGameModel.self) private var connectionsGameModel: ConnectionsGameModel
     
     var body: some View {
         VStack {
-            ForEach(connectionsGameViewModel.completedCategories) { category in
+            ForEach(connectionsGameModel.completedCategories) { category in
                 CompletedCategory(category: category)
             }
             LazyVGrid(columns: [GridItem(), GridItem(), GridItem(), GridItem()]) {
-                ForEach(connectionsGameViewModel.clueBoxes) { clueBox in
+                ForEach(connectionsGameModel.clueBoxes) { clueBox in
                     ClueBoxStyle(clueBox: clueBox)
                         .onTapGesture {
-                            connectionsGameViewModel.clickClueBox(clueBox: clueBox)
+                            connectionsGameModel.clickClueBox(clueBox: clueBox)
                         }
                 }
             }

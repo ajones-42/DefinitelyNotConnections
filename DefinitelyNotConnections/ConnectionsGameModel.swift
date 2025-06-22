@@ -83,27 +83,35 @@ class ConnectionsGameModel {
         return self.clueBoxes.firstIndex(where: { $0.id == id })
     }
     
-    func clickBox(clueBox: Category.ClueBox) {
-        if let boxIndex = getClueBoxIndex(id: clueBox.id) {
-            self.clueBoxes[boxIndex].isSelected.toggle()
+    func clickClueBox(clueBox: Category.ClueBox) {
+        if self.numSelectedBoxes < 4 || clueBox.isSelected {
+            if let boxIndex = getClueBoxIndex(id: clueBox.id) {
+                self.clueBoxes[boxIndex].isSelected.toggle()
+            }
         }
     }
     
-    func submit() {
-        checkSelection()
-        deselectAll()
+    func submitSelection() {
+        if self.numSelectedBoxes == 4 {
+            let selectedBoxIDs: [Int] = self.selectedBoxes.map({ $0.id })
+            if let correctCategoryIndex = checkSelection(selectedBoxIDs: selectedBoxIDs) {
+                completeCategory(categoryIndex: correctCategoryIndex)
+                removeSelectedBoxes(selectedBoxIDs: selectedBoxIDs)
+            } else {
+                self.numMistakesRemaining -= 1
+            }
+            
+        }
     }
     
-    func checkSelection() {
-        var correct: Bool = false
-        let selectedBoxIDs: [Int] = self.selectedBoxes.map({ $0.id })
+    func checkSelection(selectedBoxIDs: [Int]) -> Int? {
+        var correctCategoryIndex: Int? = nil
+        
         categoryLoop: for (categoryIndex, category) in self.categories.enumerated() {
             let numSameSelections: Int = checkNumSameSelections(selectedIDs: selectedBoxIDs, categoryIDs: category.clueBoxes.map({$0.id}))
             switch numSameSelections {
             case 4:
-                completeCategory(categoryIndex: categoryIndex)
-                removeSelectedBoxes(selectedBoxIDs: selectedBoxIDs)
-                correct = true
+                correctCategoryIndex = categoryIndex
                 break categoryLoop
             case 3:
                 self.oneAway.toggle()
@@ -116,7 +124,7 @@ class ConnectionsGameModel {
                 continue categoryLoop
             }
         }
-        if !correct { self.numMistakesRemaining -= 1 }
+        return correctCategoryIndex
     }
     
     func checkNumSameSelections(selectedIDs: [Int], categoryIDs: [Int]) -> Int {
@@ -139,10 +147,12 @@ class ConnectionsGameModel {
             }
         }
     }
-    
+
     func deselectAll() {
-        for index in clueBoxes.indices {
-            self.clueBoxes[index].isSelected = false
+        if numSelectedBoxes > 0 {
+            for index in clueBoxes.indices {
+                self.clueBoxes[index].isSelected = false
+            }
         }
     }
     

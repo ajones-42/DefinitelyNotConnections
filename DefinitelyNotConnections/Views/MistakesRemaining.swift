@@ -8,33 +8,19 @@
 import SwiftUI
 
 struct MistakesRemaining: View {
-    //@Environment(ConnectionsGameViewModel.self) private var connectionsGameViewModel: ConnectionsGameViewModel
-    let connectionsGameViewModel: ConnectionsGameViewModel
+    @Environment(ConnectionsGameModel.self) private var connectionsGameModel: ConnectionsGameModel
     
     var body: some View {
         let shape = Circle().frame(width: 15)
         HStack {
             Text("Mistakes remaining:")
                 .fontWeight(.semibold)
-            if connectionsGameViewModel.mistakesRemainingCircle1Shown {
-                shape.foregroundStyle(.foreground)
-            } else {
-                shape.foregroundStyle(.background)
-            }
-            if connectionsGameViewModel.mistakesRemainingCircle2Shown {
-                shape.foregroundStyle(.foreground)
-            } else {
-                shape.foregroundStyle(.background)
-            }
-            if connectionsGameViewModel.mistakesRemainingCircle3Shown {
-                shape.foregroundStyle(.foreground)
-            } else {
-                shape.foregroundStyle(.background)
-            }
-            if connectionsGameViewModel.mistakesRemainingCircle4Shown {
-                shape.foregroundStyle(.foreground)
-            } else {
-                shape.foregroundStyle(.background)
+            ForEach(0...3, id: \.self) {
+                if connectionsGameModel.numMistakesRemaining > $0 {
+                    shape.foregroundStyle(.foreground)
+                } else {
+                    shape.foregroundStyle(.background)
+                }
             }
         }
     }
