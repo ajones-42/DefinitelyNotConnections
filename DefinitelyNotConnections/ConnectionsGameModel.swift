@@ -13,6 +13,8 @@ class ConnectionsGameModel {
     private(set) var categories: [Category]
     private(set) var completedCategories: [Category] = []
     
+    private(set) var incorrectGuesses: [[Category.ClueBox]] = []
+    
     private(set) var clueBoxes: [Category.ClueBox]
     var selectedBoxes: [Category.ClueBox] {
         self.clueBoxes.filter { $0.isSelected == true }
@@ -102,6 +104,7 @@ class ConnectionsGameModel {
                 removeSelectedBoxes(selectedBoxIDs: selectedBoxIDs)
             } else {
                 self.numMistakesRemaining -= 1
+                self.incorrectGuesses.append(self.selectedBoxes)
             }
             
         }
