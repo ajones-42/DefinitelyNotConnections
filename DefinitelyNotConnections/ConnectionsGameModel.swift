@@ -23,6 +23,14 @@ class ConnectionsGameModel {
     var numMistakesRemaining: Int = 4
     var oneAway: Bool = false
     
+    var shuffleIsClickable: Bool = true // always true
+    var deselectAllIsClickable: Bool {
+        return self.numSelectedBoxes > 0
+    }
+    var submitIsClickable: Bool {
+        return self.numSelectedBoxes == 4
+    }
+    
     init() {
         self.categories = ConnectionsGameModel.getCategories()
         self.clueBoxes = []
@@ -88,8 +96,16 @@ class ConnectionsGameModel {
             if let boxIndex = getClueBoxIndex(id: clueBox.id) {
                 self.clueBoxes[boxIndex].isSelected.toggle()
             }
+            //updateButtonClickableness()
         }
     }
+    
+    /*
+    func updateButtonClickableness() {
+        self.deselectAllIsClickable = (numSelectedBoxes > 0) ? true : false
+        self.submitIsClickable = (numSelectedBoxes == 4) ? true : false
+    }
+    */
     
     func submitSelection() {
         if self.numSelectedBoxes == 4 {

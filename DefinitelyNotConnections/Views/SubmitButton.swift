@@ -10,12 +10,6 @@ import SwiftUI
 struct SubmitButton: View {
     @Environment(ConnectionsGameModel.self) private var connectionsGameModel: ConnectionsGameModel
     @State var showAlert: Bool = false
-    var boxColour: Color {
-        (connectionsGameModel.numSelectedBoxes == 4) ? Color(UIColor.systemGray) : Color(UIColor.systemGray6)
-    }
-    var textColour: Color {
-        (connectionsGameModel.numSelectedBoxes == 4) ? .white : Color(UIColor.systemGray4)
-    }
     
     var body: some View {
         Button {
@@ -24,7 +18,7 @@ struct SubmitButton: View {
                 showAlert = true
             }
         } label: {
-            NormalButton(text: "Submit", boxColour: boxColour, textColour: textColour)
+            NormalButton(text: "Submit", isClickable: connectionsGameModel.submitIsClickable)
                 .alert(Text("Oh go on then, have another go!"), isPresented: $showAlert) {
                     Button("Ok") {
                         connectionsGameModel.resetNumMistakesRemaining()

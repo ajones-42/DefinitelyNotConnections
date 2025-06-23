@@ -14,7 +14,7 @@ struct ShuffleButton: View {
         Button {
             connectionsGameModel.shuffleClueBoxes()
         } label: {
-            NormalButton(text: "Shuffle", boxColour: Color(UIColor.systemGray), textColour: .white)
+            NormalButton(text: "Shuffle", isClickable: connectionsGameModel.shuffleIsClickable)
         }
     }
 }
