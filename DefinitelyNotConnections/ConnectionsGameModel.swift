@@ -97,8 +97,8 @@ class ConnectionsGameModel {
     }
     
     func submitSelection() {
-        if self.numSelectedBoxes == 4 {
-            let selectedBoxIDs: [Int] = self.selectedBoxes.map({ $0.id })
+        let selectedBoxIDs: [Int] = self.selectedBoxes.map({ $0.id })
+        if self.numSelectedBoxes == 4 && !selectionAlreadyGuessed(selectedBoxIds: selectedBoxIDs) {
             if let correctCategoryIndex = checkSelection(selectedBoxIDs: selectedBoxIDs) {
                 completeCategory(categoryIndex: correctCategoryIndex)
                 removeSelectedBoxes(selectedBoxIDs: selectedBoxIDs)
@@ -108,6 +108,18 @@ class ConnectionsGameModel {
             }
             
         }
+    }
+    
+    func selectionAlreadyGuessed(selectedBoxIds: [Int]) -> Bool {
+        var selectionAlreadyGuessed: Bool = false
+        for incorrectGuess in self.incorrectGuesses {
+            let incorrectGuessBoxIDs: [Int] = incorrectGuess.map({ $0.id })
+            if selectedBoxIds.sorted() == incorrectGuessBoxIDs.sorted() {
+                selectionAlreadyGuessed = true
+                break
+            }
+        }
+        return selectionAlreadyGuessed
     }
     
     func checkSelection(selectedBoxIDs: [Int]) -> Int? {
