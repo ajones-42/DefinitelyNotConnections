@@ -96,16 +96,8 @@ class ConnectionsGameModel {
             if let boxIndex = getClueBoxIndex(id: clueBox.id) {
                 self.clueBoxes[boxIndex].isSelected.toggle()
             }
-            //updateButtonClickableness()
         }
     }
-    
-    /*
-    func updateButtonClickableness() {
-        self.deselectAllIsClickable = (numSelectedBoxes > 0) ? true : false
-        self.submitIsClickable = (numSelectedBoxes == 4) ? true : false
-    }
-    */
     
     func submitSelection() {
         if self.numSelectedBoxes == 4 {
