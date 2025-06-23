@@ -19,7 +19,7 @@ struct CompletedCategory: View {
                 Text(category.name)
                     .fontWeight(.semibold)
                     .foregroundStyle(.black)
-                Text(category.concatBoxTexts())
+                Text(concatBoxTexts(clueBoxes: category.clueBoxes))
                     .foregroundStyle(.black)
             }
         }

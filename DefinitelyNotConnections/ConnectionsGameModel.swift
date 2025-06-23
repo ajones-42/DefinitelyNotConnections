@@ -80,11 +80,6 @@ class ConnectionsGameModel {
             }
             return tmpClueBoxes
         }
-        
-        func concatBoxTexts() -> String {
-            let boxTexts = self.clueBoxes.map({ $0.text })
-            return boxTexts.joined(separator: ", ")
-        }
     }
     
     func getClueBoxIndex(id: Int) -> Int? {
