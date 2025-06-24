@@ -10,12 +10,10 @@ import SwiftUI
 
 @Observable
 class ConnectionsGameModel {
-    private(set) var categories: [Category]
+    private(set) var remainingCategories: [Category]
     private(set) var completedCategories: [Category] = []
-
-    private(set) var guesses: [Guess] = []
     
-    private(set) var clueBoxes: [Category.ClueBox]
+    private(set) var clueBoxes: [Category.ClueBox] = []
     var selectedBoxes: [Category.ClueBox] {
         self.clueBoxes.filter { $0.isSelected == true }
     }
@@ -23,9 +21,12 @@ class ConnectionsGameModel {
         self.selectedBoxes.count
     }
     var numMistakesRemaining: Int = 4
+
+    private(set) var guesses: [Guess] = []
+
     var oneAwayTrigger: Bool = false // Actual value doesn't matter, but must change to trigger OneAway.
     
-    var shuffleIsClickable: Bool = true // Always true
+    let shuffleIsClickable: Bool = true // Always clickable
     var deselectAllIsClickable: Bool {
         return self.numSelectedBoxes > 0
     }
@@ -34,9 +35,8 @@ class ConnectionsGameModel {
     }
     
     init() {
-        self.categories = ConnectionsGameModel.getCategories()
-        self.clueBoxes = []
-        for category in categories {
+        self.remainingCategories = ConnectionsGameModel.getCategories()
+        for category in remainingCategories {
             self.clueBoxes.append(contentsOf: category.clueBoxes)
         }
         shuffleClueBoxes()
@@ -90,16 +90,16 @@ class ConnectionsGameModel {
         let oneAway: Bool
     }
     
-    func getClueBoxIndex(id: Int) -> Int? {
-        return self.clueBoxes.firstIndex(where: { $0.id == id })
-    }
-    
     func clickClueBox(clueBox: Category.ClueBox) {
         if self.numSelectedBoxes < 4 || clueBox.isSelected {
             if let boxIndex = getClueBoxIndex(id: clueBox.id) {
                 self.clueBoxes[boxIndex].isSelected.toggle()
             }
         }
+    }
+    
+    func getClueBoxIndex(id: Int) -> Int? {
+        return self.clueBoxes.firstIndex(where: { $0.id == id })
     }
     
     func submitSelection() {
@@ -132,7 +132,7 @@ class ConnectionsGameModel {
         var correctCategoryIndex: Int? = nil
         var oneAway = false
         
-        categoryLoop: for (categoryIndex, category) in self.categories.enumerated() {
+        categoryLoop: for (categoryIndex, category) in self.remainingCategories.enumerated() {
             let numSameSelections: Int = checkNumSameSelections(selectedIDs: selectedBoxIDs, categoryIDs: category.clueBoxes.map({$0.id}))
             switch numSameSelections {
             case 4:
@@ -161,7 +161,7 @@ class ConnectionsGameModel {
     }
     
     func completeCategory(categoryIndex: Int) {
-        let completedCategory: Category = self.categories.remove(at: categoryIndex)
+        let completedCategory: Category = self.remainingCategories.remove(at: categoryIndex)
         self.completedCategories.append(completedCategory)
     }
     
