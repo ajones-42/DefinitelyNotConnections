@@ -24,7 +24,10 @@ class ConnectionsGameModel {
 
     private(set) var guesses: [Guess] = []
 
-    var oneAwayTrigger: Bool = false // Actual value doesn't matter, but must change to trigger OneAway.
+    var popupTrigger: Bool = false // Actual value doesn't matter, but must change to trigger OneAway.
+    var popupText: String = ""
+    let oneAwayText: String = "One away!"
+    let alreadyGuessedText: String = "Already guessed!"
     
     let shuffleIsClickable: Bool = true // Always clickable
     var deselectAllIsClickable: Bool {
@@ -104,7 +107,11 @@ class ConnectionsGameModel {
     
     func submitSelection() {
         let selectedBoxIDs: [Int] = self.selectedBoxes.map({ $0.id })
-        if self.numSelectedBoxes == 4 && !selectionAlreadyGuessed(selectedBoxIDs: selectedBoxIDs) {
+        let alreadyGuessed: Bool = selectionAlreadyGuessed(selectedBoxIDs: selectedBoxIDs)
+
+        if alreadyGuessed {
+            activatePopup(popupText: self.alreadyGuessedText)
+        } else if self.submitIsClickable {
             let guess: Guess = computeGuess(selectedBoxIDs: selectedBoxIDs)
             guesses.append(guess)
             if let correctCategoryIndex = guess.correctCategoryID {
@@ -112,7 +119,9 @@ class ConnectionsGameModel {
                 removeSelectedBoxes(selectedBoxIDs: selectedBoxIDs)
             } else {
                 self.numMistakesRemaining -= 1
-                if guess.oneAway { self.oneAwayTrigger.toggle() }
+                if guess.oneAway {
+                    activatePopup(popupText: self.oneAwayText)
+                }
             }
         }
     }
@@ -171,6 +180,11 @@ class ConnectionsGameModel {
                 self.clueBoxes.remove(at: boxIndex)
             }
         }
+    }
+    
+    func activatePopup(popupText: String) {
+        self.popupText = popupText
+        self.popupTrigger.toggle()
     }
 
     func deselectAll() {

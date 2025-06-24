@@ -7,18 +7,21 @@
 
 import SwiftUI
 
-struct OneAway: View {
+struct Popup: View {
+    let text: String
+
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 10)
-                .foregroundStyle(.green)
-                .frame(width: 110, height: 70)
-            Text("One Away!")
+                .foregroundStyle(.foreground)
+                .frame(width: 150, height: 70)
+            Text(text)
                 .foregroundStyle(.background)
         }
     }
 }
 
 #Preview {
-    OneAway()
+    Popup(text: "One away!")
+    Popup(text: "Already guessed!")
 }

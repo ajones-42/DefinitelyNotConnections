@@ -11,8 +11,8 @@ struct ContentView: View {
     @Environment(ConnectionsGameModel.self) private var connectionsGameModel: ConnectionsGameModel
     var body: some View {
         VStack {
-            OneAway()
-                .show(for: .seconds(2), trigger: connectionsGameModel.oneAwayTrigger)
+            Popup(text: connectionsGameModel.popupText)
+                .show(for: .seconds(2), trigger: connectionsGameModel.popupTrigger)
             Text("Create four groups of four!")
                 .foregroundStyle(.foreground)
             ClueBoxGrid()
