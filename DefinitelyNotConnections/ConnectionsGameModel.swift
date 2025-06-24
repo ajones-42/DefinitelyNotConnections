@@ -12,8 +12,8 @@ import SwiftUI
 class ConnectionsGameModel {
     private(set) var categories: [Category]
     private(set) var completedCategories: [Category] = []
-    
-    private(set) var incorrectGuesses: [[Category.ClueBox]] = []
+
+    private(set) var guesses: [Guess] = []
     
     private(set) var clueBoxes: [Category.ClueBox]
     var selectedBoxes: [Category.ClueBox] {
@@ -23,9 +23,9 @@ class ConnectionsGameModel {
         self.selectedBoxes.count
     }
     var numMistakesRemaining: Int = 4
-    var oneAway: Bool = false
+    var oneAwayTrigger: Bool = false // Actual value doesn't matter, but must change to trigger OneAway.
     
-    var shuffleIsClickable: Bool = true // always true
+    var shuffleIsClickable: Bool = true // Always true
     var deselectAllIsClickable: Bool {
         return self.numSelectedBoxes > 0
     }
@@ -84,6 +84,12 @@ class ConnectionsGameModel {
         }
     }
     
+    struct Guess {
+        let clueBoxes: [Category.ClueBox]
+        let correctCategoryID: Int?
+        let oneAway: Bool
+    }
+    
     func getClueBoxIndex(id: Int) -> Int? {
         return self.clueBoxes.firstIndex(where: { $0.id == id })
     }
@@ -98,23 +104,23 @@ class ConnectionsGameModel {
     
     func submitSelection() {
         let selectedBoxIDs: [Int] = self.selectedBoxes.map({ $0.id })
-        if self.numSelectedBoxes == 4 && !selectionAlreadyGuessed(selectedBoxIds: selectedBoxIDs) {
-            if let correctCategoryIndex = checkSelection(selectedBoxIDs: selectedBoxIDs) {
+        if self.numSelectedBoxes == 4 && !selectionAlreadyGuessed(selectedBoxIDs: selectedBoxIDs) {
+            let guess: Guess = computeGuess(selectedBoxIDs: selectedBoxIDs)
+            guesses.append(guess)
+            if let correctCategoryIndex = guess.correctCategoryID {
                 completeCategory(categoryIndex: correctCategoryIndex)
                 removeSelectedBoxes(selectedBoxIDs: selectedBoxIDs)
             } else {
                 self.numMistakesRemaining -= 1
-                self.incorrectGuesses.append(self.selectedBoxes)
+                if guess.oneAway { self.oneAwayTrigger.toggle() }
             }
-            
         }
     }
     
-    func selectionAlreadyGuessed(selectedBoxIds: [Int]) -> Bool {
+    func selectionAlreadyGuessed(selectedBoxIDs: [Int]) -> Bool {
         var selectionAlreadyGuessed: Bool = false
-        for incorrectGuess in self.incorrectGuesses {
-            let incorrectGuessBoxIDs: [Int] = incorrectGuess.map({ $0.id })
-            if selectedBoxIds.sorted() == incorrectGuessBoxIDs.sorted() {
+        for guess in guesses {
+            if guess.clueBoxes.map({ $0.id }).sorted() == selectedBoxIDs.sorted() {
                 selectionAlreadyGuessed = true
                 break
             }
@@ -122,8 +128,9 @@ class ConnectionsGameModel {
         return selectionAlreadyGuessed
     }
     
-    func checkSelection(selectedBoxIDs: [Int]) -> Int? {
+    func computeGuess(selectedBoxIDs: [Int]) -> Guess {
         var correctCategoryIndex: Int? = nil
+        var oneAway = false
         
         categoryLoop: for (categoryIndex, category) in self.categories.enumerated() {
             let numSameSelections: Int = checkNumSameSelections(selectedIDs: selectedBoxIDs, categoryIDs: category.clueBoxes.map({$0.id}))
@@ -132,7 +139,7 @@ class ConnectionsGameModel {
                 correctCategoryIndex = categoryIndex
                 break categoryLoop
             case 3:
-                self.oneAway.toggle()
+                oneAway = true
                 break categoryLoop
             case 2:
                 // No need to check further if 2 are correct
@@ -142,7 +149,7 @@ class ConnectionsGameModel {
                 continue categoryLoop
             }
         }
-        return correctCategoryIndex
+        return Guess(clueBoxes: self.selectedBoxes, correctCategoryID: correctCategoryIndex, oneAway: oneAway)
     }
     
     func checkNumSameSelections(selectedIDs: [Int], categoryIDs: [Int]) -> Int {
