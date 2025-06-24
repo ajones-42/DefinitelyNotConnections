@@ -188,7 +188,7 @@ class ConnectionsGameModel {
     }
 
     func deselectAll() {
-        if numSelectedBoxes > 0 {
+        if self.deselectAllIsClickable {
             for index in clueBoxes.indices {
                 self.clueBoxes[index].isSelected = false
             }
