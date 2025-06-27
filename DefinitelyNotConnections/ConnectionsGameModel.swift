@@ -10,6 +10,7 @@ import SwiftUI
 
 @Observable
 class ConnectionsGameModel {
+    private(set) var state: GameState = GameState.setup
     private(set) var remainingCategories: [Category]
     private(set) var completedCategories: [Category] = []
     
