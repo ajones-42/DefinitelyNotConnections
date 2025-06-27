@@ -202,4 +202,12 @@ class ConnectionsGameModel {
     func resetNumMistakesRemaining() {
         self.numMistakesRemaining = 4
     }
+    
+    func startPlaying() {
+        self.state = GameState.playing
+    }
+    
+    func finishedPlaying() {
+        self.state = GameState.finished
+    }
 }
