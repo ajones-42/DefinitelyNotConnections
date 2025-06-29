@@ -70,12 +70,14 @@ class ConnectionsGameModel {
         let name: String
         var clueBoxes: [ClueBox]
         let colour: Color
+        var isCompleted: Bool
         let id: Int
         
         init(name: String, boxTexts: [String], colour: Color, id: Int) {
             self.name = name
             self.clueBoxes = ConnectionsGameModel.Category.createClueBoxes(boxTexts: boxTexts, offset: id)
             self.colour = colour
+            self.isCompleted = false
             self.id = id
         }
         
@@ -210,5 +212,8 @@ class ConnectionsGameModel {
     
     func finishedPlaying() {
         self.state = GameState.finished
+    }
+    
+    func resetGame() {
     }
 }

@@ -15,7 +15,7 @@ struct ContentView: View {
         case .setup:
             StartScreen()
         case .playing:
-            GamePlayView()
+            GamePlayScreen()
         case .finished:
             FinishedScreen()
         }

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct FinishedScreen: View {
+    @Environment(ConnectionsGameModel.self) private var connectionsGameModel: ConnectionsGameModel
+
     var body: some View {
         ZStack {
             Color.purple
@@ -20,8 +22,11 @@ struct FinishedScreen: View {
                 Text("Happy anniversary! I love you!")
                     .foregroundStyle(.black)
                     .font(.title3)
-                AppNavigationButton(text: "Play again")
-                
+                Button {
+                    connectionsGameModel.resetGame()
+                } label: {
+                    AppNavigationButton(text: "Play again")
+                }
             }
         }
     }

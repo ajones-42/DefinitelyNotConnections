@@ -36,6 +36,7 @@ struct StartScreen: View {
     }
 }
 
-#Preview {
+/*#Preview {
     StartScreen()
 }
+*/
