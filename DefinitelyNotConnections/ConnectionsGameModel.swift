@@ -10,21 +10,28 @@ import SwiftUI
 
 @Observable
 class ConnectionsGameModel {
-    private(set) var state: GameState = GameState.setup
+    private(set) var state: GameState
     private(set) var categories: [Category]
-    private(set) var completedCategories: [Category] = [] // Can't observe self.categories since the order completed categories are shown in will change
+    // Can't compute self.categories since the order completed categories are shown in will change
+    private(set) var completedCategories: [Category] {
+        didSet {
+            if completedCategories.count == 4 {
+                self.state = .finished
+            }
+        }
+    }
     
-    private(set) var clueBoxes: [Category.ClueBox] = []
+    private(set) var clueBoxes: [Category.ClueBox]
     var selectedBoxes: [Category.ClueBox] {
         self.clueBoxes.filter { $0.isSelected == true }
     }
     var numSelectedBoxes: Int {
         self.selectedBoxes.count
     }
-    var numMistakesRemaining: Int = 4
-
-    private(set) var guesses: [Guess] = []
-
+    private(set) var numMistakesRemaining: Int
+    
+    private(set) var guesses: [Guess]
+    
     var popupTrigger: Bool = false // Actual value doesn't matter, but must change to trigger OneAway/AlreadyGuessed.
     var popupText: String = ""
     let oneAwayText: String = "One away!"
@@ -39,7 +46,25 @@ class ConnectionsGameModel {
     }
     
     init() {
+        self.state = .setup
         self.categories = ConnectionsGameModel.getCategories()
+        self.completedCategories = []
+        self.clueBoxes = []
+        self.guesses = []
+        self.numMistakesRemaining = 4
+        for category in categories {
+            self.clueBoxes.append(contentsOf: category.clueBoxes)
+        }
+        shuffleClueBoxes()
+    }
+    
+    func resetGame() {
+        self.state = .setup
+        self.categories = ConnectionsGameModel.getCategories()
+        self.completedCategories = []
+        self.clueBoxes = []
+        self.guesses = []
+        self.numMistakesRemaining = 4
         for category in categories {
             self.clueBoxes.append(contentsOf: category.clueBoxes)
         }
@@ -205,8 +230,5 @@ class ConnectionsGameModel {
     
     func finishedPlaying() {
         self.state = GameState.finished
-    }
-    
-    func resetGame() {
     }
 }
