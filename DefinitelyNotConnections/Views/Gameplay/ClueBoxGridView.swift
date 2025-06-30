@@ -7,17 +7,17 @@
 
 import SwiftUI
 
-struct ClueBoxGrid: View {
+struct ClueBoxGridView: View {
     @Environment(ConnectionsGameModel.self) private var connectionsGameModel: ConnectionsGameModel
     
     var body: some View {
         VStack {
             ForEach(connectionsGameModel.completedCategories) { category in
-                CompletedCategory(category: category)
+                CompletedCategoryView(category: category)
             }
             LazyVGrid(columns: [GridItem(), GridItem(), GridItem(), GridItem()]) {
                 ForEach(connectionsGameModel.clueBoxes) { clueBox in
-                    ClueBoxStyle(clueBox: clueBox)
+                    ClueBoxView(clueBox: clueBox)
                         .onTapGesture {
                             connectionsGameModel.clickClueBox(clueBox: clueBox)
                         }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NormalButton: View {
+struct GameplayButtonView: View {
     let text: String
     var isClickable: Bool
     

@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct ShuffleButton: View {
+struct ShuffleButtonView: View {
     @Environment(ConnectionsGameModel.self) private var connectionsGameModel: ConnectionsGameModel
     
     var body: some View {
         Button {
             connectionsGameModel.shuffleClueBoxes()
         } label: {
-            NormalButton(text: "Shuffle", isClickable: connectionsGameModel.shuffleIsClickable)
+            GameplayButtonView(text: "Shuffle", isClickable: connectionsGameModel.shuffleIsClickable)
         }
     }
 }

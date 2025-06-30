@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct DeselectAllButton: View {
+struct DeselectAllButtonView: View {
     @Environment(ConnectionsGameModel.self) private var connectionsGameModel: ConnectionsGameModel
     
     var body: some View {
         Button {
             connectionsGameModel.deselectAll()
         } label: {
-            NormalButton(text: "Deselect All", isClickable: connectionsGameModel.deselectAllIsClickable)
+            GameplayButtonView(text: "Deselect All", isClickable: connectionsGameModel.deselectAllIsClickable)
         }
     }
 }

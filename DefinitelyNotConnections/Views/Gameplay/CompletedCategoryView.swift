@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct CompletedCategory: View {
-    var category: ConnectionsGameModel.Category
+struct CompletedCategoryView: View {
+    var category: Category
 
     var body: some View {
         ZStack {

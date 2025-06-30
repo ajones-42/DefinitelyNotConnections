@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MistakesRemaining: View {
+struct MistakesRemainingView: View {
     @Environment(ConnectionsGameModel.self) private var connectionsGameModel: ConnectionsGameModel
     
     var body: some View {

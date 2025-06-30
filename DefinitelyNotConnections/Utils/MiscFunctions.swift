@@ -7,7 +7,7 @@
 
 import Foundation
 
-func concatBoxTexts(clueBoxes: [ConnectionsGameModel.Category.ClueBox]) -> String {
+func concatBoxTexts(clueBoxes: [ClueBox]) -> String {
     let boxTexts = clueBoxes.map({ $0.text })
     return boxTexts.joined(separator: ", ")
 }

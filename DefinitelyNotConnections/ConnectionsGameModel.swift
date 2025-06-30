@@ -21,8 +21,8 @@ class ConnectionsGameModel {
         }
     }
     
-    private(set) var clueBoxes: [Category.ClueBox]
-    var selectedBoxes: [Category.ClueBox] {
+    private(set) var clueBoxes: [ClueBox]
+    var selectedBoxes: [ClueBox] {
         self.clueBoxes.filter { $0.isSelected == true }
     }
     var numSelectedBoxes: Int {
@@ -80,49 +80,10 @@ class ConnectionsGameModel {
         ]
     }
     
-    struct Category: Identifiable {
-        @Observable
-        class ClueBox: Identifiable {
-            let text: String
-            var isSelected: Bool = false
-            let id: Int
-            
-            init(text: String, id: Int) {
-                self.text = text
-                self.id = id
-            }
-        }
-        let name: String
-        var clueBoxes: [ClueBox]
-        let colour: Color
-        let id: Int
-        
-        init(name: String, boxTexts: [String], colour: Color, id: Int) {
-            self.name = name
-            self.clueBoxes = ConnectionsGameModel.Category.createClueBoxes(boxTexts: boxTexts, offset: id)
-            self.colour = colour
-            self.id = id
-        }
-        
-        static func createClueBoxes(boxTexts: [String], offset: Int) -> [ClueBox] {
-            var tmpClueBoxes: [ClueBox] = []
-            for (i, boxText) in boxTexts.enumerated() {
-                tmpClueBoxes.append(ClueBox(text: boxText, id: i+4*offset))
-            }
-            return tmpClueBoxes
-        }
-    }
-    
-    struct Guess {
-        let clueBoxes: [Category.ClueBox]
-        let correctCategoryID: Int?
-        let oneAway: Bool
-    }
-    
-    func clickClueBox(clueBox: Category.ClueBox) {
+    func clickClueBox(clueBox: ClueBox) {
         if self.numSelectedBoxes < 4 || clueBox.isSelected {
             if let boxIndex = getClueBoxIndex(id: clueBox.id) {
-                self.clueBoxes[boxIndex].isSelected.toggle()
+                self.clueBoxes[boxIndex].click()
             }
         }
     }

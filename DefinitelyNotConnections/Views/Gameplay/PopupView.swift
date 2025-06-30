@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Popup: View {
+struct PopupView: View {
     let text: String
 
     var body: some View {
@@ -22,6 +22,6 @@ struct Popup: View {
 }
 
 #Preview {
-    Popup(text: "One away!")
-    Popup(text: "Already guessed!")
+    PopupView(text: "One away!")
+    PopupView(text: "Already guessed!")
 }

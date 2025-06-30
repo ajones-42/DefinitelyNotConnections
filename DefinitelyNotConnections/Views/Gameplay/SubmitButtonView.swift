@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SubmitButton: View {
+struct SubmitButtonView: View {
     @Environment(ConnectionsGameModel.self) private var connectionsGameModel: ConnectionsGameModel
     @State var showAlert: Bool = false
     
@@ -18,7 +18,7 @@ struct SubmitButton: View {
                 showAlert = true
             }
         } label: {
-            NormalButton(text: "Submit", isClickable: connectionsGameModel.submitIsClickable)
+            GameplayButtonView(text: "Submit", isClickable: connectionsGameModel.submitIsClickable)
                 .alert(Text("Oh go on then, have another go!"), isPresented: $showAlert) {
                     Button("Ok") {
                         connectionsGameModel.resetNumMistakesRemaining()
