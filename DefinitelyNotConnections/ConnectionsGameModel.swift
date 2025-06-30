@@ -21,9 +21,9 @@ class ConnectionsGameModel {
         }
     }
     
-    private(set) var remainingClueBoxes: [ClueBox]
+    private(set) var clueBoxes: [ClueBox]
     var selectedBoxes: [ClueBox] {
-        self.remainingClueBoxes.filter { $0.isSelected == true }
+        self.clueBoxes.filter { $0.isSelected == true }
     }
     var numSelectedBoxes: Int {
         self.selectedBoxes.count
@@ -49,11 +49,11 @@ class ConnectionsGameModel {
         self.gameState = GameState()
         self.categories = ConnectionsGameModel.getCategories()
         self.completedCategories = []
-        self.remainingClueBoxes = []
+        self.clueBoxes = []
         self.guesses = []
         self.numMistakesRemaining = 4
         for category in categories {
-            self.remainingClueBoxes.append(contentsOf: category.clueBoxes)
+            self.clueBoxes.append(contentsOf: category.clueBoxes)
         }
         shuffleClueBoxes()
     }
@@ -62,11 +62,11 @@ class ConnectionsGameModel {
         self.gameState = GameState()
         self.categories = ConnectionsGameModel.getCategories()
         self.completedCategories = []
-        self.remainingClueBoxes = []
+        self.clueBoxes = []
         self.guesses = []
         self.numMistakesRemaining = 4
         for category in categories {
-            self.remainingClueBoxes.append(contentsOf: category.clueBoxes)
+            self.clueBoxes.append(contentsOf: category.clueBoxes)
         }
         shuffleClueBoxes()
     }
@@ -83,13 +83,13 @@ class ConnectionsGameModel {
     func clickClueBox(clueBox: ClueBox) {
         if self.numSelectedBoxes < 4 || clueBox.isSelected {
             if let boxIndex = getClueBoxIndex(id: clueBox.id) {
-                self.remainingClueBoxes[boxIndex].click()
+                self.clueBoxes[boxIndex].click()
             }
         }
     }
     
     func getClueBoxIndex(id: Int) -> Int? {
-        return self.remainingClueBoxes.firstIndex(where: { $0.id == id })
+        return self.clueBoxes.firstIndex(where: { $0.id == id })
     }
     
     func submitSelection() {
@@ -159,7 +159,7 @@ class ConnectionsGameModel {
     func removeSelectedBoxes(selectedBoxIDs: [Int]) {
         for selectedBoxId in selectedBoxIDs {
             if let boxIndex = getClueBoxIndex(id: selectedBoxId) {
-                self.remainingClueBoxes.remove(at: boxIndex)
+                self.clueBoxes.remove(at: boxIndex)
             }
         }
     }
@@ -171,14 +171,14 @@ class ConnectionsGameModel {
 
     func deselectAll() {
         if self.deselectAllIsClickable {
-            for index in remainingClueBoxes.indices {
-                self.remainingClueBoxes[index].isSelected = false
+            for index in clueBoxes.indices {
+                self.clueBoxes[index].isSelected = false
             }
         }
     }
     
     func shuffleClueBoxes() {
-        self.remainingClueBoxes.shuffle()
+        self.clueBoxes.shuffle()
     }
     
     func resetNumMistakesRemaining() {

@@ -16,7 +16,7 @@ struct ClueBoxGridView: View {
                 CompletedCategoryView(category: category)
             }
             LazyVGrid(columns: [GridItem(), GridItem(), GridItem(), GridItem()]) {
-                ForEach(connectionsGameModel.remainingClueBoxes) { clueBox in
+                ForEach(connectionsGameModel.clueBoxes) { clueBox in
                     ClueBoxView(clueBox: clueBox)
                         .onTapGesture {
                             connectionsGameModel.clickClueBox(clueBox: clueBox)
