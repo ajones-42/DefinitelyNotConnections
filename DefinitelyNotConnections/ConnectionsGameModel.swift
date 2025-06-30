@@ -12,14 +12,6 @@ import SwiftUI
 class ConnectionsGameModel {
     private(set) var gameState: GameState
     private(set) var categories: [Category]
-    // Can't compute self.categories since the order completed categories are shown in will change
-    private(set) var completedCategories: [Category] {
-        didSet {
-            if completedCategories.count == 4 {
-                self.gameState.finishedPlaying()
-            }
-        }
-    }
     
     private(set) var remainingClueBoxes: [ClueBox]
     var selectedBoxes: [ClueBox] {
@@ -48,7 +40,6 @@ class ConnectionsGameModel {
     init() {
         self.gameState = GameState()
         self.categories = ConnectionsGameModel.getCategories()
-        self.completedCategories = []
         self.remainingClueBoxes = []
         self.guesses = []
         self.numMistakesRemaining = 4
@@ -61,7 +52,6 @@ class ConnectionsGameModel {
     func resetGame() {
         self.gameState = GameState()
         self.categories = ConnectionsGameModel.getCategories()
-        self.completedCategories = []
         self.remainingClueBoxes = []
         self.guesses = []
         self.numMistakesRemaining = 4
@@ -102,7 +92,7 @@ class ConnectionsGameModel {
             let guess: Guess = computeGuess(selectedBoxIDs: selectedBoxIDs)
             guesses.append(guess)
             if let correctCategoryIndex = guess.correctCategoryID {
-                self.completedCategories.append(self.categories[correctCategoryIndex])
+                self.gameState.completeCategory(category: self.categories[correctCategoryIndex])
                 removeSelectedBoxes(selectedBoxIDs: selectedBoxIDs)
             } else {
                 self.numMistakesRemaining -= 1
