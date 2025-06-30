@@ -43,9 +43,7 @@ class ConnectionsGameModel {
         self.remainingClueBoxes = []
         self.guesses = []
         self.numMistakesRemaining = 4
-        for category in categories {
-            self.remainingClueBoxes.append(contentsOf: category.clueBoxes)
-        }
+        self.remainingClueBoxes = Array(self.categories.map({ $0.clueBoxes }).joined())
         shuffleClueBoxes()
     }
     
