@@ -152,7 +152,7 @@ class ConnectionsGameModel {
                 continue categoryLoop
             }
         }
-        return Guess(clueBoxes: self.selectedBoxes, correctCategoryID: correctCategoryIndex, oneAway: oneAway)
+        return Guess(clueBoxes: self.selectedBoxes, correctCategoryID: correctCategoryIndex, oneAway: oneAway, id: self.guesses.count)
     }
     
     func checkNumSameSelections(selectedIDs: [Int], categoryIDs: [Int]) -> Int {

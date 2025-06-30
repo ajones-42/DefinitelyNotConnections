@@ -12,12 +12,18 @@ struct AdmiringPuzzleScreen: View {
     
     var body: some View {
         VStack {
+            HStack {
+                Spacer()
+                GuessesButtonView()
+            }
+            Spacer()
             ClueBoxGridView()
             Button {
                 connectionsGameModel.resetGame()
             } label: {
                 AppNavigationButton(text: "Play again", boxColour: Color(UIColor.systemGray), textColour: .white)
             }
+            Spacer()
         }
     }
 }

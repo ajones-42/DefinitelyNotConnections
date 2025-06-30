@@ -12,6 +12,11 @@ struct GameplayScreen: View {
 
     var body: some View {
         VStack {
+            HStack {
+                Spacer()
+                GuessesButtonView()
+            }
+            Spacer()
             PopupView(text: connectionsGameModel.popupText)
                 .show(for: .seconds(2), trigger: connectionsGameModel.popupTrigger)
             Text("Create four groups of four!")
@@ -24,6 +29,7 @@ struct GameplayScreen: View {
                 DeselectAllButtonView()
                 SubmitButtonView()
             }
+            Spacer()
         }
     }
 }
