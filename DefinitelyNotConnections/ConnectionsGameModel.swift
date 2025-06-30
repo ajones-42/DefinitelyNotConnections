@@ -10,13 +10,13 @@ import SwiftUI
 
 @Observable
 class ConnectionsGameModel {
-    private(set) var state: GameState
+    private(set) var gameState: GameState
     private(set) var categories: [Category]
     // Can't compute self.categories since the order completed categories are shown in will change
     private(set) var completedCategories: [Category] {
         didSet {
             if completedCategories.count == 4 {
-                self.state = .finished
+                self.gameState.finishedPlaying()
             }
         }
     }
@@ -46,7 +46,7 @@ class ConnectionsGameModel {
     }
     
     init() {
-        self.state = .setup
+        self.gameState = GameState()
         self.categories = ConnectionsGameModel.getCategories()
         self.completedCategories = []
         self.clueBoxes = []
@@ -59,7 +59,7 @@ class ConnectionsGameModel {
     }
     
     func resetGame() {
-        self.state = .setup
+        self.gameState = GameState()
         self.categories = ConnectionsGameModel.getCategories()
         self.completedCategories = []
         self.clueBoxes = []
@@ -186,10 +186,10 @@ class ConnectionsGameModel {
     }
     
     func startPlaying() {
-        self.state = GameState.playing
+        self.gameState.startPlaying()
     }
     
     func finishedPlaying() {
-        self.state = GameState.finished
+        self.gameState.finishedPlaying()
     }
 }

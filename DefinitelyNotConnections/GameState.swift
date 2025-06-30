@@ -7,8 +7,19 @@
 
 import Foundation
 
-enum GameState {
-    case setup
-    case playing
-    case finished
+@Observable
+class GameState {
+    private(set) var gamePhase: gamePhase
+    
+    init() {
+        self.gamePhase = .setup
+    }
+    
+    func startPlaying() {
+        self.gamePhase = .playing
+    }
+    
+    func finishedPlaying() {
+        self.gamePhase = .finished
+    }
 }
