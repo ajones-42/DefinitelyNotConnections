@@ -11,7 +11,7 @@ struct ContentView: View {
     @Environment(ConnectionsGameModel.self) private var connectionsGameModel: ConnectionsGameModel
 
     var body: some View {
-        switch connectionsGameModel.gameState.gamePhase {
+        switch connectionsGameModel.state {
         case .setup:
             StartScreen()
         case .playing:
