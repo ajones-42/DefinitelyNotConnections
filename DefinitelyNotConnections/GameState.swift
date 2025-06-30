@@ -11,4 +11,5 @@ enum GameState {
     case setup
     case playing
     case finished
+    case admiring
 }

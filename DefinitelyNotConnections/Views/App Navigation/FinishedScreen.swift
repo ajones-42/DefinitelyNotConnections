@@ -22,10 +22,16 @@ struct FinishedScreen: View {
                 Text("Happy anniversary! I love you!")
                     .foregroundStyle(.black)
                     .font(.title3)
+                
+            Button {
+                connectionsGameModel.admirePuzzle()
+            } label: {
+                AppNavigationButton(text: "Admire puzzle", boxColour: .black, textColour: .white)
+            }
                 Button {
                     connectionsGameModel.resetGame()
                 } label: {
-                    AppNavigationButton(text: "Play again")
+                    AppNavigationButton(text: "Play again", boxColour: .black, textColour: .white)
                 }
             }
         }

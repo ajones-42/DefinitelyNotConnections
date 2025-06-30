@@ -67,11 +67,15 @@ class ConnectionsGameModel {
     }
     
     func startPlaying() {
-        self.state = GameState.playing
+        self.state = .playing
     }
     
     func finishedPlaying() {
-        self.state = GameState.finished
+        self.state = .finished
+    }
+    
+    func admirePuzzle() {
+        self.state = .admiring
     }
 
     static func getCategories() -> [Category] {

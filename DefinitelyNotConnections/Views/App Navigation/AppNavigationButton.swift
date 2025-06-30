@@ -9,14 +9,16 @@ import SwiftUI
 
 struct AppNavigationButton: View {
     let text: String
+    let boxColour: Color
+    let textColour: Color
 
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 50)
-                .foregroundStyle(.black)
+                .foregroundStyle(boxColour)
                 .frame(width: 200, height: 60)
             Text(text)
-                .foregroundStyle(.white)
+                .foregroundStyle(textColour)
                 .font(.system(size: 18, weight: .bold, design: .rounded))
             }
     }
@@ -26,6 +28,6 @@ struct AppNavigationButton: View {
     ZStack {
         Color.purple
             .ignoresSafeArea()
-        AppNavigationButton(text: "Play")
+        AppNavigationButton(text: "Play", boxColour: .black, textColour: .white)
     }
 }

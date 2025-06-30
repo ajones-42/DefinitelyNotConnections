@@ -24,7 +24,7 @@ struct StartScreen: View {
                 Button {
                     connectionsGameModel.startPlaying()
                 } label: {
-                    AppNavigationButton(text: "Play")
+                    AppNavigationButton(text: "Play", boxColour: .black, textColour: .white)
                 }
                 Text("No. 1")
                     .foregroundStyle(.black)

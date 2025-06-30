@@ -1,0 +1,29 @@
+//
+//  AdmiringPuzzleView.swift
+//  DefinitelyNotConnections
+//
+//  Created by Alexander Jones on 30.06.25.
+//
+
+import SwiftUI
+
+struct AdmiringPuzzleScreen: View {
+    @Environment(ConnectionsGameModel.self) private var connectionsGameModel: ConnectionsGameModel
+    
+    var body: some View {
+        VStack {
+            ClueBoxGridView()
+            Button {
+                connectionsGameModel.resetGame()
+            } label: {
+                AppNavigationButton(text: "Play again", boxColour: Color(UIColor.systemGray), textColour: .white)
+            }
+        }
+    }
+}
+
+/*#Preview {
+    let connectionsGameModel: ConnectionsGameModel = ConnectionsGameModel()
+    AdmiringPuzzleScreen()
+        .environment(connectionsGameModel)
+}*/

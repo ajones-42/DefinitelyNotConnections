@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct GamePlayScreen: View {
+struct GameplayScreen: View {
     @Environment(ConnectionsGameModel.self) private var connectionsGameModel: ConnectionsGameModel
 
     var body: some View {
