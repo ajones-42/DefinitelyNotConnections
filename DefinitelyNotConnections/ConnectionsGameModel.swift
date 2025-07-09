@@ -80,10 +80,10 @@ class ConnectionsGameModel {
 
     static func getCategories() -> [Category] {
         return [
-            Category(name: "Category0", boxTexts: ["Clue0", "Clue1", "Clue2", "Clue3"], colour: .yellow, id: 0),
-            Category(name: "Category1", boxTexts: ["Clue4", "Clue5", "Clue6", "Clue7"], colour: .green, id: 1),
-            Category(name: "Category2", boxTexts: ["Clue8", "Clue9", "Clue10", "Clue11"], colour: .blue, id: 2),
-            Category(name: "Category3", boxTexts: ["Clue12", "Clue13", "Clue14", "Clue15"], colour: .purple, id: 3)
+            Category(name: "Reasons Alex Loves Caro (Amongst Others)", boxTexts: ["Smart", "Thoughtful", "Funny", "Crazy"], colour: .yellow, id: 0),
+            Category(name: "Things Caro Is", boxTexts: ["Stupido", "Queen Of Alex's Heart", "Ruler Of Alex's Life", "Duchess Dumpling"], colour: .green, id: 1),
+            Category(name: "Things Alex Is", boxTexts: ["Smort", "Smudge", "Wrong", "Banana Boy"], colour: .blue, id: 2),
+            Category(name: "Things That Live At The Top Of Caro's Brain", boxTexts: ["Banana", "Eggdoor", "Oops", "Bubbles"], colour: .purple, id: 3)
         ]
     }
     
