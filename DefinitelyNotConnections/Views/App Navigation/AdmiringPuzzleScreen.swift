@@ -18,6 +18,7 @@ struct AdmiringPuzzleScreen: View {
             }
             Spacer()
             ClueBoxGridView()
+                .padding(.horizontal)
             Button {
                 connectionsGameModel.resetGame()
             } label: {
