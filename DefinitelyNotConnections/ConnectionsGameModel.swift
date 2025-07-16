@@ -10,16 +10,8 @@ import SwiftUI
 
 @Observable
 class ConnectionsGameModel {
-    private(set) var state: GameState
+    private(set) var gameState: GameState
     private(set) var categories: [Category]
-    // Can't compute self.categories since the order completed categories are shown in will change
-    private(set) var completedCategories: [Category] {
-        didSet {
-            if completedCategories.count == 4 {
-                self.state = .finished
-            }
-        }
-    }
     
     private(set) var remainingClueBoxes: [ClueBox]
     var selectedBoxes: [ClueBox] {
@@ -46,9 +38,8 @@ class ConnectionsGameModel {
     }
     
     init() {
-        self.state = .setup
+        self.gameState = GameState()
         self.categories = ConnectionsGameModel.getCategories()
-        self.completedCategories = []
         self.guesses = []
         self.numMistakesRemaining = 4
         self.remainingClueBoxes = []
@@ -57,9 +48,8 @@ class ConnectionsGameModel {
     }
     
     func resetGame() {
-        self.state = .setup
+        self.gameState = GameState()
         self.categories = ConnectionsGameModel.getCategories()
-        self.completedCategories = []
         self.guesses = []
         self.numMistakesRemaining = 4
         self.remainingClueBoxes = Array(self.categories.map({ $0.clueBoxes }).joined())
@@ -67,15 +57,15 @@ class ConnectionsGameModel {
     }
     
     func startPlaying() {
-        self.state = .playing
+        self.gameState.startPlaying()
     }
     
     func finishedPlaying() {
-        self.state = .finished
+        self.gameState.finishedPlaying()
     }
     
     func admirePuzzle() {
-        self.state = .admiring
+        self.gameState.admirePuzzle()
     }
 
     static func getCategories() -> [Category] {
@@ -109,7 +99,7 @@ class ConnectionsGameModel {
             let guess: Guess = computeGuess(selectedBoxIDs: selectedBoxIDs)
             guesses.append(guess)
             if let correctCategoryIndex = guess.correctCategoryID {
-                self.completedCategories.append(self.categories[correctCategoryIndex])
+                self.gameState.completeCategory(category: self.categories[correctCategoryIndex])
                 removeSelectedBoxes(selectedBoxIDs: selectedBoxIDs)
             } else {
                 self.numMistakesRemaining -= 1
