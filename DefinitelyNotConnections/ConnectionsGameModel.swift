@@ -11,49 +11,33 @@ import SwiftUI
 @Observable
 class ConnectionsGameModel {
     private(set) var gameState: GameState
-    private(set) var categories: [Category]
-    
-    private(set) var remainingClueBoxes: [ClueBox]
-    var selectedBoxes: [ClueBox] {
-        self.remainingClueBoxes.filter { $0.isSelected == true }
-    }
-    var numSelectedBoxes: Int {
-        self.selectedBoxes.count
-    }
-    private(set) var numMistakesRemaining: Int
-    
-    private(set) var guesses: [Guess]
+    let categories: [Category]
+    let allClueBoxes: [ClueBox]
     
     var popupTrigger: Bool = false // Actual value doesn't matter, but must change to trigger OneAway/AlreadyGuessed.
     var popupText: String = ""
     let oneAwayText: String = "One away!"
     let alreadyGuessedText: String = "Already guessed!"
     
-    let shuffleIsClickable: Bool = true // Always clickable
-    var deselectAllIsClickable: Bool {
-        return self.numSelectedBoxes > 0
-    }
-    var submitIsClickable: Bool {
-        return self.numSelectedBoxes == 4
-    }
-    
     init() {
-        self.gameState = GameState()
         self.categories = ConnectionsGameModel.getCategories()
-        self.guesses = []
-        self.numMistakesRemaining = 4
-        self.remainingClueBoxes = []
-        self.remainingClueBoxes.append(contentsOf: Array(self.categories.map({ $0.clueBoxes }).joined()))
+        self.allClueBoxes = Array(self.categories.map({ $0.clueBoxes }).joined())
+        self.gameState = GameState(clueBoxes: self.allClueBoxes)
         shuffleClueBoxes()
     }
     
     func resetGame() {
-        self.gameState = GameState()
-        self.categories = ConnectionsGameModel.getCategories()
-        self.guesses = []
-        self.numMistakesRemaining = 4
-        self.remainingClueBoxes = Array(self.categories.map({ $0.clueBoxes }).joined())
+        self.gameState = GameState(clueBoxes: self.allClueBoxes)
         shuffleClueBoxes()
+    }
+    
+    static func getCategories() -> [Category] {
+        return [
+            Category(name: "Reasons Alex Loves Caro (Amongst Others)", boxTexts: ["Smart", "Thoughtful", "Funny", "Crazy"], colour: .yellow, id: 0),
+            Category(name: "Things Caro Is", boxTexts: ["Stupido", "Queen Of Alex's Heart", "Ruler Of Alex's Life", "Duchess Dumpling"], colour: .green, id: 1),
+            Category(name: "Things Alex Is", boxTexts: ["Smort", "Smudge", "Wrong", "Banana Boy"], colour: .blue, id: 2),
+            Category(name: "Things That Live At The Top Of Caro's Brain", boxTexts: ["Banana", "Eggdoor", "Oops", "Bubbles"], colour: .purple, id: 3)
+        ]
     }
     
     func startPlaying() {
@@ -67,42 +51,81 @@ class ConnectionsGameModel {
     func admirePuzzle() {
         self.gameState.admirePuzzle()
     }
+    
+    func getCurrentGamePhase() -> GamePhase {
+        self.gameState.getCurrentGamePhase()
+    }
 
-    static func getCategories() -> [Category] {
-        return [
-            Category(name: "Reasons Alex Loves Caro (Amongst Others)", boxTexts: ["Smart", "Thoughtful", "Funny", "Crazy"], colour: .yellow, id: 0),
-            Category(name: "Things Caro Is", boxTexts: ["Stupido", "Queen Of Alex's Heart", "Ruler Of Alex's Life", "Duchess Dumpling"], colour: .green, id: 1),
-            Category(name: "Things Alex Is", boxTexts: ["Smort", "Smudge", "Wrong", "Banana Boy"], colour: .blue, id: 2),
-            Category(name: "Things That Live At The Top Of Caro's Brain", boxTexts: ["Banana", "Eggdoor", "Oops", "Bubbles"], colour: .purple, id: 3)
-        ]
+
+    func getGuesses() -> [Guess] {
+        return self.gameState.getGuesses()
+    }
+
+    func getNumMistakesRemaining() -> Int {
+        self.gameState.getNumMistakesRemaining()
+    }
+    
+    func resetNumMistakesRemaining() {
+        self.gameState.resetNumMistakesRemaining()
+    }
+    
+    func getCompletedCategories() -> [Category] {
+        return self.gameState.getCompletedCategories()
+    }
+    
+    func getRemainingClueBoxes() -> [ClueBox] {
+        return self.gameState.getRemainingClueBoxes()
+    }
+    
+    func getSelectedClueBoxes() -> [ClueBox] {
+        return self.gameState.getSelectedClueBoxes()
     }
     
     func clickClueBox(clueBox: ClueBox) {
-        if self.numSelectedBoxes < 4 || clueBox.isSelected {
-            if let boxIndex = getClueBoxIndex(id: clueBox.id) {
-                self.remainingClueBoxes[boxIndex].click()
-            }
+        if (self.gameState.areUnselectedClueBoxesClickable() || clueBox.isSelected) {
+            clueBox.click()
         }
     }
     
-    func getClueBoxIndex(id: Int) -> Int? {
-        return self.remainingClueBoxes.firstIndex(where: { $0.id == id })
+    func isShuffleClickable() -> Bool {
+        return self.gameState.isShuffleClickable()
+    }
+    
+    func shuffleClueBoxes() {
+        // Redundant because always true, but fits the pattern of others
+        if isShuffleClickable() {
+            self.gameState.shuffleClueBoxes()
+        }
+    }
+    
+    func isDeselectAllClickable() -> Bool {
+        return self.gameState.isDeselectAllClickable()
+    }
+    
+    func deselectAllClueBoxes() {
+        if isDeselectAllClickable() {
+            self.gameState.deselectAllClueBoxes()
+        }
+    }
+    
+    func isSubmitClickable() -> Bool {
+        return self.gameState.isSubmitClickable()
     }
     
     func submitSelection() {
-        let selectedBoxIDs: [Int] = self.selectedBoxes.map({ $0.id })
+        let selectedBoxIDs: [Int] = getSelectedClueBoxes().map({ $0.id })
         let alreadyGuessed: Bool = selectionAlreadyGuessed(selectedBoxIDs: selectedBoxIDs)
 
         if alreadyGuessed {
             activatePopup(popupText: self.alreadyGuessedText)
-        } else if self.submitIsClickable {
+        } else if isSubmitClickable() {
             let guess: Guess = computeGuess(selectedBoxIDs: selectedBoxIDs)
-            guesses.append(guess)
+            self.gameState.addGuess(guess: guess)
             if let correctCategoryIndex = guess.correctCategoryID {
                 self.gameState.completeCategory(category: self.categories[correctCategoryIndex])
-                removeSelectedBoxes(selectedBoxIDs: selectedBoxIDs)
+                self.gameState.removeSelectedClueBoxes()
             } else {
-                self.numMistakesRemaining -= 1
+                self.gameState.madeMistake()
                 if guess.oneAway {
                     activatePopup(popupText: self.oneAwayText)
                 }
@@ -112,7 +135,7 @@ class ConnectionsGameModel {
     
     func selectionAlreadyGuessed(selectedBoxIDs: [Int]) -> Bool {
         var selectionAlreadyGuessed: Bool = false
-        for guess in guesses {
+        for guess in getGuesses() {
             if guess.clueBoxes.map({ $0.id }).sorted() == selectedBoxIDs.sorted() {
                 selectionAlreadyGuessed = true
                 break
@@ -142,7 +165,7 @@ class ConnectionsGameModel {
                 continue categoryLoop
             }
         }
-        return Guess(clueBoxes: self.selectedBoxes, correctCategoryID: correctCategoryIndex, oneAway: oneAway, id: self.guesses.count)
+        return Guess(clueBoxes: getSelectedClueBoxes(), correctCategoryID: correctCategoryIndex, oneAway: oneAway, id: self.gameState.getNumGuesses())
     }
     
     func checkNumSameSelections(selectedIDs: [Int], categoryIDs: [Int]) -> Int {
@@ -153,32 +176,8 @@ class ConnectionsGameModel {
         return numSameSelections
     }
     
-    func removeSelectedBoxes(selectedBoxIDs: [Int]) {
-        for selectedBoxId in selectedBoxIDs {
-            if let boxIndex = getClueBoxIndex(id: selectedBoxId) {
-                self.remainingClueBoxes.remove(at: boxIndex)
-            }
-        }
-    }
-    
     func activatePopup(popupText: String) {
         self.popupText = popupText
         self.popupTrigger.toggle()
-    }
-
-    func deselectAll() {
-        if self.deselectAllIsClickable {
-            for index in remainingClueBoxes.indices {
-                self.remainingClueBoxes[index].isSelected = false
-            }
-        }
-    }
-    
-    func shuffleClueBoxes() {
-        self.remainingClueBoxes.shuffle()
-    }
-    
-    func resetNumMistakesRemaining() {
-        self.numMistakesRemaining = 4
     }
 }

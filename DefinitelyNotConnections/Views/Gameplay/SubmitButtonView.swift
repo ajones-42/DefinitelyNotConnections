@@ -14,11 +14,11 @@ struct SubmitButtonView: View {
     var body: some View {
         Button {
             connectionsGameModel.submitSelection()
-            if connectionsGameModel.numMistakesRemaining == 0 {
+            if connectionsGameModel.getNumMistakesRemaining() == 0 {
                 showAlert = true
             }
         } label: {
-            GameplayButtonView(text: "Submit", isClickable: connectionsGameModel.submitIsClickable)
+            GameplayButtonView(text: "Submit", isClickable: connectionsGameModel.isSubmitClickable())
                 .alert(Text("Oh go on then, have another go!"), isPresented: $showAlert) {
                     Button("Ok") {
                         connectionsGameModel.resetNumMistakesRemaining()

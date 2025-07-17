@@ -12,9 +12,9 @@ struct DeselectAllButtonView: View {
     
     var body: some View {
         Button {
-            connectionsGameModel.deselectAll()
+            connectionsGameModel.deselectAllClueBoxes()
         } label: {
-            GameplayButtonView(text: "Deselect All", isClickable: connectionsGameModel.deselectAllIsClickable)
+            GameplayButtonView(text: "Deselect All", isClickable: connectionsGameModel.isDeselectAllClickable())
         }
     }
 }

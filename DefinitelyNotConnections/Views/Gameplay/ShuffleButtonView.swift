@@ -14,7 +14,7 @@ struct ShuffleButtonView: View {
         Button {
             connectionsGameModel.shuffleClueBoxes()
         } label: {
-            GameplayButtonView(text: "Shuffle", isClickable: connectionsGameModel.shuffleIsClickable)
+            GameplayButtonView(text: "Shuffle", isClickable: connectionsGameModel.isShuffleClickable())
         }
     }
 }

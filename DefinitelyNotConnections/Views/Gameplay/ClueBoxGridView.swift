@@ -12,11 +12,11 @@ struct ClueBoxGridView: View {
     
     var body: some View {
         VStack {
-            ForEach(connectionsGameModel.gameState.completedCategories) { category in
+            ForEach(connectionsGameModel.getCompletedCategories()) { category in
                 CompletedCategoryView(category: category)
             }
             LazyVGrid(columns: [GridItem(), GridItem(), GridItem(), GridItem()]) {
-                ForEach(connectionsGameModel.remainingClueBoxes) { clueBox in
+                ForEach(connectionsGameModel.getRemainingClueBoxes()) { clueBox in
                     ClueBoxView(clueBox: clueBox)
                         .onTapGesture {
                             connectionsGameModel.clickClueBox(clueBox: clueBox)

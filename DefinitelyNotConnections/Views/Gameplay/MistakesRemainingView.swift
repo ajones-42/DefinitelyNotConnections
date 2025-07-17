@@ -16,7 +16,7 @@ struct MistakesRemainingView: View {
             Text("Mistakes remaining:")
                 .fontWeight(.semibold)
             ForEach(0...3, id: \.self) {
-                if connectionsGameModel.numMistakesRemaining > $0 {
+                if connectionsGameModel.getNumMistakesRemaining() > $0 {
                     shape.foregroundStyle(.foreground)
                 } else {
                     shape.foregroundStyle(.background)

@@ -21,4 +21,8 @@ class ClueBox: Identifiable {
     func click() {
         self.isSelected.toggle()
     }
+    
+    func deselect() {
+        self.isSelected = false
+    }
 }
