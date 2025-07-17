@@ -138,22 +138,4 @@ struct GameState {
     mutating func resetNumMistakesRemaining() {
         self.numMistakesRemaining = 4
     }
-    
-    /*
-    func getClueBoxIndex(clueBoxID: Int) -> Int? {
-        return self.remainingClueBoxes.firstIndex(where: { $0.id == clueBoxID })
-    }
-    
-    func getClueBox(clueBox: ClueBox) -> ClueBox? {
-        if let boxIndex = getClueBoxIndex(clueBoxID: clueBox.id) {
-            return self.remainingClueBoxes[boxIndex]
-        } else {
-            return nil
-        }
-    }
-    
-    func clueBoxIsClickable(clueBox: ClueBox) -> Bool {
-        return (self.numSelectedBoxes < 4 || clueBox.isSelected)
-    }
-    */
 }
