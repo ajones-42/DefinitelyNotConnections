@@ -10,12 +10,17 @@ import Foundation
 @Observable
 class ClueBox: Identifiable {
     let text: String
-    var isSelected: Bool = false
+    var isSelected: Bool
     let id: Int
     
-    init(text: String, id: Int) {
+    init(text: String, isSelected: Bool, id: Int) {
         self.text = text
+        self.isSelected = isSelected
         self.id = id
+    }
+    
+    convenience init(text: String, id: Int) {
+        self.init(text: text, isSelected: false, id: id)
     }
     
     func click() {
