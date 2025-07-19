@@ -52,6 +52,14 @@ struct GameState {
         deselectAllClueBoxes()
     }
     
+    init(gamePhase: GamePhase, numMistakesRemaining: Int, completedCategories: [Category], guesses: [Guess], remainingClueBoxes: [ClueBox]) {
+        self.gamePhase = gamePhase
+        self.completedCategories = completedCategories
+        self.guesses = guesses
+        self.remainingClueBoxes = remainingClueBoxes
+        self.numMistakesRemaining = numMistakesRemaining
+    }
+    
     mutating func startPlaying() {
         self.gamePhase = .playing
     }
