@@ -22,6 +22,13 @@ class Category: Identifiable {
         self.id = id
     }
     
+    init(name: String, clueBoxes: [ClueBox], colour: Color, id: Int) {
+        self.name = name
+        self.clueBoxes = clueBoxes
+        self.colour = colour
+        self.id = id
+    }
+    
     static func createClueBoxes(boxTexts: [String], offset: Int) -> [ClueBox] {
         var tmpClueBoxes: [ClueBox] = []
         for (i, boxText) in boxTexts.enumerated() {
