@@ -15,7 +15,7 @@ struct Guess: Identifiable {
     let id: Int
     
     func getGuessText() -> String {
-        var guessText = "Guess \(self.id): \(concatBoxTexts(clueBoxes: self.clueBoxes))"
+        var guessText = "Guess \(self.id + 1): \(concatBoxTexts(clueBoxes: self.clueBoxes))"
         if correctCategoryID != nil {
             guessText += " (Correct!)"
         } else if self.oneAway {
