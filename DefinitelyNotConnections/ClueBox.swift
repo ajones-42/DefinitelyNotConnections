@@ -33,7 +33,11 @@ class ClueBox: Identifiable {
         self.isSelected = false
     }
     
-    func toggleShake() {
-        self.shake.toggle()
+    func activateShake() {
+        self.shake = true
+    }
+    
+    func deactivateShake() {
+        self.shake = false
     }
 }

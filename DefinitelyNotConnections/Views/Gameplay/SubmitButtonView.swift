@@ -13,9 +13,10 @@ struct SubmitButtonView: View {
     
     var body: some View {
         Button {
-            Task {
-                do {
-                    await connectionsGameModel.submitSelection()
+            if !connectionsGameModel.submitSelection() {
+                connectionsGameModel.activateSelectedBoxesShake()
+                withAnimation(Animation.spring(response: 0.3, dampingFraction: 0.2, blendDuration: 0.2)) {
+                    connectionsGameModel.deactivateSelectedBoxesShake()
                 }
             }
             if connectionsGameModel.getNumMistakesRemaining() == 0 {

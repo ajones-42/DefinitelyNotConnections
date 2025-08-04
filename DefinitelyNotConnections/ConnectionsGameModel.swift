@@ -112,14 +112,14 @@ class ConnectionsGameModel {
         return self.gameState.isSubmitClickable()
     }
     
-    func submitSelection() async {
+    func submitSelection() -> Bool {
         let selectedBoxIDs: [Int] = getSelectedClueBoxes().map({ $0.id })
         let alreadyGuessed: Bool = selectionAlreadyGuessed(selectedBoxIDs: selectedBoxIDs)
+        var correct: Bool = true
 
         if alreadyGuessed {
             activatePopup(popupText: self.alreadyGuessedText)
         } else if isSubmitClickable() {
-            await self.gameState.shakeSelectedBoxes()
             let guess: Guess = computeGuess(selectedBoxIDs: selectedBoxIDs)
             self.gameState.addGuess(guess: guess)
             if let correctCategoryIndex = guess.correctCategoryID {
@@ -130,8 +130,10 @@ class ConnectionsGameModel {
                 if guess.oneAway {
                     activatePopup(popupText: self.oneAwayText)
                 }
+                correct = false
             }
         }
+        return correct
     }
     
     func selectionAlreadyGuessed(selectedBoxIDs: [Int]) -> Bool {
@@ -180,5 +182,13 @@ class ConnectionsGameModel {
     func activatePopup(popupText: String) {
         self.popupText = popupText
         self.popupTrigger.toggle()
+    }
+    
+    func activateSelectedBoxesShake() {
+        self.gameState.activateSelectedBoxesShake()
+    }
+    
+    func deactivateSelectedBoxesShake() {
+        self.gameState.deactivateSelectedBoxesShake()
     }
 }
