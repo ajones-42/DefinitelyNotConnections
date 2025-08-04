@@ -17,7 +17,7 @@ struct GameplayButtonView: View {
         ZStack {
             RoundedRectangle(cornerRadius: 20)
                 .foregroundStyle(boxColour)
-                .frame(width: 80, height: 40)
+                .frame(width: 90, height: 40)
             Text(text)
                 .foregroundStyle(textColour)
                 .font(.system(size: 13, weight: .bold, design: .rounded))
