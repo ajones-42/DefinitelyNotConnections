@@ -9,18 +9,21 @@ import SwiftUI
 
 struct CompletedCategoryView: View {
     var category: Category
+    let rectangleWidth: CGFloat = 360
 
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 20)
-                .frame(width: 360, height: 80)
+                .frame(width: rectangleWidth, height: 80)
                 .foregroundStyle(category.colour)
             VStack {
                 Text(category.name)
                     .fontWeight(.semibold)
                     .foregroundStyle(.black)
+                    .frame(maxWidth: rectangleWidth - 10)
                 Text(concatBoxTexts(clueBoxes: category.clueBoxes))
                     .foregroundStyle(.black)
+                    .frame(maxWidth: rectangleWidth - 10)
             }
         }
     }
