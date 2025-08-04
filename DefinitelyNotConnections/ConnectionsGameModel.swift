@@ -112,13 +112,14 @@ class ConnectionsGameModel {
         return self.gameState.isSubmitClickable()
     }
     
-    func submitSelection() {
+    func submitSelection() async {
         let selectedBoxIDs: [Int] = getSelectedClueBoxes().map({ $0.id })
         let alreadyGuessed: Bool = selectionAlreadyGuessed(selectedBoxIDs: selectedBoxIDs)
 
         if alreadyGuessed {
             activatePopup(popupText: self.alreadyGuessedText)
         } else if isSubmitClickable() {
+            await self.gameState.shakeSelectedBoxes()
             let guess: Guess = computeGuess(selectedBoxIDs: selectedBoxIDs)
             self.gameState.addGuess(guess: guess)
             if let correctCategoryIndex = guess.correctCategoryID {

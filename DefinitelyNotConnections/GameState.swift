@@ -146,4 +146,16 @@ struct GameState {
     mutating func resetNumMistakesRemaining() {
         self.numMistakesRemaining = 4
     }
+    
+    func _shakeSelectedBoxes() {
+        self.selectedClueBoxes.forEach { box in
+            box.toggleShake()
+        }
+    }
+    
+    func shakeSelectedBoxes() async {
+        _shakeSelectedBoxes()
+        try? await Task.sleep(nanoseconds: 200000000)
+        _shakeSelectedBoxes()
+    }
 }

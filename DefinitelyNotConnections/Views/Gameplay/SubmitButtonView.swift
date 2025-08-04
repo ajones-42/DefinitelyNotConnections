@@ -13,7 +13,11 @@ struct SubmitButtonView: View {
     
     var body: some View {
         Button {
-            connectionsGameModel.submitSelection()
+            Task {
+                do {
+                    await connectionsGameModel.submitSelection()
+                }
+            }
             if connectionsGameModel.getNumMistakesRemaining() == 0 {
                 showAlert = true
             }

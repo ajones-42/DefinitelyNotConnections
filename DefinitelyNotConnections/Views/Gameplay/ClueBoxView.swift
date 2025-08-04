@@ -22,6 +22,8 @@ struct ClueBoxView: View {
                 text.foregroundStyle(.background)
             }
         }
+        .offset(y: clueBox.shake ? -20 : 0)
+        .animation(.spring(), value: clueBox.shake)
     }
 }
 

@@ -11,11 +11,13 @@ import Foundation
 class ClueBox: Identifiable {
     let text: String
     var isSelected: Bool
+    var shake: Bool
     let id: Int
     
     init(text: String, isSelected: Bool, id: Int) {
         self.text = text
         self.isSelected = isSelected
+        self.shake = false
         self.id = id
     }
     
@@ -29,5 +31,9 @@ class ClueBox: Identifiable {
     
     func deselect() {
         self.isSelected = false
+    }
+    
+    func toggleShake() {
+        self.shake.toggle()
     }
 }
