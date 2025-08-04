@@ -15,7 +15,7 @@ struct GameState {
     private var completedCategories: [Category] {
         didSet {
             if completedCategories.count == 4 {
-                finishedPlaying()
+                admirePuzzle()
             }
         }
     }
@@ -64,7 +64,7 @@ struct GameState {
         self.gamePhase = .playing
     }
     
-    mutating func finishedPlaying() {
+    mutating func finishPlaying() {
         self.gamePhase = .finished
     }
     

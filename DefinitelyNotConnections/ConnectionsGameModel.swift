@@ -44,8 +44,8 @@ class ConnectionsGameModel {
         self.gameState.startPlaying()
     }
     
-    func finishedPlaying() {
-        self.gameState.finishedPlaying()
+    func finishPlaying() {
+        self.gameState.finishPlaying()
     }
     
     func admirePuzzle() {

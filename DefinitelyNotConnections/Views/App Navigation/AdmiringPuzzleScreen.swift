@@ -20,6 +20,11 @@ struct AdmiringPuzzleScreen: View {
             ClueBoxGridView()
                 .padding(.horizontal)
             Button {
+                connectionsGameModel.finishPlaying()
+            } label: {
+                AppNavigationButton(text: "Finish", boxColour: Color(UIColor.systemGray), textColour: .white)
+            }
+            Button {
                 connectionsGameModel.resetGame()
             } label: {
                 AppNavigationButton(text: "Play again", boxColour: Color(UIColor.systemGray), textColour: .white)
