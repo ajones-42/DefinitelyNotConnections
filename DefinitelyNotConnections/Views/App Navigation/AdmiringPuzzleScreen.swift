@@ -17,6 +17,10 @@ struct AdmiringPuzzleScreen: View {
                 GuessesButtonView()
             }
             Spacer()
+            Text("Obvio!")
+                .foregroundStyle(.foreground)
+                .font(.largeTitle)
+                .fontWeight(.heavy)
             ClueBoxGridView()
                 .padding(.horizontal)
             Button {
