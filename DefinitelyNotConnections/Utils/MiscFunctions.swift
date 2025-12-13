@@ -11,3 +11,7 @@ func concatBoxTexts(clueBoxes: [ClueBox]) -> String {
     let boxTexts = clueBoxes.map({ $0.text })
     return boxTexts.joined(separator: ", ")
 }
+
+func getClueBoxIDs(clueBoxes: [ClueBox]) -> [Int] {
+    return clueBoxes.map({ $0.id })
+}

@@ -21,6 +21,7 @@ struct GameState {
     }
     
     private var guesses: [Guess]
+    private var lastGuessShakesBoxes: Bool = false
     
     private var remainingClueBoxes: [ClueBox]
     private var selectedClueBoxes: [ClueBox] {
@@ -35,8 +36,7 @@ struct GameState {
     private var deselectAllIsClickable: Bool {
         self.numSelectedClueBoxes > 0
     }
-    
-    private let shuffleIsClickable: Bool = true // Always clickable
+
     private var submitIsClickable: Bool {
         self.numSelectedClueBoxes == 4
     }
@@ -76,6 +76,14 @@ struct GameState {
         return self.gamePhase
     }
     
+    mutating func setLastGuessShakesBoxes(shakesBoxes: Bool) {
+        self.lastGuessShakesBoxes = shakesBoxes
+    }
+    
+    func getLastGuessShakesBoxes() -> Bool {
+        return self.lastGuessShakesBoxes
+    }
+    
     mutating func completeCategory(category: Category) {
         self.completedCategories.append(category)
     }
@@ -92,10 +100,6 @@ struct GameState {
         return self.guesses
     }
     
-    func getNumGuesses() -> Int {
-        return self.guesses.count
-    }
-    
     func getRemainingClueBoxes() -> [ClueBox] {
         return self.remainingClueBoxes
     }
@@ -104,12 +108,12 @@ struct GameState {
         return self.selectedClueBoxes
     }
     
-    mutating func removeSelectedClueBoxes() {
-        self.remainingClueBoxes.removeAll(where: { $0.isSelected })
+    func getNextGuessID() -> Int {
+        return self.guesses.count + 1
     }
     
-    func isShuffleClickable() -> Bool {
-        return self.shuffleIsClickable
+    mutating func removeSelectedClueBoxes() {
+        self.remainingClueBoxes.removeAll(where: { $0.isSelected })
     }
     
     mutating func shuffleClueBoxes() {

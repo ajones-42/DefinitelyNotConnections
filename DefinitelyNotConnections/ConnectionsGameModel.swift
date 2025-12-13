@@ -56,9 +56,16 @@ class ConnectionsGameModel {
         self.gameState.getCurrentGamePhase()
     }
 
-
     func getGuesses() -> [Guess] {
         return self.gameState.getGuesses()
+    }
+    
+    func setLastGuessShakesBoxes(shakesBoxes: Bool) {
+        self.gameState.setLastGuessShakesBoxes(shakesBoxes: shakesBoxes)
+    }
+    
+    func getLastGuessShakesBoxes() -> Bool {
+        return self.gameState.getLastGuessShakesBoxes()
     }
 
     func getNumMistakesRemaining() -> Int {
@@ -81,21 +88,19 @@ class ConnectionsGameModel {
         return self.gameState.getSelectedClueBoxes()
     }
     
+    func getNextGuessID() -> Int {
+        return self.gameState.getNextGuessID()
+    }
+    
     func clickClueBox(clueBox: ClueBox) {
         if (self.gameState.areUnselectedClueBoxesClickable() || clueBox.isSelected) {
             clueBox.click()
         }
     }
     
-    func isShuffleClickable() -> Bool {
-        return self.gameState.isShuffleClickable()
-    }
-    
     func shuffleClueBoxes() {
-        // Redundant because always true, but fits the pattern of others
-        if isShuffleClickable() {
-            self.gameState.shuffleClueBoxes()
-        }
+        // No check since shuffle is always clickable
+        self.gameState.shuffleClueBoxes()
     }
     
     func isDeselectAllClickable() -> Bool {
@@ -112,19 +117,20 @@ class ConnectionsGameModel {
         return self.gameState.isSubmitClickable()
     }
     
-    func submitSelection() -> Bool {
-        let selectedBoxIDs: [Int] = getSelectedClueBoxes().map({ $0.id })
-        let alreadyGuessed: Bool = selectionAlreadyGuessed(selectedBoxIDs: selectedBoxIDs)
-        var correct: Bool = true
+    func submitSelection() {
+        let selectedBoxes: [ClueBox] = getSelectedClueBoxes()
+        let alreadyGuessed: Bool = selectionAlreadyGuessed(selectedBoxIDs: getClueBoxIDs(clueBoxes: selectedBoxes))
+        var correct: Bool?
 
         if alreadyGuessed {
             activatePopup(popupText: self.alreadyGuessedText)
         } else if isSubmitClickable() {
-            let guess: Guess = computeGuess(selectedBoxIDs: selectedBoxIDs)
+            let guess: Guess = computeGuess(selectedBoxes: selectedBoxes, guessID: getNextGuessID())
             self.gameState.addGuess(guess: guess)
             if let correctCategoryIndex = guess.correctCategoryID {
                 self.gameState.completeCategory(category: self.categories[correctCategoryIndex])
                 self.gameState.removeSelectedClueBoxes()
+                correct = true
             } else {
                 self.gameState.madeMistake()
                 if guess.oneAway {
@@ -133,13 +139,18 @@ class ConnectionsGameModel {
                 correct = false
             }
         }
-        return correct
+
+        if correct == nil || correct == true {
+            setLastGuessShakesBoxes(shakesBoxes: false)
+        } else {
+            setLastGuessShakesBoxes(shakesBoxes: true)
+        }
     }
     
     func selectionAlreadyGuessed(selectedBoxIDs: [Int]) -> Bool {
         var selectionAlreadyGuessed: Bool = false
         for guess in getGuesses() {
-            if guess.clueBoxes.map({ $0.id }).sorted() == selectedBoxIDs.sorted() {
+            if getClueBoxIDs(clueBoxes: guess.clueBoxes).sorted() == selectedBoxIDs.sorted() {
                 selectionAlreadyGuessed = true
                 break
             }
@@ -147,12 +158,12 @@ class ConnectionsGameModel {
         return selectionAlreadyGuessed
     }
     
-    func computeGuess(selectedBoxIDs: [Int]) -> Guess {
+    func computeGuess(selectedBoxes: [ClueBox], guessID: Int) -> Guess {
         var correctCategoryIndex: Int? = nil
         var oneAway = false
         
         categoryLoop: for (categoryIndex, category) in self.categories.enumerated() {
-            let numSameSelections: Int = checkNumSameSelections(selectedIDs: selectedBoxIDs, categoryIDs: category.clueBoxes.map({$0.id}))
+            let numSameSelections: Int = checkNumSameSelections(selectedIDs: getClueBoxIDs(clueBoxes: selectedBoxes), categoryIDs: getClueBoxIDs(clueBoxes: category.clueBoxes))
             switch numSameSelections {
             case 4:
                 correctCategoryIndex = categoryIndex
@@ -168,7 +179,7 @@ class ConnectionsGameModel {
                 continue categoryLoop
             }
         }
-        return Guess(clueBoxes: getSelectedClueBoxes(), correctCategoryID: correctCategoryIndex, oneAway: oneAway, id: self.gameState.getNumGuesses())
+        return Guess(clueBoxes: selectedBoxes, correctCategoryID: correctCategoryIndex, oneAway: oneAway, id: guessID)
     }
     
     func checkNumSameSelections(selectedIDs: [Int], categoryIDs: [Int]) -> Int {
