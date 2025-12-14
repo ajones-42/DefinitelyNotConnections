@@ -13,15 +13,17 @@ struct SubmitButtonView: View {
     
     var body: some View {
         Button {
-            connectionsGameModel.submitSelection()
-            if connectionsGameModel.getLastGuessShakesBoxes() {
-                connectionsGameModel.activateSelectedBoxesShake()
-                withAnimation(Animation.spring(response: 0.3, dampingFraction: 0.2, blendDuration: 0.2)) {
-                    connectionsGameModel.deactivateSelectedBoxesShake()
+            if connectionsGameModel.isSubmitClickable() {
+                connectionsGameModel.submitSelection()
+                if connectionsGameModel.getLastGuessShakesBoxes() {
+                    connectionsGameModel.activateSelectedBoxesShake()
+                    withAnimation(Animation.spring(response: 0.3, dampingFraction: 0.2, blendDuration: 0.2)) {
+                        connectionsGameModel.deactivateSelectedBoxesShake()
+                    }
                 }
-            }
-            if connectionsGameModel.getNumMistakesRemaining() == 0 {
-                showAlert = true
+                if connectionsGameModel.getNumMistakesRemaining() == 0 {
+                    showAlert = true
+                }
             }
         } label: {
             GameplayButtonView(text: "Submit", isClickable: connectionsGameModel.isSubmitClickable())

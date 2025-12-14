@@ -108,9 +108,7 @@ class ConnectionsGameModel {
     }
     
     func deselectAllClueBoxes() {
-        if isDeselectAllClickable() {
-            self.gameState.deselectAllClueBoxes()
-        }
+        self.gameState.deselectAllClueBoxes()
     }
     
     func isSubmitClickable() -> Bool {
@@ -124,7 +122,7 @@ class ConnectionsGameModel {
 
         if alreadyGuessed {
             activatePopup(popupText: self.alreadyGuessedText)
-        } else if isSubmitClickable() {
+        } else {
             let guess: Guess = computeGuess(selectedBoxes: selectedBoxes, guessID: getNextGuessID())
             self.gameState.addGuess(guess: guess)
             if let correctCategoryIndex = guess.correctCategoryID {
