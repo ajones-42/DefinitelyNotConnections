@@ -99,7 +99,6 @@ class ConnectionsGameModel {
     }
     
     func shuffleClueBoxes() {
-        // No check since shuffle is always clickable
         self.gameState.shuffleClueBoxes()
     }
     

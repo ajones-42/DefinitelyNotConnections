@@ -12,6 +12,7 @@ struct ShuffleButtonView: View {
     
     var body: some View {
         Button {
+            // No check since shuffle is always clickable
             connectionsGameModel.shuffleClueBoxes()
         } label: {
             GameplayButtonView(text: "Shuffle", isClickable: true)
