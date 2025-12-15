@@ -41,6 +41,8 @@ class ConnectionsGameModel {
         ]
     }
     
+    // GamePhase
+    
     func startPlaying() {
         self.gameState.gamePhase = .playing
     }
@@ -56,6 +58,8 @@ class ConnectionsGameModel {
     func getCurrentGamePhase() -> GamePhase {
         return self.gameState.gamePhase
     }
+    
+    // ClueBoxes
     
     func getSelectedClueBoxes() -> [ClueBox] {
         return self.gameState.remainingClueBoxes.filter { $0.isSelected }
@@ -83,6 +87,22 @@ class ConnectionsGameModel {
         self.gameState.remainingClueBoxes.removeAll(where: { $0.isSelected })
     }
     
+    func isDeselectAllClickable() -> Bool {
+        return getNumSelectedClueBoxes() > 0
+    }
+    
+    func deselectAllClueBoxes() {
+        for clueBox in self.gameState.remainingClueBoxes {
+            clueBox.deselect()
+        }
+    }
+    
+    func isSubmitClickable() -> Bool {
+        return getNumSelectedClueBoxes() == 4
+    }
+    
+    // Guesses
+    
     func addGuess(guess: Guess) {
         self.gameState.guesses.append(guess)
     }
@@ -98,6 +118,8 @@ class ConnectionsGameModel {
     func getLastGuessShakesBoxes() -> Bool {
         return self.gameState.lastGuessShakesBoxes
     }
+    
+    // Mistakes
 
     func getNumMistakesRemaining() -> Int {
         return self.gameState.numMistakesRemaining
@@ -111,6 +133,8 @@ class ConnectionsGameModel {
         self.gameState.numMistakesRemaining = 4
     }
     
+    // Categories
+    
     func completeCategory(correctCategoryIndex: Int) {
         self.gameState.completedCategories.append(self.categories[correctCategoryIndex])
     }
@@ -123,19 +147,8 @@ class ConnectionsGameModel {
         return getNumSelectedClueBoxes() < 4
     }
     
-    func isDeselectAllClickable() -> Bool {
-        return getNumSelectedClueBoxes() > 0
-    }
-    
-    func deselectAllClueBoxes() {
-        for clueBox in self.gameState.remainingClueBoxes {
-            clueBox.deselect()
-        }
-    }
-    
-    func isSubmitClickable() -> Bool {
-        return getNumSelectedClueBoxes() == 4
-    }
+
+
     
     func submitSelection() {
         let selectedBoxes: [ClueBox] = getSelectedClueBoxes()
