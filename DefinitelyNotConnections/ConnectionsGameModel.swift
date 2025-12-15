@@ -19,6 +19,26 @@ class ConnectionsGameModel {
     let oneAwayText: String = "One away!"
     let alreadyGuessedText: String = "Already guessed!"
     
+    private var selectedClueBoxes: [ClueBox] {
+        self.gameState.remainingClueBoxes.filter { $0.isSelected }
+    }
+    
+    private var numSelectedClueBoxes: Int {
+        selectedClueBoxes.count
+    }
+    
+    private var deselectAllIsClickable: Bool {
+        numSelectedClueBoxes > 0
+    }
+    
+    private var submitIsClickable: Bool {
+        numSelectedClueBoxes == 4
+    }
+
+    private var unselectedBoxesAreClickable: Bool {
+        numSelectedClueBoxes < 4
+    }
+    
     init() {
         self.categories = ConnectionsGameModel.getCategories()
         self.allClueBoxes = Array(self.categories.map({ $0.clueBoxes }).joined())
@@ -28,6 +48,7 @@ class ConnectionsGameModel {
     
     func resetGame() {
         self.gameState = GameState(clueBoxes: self.allClueBoxes)
+        deselectAllClueBoxes()
         shuffleClueBoxes()
     }
     
@@ -41,81 +62,91 @@ class ConnectionsGameModel {
     }
     
     func startPlaying() {
-        self.gameState.startPlaying()
+        self.gameState.gamePhase = .playing
     }
     
     func finishPlaying() {
-        self.gameState.finishPlaying()
+        self.gameState.gamePhase = .finished
     }
     
     func admirePuzzle() {
-        self.gameState.admirePuzzle()
+        self.gameState.gamePhase = .admiring
     }
     
     func getCurrentGamePhase() -> GamePhase {
-        self.gameState.getCurrentGamePhase()
-    }
-
-    func getGuesses() -> [Guess] {
-        return self.gameState.getGuesses()
-    }
-    
-    func setLastGuessShakesBoxes(shakesBoxes: Bool) {
-        self.gameState.setLastGuessShakesBoxes(shakesBoxes: shakesBoxes)
-    }
-    
-    func getLastGuessShakesBoxes() -> Bool {
-        return self.gameState.getLastGuessShakesBoxes()
-    }
-
-    func getNumMistakesRemaining() -> Int {
-        self.gameState.getNumMistakesRemaining()
-    }
-    
-    func resetNumMistakesRemaining() {
-        self.gameState.resetNumMistakesRemaining()
-    }
-    
-    func getCompletedCategories() -> [Category] {
-        return self.gameState.getCompletedCategories()
+        return self.gameState.gamePhase
     }
     
     func getRemainingClueBoxes() -> [ClueBox] {
-        return self.gameState.getRemainingClueBoxes()
-    }
-    
-    func getSelectedClueBoxes() -> [ClueBox] {
-        return self.gameState.getSelectedClueBoxes()
-    }
-    
-    func getNextGuessID() -> Int {
-        return self.gameState.getNextGuessID()
+        return self.gameState.remainingClueBoxes
     }
     
     func clickClueBox(clueBox: ClueBox) {
-        if (self.gameState.areUnselectedClueBoxesClickable() || clueBox.isSelected) {
+        if (unselectedBoxesAreClickable || clueBox.isSelected) {
             clueBox.click()
         }
     }
     
     func shuffleClueBoxes() {
-        self.gameState.shuffleClueBoxes()
+        self.gameState.remainingClueBoxes.shuffle()
+    }
+    
+    func removeSelectedClueBoxes() {
+        self.gameState.remainingClueBoxes.removeAll(where: { $0.isSelected })
+    }
+    
+    func addGuess(guess: Guess) {
+        self.gameState.guesses.append(guess)
+    }
+
+    func getGuesses() -> [Guess] {
+        return self.gameState.guesses
+    }
+    
+    func getNextGuessID() -> Int {
+        return self.gameState.guesses.count + 1
+    }
+    
+    func getLastGuessShakesBoxes() -> Bool {
+        return self.gameState.lastGuessShakesBoxes
+    }
+
+    func getNumMistakesRemaining() -> Int {
+        return self.gameState.numMistakesRemaining
+    }
+    
+    func madeMistake() {
+        self.gameState.numMistakesRemaining -= 1
+    }
+    
+    func resetNumMistakesRemaining() {
+        self.gameState.numMistakesRemaining = 4
+    }
+    
+    func completeCategory(correctCategoryIndex: Int) {
+        self.gameState.completedCategories.append(self.categories[correctCategoryIndex])
+    }
+    
+    func getCompletedCategories() -> [Category] {
+        return self.gameState.completedCategories
     }
     
     func isDeselectAllClickable() -> Bool {
-        return self.gameState.isDeselectAllClickable()
+        return deselectAllIsClickable
     }
     
     func deselectAllClueBoxes() {
-        self.gameState.deselectAllClueBoxes()
+        for clueBox in self.gameState.remainingClueBoxes {
+            clueBox.deselect()
+        }
     }
     
     func isSubmitClickable() -> Bool {
-        return self.gameState.isSubmitClickable()
+        return submitIsClickable
     }
     
     func submitSelection() {
-        let selectedBoxes: [ClueBox] = getSelectedClueBoxes()
+        let selectedBoxes: [ClueBox] = self.selectedClueBoxes
         let alreadyGuessed: Bool = selectionAlreadyGuessed(selectedBoxIDs: getClueBoxIDs(clueBoxes: selectedBoxes))
         var correct: Bool?
 
@@ -123,13 +154,16 @@ class ConnectionsGameModel {
             activatePopup(popupText: self.alreadyGuessedText)
         } else {
             let guess: Guess = computeGuess(selectedBoxes: selectedBoxes, guessID: getNextGuessID())
-            self.gameState.addGuess(guess: guess)
+            addGuess(guess: guess)
             if let correctCategoryIndex = guess.correctCategoryID {
-                self.gameState.completeCategory(category: self.categories[correctCategoryIndex])
-                self.gameState.removeSelectedClueBoxes()
+                completeCategory(correctCategoryIndex: correctCategoryIndex)
+                removeSelectedClueBoxes()
                 correct = true
+                if self.gameState.completedCategories.count == 4 {
+                    admirePuzzle()
+                }
             } else {
-                self.gameState.madeMistake()
+                madeMistake()
                 if guess.oneAway {
                     activatePopup(popupText: self.oneAwayText)
                 }
@@ -138,9 +172,9 @@ class ConnectionsGameModel {
         }
 
         if correct == nil || correct == true {
-            setLastGuessShakesBoxes(shakesBoxes: false)
+            self.gameState.lastGuessShakesBoxes = false
         } else {
-            setLastGuessShakesBoxes(shakesBoxes: true)
+            self.gameState.lastGuessShakesBoxes = true
         }
     }
     
@@ -193,10 +227,14 @@ class ConnectionsGameModel {
     }
     
     func activateSelectedBoxesShake() {
-        self.gameState.activateSelectedBoxesShake()
+        self.selectedClueBoxes.forEach { box in
+            box.activateShake()
+        }
     }
     
     func deactivateSelectedBoxesShake() {
-        self.gameState.deactivateSelectedBoxesShake()
+        self.selectedClueBoxes.forEach { box in
+            box.deactivateShake()
+        }
     }
 }
