@@ -74,7 +74,7 @@ class ConnectionsGameModel {
     }
     
     func clickClueBox(clueBox: ClueBox) {
-        if (areUnselectedBoxesClickable() || clueBox.isSelected) {
+        if (getNumSelectedClueBoxes() < 4 || clueBox.isSelected) {
             clueBox.click()
         }
     }
@@ -142,11 +142,6 @@ class ConnectionsGameModel {
     func getCompletedCategories() -> [Category] {
         return self.gameState.completedCategories
     }
-    
-    func areUnselectedBoxesClickable() -> Bool {
-        return getNumSelectedClueBoxes() < 4
-    }
-    
 
 
     
