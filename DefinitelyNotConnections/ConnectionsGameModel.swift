@@ -19,26 +19,6 @@ class ConnectionsGameModel {
     let oneAwayText: String = "One away!"
     let alreadyGuessedText: String = "Already guessed!"
     
-    private var selectedClueBoxes: [ClueBox] {
-        self.gameState.remainingClueBoxes.filter { $0.isSelected }
-    }
-    
-    private var numSelectedClueBoxes: Int {
-        selectedClueBoxes.count
-    }
-    
-    private var deselectAllIsClickable: Bool {
-        numSelectedClueBoxes > 0
-    }
-    
-    private var submitIsClickable: Bool {
-        numSelectedClueBoxes == 4
-    }
-
-    private var unselectedBoxesAreClickable: Bool {
-        numSelectedClueBoxes < 4
-    }
-    
     init() {
         self.categories = ConnectionsGameModel.getCategories()
         self.allClueBoxes = Array(self.categories.map({ $0.clueBoxes }).joined())
@@ -77,12 +57,20 @@ class ConnectionsGameModel {
         return self.gameState.gamePhase
     }
     
+    func getSelectedClueBoxes() -> [ClueBox] {
+        return self.gameState.remainingClueBoxes.filter { $0.isSelected }
+    }
+    
+    func getNumSelectedClueBoxes() -> Int {
+        return getSelectedClueBoxes().count
+    }
+    
     func getRemainingClueBoxes() -> [ClueBox] {
         return self.gameState.remainingClueBoxes
     }
     
     func clickClueBox(clueBox: ClueBox) {
-        if (unselectedBoxesAreClickable || clueBox.isSelected) {
+        if (areUnselectedBoxesClickable() || clueBox.isSelected) {
             clueBox.click()
         }
     }
@@ -131,8 +119,12 @@ class ConnectionsGameModel {
         return self.gameState.completedCategories
     }
     
+    func areUnselectedBoxesClickable() -> Bool {
+        return getNumSelectedClueBoxes() < 4
+    }
+    
     func isDeselectAllClickable() -> Bool {
-        return deselectAllIsClickable
+        return getNumSelectedClueBoxes() > 0
     }
     
     func deselectAllClueBoxes() {
@@ -142,11 +134,11 @@ class ConnectionsGameModel {
     }
     
     func isSubmitClickable() -> Bool {
-        return submitIsClickable
+        return getNumSelectedClueBoxes() == 4
     }
     
     func submitSelection() {
-        let selectedBoxes: [ClueBox] = self.selectedClueBoxes
+        let selectedBoxes: [ClueBox] = getSelectedClueBoxes()
         let alreadyGuessed: Bool = selectionAlreadyGuessed(selectedBoxIDs: getClueBoxIDs(clueBoxes: selectedBoxes))
         var correct: Bool?
 
@@ -227,13 +219,13 @@ class ConnectionsGameModel {
     }
     
     func activateSelectedBoxesShake() {
-        self.selectedClueBoxes.forEach { box in
+        getSelectedClueBoxes().forEach { box in
             box.activateShake()
         }
     }
     
     func deactivateSelectedBoxesShake() {
-        self.selectedClueBoxes.forEach { box in
+        getSelectedClueBoxes().forEach { box in
             box.deactivateShake()
         }
     }
