@@ -92,7 +92,7 @@ class ConnectionsGameModel {
     }
     
     func getNextGuessID() -> Int {
-        return self.gameState.guesses.count + 1
+        return self.gameState.guesses.count
     }
     
     func getLastGuessShakesBoxes() -> Bool {
