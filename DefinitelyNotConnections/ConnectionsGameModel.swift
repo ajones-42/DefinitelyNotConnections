@@ -147,10 +147,9 @@ class ConnectionsGameModel {
     
     func submitSelection() {
         let selectedBoxes: [ClueBox] = getSelectedClueBoxes()
-        let alreadyGuessed: Bool = selectionAlreadyGuessed(selectedBoxIDs: getClueBoxIDs(clueBoxes: selectedBoxes))
         var correct: Bool?
 
-        if alreadyGuessed {
+        if selectionAlreadyGuessed(selectedBoxIDs: getClueBoxIDs(clueBoxes: selectedBoxes)) {
             activatePopup(popupText: self.alreadyGuessedText)
         } else {
             let guess: Guess = computeGuess(selectedBoxes: selectedBoxes, guessID: getNextGuessID())
