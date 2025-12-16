@@ -119,6 +119,10 @@ class ConnectionsGameModel {
         return self.gameState.lastGuessShakesBoxes
     }
     
+    func guessIsCorrect(guess: Guess) -> Bool {
+        return guess.correctCategoryID != nil
+    }
+    
     // Mistakes
 
     func getNumMistakesRemaining() -> Int {
@@ -142,38 +146,46 @@ class ConnectionsGameModel {
     func getCompletedCategories() -> [Category] {
         return self.gameState.completedCategories
     }
+    
+    
+    func correctGuess(guess: Guess) {
+        self.gameState.lastGuessShakesBoxes = false
+        completeCategory(correctCategoryIndex: guess.correctCategoryID!)
+        removeSelectedClueBoxes()
+        if self.gameState.completedCategories.count == 4 {
+            admirePuzzle()
+        }
+    }
+    
+    func incorrectGuess(guess: Guess) {
+        self.gameState.lastGuessShakesBoxes = true
+        madeMistake()
+        if guess.oneAway {
+            activatePopup(popupText: self.oneAwayText)
+        }
+    }
+    
+    func alreadyGuessed() {
+        self.gameState.lastGuessShakesBoxes = true
+        activatePopup(popupText: self.alreadyGuessedText)
+    }
 
 
     
     func submitSelection() {
         let selectedBoxes: [ClueBox] = getSelectedClueBoxes()
-        var correct: Bool?
 
         if selectionAlreadyGuessed(selectedBoxIDs: getClueBoxIDs(clueBoxes: selectedBoxes)) {
-            activatePopup(popupText: self.alreadyGuessedText)
+            alreadyGuessed()
         } else {
             let guess: Guess = computeGuess(selectedBoxes: selectedBoxes, guessID: getNextGuessID())
             addGuess(guess: guess)
-            if let correctCategoryIndex = guess.correctCategoryID {
-                completeCategory(correctCategoryIndex: correctCategoryIndex)
-                removeSelectedClueBoxes()
-                correct = true
-                if self.gameState.completedCategories.count == 4 {
-                    admirePuzzle()
-                }
+            
+            if guessIsCorrect(guess: guess) {
+                correctGuess(guess: guess)
             } else {
-                madeMistake()
-                if guess.oneAway {
-                    activatePopup(popupText: self.oneAwayText)
-                }
-                correct = false
+                incorrectGuess(guess: guess)
             }
-        }
-
-        if correct == nil || correct == true {
-            self.gameState.lastGuessShakesBoxes = false
-        } else {
-            self.gameState.lastGuessShakesBoxes = true
         }
     }
     
