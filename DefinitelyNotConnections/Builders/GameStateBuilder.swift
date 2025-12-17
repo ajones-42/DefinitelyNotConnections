@@ -40,6 +40,6 @@ struct GameStateBuilder {
     }
     
     func build() -> GameState {
-        return GameState(gamePhase: self.gamePhase, numMistakesRemaining: self.numMistakesRemaining, completedCategories: self.completedCategories, guesses: self.guesses, remainingClueBoxes: self.remainingClueBoxes)
+        return GameState(gamePhase: self.gamePhase, numMistakesRemaining: self.numMistakesRemaining, completedCategories: self.completedCategories, guesses: self.guesses, remainingClueBoxes: RemainingClueBoxes(clueBoxes: self.remainingClueBoxes))
     }
 }

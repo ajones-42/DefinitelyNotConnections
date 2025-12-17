@@ -62,7 +62,7 @@ class ConnectionsGameModel {
     // ClueBoxes
     
     func getSelectedClueBoxes() -> [ClueBox] {
-        return self.gameState.remainingClueBoxes.filter { $0.isSelected }
+        return self.gameState.remainingClueBoxes.getSelectedClueBoxes()
     }
     
     func getNumSelectedClueBoxes() -> Int {
@@ -70,7 +70,7 @@ class ConnectionsGameModel {
     }
     
     func getRemainingClueBoxes() -> [ClueBox] {
-        return self.gameState.remainingClueBoxes
+        return self.gameState.remainingClueBoxes.clueBoxes
     }
     
     func clickClueBox(clueBox: ClueBox) {
@@ -84,7 +84,7 @@ class ConnectionsGameModel {
     }
     
     func removeSelectedClueBoxes() {
-        self.gameState.remainingClueBoxes.removeAll(where: { $0.isSelected })
+        self.gameState.remainingClueBoxes.removeSelectedClueBoxes()
     }
     
     func isDeselectAllClickable() -> Bool {
@@ -92,9 +92,7 @@ class ConnectionsGameModel {
     }
     
     func deselectAllClueBoxes() {
-        for clueBox in self.gameState.remainingClueBoxes {
-            clueBox.deselect()
-        }
+        self.gameState.remainingClueBoxes.deselectAll()
     }
     
     func isSubmitClickable() -> Bool {
