@@ -14,15 +14,15 @@ class ClueBox: Identifiable {
     var shake: Bool
     let id: Int
     
-    init(text: String, isSelected: Bool, id: Int) {
+    init(text: String, isSelected: Bool, shake: Bool, id: Int) {
         self.text = text
         self.isSelected = isSelected
-        self.shake = false
+        self.shake = shake
         self.id = id
     }
     
     convenience init(text: String, id: Int) {
-        self.init(text: text, isSelected: false, id: id)
+        self.init(text: text, isSelected: false, shake: false, id: id)
     }
     
     func click() {
