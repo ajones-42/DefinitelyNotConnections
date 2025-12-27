@@ -33,12 +33,7 @@ class ConnectionsGameModel {
     }
     
     static func getCategories() -> [Category] {
-        return [
-            Category(name: "Category 0", boxTexts: ["Clue0", "Clue1", "Clue2", "Clue3"], colour: .yellow, id: 0),
-            Category(name: "Category 1", boxTexts: ["Clue4", "Clue5", "Clue6", "Clue7"], colour: .green, id: 1),
-            Category(name: "Category 2", boxTexts: ["Clue8", "Clue9", "Clue10", "Clue11"], colour: .blue, id: 2),
-            Category(name: "Category 3", boxTexts: ["Clue12", "Clue13", "Clue14", "Clue15"], colour: .purple, id: 3)
-        ]
+        return createDefaultTestCategories()
     }
     
     // GamePhase

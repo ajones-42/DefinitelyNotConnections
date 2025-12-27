@@ -15,9 +15,9 @@ class Category: Identifiable {
     let colour: Color
     let id: Int
     
-    init(name: String, boxTexts: [String], colour: Color, id: Int) {
+    init(name: String, clueBoxTexts: [String], colour: Color, id: Int) {
         self.name = name
-        self.clueBoxes = Category.createClueBoxes(boxTexts: boxTexts, offset: id)
+        self.clueBoxes = Category.createClueBoxes(clueBoxTexts: clueBoxTexts, offset: id)
         self.colour = colour
         self.id = id
     }
@@ -29,9 +29,9 @@ class Category: Identifiable {
         self.id = id
     }
     
-    static func createClueBoxes(boxTexts: [String], offset: Int) -> [ClueBox] {
+    static func createClueBoxes(clueBoxTexts: [String], offset: Int) -> [ClueBox] {
         var tmpClueBoxes: [ClueBox] = []
-        for (i, boxText) in boxTexts.enumerated() {
+        for (i, boxText) in clueBoxTexts.enumerated() {
             tmpClueBoxes.append(ClueBox(text: boxText, id: i+4*offset))
         }
         return tmpClueBoxes
