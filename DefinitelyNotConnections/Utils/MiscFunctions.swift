@@ -17,6 +17,10 @@ func getClueBoxIDs(clueBoxes: [ClueBox]) -> [Int] {
     return clueBoxes.map({ $0.id })
 }
 
+func getAllClueBoxes(categories: [Category]) -> [ClueBox] {
+    return Array(categories.map({ $0.clueBoxes }).joined())
+}
+
 func createTestCategory(categoryNumber: Int, numCluesPerCategory: Int, colour: Color) -> Category {
     let categoryName: String = "Category \(categoryNumber)"
     var clueBoxTexts: [String] = []

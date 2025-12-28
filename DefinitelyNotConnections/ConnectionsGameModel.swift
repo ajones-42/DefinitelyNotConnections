@@ -21,7 +21,7 @@ class ConnectionsGameModel {
     
     init() {
         self.categories = ConnectionsGameModel.getCategories()
-        self.allClueBoxes = Array(self.categories.map({ $0.clueBoxes }).joined())
+        self.allClueBoxes = getAllClueBoxes(categories: self.categories)
         self.gameState = GameState(clueBoxes: self.allClueBoxes)
         shuffleClueBoxes()
     }
