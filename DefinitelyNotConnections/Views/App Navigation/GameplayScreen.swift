@@ -21,7 +21,7 @@ struct GameplayScreen: View {
                 .show(for: .seconds(2), trigger: connectionsGameModel.popupTrigger)
             Text("Create four groups of four!")
                 .foregroundStyle(.foreground)
-            ClueBoxGridView()
+            GameGridView()
                 .padding(.horizontal)
             MistakesRemainingView()
             HStack {

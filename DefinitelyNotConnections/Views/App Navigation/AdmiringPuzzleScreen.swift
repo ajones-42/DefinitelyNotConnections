@@ -21,7 +21,7 @@ struct AdmiringPuzzleScreen: View {
                 .foregroundStyle(.foreground)
                 .font(.largeTitle)
                 .fontWeight(.heavy)
-            ClueBoxGridView()
+            GameGridView()
                 .padding(.horizontal)
             Button {
                 connectionsGameModel.finishPlaying()

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ClueBoxGridView: View {
+struct GameGridView: View {
     @Environment(ConnectionsGameModel.self) private var connectionsGameModel: ConnectionsGameModel
     
     var body: some View {
