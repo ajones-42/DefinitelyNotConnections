@@ -11,8 +11,7 @@ import SwiftUI
 @Observable
 class ConnectionsGameModel {
     private(set) var gameState: GameState
-    let categories: [Category]
-    let allClueBoxes: [ClueBox]
+    let allCategories: [Category]
     
     var popupTrigger: Bool = false // Actual value doesn't matter, but must change to trigger OneAway/AlreadyGuessed.
     var popupText: String = ""
@@ -20,14 +19,19 @@ class ConnectionsGameModel {
     let alreadyGuessedText: String = "Already guessed!"
     
     init() {
-        self.categories = ConnectionsGameModel.getCategories()
-        self.allClueBoxes = getAllClueBoxes(categories: self.categories)
-        self.gameState = GameState(clueBoxes: self.allClueBoxes)
+        self.allCategories = ConnectionsGameModel.getCategories()
+        self.gameState = GameState(clueBoxes: getAllClueBoxes(categories: self.allCategories))
+        shuffleClueBoxes()
+    }
+    
+    init(gameState: GameState, categories: [Category]) {
+        self.gameState = gameState
+        self.allCategories = categories
         shuffleClueBoxes()
     }
     
     func resetGame() {
-        self.gameState = GameState(clueBoxes: self.allClueBoxes)
+        self.gameState = GameState(clueBoxes: getAllClueBoxes(categories: self.allCategories))
         deselectAllClueBoxes()
         shuffleClueBoxes()
     }
@@ -133,7 +137,7 @@ class ConnectionsGameModel {
     // Categories
     
     func completeCategory(correctCategoryIndex: Int) {
-        self.gameState.completedCategories.append(self.categories[correctCategoryIndex])
+        self.gameState.completedCategories.append(self.allCategories[correctCategoryIndex])
     }
     
     func getCompletedCategories() -> [Category] {
@@ -197,7 +201,7 @@ class ConnectionsGameModel {
         var correctCategoryIndex: Int? = nil
         var oneAway = false
         
-        categoryLoop: for (categoryIndex, category) in self.categories.enumerated() {
+        categoryLoop: for (categoryIndex, category) in self.allCategories.enumerated() {
             let numSameSelections: Int = checkNumSameSelections(selectedIDs: getClueBoxIDs(clueBoxes: selectedBoxes), categoryIDs: getClueBoxIDs(clueBoxes: category.clueBoxes))
             switch numSameSelections {
             case 4:
