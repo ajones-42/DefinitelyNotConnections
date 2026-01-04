@@ -37,7 +37,7 @@ func createTestCategories(numCategories: Int, numCluesPerCategory: Int, colours:
     }
     var categories: [Category] = []
 
-    for categoryNumber in 0...numCategories {
+    for categoryNumber in 0...numCategories - 1 {
         categories.append(createTestCategory(categoryNumber: categoryNumber, numCluesPerCategory: numCluesPerCategory, colour: colours[categoryNumber]))
     }
     return categories
