@@ -83,7 +83,7 @@ class ConnectionsGameModel {
     }
     
     func shuffleClueBoxes() {
-        self.gameState.remainingClueBoxes.shuffleClueBoxes()
+        self.gameGrid.remainingClueBoxes.shuffleClueBoxes()
     }
     
     func removeSelectedClueBoxes() {
