@@ -10,7 +10,6 @@ import Foundation
 class GameStateBuilder {
     var gamePhase: GamePhase = .playing
     var numMistakesRemaining: Int = 4
-    var completedCategories: [Category] = []
     var guesses: [Guess] = []
     
     func withGamePhase(gamePhase: GamePhase) -> GameStateBuilder {
