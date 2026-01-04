@@ -25,7 +25,7 @@ func createTestCategory(categoryNumber: Int, numCluesPerCategory: Int, colour: C
     let categoryName: String = "Category \(categoryNumber)"
     var clueBoxTexts: [String] = []
 
-    for clueBoxNumber in 0...numCluesPerCategory {
+    for clueBoxNumber in 0...numCluesPerCategory - 1 {
         clueBoxTexts.append("Clue \(clueBoxNumber + categoryNumber * numCluesPerCategory)")
     }
     return Category(name: categoryName, clueBoxTexts: clueBoxTexts, colour: colour, id: categoryNumber)
