@@ -8,15 +8,18 @@
 import Foundation
 
 struct GameGrid {
+    let allCategories: [Category]
     var remainingClueBoxes: RemainingClueBoxes
     var completedCategories: [Category]
     
-    init(clueBoxes: [ClueBox]) {
-        self.remainingClueBoxes = RemainingClueBoxes(clueBoxes: clueBoxes)
+    init(categories: [Category]) {
+        self.allCategories = categories
+        self.remainingClueBoxes = RemainingClueBoxes(clueBoxes: getAllClueBoxes(categories: self.allCategories))
         self.completedCategories = []
     }
     
-    init(remainingClueBoxes: RemainingClueBoxes, completedCategories: [Category]) {
+    init(allCategories: [Category], remainingClueBoxes: RemainingClueBoxes, completedCategories: [Category]) {
+        self.allCategories = allCategories
         self.remainingClueBoxes = remainingClueBoxes
         self.completedCategories = completedCategories
     }

@@ -22,7 +22,7 @@ class ConnectionsGameModel {
     init() {
         self.allCategories = ConnectionsGameModel.getCategories()
         self.gameState = GameState()
-        self.gameGrid = GameGrid(clueBoxes: getAllClueBoxes(categories: self.allCategories))
+        self.gameGrid = GameGrid(categories: self.allCategories)
         shuffleClueBoxes()
     }
     
@@ -35,7 +35,7 @@ class ConnectionsGameModel {
     
     func resetGame() {
         self.gameState = GameState()
-        self.gameGrid = GameGrid(clueBoxes: getAllClueBoxes(categories: self.allCategories))
+        self.gameGrid = GameGrid(categories: self.allCategories)
         deselectAllClueBoxes()
         shuffleClueBoxes()
     }
