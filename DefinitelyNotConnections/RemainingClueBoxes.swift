@@ -26,7 +26,7 @@ class RemainingClueBoxes {
         return getSelectedClueBoxes().count
     }
     
-    func shuffle() {
+    func shuffleClueBoxes() {
         self.clueBoxes.shuffle()
     }
     
