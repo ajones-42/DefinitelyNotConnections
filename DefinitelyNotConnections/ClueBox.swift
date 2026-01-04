@@ -8,7 +8,7 @@
 import Foundation
 
 @Observable
-class ClueBox: Identifiable {
+class ClueBox: Identifiable, Equatable {
     let text: String
     var isSelected: Bool
     var shake: Bool
@@ -23,6 +23,10 @@ class ClueBox: Identifiable {
     
     convenience init(text: String, id: Int) {
         self.init(text: text, isSelected: false, shake: false, id: id)
+    }
+    
+    static func ==(lhs: ClueBox, rhs: ClueBox) -> Bool {
+        return lhs.id == rhs.id && lhs.text == rhs.text
     }
     
     func click() {
