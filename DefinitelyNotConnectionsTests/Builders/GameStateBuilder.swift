@@ -23,17 +23,12 @@ class GameStateBuilder {
         return self
     }
     
-    func withCompletedCategories(completedCategories: [Category]) -> GameStateBuilder {
-        self.completedCategories = completedCategories
-        return self
-    }
-    
     func withGuesses(guesses: [Guess]) -> GameStateBuilder {
         self.guesses = guesses
         return self
     }
     
     func build() -> GameState {
-        return GameState(gamePhase: self.gamePhase, numMistakesRemaining: self.numMistakesRemaining, completedCategories: self.completedCategories, guesses: self.guesses)
+        return GameState(gamePhase: self.gamePhase, numMistakesRemaining: self.numMistakesRemaining, guesses: self.guesses)
     }
 }

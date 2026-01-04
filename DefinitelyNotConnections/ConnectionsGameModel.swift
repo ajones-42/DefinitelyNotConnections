@@ -141,11 +141,11 @@ class ConnectionsGameModel {
     // Categories
     
     func completeCategory(correctCategoryIndex: Int) {
-        self.gameState.completedCategories.append(self.allCategories[correctCategoryIndex])
+        self.gameGrid.completedCategories.append(self.allCategories[correctCategoryIndex])
     }
     
     func getCompletedCategories() -> [Category] {
-        return self.gameState.completedCategories
+        return self.gameGrid.completedCategories
     }
     
     
@@ -153,7 +153,7 @@ class ConnectionsGameModel {
         self.gameState.lastGuessShakesBoxes = false
         completeCategory(correctCategoryIndex: guess.correctCategoryID!)
         removeSelectedClueBoxes()
-        if self.gameState.completedCategories.count == 4 {
+        if self.gameGrid.completedCategories.count == 4 {
             admirePuzzle()
         }
     }

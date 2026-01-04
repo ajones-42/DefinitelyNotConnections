@@ -10,21 +10,18 @@ import Foundation
 struct GameState {
     var gamePhase: GamePhase
     var numMistakesRemaining: Int
-    var completedCategories: [Category]
     var guesses: [Guess]
     var lastGuessShakesBoxes: Bool = false
 
     
     init() {
         self.gamePhase = .setup
-        self.completedCategories = []
         self.guesses = []
         self.numMistakesRemaining = 4
     }
     
-    init(gamePhase: GamePhase, numMistakesRemaining: Int, completedCategories: [Category], guesses: [Guess]) {
+    init(gamePhase: GamePhase, numMistakesRemaining: Int, guesses: [Guess]) {
         self.gamePhase = gamePhase
-        self.completedCategories = completedCategories
         self.guesses = guesses
         self.numMistakesRemaining = numMistakesRemaining
     }
