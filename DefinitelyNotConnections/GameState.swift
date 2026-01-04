@@ -13,22 +13,19 @@ struct GameState {
     var completedCategories: [Category]
     var guesses: [Guess]
     var lastGuessShakesBoxes: Bool = false
-    var remainingClueBoxes: RemainingClueBoxes
 
     
-    init(clueBoxes: [ClueBox]) {
+    init() {
         self.gamePhase = .setup
         self.completedCategories = []
         self.guesses = []
-        self.remainingClueBoxes = RemainingClueBoxes(clueBoxes: clueBoxes)
         self.numMistakesRemaining = 4
     }
     
-    init(gamePhase: GamePhase, numMistakesRemaining: Int, completedCategories: [Category], guesses: [Guess], remainingClueBoxes: RemainingClueBoxes) {
+    init(gamePhase: GamePhase, numMistakesRemaining: Int, completedCategories: [Category], guesses: [Guess]) {
         self.gamePhase = gamePhase
         self.completedCategories = completedCategories
         self.guesses = guesses
-        self.remainingClueBoxes = remainingClueBoxes
         self.numMistakesRemaining = numMistakesRemaining
     }
 }

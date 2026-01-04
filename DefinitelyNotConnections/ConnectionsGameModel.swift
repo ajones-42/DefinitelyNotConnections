@@ -11,6 +11,7 @@ import SwiftUI
 @Observable
 class ConnectionsGameModel {
     private(set) var gameState: GameState
+    var gameGrid: GameGrid
     let allCategories: [Category]
     
     var popupTrigger: Bool = false // Actual value doesn't matter, but must change to trigger OneAway/AlreadyGuessed.
@@ -20,18 +21,21 @@ class ConnectionsGameModel {
     
     init() {
         self.allCategories = ConnectionsGameModel.getCategories()
-        self.gameState = GameState(clueBoxes: getAllClueBoxes(categories: self.allCategories))
+        self.gameState = GameState()
+        self.gameGrid = GameGrid(clueBoxes: getAllClueBoxes(categories: self.allCategories))
         shuffleClueBoxes()
     }
     
-    init(gameState: GameState, categories: [Category]) {
+    init(gameState: GameState, gameGrid: GameGrid, categories: [Category]) {
         self.gameState = gameState
         self.allCategories = categories
+        self.gameGrid = gameGrid
         shuffleClueBoxes()
     }
     
     func resetGame() {
-        self.gameState = GameState(clueBoxes: getAllClueBoxes(categories: self.allCategories))
+        self.gameState = GameState()
+        self.gameGrid = GameGrid(clueBoxes: getAllClueBoxes(categories: self.allCategories))
         deselectAllClueBoxes()
         shuffleClueBoxes()
     }
@@ -61,7 +65,7 @@ class ConnectionsGameModel {
     // ClueBoxes
     
     func getSelectedClueBoxes() -> [ClueBox] {
-        return self.gameState.remainingClueBoxes.getSelectedClueBoxes()
+        return self.gameGrid.remainingClueBoxes.getSelectedClueBoxes()
     }
     
     func getNumSelectedClueBoxes() -> Int {
@@ -69,7 +73,7 @@ class ConnectionsGameModel {
     }
     
     func getRemainingClueBoxes() -> [ClueBox] {
-        return self.gameState.remainingClueBoxes.clueBoxes
+        return self.gameGrid.remainingClueBoxes.clueBoxes
     }
     
     func clickClueBox(clueBox: ClueBox) {
@@ -79,11 +83,11 @@ class ConnectionsGameModel {
     }
     
     func shuffleClueBoxes() {
-        self.gameState.remainingClueBoxes.shuffle()
+        self.gameGrid.remainingClueBoxes.shuffle()
     }
     
     func removeSelectedClueBoxes() {
-        self.gameState.remainingClueBoxes.removeSelectedClueBoxes()
+        self.gameGrid.remainingClueBoxes.removeSelectedClueBoxes()
     }
     
     func isDeselectAllClickable() -> Bool {
@@ -91,7 +95,7 @@ class ConnectionsGameModel {
     }
     
     func deselectAllClueBoxes() {
-        self.gameState.remainingClueBoxes.deselectAll()
+        self.gameGrid.remainingClueBoxes.deselectAll()
     }
     
     func isSubmitClickable() -> Bool {

@@ -7,12 +7,12 @@
 
 import Foundation
 
-class GameGrid {
+struct GameGrid {
     var remainingClueBoxes: RemainingClueBoxes
     var completedCategories: [Category]
     
-    init(remainingClueBoxes: RemainingClueBoxes) {
-        self.remainingClueBoxes = remainingClueBoxes
+    init(clueBoxes: [ClueBox]) {
+        self.remainingClueBoxes = RemainingClueBoxes(clueBoxes: clueBoxes)
         self.completedCategories = []
     }
     
