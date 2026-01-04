@@ -14,19 +14,22 @@ class Category: Identifiable {
     var clueBoxes: [ClueBox]
     let colour: Color
     let id: Int
+    var orderCompleted: Int?
     
-    init(name: String, clueBoxTexts: [String], colour: Color, id: Int) {
+    init(name: String, clueBoxTexts: [String], colour: Color, id: Int, orderCompleted: Int? = nil) {
         self.name = name
         self.clueBoxes = Category.createClueBoxes(clueBoxTexts: clueBoxTexts, offset: id)
         self.colour = colour
         self.id = id
+        self.orderCompleted = orderCompleted
     }
     
-    init(name: String, clueBoxes: [ClueBox], colour: Color, id: Int) {
+    init(name: String, clueBoxes: [ClueBox], colour: Color, id: Int, orderCompleted: Int? = nil) {
         self.name = name
         self.clueBoxes = clueBoxes
         self.colour = colour
         self.id = id
+        self.orderCompleted = orderCompleted
     }
     
     static func createClueBoxes(clueBoxTexts: [String], offset: Int) -> [ClueBox] {
