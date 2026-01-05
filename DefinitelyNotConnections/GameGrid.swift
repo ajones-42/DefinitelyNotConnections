@@ -28,9 +28,4 @@ class GameGrid {
     func getCompletedCategories() -> [Category] {
         return self.completedCategories
     }
-    
-    // Temporary
-    func getRemainingClueBoxes() -> [ClueBox] {
-        return self.remainingClueBoxes.clueBoxes
-    }
 }

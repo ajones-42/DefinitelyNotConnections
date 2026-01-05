@@ -14,6 +14,7 @@ struct GameGridView: View {
         VStack {
             CompletedCategoriesView()
             RemainingClueBoxesView()
+                .environment(gameGrid.remainingClueBoxes)
         }
     }
 }

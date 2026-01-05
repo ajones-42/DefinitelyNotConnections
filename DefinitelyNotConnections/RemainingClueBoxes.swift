@@ -27,6 +27,10 @@ class RemainingClueBoxes {
         }
     }
     
+    func getRemainingClueBoxes() -> [ClueBox] {
+        return self.clueBoxes
+    }
+    
     func getSelectedClueBoxes() -> [ClueBox] {
         return self.clueBoxes.filter { $0.isSelected }
     }
