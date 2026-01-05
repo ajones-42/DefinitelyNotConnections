@@ -23,21 +23,18 @@ class ConnectionsGameModel {
         self.allCategories = ConnectionsGameModel.getCategories()
         self.gameState = GameState()
         self.gameGrid = GameGrid(categories: self.allCategories)
-        shuffleClueBoxes()
     }
     
     init(gameState: GameState, gameGrid: GameGrid, categories: [Category]) {
         self.gameState = gameState
         self.allCategories = categories
         self.gameGrid = gameGrid
-        shuffleClueBoxes()
     }
     
     func resetGame() {
         self.gameState = GameState()
         self.gameGrid = GameGrid(categories: self.allCategories)
         deselectAllClueBoxes()
-        shuffleClueBoxes()
     }
     
     static func getCategories() -> [Category] {
@@ -80,10 +77,6 @@ class ConnectionsGameModel {
         if (getNumSelectedClueBoxes() < 4 || clueBox.isSelected) {
             clueBox.click()
         }
-    }
-    
-    func shuffleClueBoxes() {
-        self.gameGrid.remainingClueBoxes.shuffleClueBoxes()
     }
     
     func removeSelectedClueBoxes() {

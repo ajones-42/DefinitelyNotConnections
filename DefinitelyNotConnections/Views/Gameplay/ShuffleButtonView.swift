@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct ShuffleButtonView: View {
-    @Environment(ConnectionsGameModel.self) private var connectionsGameModel: ConnectionsGameModel
+    @Environment(RemainingClueBoxes.self) private var remainingClueBoxes: RemainingClueBoxes
     
     var body: some View {
         Button {
             // No check since shuffle is always clickable
-            connectionsGameModel.shuffleClueBoxes()
+            remainingClueBoxes.shuffleClueBoxes()
         } label: {
             GameplayButtonView(text: "Shuffle", isClickable: true)
         }

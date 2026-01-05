@@ -7,6 +7,7 @@
 
 import Foundation
 
+@Observable
 class RemainingClueBoxes {
     var clueBoxes: [ClueBox]
     
@@ -16,6 +17,7 @@ class RemainingClueBoxes {
     
     init(clueBoxes: [ClueBox]) {
         self.clueBoxes = clueBoxes
+        shuffleClueBoxes()
     }
     
     func getSelectedClueBoxes() -> [ClueBox] {
