@@ -19,7 +19,7 @@ struct GameGridView: View {
                 ForEach(gameGrid.getRemainingClueBoxes()) { clueBox in
                     ClueBoxView(clueBox: clueBox)
                         .onTapGesture {
-                            gameGrid.clickClueBox(clueBox: clueBox)
+                            gameGrid.remainingClueBoxes.clickClueBox(clueBox: clueBox)
                         }
                 }
             }

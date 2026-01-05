@@ -60,11 +60,11 @@ class ConnectionsGameModel {
     // ClueBoxes
     
     func getSelectedClueBoxes() -> [ClueBox] {
-        return self.mainGame.gameGrid.getSelectedClueBoxes()
+        return self.mainGame.gameGrid.remainingClueBoxes.getSelectedClueBoxes()
     }
     
     func getNumSelectedClueBoxes() -> Int {
-        return self.mainGame.gameGrid.getNumSelectedClueBoxes()
+        return self.mainGame.gameGrid.remainingClueBoxes.getNumSelectedClueBoxes()
     }
     
     func removeSelectedClueBoxes() {

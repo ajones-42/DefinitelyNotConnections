@@ -20,12 +20,18 @@ class RemainingClueBoxes {
         shuffleClueBoxes()
         deselectAllClueBoxes()
     }
+
+    func clickClueBox(clueBox: ClueBox) {
+        if (getNumSelectedClueBoxes() < 4 || clueBox.isSelected) {
+            clueBox.click()
+        }
+    }
     
     func getSelectedClueBoxes() -> [ClueBox] {
         return self.clueBoxes.filter { $0.isSelected }
     }
     
-    func getNumSelectedBoxes() -> Int {
+    func getNumSelectedClueBoxes() -> Int {
         return getSelectedClueBoxes().count
     }
     
@@ -34,7 +40,7 @@ class RemainingClueBoxes {
     }
     
     func isDeselectAllClickable() -> Bool {
-        return getNumSelectedBoxes() > 0
+        return getNumSelectedClueBoxes() > 0
     }
     
     func deselectAllClueBoxes() {

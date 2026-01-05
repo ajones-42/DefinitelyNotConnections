@@ -33,20 +33,4 @@ class GameGrid {
     func getRemainingClueBoxes() -> [ClueBox] {
         return self.remainingClueBoxes.clueBoxes
     }
-    
-    func getSelectedClueBoxes() -> [ClueBox] {
-        return self.remainingClueBoxes.getSelectedClueBoxes()
-    }
-    
-    // Temporary
-    func getNumSelectedClueBoxes() -> Int {
-        return getSelectedClueBoxes().count
-    }
-    
-    // Temporary
-    func clickClueBox(clueBox: ClueBox) {
-        if (getNumSelectedClueBoxes() < 4 || clueBox.isSelected) {
-            clueBox.click()
-        }
-    }
 }
