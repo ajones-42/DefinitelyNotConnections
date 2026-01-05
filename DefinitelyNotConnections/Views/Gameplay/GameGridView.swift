@@ -23,6 +23,12 @@ struct GameGridView: View {
                         }
                 }
             }
+            MistakesRemainingView()
+            HStack {
+                ShuffleButtonView()
+                DeselectAllButtonView()
+                SubmitButtonView()
+            }
         }
     }
 }

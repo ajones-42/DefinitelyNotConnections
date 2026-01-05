@@ -23,12 +23,6 @@ struct GameplayScreen: View {
                 .foregroundStyle(.foreground)
             GameGridView()
                 .padding(.horizontal)
-            MistakesRemainingView()
-            HStack {
-                ShuffleButtonView()
-                DeselectAllButtonView()
-                SubmitButtonView()
-            }
             Spacer()
         }
     }
