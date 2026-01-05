@@ -19,6 +19,11 @@ class MainGame {
         self.numMistakesRemaining = 4
     }
     
+    func resetGame() {
+        self.gameGrid = GameGrid(categories: self.allCategories)
+        self.numMistakesRemaining = 4
+    }
+    
     func getNumMistakesRemaining() -> Int {
         return self.numMistakesRemaining
     }

@@ -33,6 +33,7 @@ class ConnectionsGameModel {
     
     func resetGame() {
         self.gameState = GameState()
+        self.mainGame.resetGame()
     }
     
     static func getCategories() -> [Category] {
