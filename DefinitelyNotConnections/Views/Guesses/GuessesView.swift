@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GuessesView: View {
-    @Environment(ConnectionsGameModel.self) private var connectionsGameModel: ConnectionsGameModel
+    @Environment(MainGame.self) private var mainGame: MainGame
     @Binding var guessesArePresented: Bool
 
     var body: some View {
@@ -24,7 +24,7 @@ struct GuessesView: View {
             }
             .padding()
             List {
-                ForEach(connectionsGameModel.getGuesses()) { guess in
+                ForEach(mainGame.getGuesses()) { guess in
                         GuessView(guess: guess)
                 }
             }

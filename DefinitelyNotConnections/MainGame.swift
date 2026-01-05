@@ -38,4 +38,8 @@ class MainGame {
     func resetNumMistakesRemaining() {
         self.numMistakesRemaining = 4
     }
+    
+    func getGuesses() -> [Guess] {
+        return self.guesses
+    }
 }

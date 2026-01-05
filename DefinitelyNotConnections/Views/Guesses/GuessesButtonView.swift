@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct GuessesButtonView: View {
+    @Environment(MainGame.self) private var mainGame: MainGame
     @State var guessesArePresented: Bool = false
 
     var body: some View {
@@ -22,6 +23,7 @@ struct GuessesButtonView: View {
         .sheet(isPresented: $guessesArePresented, onDismiss: {}) {
             GuessesView(guessesArePresented: $guessesArePresented)
                 .presentationDetents([.fraction(0.4)])
+                .environment(mainGame)
         }
     }
 }

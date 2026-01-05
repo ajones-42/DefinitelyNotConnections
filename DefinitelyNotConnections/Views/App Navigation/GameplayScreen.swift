@@ -15,6 +15,7 @@ struct GameplayScreen: View {
             HStack {
                 Spacer()
                 GuessesButtonView()
+                    .environment(connectionsGameModel.mainGame)
             }
             Spacer()
             PopupView(text: connectionsGameModel.popupText)

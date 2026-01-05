@@ -77,10 +77,6 @@ class ConnectionsGameModel {
     func addGuess(guess: Guess) {
         self.mainGame.guesses.append(guess)
     }
-
-    func getGuesses() -> [Guess] {
-        return self.mainGame.guesses
-    }
     
     func getNextGuessID() -> Int {
         return self.mainGame.guesses.count
@@ -144,7 +140,7 @@ class ConnectionsGameModel {
     
     func selectionAlreadyGuessed(selectedBoxIDs: [Int]) -> Bool {
         var selectionAlreadyGuessed: Bool = false
-        for guess in getGuesses() {
+        for guess in self.mainGame.getGuesses() {
             if getClueBoxIDs(clueBoxes: guess.clueBoxes).sorted() == selectedBoxIDs.sorted() {
                 selectionAlreadyGuessed = true
                 break
