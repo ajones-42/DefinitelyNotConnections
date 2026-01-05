@@ -107,12 +107,6 @@ class ConnectionsGameModel {
         return guess.correctCategoryID != nil
     }
     
-    // Mistakes
-    
-    func resetNumMistakesRemaining() {
-        self.mainGame.numMistakesRemaining = 4
-    }
-    
     // Categories
     
     func completeCategory(correctCategoryIndex: Int) {

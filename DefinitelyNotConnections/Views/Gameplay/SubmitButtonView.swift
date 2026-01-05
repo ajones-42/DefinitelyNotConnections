@@ -29,7 +29,7 @@ struct SubmitButtonView: View {
             GameplayButtonView(text: "Submit", isClickable: connectionsGameModel.isSubmitClickable())
                 .alert(Text("Oh go on then, have another go!"), isPresented: $showAlert) {
                     Button("Ok") {
-                        connectionsGameModel.resetNumMistakesRemaining()
+                        connectionsGameModel.mainGame.resetNumMistakesRemaining()
                     }
                 }
         }
