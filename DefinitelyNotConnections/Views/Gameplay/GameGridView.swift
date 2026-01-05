@@ -12,9 +12,7 @@ struct GameGridView: View {
     
     var body: some View {
         VStack {
-            ForEach(gameGrid.getCompletedCategories()) { category in
-                CompletedCategoryView(category: category)
-            }
+            CompletedCategoriesView()
             LazyVGrid(columns: [GridItem(), GridItem(), GridItem(), GridItem()]) {
                 ForEach(gameGrid.getRemainingClueBoxes()) { clueBox in
                     ClueBoxView(clueBox: clueBox)
