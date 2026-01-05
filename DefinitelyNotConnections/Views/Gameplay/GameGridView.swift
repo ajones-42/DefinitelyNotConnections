@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct GameGridView: View {
-    @Environment(ConnectionsGameModel.self) private var connectionsGameModel: ConnectionsGameModel
+    @Environment(GameGrid.self) private var gameGrid: GameGrid
     
     var body: some View {
         VStack {
-            ForEach(connectionsGameModel.getCompletedCategories()) { category in
+            ForEach(gameGrid.getCompletedCategories()) { category in
                 CompletedCategoryView(category: category)
             }
             LazyVGrid(columns: [GridItem(), GridItem(), GridItem(), GridItem()]) {
-                ForEach(connectionsGameModel.getRemainingClueBoxes()) { clueBox in
+                ForEach(gameGrid.getRemainingClueBoxes()) { clueBox in
                     ClueBoxView(clueBox: clueBox)
                         .onTapGesture {
-                            connectionsGameModel.clickClueBox(clueBox: clueBox)
+                            gameGrid.clickClueBox(clueBox: clueBox)
                         }
                 }
             }

@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct GameGrid {
+@Observable
+class GameGrid {
     let allCategories: [Category]
     var remainingClueBoxes: RemainingClueBoxes
     var completedCategories: [Category]
@@ -22,5 +23,30 @@ struct GameGrid {
         self.allCategories = allCategories
         self.remainingClueBoxes = remainingClueBoxes
         self.completedCategories = completedCategories
+    }
+    
+    func getCompletedCategories() -> [Category] {
+        return self.completedCategories
+    }
+    
+    // Temporary
+    func getRemainingClueBoxes() -> [ClueBox] {
+        return self.remainingClueBoxes.clueBoxes
+    }
+    
+    func getSelectedClueBoxes() -> [ClueBox] {
+        return self.remainingClueBoxes.getSelectedClueBoxes()
+    }
+    
+    // Temporary
+    func getNumSelectedClueBoxes() -> Int {
+        return getSelectedClueBoxes().count
+    }
+    
+    // Temporary
+    func clickClueBox(clueBox: ClueBox) {
+        if (getNumSelectedClueBoxes() < 4 || clueBox.isSelected) {
+            clueBox.click()
+        }
     }
 }

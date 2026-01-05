@@ -60,21 +60,11 @@ class ConnectionsGameModel {
     // ClueBoxes
     
     func getSelectedClueBoxes() -> [ClueBox] {
-        return self.mainGame.gameGrid.remainingClueBoxes.getSelectedClueBoxes()
+        return self.mainGame.gameGrid.getSelectedClueBoxes()
     }
     
     func getNumSelectedClueBoxes() -> Int {
-        return getSelectedClueBoxes().count
-    }
-    
-    func getRemainingClueBoxes() -> [ClueBox] {
-        return self.mainGame.gameGrid.remainingClueBoxes.clueBoxes
-    }
-    
-    func clickClueBox(clueBox: ClueBox) {
-        if (getNumSelectedClueBoxes() < 4 || clueBox.isSelected) {
-            clueBox.click()
-        }
+        return self.mainGame.gameGrid.getNumSelectedClueBoxes()
     }
     
     func removeSelectedClueBoxes() {
@@ -111,10 +101,6 @@ class ConnectionsGameModel {
     
     func completeCategory(correctCategoryIndex: Int) {
         self.mainGame.gameGrid.completedCategories.append(self.allCategories[correctCategoryIndex])
-    }
-    
-    func getCompletedCategories() -> [Category] {
-        return self.mainGame.gameGrid.completedCategories
     }
     
     

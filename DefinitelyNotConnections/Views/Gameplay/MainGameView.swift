@@ -14,6 +14,7 @@ struct MainGameView: View {
         VStack {
             GameGridView()
                 .padding(.horizontal)
+                .environment(connectionsGameModel.mainGame.gameGrid)
             MistakesRemainingView()
                 .environment(connectionsGameModel.mainGame)
             HStack {
