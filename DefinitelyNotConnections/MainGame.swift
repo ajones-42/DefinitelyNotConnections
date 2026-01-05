@@ -50,4 +50,15 @@ class MainGame {
     func getNextGuessID() -> Int {
         return self.guesses.count
     }
+    
+    func selectionAlreadyGuessed(selectedBoxIDs: [Int]) -> Bool {
+        var selectionAlreadyGuessed: Bool = false
+        for guess in self.getGuesses() {
+            if getClueBoxIDs(clueBoxes: guess.clueBoxes).sorted() == selectedBoxIDs.sorted() {
+                selectionAlreadyGuessed = true
+                break
+            }
+        }
+        return selectionAlreadyGuessed
+    }
 }

@@ -112,7 +112,7 @@ class ConnectionsGameModel {
     func submitSelection() {
         let selectedBoxes: [ClueBox] = getSelectedClueBoxes()
 
-        if selectionAlreadyGuessed(selectedBoxIDs: getClueBoxIDs(clueBoxes: selectedBoxes)) {
+        if self.mainGame.selectionAlreadyGuessed(selectedBoxIDs: getClueBoxIDs(clueBoxes: selectedBoxes)) {
             alreadyGuessed()
         } else {
             let guess: Guess = computeGuess(selectedBoxes: selectedBoxes, guessID: self.mainGame.getNextGuessID())
@@ -124,17 +124,6 @@ class ConnectionsGameModel {
                 incorrectGuess(guess: guess)
             }
         }
-    }
-    
-    func selectionAlreadyGuessed(selectedBoxIDs: [Int]) -> Bool {
-        var selectionAlreadyGuessed: Bool = false
-        for guess in self.mainGame.getGuesses() {
-            if getClueBoxIDs(clueBoxes: guess.clueBoxes).sorted() == selectedBoxIDs.sorted() {
-                selectionAlreadyGuessed = true
-                break
-            }
-        }
-        return selectionAlreadyGuessed
     }
     
     func computeGuess(selectedBoxes: [ClueBox], guessID: Int) -> Guess {
