@@ -11,7 +11,7 @@ import SwiftUI
 @Observable
 class ConnectionsGameModel {
     private(set) var gameState: GameState
-    var gameGrid: GameGrid
+    var mainGame: MainGame
     let allCategories: [Category]
     
     var popupTrigger: Bool = false // Actual value doesn't matter, but must change to trigger OneAway/AlreadyGuessed.
@@ -22,18 +22,17 @@ class ConnectionsGameModel {
     init() {
         self.allCategories = ConnectionsGameModel.getCategories()
         self.gameState = GameState()
-        self.gameGrid = GameGrid(categories: self.allCategories)
+        self.mainGame = MainGame(categories: self.allCategories)
     }
     
-    init(gameState: GameState, gameGrid: GameGrid, categories: [Category]) {
+    init(gameState: GameState, mainGame: MainGame, categories: [Category]) {
         self.gameState = gameState
         self.allCategories = categories
-        self.gameGrid = gameGrid
+        self.mainGame = mainGame
     }
     
     func resetGame() {
         self.gameState = GameState()
-        self.gameGrid = GameGrid(categories: self.allCategories)
     }
     
     static func getCategories() -> [Category] {
@@ -61,7 +60,7 @@ class ConnectionsGameModel {
     // ClueBoxes
     
     func getSelectedClueBoxes() -> [ClueBox] {
-        return self.gameGrid.remainingClueBoxes.getSelectedClueBoxes()
+        return self.mainGame.gameGrid.remainingClueBoxes.getSelectedClueBoxes()
     }
     
     func getNumSelectedClueBoxes() -> Int {
@@ -69,7 +68,7 @@ class ConnectionsGameModel {
     }
     
     func getRemainingClueBoxes() -> [ClueBox] {
-        return self.gameGrid.remainingClueBoxes.clueBoxes
+        return self.mainGame.gameGrid.remainingClueBoxes.clueBoxes
     }
     
     func clickClueBox(clueBox: ClueBox) {
@@ -79,7 +78,7 @@ class ConnectionsGameModel {
     }
     
     func removeSelectedClueBoxes() {
-        self.gameGrid.remainingClueBoxes.removeSelectedClueBoxes()
+        self.mainGame.gameGrid.remainingClueBoxes.removeSelectedClueBoxes()
     }
     
     func isSubmitClickable() -> Bool {
@@ -111,25 +110,25 @@ class ConnectionsGameModel {
     // Mistakes
 
     func getNumMistakesRemaining() -> Int {
-        return self.gameState.numMistakesRemaining
+        return self.mainGame.numMistakesRemaining
     }
     
     func madeMistake() {
-        self.gameState.numMistakesRemaining -= 1
+        self.mainGame.numMistakesRemaining -= 1
     }
     
     func resetNumMistakesRemaining() {
-        self.gameState.numMistakesRemaining = 4
+        self.mainGame.numMistakesRemaining = 4
     }
     
     // Categories
     
     func completeCategory(correctCategoryIndex: Int) {
-        self.gameGrid.completedCategories.append(self.allCategories[correctCategoryIndex])
+        self.mainGame.gameGrid.completedCategories.append(self.allCategories[correctCategoryIndex])
     }
     
     func getCompletedCategories() -> [Category] {
-        return self.gameGrid.completedCategories
+        return self.mainGame.gameGrid.completedCategories
     }
     
     
@@ -137,7 +136,7 @@ class ConnectionsGameModel {
         self.gameState.lastGuessShakesBoxes = false
         completeCategory(correctCategoryIndex: guess.correctCategoryID!)
         removeSelectedClueBoxes()
-        if self.gameGrid.completedCategories.count == 4 {
+        if self.mainGame.gameGrid.completedCategories.count == 4 {
             admirePuzzle()
         }
     }

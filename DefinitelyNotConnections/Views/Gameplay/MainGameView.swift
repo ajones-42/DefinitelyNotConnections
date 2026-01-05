@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct GameView: View {
+struct MainGameView: View {
     @Environment(ConnectionsGameModel.self) private var connectionsGameModel: ConnectionsGameModel
 
     var body: some View {
@@ -17,9 +17,9 @@ struct GameView: View {
             MistakesRemainingView()
             HStack {
                 ShuffleButtonView()
-                    .environment(connectionsGameModel.gameGrid.remainingClueBoxes)
+                    .environment(connectionsGameModel.mainGame.gameGrid.remainingClueBoxes)
                 DeselectAllButtonView()
-                    .environment(connectionsGameModel.gameGrid.remainingClueBoxes)
+                    .environment(connectionsGameModel.mainGame.gameGrid.remainingClueBoxes)
                 SubmitButtonView()
             }
         }

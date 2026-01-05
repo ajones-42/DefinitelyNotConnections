@@ -9,16 +9,10 @@ import Foundation
 
 class GameStateBuilder {
     var gamePhase: GamePhase = .playing
-    var numMistakesRemaining: Int = 4
     var guesses: [Guess] = []
     
     func withGamePhase(gamePhase: GamePhase) -> GameStateBuilder {
         self.gamePhase = gamePhase
-        return self
-    }
-    
-    func withNumMistakesRemaining(numMistakesRemaining: Int) -> GameStateBuilder {
-        self.numMistakesRemaining = numMistakesRemaining
         return self
     }
     
@@ -28,6 +22,6 @@ class GameStateBuilder {
     }
     
     func build() -> GameState {
-        return GameState(gamePhase: self.gamePhase, numMistakesRemaining: self.numMistakesRemaining, guesses: self.guesses)
+        return GameState(gamePhase: self.gamePhase, guesses: self.guesses)
     }
 }

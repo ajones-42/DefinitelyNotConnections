@@ -9,7 +9,6 @@ import Foundation
 
 struct GameState {
     var gamePhase: GamePhase
-    var numMistakesRemaining: Int
     var guesses: [Guess]
     var lastGuessShakesBoxes: Bool = false
 
@@ -17,12 +16,10 @@ struct GameState {
     init() {
         self.gamePhase = .setup
         self.guesses = []
-        self.numMistakesRemaining = 4
     }
     
-    init(gamePhase: GamePhase, numMistakesRemaining: Int, guesses: [Guess]) {
+    init(gamePhase: GamePhase, guesses: [Guess]) {
         self.gamePhase = gamePhase
         self.guesses = guesses
-        self.numMistakesRemaining = numMistakesRemaining
     }
 }
