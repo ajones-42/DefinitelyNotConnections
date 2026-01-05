@@ -13,14 +13,7 @@ struct GameGridView: View {
     var body: some View {
         VStack {
             CompletedCategoriesView()
-            LazyVGrid(columns: [GridItem(), GridItem(), GridItem(), GridItem()]) {
-                ForEach(gameGrid.getRemainingClueBoxes()) { clueBox in
-                    ClueBoxView(clueBox: clueBox)
-                        .onTapGesture {
-                            gameGrid.remainingClueBoxes.clickClueBox(clueBox: clueBox)
-                        }
-                }
-            }
+            RemainingClueBoxesView()
         }
     }
 }
