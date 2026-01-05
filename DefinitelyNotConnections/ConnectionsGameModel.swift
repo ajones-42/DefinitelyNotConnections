@@ -115,7 +115,7 @@ class ConnectionsGameModel {
         if self.mainGame.selectionAlreadyGuessed(selectedBoxIDs: getClueBoxIDs(clueBoxes: selectedBoxes)) {
             alreadyGuessed()
         } else {
-            let guess: Guess = computeGuess(selectedBoxes: selectedBoxes, guessID: self.mainGame.getNextGuessID())
+            let guess: Guess = self.mainGame.computeGuess(selectedBoxes: selectedBoxes, guessID: self.mainGame.getNextGuessID())
             self.mainGame.addGuess(guess: guess)
             
             if guess.isCorrect() {
@@ -124,34 +124,6 @@ class ConnectionsGameModel {
                 incorrectGuess(guess: guess)
             }
         }
-    }
-    
-    func computeGuess(selectedBoxes: [ClueBox], guessID: Int) -> Guess {
-        var correctCategoryIndex: Int? = nil
-        var oneAway = false
-        
-        categoryLoop: for (categoryIndex, category) in self.allCategories.enumerated() {
-            let numSameSelections: Int = checkNumSameSelections(selectedIDs: getClueBoxIDs(clueBoxes: selectedBoxes), categoryIDs: getClueBoxIDs(clueBoxes: category.clueBoxes))
-            switch numSameSelections {
-            case 4:
-                correctCategoryIndex = categoryIndex
-                break categoryLoop
-            case 3:
-                oneAway = true
-                break categoryLoop
-            case 2:
-                // No need to check further if 2 are correct
-                break categoryLoop
-            default:
-                // Keep checking for 0 or 1 correct
-                continue categoryLoop
-            }
-        }
-        return Guess(clueBoxes: selectedBoxes, correctCategoryID: correctCategoryIndex, oneAway: oneAway, id: guessID)
-    }
-    
-    func checkNumSameSelections(selectedIDs: [Int], categoryIDs: [Int]) -> Int {
-        return getNumSameElementsInArrays(lhs: selectedIDs, rhs: categoryIDs)
     }
     
     func activatePopup(popupText: String) {

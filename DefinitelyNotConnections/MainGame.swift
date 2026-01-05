@@ -39,6 +39,30 @@ class MainGame {
         self.numMistakesRemaining = 4
     }
     
+    func computeGuess(selectedBoxes: [ClueBox], guessID: Int) -> Guess {
+        var correctCategoryIndex: Int? = nil
+        var oneAway = false
+        
+        categoryLoop: for (categoryIndex, category) in self.allCategories.enumerated() {
+            let numSameSelections: Int = getNumSameElementsInArrays(lhs: getClueBoxIDs(clueBoxes: selectedBoxes), rhs: getClueBoxIDs(clueBoxes: category.clueBoxes))
+            switch numSameSelections {
+            case 4:
+                correctCategoryIndex = categoryIndex
+                break categoryLoop
+            case 3:
+                oneAway = true
+                break categoryLoop
+            case 2:
+                // No need to check further if 2 are correct
+                break categoryLoop
+            default:
+                // Keep checking for 0 or 1 correct
+                continue categoryLoop
+            }
+        }
+        return Guess(clueBoxes: selectedBoxes, correctCategoryID: correctCategoryIndex, oneAway: oneAway, id: guessID)
+    }
+    
     func addGuess(guess: Guess) {
         self.guesses.append(guess)
     }
