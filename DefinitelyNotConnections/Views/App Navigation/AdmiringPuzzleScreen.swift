@@ -23,6 +23,7 @@ struct AdmiringPuzzleScreen: View {
                 .fontWeight(.heavy)
             GameGridView()
                 .padding(.horizontal)
+                .environment(connectionsGameModel.mainGame.gameGrid)
             Button {
                 connectionsGameModel.finishPlaying()
             } label: {
