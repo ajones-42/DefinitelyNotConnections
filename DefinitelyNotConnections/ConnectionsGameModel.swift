@@ -109,10 +109,6 @@ class ConnectionsGameModel {
     
     // Mistakes
     
-    func madeMistake() {
-        self.mainGame.numMistakesRemaining -= 1
-    }
-    
     func resetNumMistakesRemaining() {
         self.mainGame.numMistakesRemaining = 4
     }
@@ -139,7 +135,7 @@ class ConnectionsGameModel {
     
     func incorrectGuess(guess: Guess) {
         self.gameState.lastGuessShakesBoxes = true
-        madeMistake()
+        self.mainGame.madeMistake()
         if guess.oneAway {
             activatePopup(popupText: self.oneAwayText)
         }

@@ -22,4 +22,8 @@ class MainGame {
     func getNumMistakesRemaining() -> Int {
         return self.numMistakesRemaining
     }
+    
+    func madeMistake() {
+        self.numMistakesRemaining -= 1
+    }
 }
