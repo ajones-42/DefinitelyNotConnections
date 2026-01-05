@@ -13,7 +13,7 @@ struct SubmitButtonView: View {
     
     var body: some View {
         Button {
-            if connectionsGameModel.isSubmitClickable() {
+            if connectionsGameModel.mainGame.gameGrid.remainingClueBoxes.isSubmitClickable() {
                 connectionsGameModel.submitSelection()
                 if connectionsGameModel.getLastGuessShakesBoxes() {
                     connectionsGameModel.activateSelectedBoxesShake()
@@ -26,7 +26,7 @@ struct SubmitButtonView: View {
                 }
             }
         } label: {
-            GameplayButtonView(text: "Submit", isClickable: connectionsGameModel.isSubmitClickable())
+            GameplayButtonView(text: "Submit", isClickable: connectionsGameModel.mainGame.gameGrid.remainingClueBoxes.isSubmitClickable())
                 .alert(Text("Oh go on then, have another go!"), isPresented: $showAlert) {
                     Button("Ok") {
                         connectionsGameModel.mainGame.resetNumMistakesRemaining()

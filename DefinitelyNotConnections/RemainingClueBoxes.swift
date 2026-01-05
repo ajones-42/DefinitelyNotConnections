@@ -39,6 +39,10 @@ class RemainingClueBoxes {
         return getSelectedClueBoxes().count
     }
     
+    func isSubmitClickable() -> Bool {
+        return getNumSelectedClueBoxes() == 4
+    }
+    
     func shuffleClueBoxes() {
         self.clueBoxes.shuffle()
     }

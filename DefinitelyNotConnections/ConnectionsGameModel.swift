@@ -72,10 +72,6 @@ class ConnectionsGameModel {
         self.mainGame.gameGrid.remainingClueBoxes.removeSelectedClueBoxes()
     }
     
-    func isSubmitClickable() -> Bool {
-        return getNumSelectedClueBoxes() == 4
-    }
-    
     // Guesses
     
     func addGuess(guess: Guess) {
