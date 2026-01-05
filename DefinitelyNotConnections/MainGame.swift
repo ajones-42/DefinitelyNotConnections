@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct MainGame {
+@Observable
+class MainGame {
     let allCategories: [Category]
     var gameGrid: GameGrid
     var numMistakesRemaining: Int
@@ -16,5 +17,9 @@ struct MainGame {
         self.allCategories = categories
         self.gameGrid = GameGrid(categories: self.allCategories)
         self.numMistakesRemaining = 4
+    }
+    
+    func getNumMistakesRemaining() -> Int {
+        return self.numMistakesRemaining
     }
 }

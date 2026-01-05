@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MistakesRemainingView: View {
-    @Environment(ConnectionsGameModel.self) private var connectionsGameModel: ConnectionsGameModel
+    @Environment(MainGame.self) private var mainGame: MainGame
     
     var body: some View {
         let shape = Circle().frame(width: 15)
@@ -16,7 +16,7 @@ struct MistakesRemainingView: View {
             Text("Mistakes remaining:")
                 .fontWeight(.semibold)
             ForEach(0...3, id: \.self) {
-                if connectionsGameModel.getNumMistakesRemaining() > $0 {
+                if mainGame.getNumMistakesRemaining() > $0 {
                     shape.foregroundStyle(.foreground)
                 } else {
                     shape.foregroundStyle(.background)

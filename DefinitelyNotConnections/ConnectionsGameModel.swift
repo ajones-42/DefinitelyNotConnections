@@ -108,10 +108,6 @@ class ConnectionsGameModel {
     }
     
     // Mistakes
-
-    func getNumMistakesRemaining() -> Int {
-        return self.mainGame.numMistakesRemaining
-    }
     
     func madeMistake() {
         self.mainGame.numMistakesRemaining -= 1

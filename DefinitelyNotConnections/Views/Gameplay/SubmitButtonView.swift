@@ -21,7 +21,7 @@ struct SubmitButtonView: View {
                         connectionsGameModel.deactivateSelectedBoxesShake()
                     }
                 }
-                if connectionsGameModel.getNumMistakesRemaining() == 0 {
+                if connectionsGameModel.mainGame.getNumMistakesRemaining() == 0 {
                     showAlert = true
                 }
             }

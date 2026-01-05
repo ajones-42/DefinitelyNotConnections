@@ -15,6 +15,7 @@ struct MainGameView: View {
             GameGridView()
                 .padding(.horizontal)
             MistakesRemainingView()
+                .environment(connectionsGameModel.mainGame)
             HStack {
                 ShuffleButtonView()
                     .environment(connectionsGameModel.mainGame.gameGrid.remainingClueBoxes)
