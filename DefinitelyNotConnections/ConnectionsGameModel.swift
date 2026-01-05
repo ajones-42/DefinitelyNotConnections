@@ -78,10 +78,6 @@ class ConnectionsGameModel {
         return self.gameState.lastGuessShakesBoxes
     }
     
-    func guessIsCorrect(guess: Guess) -> Bool {
-        return guess.correctCategoryID != nil
-    }
-    
     // Categories
     
     func completeCategory(correctCategoryIndex: Int) {
@@ -122,7 +118,7 @@ class ConnectionsGameModel {
             let guess: Guess = computeGuess(selectedBoxes: selectedBoxes, guessID: self.mainGame.getNextGuessID())
             self.mainGame.addGuess(guess: guess)
             
-            if guessIsCorrect(guess: guess) {
+            if guess.isCorrect() {
                 correctGuess(guess: guess)
             } else {
                 incorrectGuess(guess: guess)

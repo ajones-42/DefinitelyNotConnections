@@ -23,4 +23,8 @@ struct Guess: Identifiable {
         }
         return guessText
     }
+    
+    func isCorrect() -> Bool {
+        return self.correctCategoryID != nil
+    }
 }
