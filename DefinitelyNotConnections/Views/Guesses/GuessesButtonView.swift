@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct GuessesButtonView: View {
+    // GuessesView can get meinGame from the environment without this, but this is clearer.
     @Environment(MainGame.self) private var mainGame: MainGame
     @State var guessesArePresented: Bool = false
 
