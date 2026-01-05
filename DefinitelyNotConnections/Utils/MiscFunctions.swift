@@ -53,3 +53,15 @@ func createDefaultTestCategories() -> [Category] {
         return categories
     }
 }
+
+func categoriesCompletedInIncreasingOrder(category1: Category, category2: Category) -> Bool {
+    if let orderCompleted1 = category1.orderCompleted, let orderCompleted2 = category2.orderCompleted {
+        return orderCompleted1 < orderCompleted2
+    } else if let orderCompleted1 = category1.orderCompleted {
+        return true
+    } else if let orderCompleted2 = category2.orderCompleted {
+        return false
+    } else {
+        return true
+    }
+}
