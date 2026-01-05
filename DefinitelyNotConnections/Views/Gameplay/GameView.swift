@@ -19,6 +19,7 @@ struct GameView: View {
                 ShuffleButtonView()
                     .environment(connectionsGameModel.gameGrid.remainingClueBoxes)
                 DeselectAllButtonView()
+                    .environment(connectionsGameModel.gameGrid.remainingClueBoxes)
                 SubmitButtonView()
             }
         }

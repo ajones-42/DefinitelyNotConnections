@@ -18,6 +18,7 @@ class RemainingClueBoxes {
     init(clueBoxes: [ClueBox]) {
         self.clueBoxes = clueBoxes
         shuffleClueBoxes()
+        deselectAllClueBoxes()
     }
     
     func getSelectedClueBoxes() -> [ClueBox] {
@@ -32,7 +33,11 @@ class RemainingClueBoxes {
         self.clueBoxes.shuffle()
     }
     
-    func deselectAll() {
+    func isDeselectAllClickable() -> Bool {
+        return getNumSelectedBoxes() > 0
+    }
+    
+    func deselectAllClueBoxes() {
         for clueBox in self.clueBoxes {
             clueBox.deselect()
         }

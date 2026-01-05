@@ -34,7 +34,6 @@ class ConnectionsGameModel {
     func resetGame() {
         self.gameState = GameState()
         self.gameGrid = GameGrid(categories: self.allCategories)
-        deselectAllClueBoxes()
     }
     
     static func getCategories() -> [Category] {
@@ -81,14 +80,6 @@ class ConnectionsGameModel {
     
     func removeSelectedClueBoxes() {
         self.gameGrid.remainingClueBoxes.removeSelectedClueBoxes()
-    }
-    
-    func isDeselectAllClickable() -> Bool {
-        return getNumSelectedClueBoxes() > 0
-    }
-    
-    func deselectAllClueBoxes() {
-        self.gameGrid.remainingClueBoxes.deselectAll()
     }
     
     func isSubmitClickable() -> Bool {
