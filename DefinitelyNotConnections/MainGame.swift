@@ -39,6 +39,10 @@ class MainGame {
         self.numMistakesRemaining = 4
     }
     
+    func addGuess(guess: Guess) {
+        self.guesses.append(guess)
+    }
+    
     func getGuesses() -> [Guess] {
         return self.guesses
     }
