@@ -23,5 +23,5 @@ struct RemainingClueBoxesView: View {
 }
 
 //#Preview {
-    //RemainingClueBoxes()
+    //RemainingClueBoxesView()
 //}
