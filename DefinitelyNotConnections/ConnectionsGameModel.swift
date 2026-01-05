@@ -75,15 +75,15 @@ class ConnectionsGameModel {
     // Guesses
     
     func addGuess(guess: Guess) {
-        self.gameState.guesses.append(guess)
+        self.mainGame.guesses.append(guess)
     }
 
     func getGuesses() -> [Guess] {
-        return self.gameState.guesses
+        return self.mainGame.guesses
     }
     
     func getNextGuessID() -> Int {
-        return self.gameState.guesses.count
+        return self.mainGame.guesses.count
     }
     
     func getLastGuessShakesBoxes() -> Bool {

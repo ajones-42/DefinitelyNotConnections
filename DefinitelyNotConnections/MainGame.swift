@@ -11,16 +11,19 @@ import Foundation
 class MainGame {
     let allCategories: [Category]
     var gameGrid: GameGrid
+    var guesses: [Guess]
     var numMistakesRemaining: Int
     
     init(categories: [Category]) {
         self.allCategories = categories
         self.gameGrid = GameGrid(categories: self.allCategories)
+        self.guesses = []
         self.numMistakesRemaining = 4
     }
     
     func resetGame() {
         self.gameGrid = GameGrid(categories: self.allCategories)
+        self.guesses = []
         self.numMistakesRemaining = 4
     }
     
