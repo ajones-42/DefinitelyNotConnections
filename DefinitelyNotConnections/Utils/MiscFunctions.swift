@@ -21,6 +21,15 @@ func getAllClueBoxes(categories: [Category]) -> [ClueBox] {
     return Array(categories.map({ $0.clueBoxes }).joined())
 }
 
+func getNumSameElementsInArrays<T: Equatable>(lhs: [T], rhs: [T]) -> Int {
+    // If I ever expect one array to be much larger than the other, it may be worth finding and iterating over smaller array
+    var numSameElements: Int = 0
+    for lhElement in lhs {
+        numSameElements += (rhs.contains(lhElement)) ? 1 : 0
+    }
+    return numSameElements
+}
+
 func createTestCategory(categoryNumber: Int, numCluesPerCategory: Int, colour: Color) -> Category {
     let categoryName: String = "Category \(categoryNumber)"
     var clueBoxTexts: [String] = []

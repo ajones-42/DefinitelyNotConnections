@@ -151,11 +151,7 @@ class ConnectionsGameModel {
     }
     
     func checkNumSameSelections(selectedIDs: [Int], categoryIDs: [Int]) -> Int {
-        var numSameSelections: Int = 0
-        for selectedID in selectedIDs {
-            numSameSelections += (categoryIDs.contains(selectedID)) ? 1 : 0
-        }
-        return numSameSelections
+        return getNumSameElementsInArrays(lhs: selectedIDs, rhs: categoryIDs)
     }
     
     func activatePopup(popupText: String) {
