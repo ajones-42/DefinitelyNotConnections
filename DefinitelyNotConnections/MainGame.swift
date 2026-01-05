@@ -42,4 +42,8 @@ class MainGame {
     func getGuesses() -> [Guess] {
         return self.guesses
     }
+    
+    func getNextGuessID() -> Int {
+        return self.guesses.count
+    }
 }
