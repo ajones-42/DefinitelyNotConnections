@@ -13,22 +13,20 @@ class ConnectionsGameModel {
     private(set) var gameState: GameState
     var mainGame: MainGame
     let allCategories: [Category]
-    
-    var popupTrigger: Bool = false // Actual value doesn't matter, but must change to trigger OneAway/AlreadyGuessed.
-    var popupText: String = ""
-    let oneAwayText: String = "One away!"
-    let alreadyGuessedText: String = "Already guessed!"
+    var popup: Popup
     
     init() {
         self.allCategories = ConnectionsGameModel.getCategories()
         self.gameState = GameState()
         self.mainGame = MainGame(categories: self.allCategories)
+        self.popup = Popup()
     }
     
-    init(gameState: GameState, mainGame: MainGame, categories: [Category]) {
+    init(gameState: GameState, mainGame: MainGame, categories: [Category], popup: Popup) {
         self.gameState = gameState
         self.allCategories = categories
         self.mainGame = mainGame
+        self.popup = popup
     }
     
     func resetGame() {
@@ -81,13 +79,13 @@ class ConnectionsGameModel {
         self.gameState.lastGuessShakesBoxes = true
         self.mainGame.madeMistake()
         if guess.oneAway {
-            activatePopup(popupText: self.oneAwayText)
+            self.popup.activateOneAway()
         }
     }
     
     func handleAlreadyGuessed() {
         self.gameState.lastGuessShakesBoxes = true
-        activatePopup(popupText: self.alreadyGuessedText)
+        self.popup.activateAlreadyGuessed()
     }
 
 
@@ -107,11 +105,6 @@ class ConnectionsGameModel {
                 handleIncorrectGuess(guess: guess)
             }
         }
-    }
-    
-    func activatePopup(popupText: String) {
-        self.popupText = popupText
-        self.popupTrigger.toggle()
     }
     
     func activateSelectedBoxesShake() {
