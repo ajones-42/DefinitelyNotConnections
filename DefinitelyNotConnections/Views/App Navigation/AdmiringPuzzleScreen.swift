@@ -15,6 +15,7 @@ struct AdmiringPuzzleScreen: View {
             HStack {
                 Spacer()
                 GuessesButtonView()
+                    .environment(connectionsGameModel.mainGame)
             }
             Spacer()
             Text("Obvio!")
