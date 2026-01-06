@@ -50,10 +50,6 @@ class ConnectionsGameModel {
         return self.mainGame.gameGrid.remainingClueBoxes.getNumSelectedClueBoxes()
     }
     
-    func removeSelectedClueBoxes() {
-        self.mainGame.gameGrid.remainingClueBoxes.removeSelectedClueBoxes()
-    }
-    
     // Guesses
     
     func getLastGuessShakesBoxes() -> Bool {
@@ -61,15 +57,6 @@ class ConnectionsGameModel {
     }
     
     // Categories
-    
-    func handleCorrectGuess(guess: Guess) {
-        self.mainGame.lastGuessShakesBoxes = false
-        self.mainGame.gameGrid.completeCategory(category: self.allCategories[guess.correctCategoryID!])
-        removeSelectedClueBoxes()
-        if self.mainGame.gameGrid.completedCategories.count == 4 {
-            self.mainGame.admirePuzzle()
-        }
-    }
     
     func handleIncorrectGuess(guess: Guess) {
         self.mainGame.lastGuessShakesBoxes = true
@@ -96,7 +83,7 @@ class ConnectionsGameModel {
             self.mainGame.allGuesses.addGuess(guess: guess)
             
             if guess.isCorrect() {
-                handleCorrectGuess(guess: guess)
+                self.mainGame.handleCorrectGuess(guess: guess)
             } else {
                 handleIncorrectGuess(guess: guess)
             }
