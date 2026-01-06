@@ -25,6 +25,10 @@ class GameGrid {
         self.completedCategories = completedCategories
     }
     
+    func completeCategory(category: Category) {
+        self.completedCategories.append(category)
+    }
+    
     func getCompletedCategories() -> [Category] {
         return self.completedCategories
     }
