@@ -59,15 +59,4 @@ class MainGame {
     func resetNumMistakesRemaining() {
         self.numMistakesRemaining = 4
     }
-    
-    func selectionAlreadyGuessed(selectedBoxIDs: [Int]) -> Bool {
-        var selectionAlreadyGuessed: Bool = false
-        for guess in self.allGuesses.getGuesses() {
-            if getClueBoxIDs(clueBoxes: guess.clueBoxes).sorted() == selectedBoxIDs.sorted() {
-                selectionAlreadyGuessed = true
-                break
-            }
-        }
-        return selectionAlreadyGuessed
-    }
 }

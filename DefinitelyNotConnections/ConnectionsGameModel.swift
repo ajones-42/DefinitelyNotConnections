@@ -93,7 +93,7 @@ class ConnectionsGameModel {
     func submitSelection() {
         let selectedBoxes: [ClueBox] = getSelectedClueBoxes()
 
-        if self.mainGame.selectionAlreadyGuessed(selectedBoxIDs: getClueBoxIDs(clueBoxes: selectedBoxes)) {
+        if self.mainGame.allGuesses.selectionAlreadyGuessed(selectedBoxIDs: getClueBoxIDs(clueBoxes: selectedBoxes)) {
             handleAlreadyGuessed()
         } else {
             let guess: Guess = Guess(allCategories: self.allCategories, selectedBoxes: selectedBoxes, id: self.mainGame.allGuesses.getNextGuessID())

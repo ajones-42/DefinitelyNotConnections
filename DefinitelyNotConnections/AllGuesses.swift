@@ -26,4 +26,15 @@ class AllGuesses {
     func addGuess(guess: Guess) {
         self.guesses.append(guess)
     }
+    
+    func selectionAlreadyGuessed(selectedBoxIDs: [Int]) -> Bool {
+        var selectionAlreadyGuessed: Bool = false
+        for guess in self.getGuesses() {
+            if getClueBoxIDs(clueBoxes: guess.clueBoxes).sorted() == selectedBoxIDs.sorted() {
+                selectionAlreadyGuessed = true
+                break
+            }
+        }
+        return selectionAlreadyGuessed
+    }
 }
