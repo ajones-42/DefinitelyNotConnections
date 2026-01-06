@@ -15,7 +15,7 @@ struct GameplayScreen: View {
             HStack {
                 Spacer()
                 GuessesButtonView()
-                    .environment(connectionsGameModel.mainGame)
+                    .environment(connectionsGameModel.mainGame.allGuesses)
             }
             Spacer()
             MainGameView()
