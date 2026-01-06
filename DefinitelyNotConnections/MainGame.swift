@@ -83,4 +83,17 @@ class MainGame {
             self.admirePuzzle()
         }
     }
+    
+    func handleIncorrectGuess(guess: Guess) {
+        self.lastGuessShakesBoxes = true
+        self.madeMistake()
+        if guess.oneAway {
+            self.popup.activateOneAway()
+        }
+    }
+    
+    func handleAlreadyGuessed() {
+        self.lastGuessShakesBoxes = true
+        self.popup.activateAlreadyGuessed()
+    }
 }

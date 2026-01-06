@@ -54,19 +54,6 @@ class ConnectionsGameModel {
     }
     
     // Categories
-    
-    func handleIncorrectGuess(guess: Guess) {
-        self.mainGame.lastGuessShakesBoxes = true
-        self.mainGame.madeMistake()
-        if guess.oneAway {
-            self.mainGame.popup.activateOneAway()
-        }
-    }
-    
-    func handleAlreadyGuessed() {
-        self.mainGame.lastGuessShakesBoxes = true
-        self.mainGame.popup.activateAlreadyGuessed()
-    }
 
 
     
@@ -74,7 +61,7 @@ class ConnectionsGameModel {
         let selectedBoxes: [ClueBox] = getSelectedClueBoxes()
 
         if self.mainGame.allGuesses.selectionAlreadyGuessed(selectedBoxIDs: getClueBoxIDs(clueBoxes: selectedBoxes)) {
-            handleAlreadyGuessed()
+            self.mainGame.handleAlreadyGuessed()
         } else {
             let guess: Guess = Guess(allCategories: self.allCategories, selectedBoxes: selectedBoxes, id: self.mainGame.allGuesses.getNextGuessID())
             self.mainGame.allGuesses.addGuess(guess: guess)
@@ -82,7 +69,7 @@ class ConnectionsGameModel {
             if guess.isCorrect() {
                 self.mainGame.handleCorrectGuess(guess: guess)
             } else {
-                handleIncorrectGuess(guess: guess)
+                self.mainGame.handleIncorrectGuess(guess: guess)
             }
         }
     }
