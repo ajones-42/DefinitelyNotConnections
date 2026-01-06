@@ -9,7 +9,6 @@ import SwiftUI
 
 struct PopupView: View {
     @Environment(Popup.self) private var popup: Popup
-    //let text: String
 
     var body: some View {
         ZStack {
