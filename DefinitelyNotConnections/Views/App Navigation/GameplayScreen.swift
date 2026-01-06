@@ -18,10 +18,6 @@ struct GameplayScreen: View {
                     .environment(connectionsGameModel.mainGame)
             }
             Spacer()
-            PopupView()
-                .environment(connectionsGameModel.popup)
-            Text("Create four groups of four!")
-                .foregroundStyle(.foreground)
             MainGameView()
             Spacer()
         }

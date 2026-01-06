@@ -12,6 +12,10 @@ struct MainGameView: View {
 
     var body: some View {
         VStack {
+            PopupView()
+                .environment(connectionsGameModel.popup)
+            Text("Create four groups of four!")
+                .foregroundStyle(.foreground)
             GameGridView()
                 .padding(.horizontal)
                 .environment(connectionsGameModel.mainGame.gameGrid)
