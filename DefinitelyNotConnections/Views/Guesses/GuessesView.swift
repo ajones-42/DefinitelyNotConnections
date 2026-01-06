@@ -24,7 +24,7 @@ struct GuessesView: View {
             }
             .padding()
             List {
-                ForEach(mainGame.getGuesses()) { guess in
+                ForEach(mainGame.allGuesses.getGuesses()) { guess in
                         GuessView(guess: guess)
                 }
             }

@@ -12,21 +12,21 @@ class MainGame {
     let allCategories: [Category]
     var gamePhase: GamePhase
     var gameGrid: GameGrid
-    var guesses: [Guess]
+    var allGuesses: AllGuesses
     var numMistakesRemaining: Int
     
     init(categories: [Category]) {
         self.allCategories = categories
         self.gamePhase = .setup
         self.gameGrid = GameGrid(categories: self.allCategories)
-        self.guesses = []
+        self.allGuesses = AllGuesses()
         self.numMistakesRemaining = 4
     }
     
     func resetGame() {
         self.gamePhase = .setup
         self.gameGrid = GameGrid(categories: self.allCategories)
-        self.guesses = []
+        self.allGuesses = AllGuesses()
         self.numMistakesRemaining = 4
     }
     
@@ -60,21 +60,9 @@ class MainGame {
         self.numMistakesRemaining = 4
     }
     
-    func addGuess(guess: Guess) {
-        self.guesses.append(guess)
-    }
-    
-    func getGuesses() -> [Guess] {
-        return self.guesses
-    }
-    
-    func getNextGuessID() -> Int {
-        return self.guesses.count
-    }
-    
     func selectionAlreadyGuessed(selectedBoxIDs: [Int]) -> Bool {
         var selectionAlreadyGuessed: Bool = false
-        for guess in self.getGuesses() {
+        for guess in self.allGuesses.getGuesses() {
             if getClueBoxIDs(clueBoxes: guess.clueBoxes).sorted() == selectedBoxIDs.sorted() {
                 selectionAlreadyGuessed = true
                 break
