@@ -14,6 +14,7 @@ class MainGame {
     var gameGrid: GameGrid
     var allGuesses: AllGuesses
     var numMistakesRemaining: Int
+    var lastGuessShakesBoxes: Bool = false
     
     init(categories: [Category]) {
         self.allCategories = categories

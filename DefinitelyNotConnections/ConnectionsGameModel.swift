@@ -10,27 +10,23 @@ import SwiftUI
 
 @Observable
 class ConnectionsGameModel {
-    private(set) var gameState: GameState
     var mainGame: MainGame
     let allCategories: [Category]
     var popup: Popup
     
     init() {
         self.allCategories = ConnectionsGameModel.getCategories()
-        self.gameState = GameState()
         self.mainGame = MainGame(categories: self.allCategories)
         self.popup = Popup()
     }
     
-    init(gameState: GameState, mainGame: MainGame, categories: [Category], popup: Popup) {
-        self.gameState = gameState
+    init(mainGame: MainGame, categories: [Category], popup: Popup) {
         self.allCategories = categories
         self.mainGame = mainGame
         self.popup = popup
     }
     
     func resetGame() {
-        self.gameState = GameState()
         self.mainGame.resetGame()
     }
     
@@ -61,13 +57,13 @@ class ConnectionsGameModel {
     // Guesses
     
     func getLastGuessShakesBoxes() -> Bool {
-        return self.gameState.lastGuessShakesBoxes
+        return self.mainGame.lastGuessShakesBoxes
     }
     
     // Categories
     
     func handleCorrectGuess(guess: Guess) {
-        self.gameState.lastGuessShakesBoxes = false
+        self.mainGame.lastGuessShakesBoxes = false
         self.mainGame.gameGrid.completeCategory(category: self.allCategories[guess.correctCategoryID!])
         removeSelectedClueBoxes()
         if self.mainGame.gameGrid.completedCategories.count == 4 {
@@ -76,7 +72,7 @@ class ConnectionsGameModel {
     }
     
     func handleIncorrectGuess(guess: Guess) {
-        self.gameState.lastGuessShakesBoxes = true
+        self.mainGame.lastGuessShakesBoxes = true
         self.mainGame.madeMistake()
         if guess.oneAway {
             self.popup.activateOneAway()
@@ -84,7 +80,7 @@ class ConnectionsGameModel {
     }
     
     func handleAlreadyGuessed() {
-        self.gameState.lastGuessShakesBoxes = true
+        self.mainGame.lastGuessShakesBoxes = true
         self.popup.activateAlreadyGuessed()
     }
 
