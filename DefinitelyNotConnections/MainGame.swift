@@ -17,14 +17,14 @@ class MainGame {
     
     init(categories: [Category]) {
         self.allCategories = categories
-        self.gamePhase = .playing
+        self.gamePhase = .setup
         self.gameGrid = GameGrid(categories: self.allCategories)
         self.guesses = []
         self.numMistakesRemaining = 4
     }
     
     func resetGame() {
-        self.gamePhase = .playing
+        self.gamePhase = .setup
         self.gameGrid = GameGrid(categories: self.allCategories)
         self.guesses = []
         self.numMistakesRemaining = 4
