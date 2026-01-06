@@ -115,7 +115,7 @@ class ConnectionsGameModel {
         if self.mainGame.selectionAlreadyGuessed(selectedBoxIDs: getClueBoxIDs(clueBoxes: selectedBoxes)) {
             alreadyGuessed()
         } else {
-            let guess: Guess = self.mainGame.computeGuess(selectedBoxes: selectedBoxes, guessID: self.mainGame.getNextGuessID())
+            let guess: Guess = Guess(allCategories: self.allCategories, selectedBoxes: selectedBoxes, id: self.mainGame.getNextGuessID())
             self.mainGame.addGuess(guess: guess)
             
             if guess.isCorrect() {
