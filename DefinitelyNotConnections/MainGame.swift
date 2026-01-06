@@ -60,4 +60,16 @@ class MainGame {
     func resetNumMistakesRemaining() {
         self.numMistakesRemaining = 4
     }
+    
+    func activateSelectedBoxesShake() {
+        self.gameGrid.remainingClueBoxes.getSelectedClueBoxes().forEach { box in
+            box.activateShake()
+        }
+    }
+    
+    func deactivateSelectedBoxesShake() {
+        self.gameGrid.remainingClueBoxes.getSelectedClueBoxes().forEach { box in
+            box.deactivateShake()
+        }
+    }
 }

@@ -16,9 +16,9 @@ struct SubmitButtonView: View {
             if connectionsGameModel.mainGame.gameGrid.remainingClueBoxes.isSubmitClickable() {
                 connectionsGameModel.submitSelection()
                 if connectionsGameModel.getLastGuessShakesBoxes() {
-                    connectionsGameModel.activateSelectedBoxesShake()
+                    connectionsGameModel.mainGame.activateSelectedBoxesShake()
                     withAnimation(Animation.spring(response: 0.3, dampingFraction: 0.2, blendDuration: 0.2)) {
-                        connectionsGameModel.deactivateSelectedBoxesShake()
+                        connectionsGameModel.mainGame.deactivateSelectedBoxesShake()
                     }
                 }
                 if connectionsGameModel.mainGame.getNumMistakesRemaining() == 0 {

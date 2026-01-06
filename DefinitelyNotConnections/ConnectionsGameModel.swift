@@ -102,16 +102,4 @@ class ConnectionsGameModel {
             }
         }
     }
-    
-    func activateSelectedBoxesShake() {
-        getSelectedClueBoxes().forEach { box in
-            box.activateShake()
-        }
-    }
-    
-    func deactivateSelectedBoxesShake() {
-        getSelectedClueBoxes().forEach { box in
-            box.deactivateShake()
-        }
-    }
 }
