@@ -12,18 +12,15 @@ import SwiftUI
 class ConnectionsGameModel {
     var mainGame: MainGame
     let allCategories: [Category]
-    var popup: Popup
     
     init() {
         self.allCategories = ConnectionsGameModel.getCategories()
         self.mainGame = MainGame(categories: self.allCategories)
-        self.popup = Popup()
     }
     
-    init(mainGame: MainGame, categories: [Category], popup: Popup) {
+    init(mainGame: MainGame, categories: [Category]) {
         self.allCategories = categories
         self.mainGame = mainGame
-        self.popup = popup
     }
     
     func resetGame() {
@@ -62,13 +59,13 @@ class ConnectionsGameModel {
         self.mainGame.lastGuessShakesBoxes = true
         self.mainGame.madeMistake()
         if guess.oneAway {
-            self.popup.activateOneAway()
+            self.mainGame.popup.activateOneAway()
         }
     }
     
     func handleAlreadyGuessed() {
         self.mainGame.lastGuessShakesBoxes = true
-        self.popup.activateAlreadyGuessed()
+        self.mainGame.popup.activateAlreadyGuessed()
     }
 
 

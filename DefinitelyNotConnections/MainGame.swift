@@ -13,6 +13,7 @@ class MainGame {
     var gamePhase: GamePhase
     var gameGrid: GameGrid
     var allGuesses: AllGuesses
+    var popup: Popup
     var numMistakesRemaining: Int
     var lastGuessShakesBoxes: Bool = false
     
@@ -21,6 +22,7 @@ class MainGame {
         self.gamePhase = .setup
         self.gameGrid = GameGrid(categories: self.allCategories)
         self.allGuesses = AllGuesses()
+        self.popup = Popup()
         self.numMistakesRemaining = 4
     }
     
