@@ -39,10 +39,6 @@ class ConnectionsGameModel {
     
     // ClueBoxes
     
-    func getSelectedClueBoxes() -> [ClueBox] {
-        return self.mainGame.gameGrid.remainingClueBoxes.getSelectedClueBoxes()
-    }
-    
     func getNumSelectedClueBoxes() -> Int {
         return self.mainGame.gameGrid.remainingClueBoxes.getNumSelectedClueBoxes()
     }
@@ -54,23 +50,4 @@ class ConnectionsGameModel {
     }
     
     // Categories
-
-
-    
-    func submitSelection() {
-        let selectedBoxes: [ClueBox] = getSelectedClueBoxes()
-
-        if self.mainGame.allGuesses.selectionAlreadyGuessed(selectedBoxIDs: getClueBoxIDs(clueBoxes: selectedBoxes)) {
-            self.mainGame.handleAlreadyGuessed()
-        } else {
-            let guess: Guess = Guess(allCategories: self.allCategories, selectedBoxes: selectedBoxes, id: self.mainGame.allGuesses.getNextGuessID())
-            self.mainGame.allGuesses.addGuess(guess: guess)
-            
-            if guess.isCorrect() {
-                self.mainGame.handleCorrectGuess(guess: guess)
-            } else {
-                self.mainGame.handleIncorrectGuess(guess: guess)
-            }
-        }
-    }
 }

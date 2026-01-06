@@ -96,4 +96,21 @@ class MainGame {
         self.lastGuessShakesBoxes = true
         self.popup.activateAlreadyGuessed()
     }
+    
+    func submitSelection() {
+        let selectedBoxes: [ClueBox] = self.gameGrid.remainingClueBoxes.getSelectedClueBoxes()
+
+        if self.allGuesses.selectionAlreadyGuessed(selectedBoxIDs: getClueBoxIDs(clueBoxes: selectedBoxes)) {
+            self.handleAlreadyGuessed()
+        } else {
+            let guess: Guess = Guess(allCategories: self.allCategories, selectedBoxes: selectedBoxes, id: self.allGuesses.getNextGuessID())
+            self.allGuesses.addGuess(guess: guess)
+            
+            if guess.isCorrect() {
+                self.handleCorrectGuess(guess: guess)
+            } else {
+                self.handleIncorrectGuess(guess: guess)
+            }
+        }
+    }
 }
