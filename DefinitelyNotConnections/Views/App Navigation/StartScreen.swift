@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct StartScreen: View {
-    @Environment(ConnectionsGameModel.self) private var connectionsGameModel: ConnectionsGameModel
+    @Environment(MainGame.self) private var mainGame: MainGame
 
     var body: some View {
         ZStack {
@@ -22,7 +22,7 @@ struct StartScreen: View {
                 Text("Group words that share a common thread.")
                     .foregroundStyle(.black)
                 Button {
-                    connectionsGameModel.startPlaying()
+                    mainGame.startPlaying()
                 } label: {
                     AppNavigationButton(text: "Play", boxColour: .black, textColour: .white)
                 }

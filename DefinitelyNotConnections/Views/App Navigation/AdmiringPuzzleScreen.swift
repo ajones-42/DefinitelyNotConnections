@@ -8,14 +8,13 @@
 import SwiftUI
 
 struct AdmiringPuzzleScreen: View {
-    @Environment(ConnectionsGameModel.self) private var connectionsGameModel: ConnectionsGameModel
+    @Environment(MainGame.self) private var mainGame: MainGame
     
     var body: some View {
         VStack {
             HStack {
                 Spacer()
                 GuessesButtonView()
-                    .environment(connectionsGameModel.mainGame)
             }
             Spacer()
             Text("Obvio!")
@@ -24,14 +23,14 @@ struct AdmiringPuzzleScreen: View {
                 .fontWeight(.heavy)
             GameGridView()
                 .padding(.horizontal)
-                .environment(connectionsGameModel.mainGame.gameGrid)
+                .environment(mainGame.gameGrid)
             Button {
-                connectionsGameModel.finishPlaying()
+                mainGame.finishPlaying()
             } label: {
                 AppNavigationButton(text: "Finish", boxColour: Color(UIColor.systemGray), textColour: .white)
             }
             Button {
-                connectionsGameModel.resetGame()
+                mainGame.resetGame()
             } label: {
                 AppNavigationButton(text: "Play again", boxColour: Color(UIColor.systemGray), textColour: .white)
             }

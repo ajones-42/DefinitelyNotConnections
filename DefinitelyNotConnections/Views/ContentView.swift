@@ -14,12 +14,15 @@ struct ContentView: View {
         switch connectionsGameModel.getCurrentGamePhase() {
         case .setup:
             StartScreen()
+                .environment(connectionsGameModel.mainGame)
         case .playing:
             GameplayScreen()
         case .finished:
             FinishedScreen()
+                .environment(connectionsGameModel.mainGame)
         case .admiring:
             AdmiringPuzzleScreen()
+                .environment(connectionsGameModel.mainGame)
         }
     }
 }

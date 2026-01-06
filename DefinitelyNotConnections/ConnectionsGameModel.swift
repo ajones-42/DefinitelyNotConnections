@@ -42,18 +42,6 @@ class ConnectionsGameModel {
     
     // GamePhase
     
-    func startPlaying() {
-        self.mainGame.startPlaying()
-    }
-    
-    func finishPlaying() {
-        self.mainGame.finishPlaying()
-    }
-    
-    func admirePuzzle() {
-        self.mainGame.admirePuzzle()
-    }
-    
     func getCurrentGamePhase() -> GamePhase {
         return self.mainGame.getCurrentGamePhase()
     }

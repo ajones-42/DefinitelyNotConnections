@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FinishedScreen: View {
-    @Environment(ConnectionsGameModel.self) private var connectionsGameModel: ConnectionsGameModel
+    @Environment(MainGame.self) private var mainGame: MainGame
 
     var body: some View {
         ZStack {
@@ -24,12 +24,12 @@ struct FinishedScreen: View {
                     .font(.title3)
                 
             Button {
-                connectionsGameModel.admirePuzzle()
+                mainGame.admirePuzzle()
             } label: {
                 AppNavigationButton(text: "Admire puzzle", boxColour: .black, textColour: .white)
             }
                 Button {
-                    connectionsGameModel.resetGame()
+                    mainGame.resetGame()
                 } label: {
                     AppNavigationButton(text: "Play again", boxColour: .black, textColour: .white)
                 }
