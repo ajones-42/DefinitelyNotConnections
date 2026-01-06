@@ -35,7 +35,6 @@
 			membershipExceptions = (
 				Builders/CategoryBuilder.swift,
 				Builders/ClueBoxBuilder.swift,
-				Builders/GameStateBuilder.swift,
 				Builders/GuessBuilder.swift,
 			);
 			target = FAD88C242DEDF61200CE86B6 /* DefinitelyNotConnections */;
@@ -45,7 +44,6 @@
 			membershipExceptions = (
 				Builders/CategoryBuilder.swift,
 				Builders/ClueBoxBuilder.swift,
-				Builders/GameStateBuilder.swift,
 				Builders/GuessBuilder.swift,
 			);
 			target = FAD88C312DEDF61500CE86B6 /* DefinitelyNotConnectionsTests */;

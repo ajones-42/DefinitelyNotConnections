@@ -8,15 +8,5 @@
 import Foundation
 
 struct GameState {
-    var gamePhase: GamePhase
     var lastGuessShakesBoxes: Bool = false
-
-    
-    init() {
-        self.gamePhase = .setup
-    }
-    
-    init(gamePhase: GamePhase) {
-        self.gamePhase = gamePhase
-    }
 }

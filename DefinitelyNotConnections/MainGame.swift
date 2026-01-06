@@ -10,21 +10,42 @@ import Foundation
 @Observable
 class MainGame {
     let allCategories: [Category]
+    var gamePhase: GamePhase
     var gameGrid: GameGrid
     var guesses: [Guess]
     var numMistakesRemaining: Int
     
     init(categories: [Category]) {
         self.allCategories = categories
+        self.gamePhase = .playing
         self.gameGrid = GameGrid(categories: self.allCategories)
         self.guesses = []
         self.numMistakesRemaining = 4
     }
     
     func resetGame() {
+        self.gamePhase = .playing
         self.gameGrid = GameGrid(categories: self.allCategories)
         self.guesses = []
         self.numMistakesRemaining = 4
+    }
+    
+    // GamePhase
+    
+    func startPlaying() {
+        self.gamePhase = .playing
+    }
+    
+    func finishPlaying() {
+        self.gamePhase = .finished
+    }
+    
+    func admirePuzzle() {
+        self.gamePhase = .admiring
+    }
+    
+    func getCurrentGamePhase() -> GamePhase {
+        return self.gamePhase
     }
     
     func getNumMistakesRemaining() -> Int {

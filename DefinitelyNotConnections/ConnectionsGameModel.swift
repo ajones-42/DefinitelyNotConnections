@@ -43,19 +43,19 @@ class ConnectionsGameModel {
     // GamePhase
     
     func startPlaying() {
-        self.gameState.gamePhase = .playing
+        self.mainGame.startPlaying()
     }
     
     func finishPlaying() {
-        self.gameState.gamePhase = .finished
+        self.mainGame.finishPlaying()
     }
     
     func admirePuzzle() {
-        self.gameState.gamePhase = .admiring
+        self.mainGame.admirePuzzle()
     }
     
     func getCurrentGamePhase() -> GamePhase {
-        return self.gameState.gamePhase
+        return self.mainGame.getCurrentGamePhase()
     }
     
     // ClueBoxes
@@ -85,7 +85,7 @@ class ConnectionsGameModel {
         self.mainGame.gameGrid.completeCategory(category: self.allCategories[guess.correctCategoryID!])
         removeSelectedClueBoxes()
         if self.mainGame.gameGrid.completedCategories.count == 4 {
-            admirePuzzle()
+            self.mainGame.admirePuzzle()
         }
     }
     
