@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RemainingClueBoxesView: View {
-    @Environment(RemainingClueBoxes.self) private var remainingClueBoxes: RemainingClueBoxes
+    var remainingClueBoxes: RemainingClueBoxes
 
     var body: some View {
         LazyVGrid(columns: [GridItem(), GridItem(), GridItem(), GridItem()]) {

@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct GameplayScreen: View {
-    @Environment(ConnectionsGameModel.self) private var connectionsGameModel: ConnectionsGameModel
+    @Environment(MainGame.self) private var mainGame: MainGame
 
     var body: some View {
         VStack {
             HStack {
                 Spacer()
                 GuessesButtonView()
-                    .environment(connectionsGameModel.mainGame.allGuesses)
+                    .environment(mainGame.allGuesses)
             }
             Spacer()
             MainGameView()

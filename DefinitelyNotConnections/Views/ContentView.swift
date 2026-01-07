@@ -8,29 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
-    @Environment(ConnectionsGameModel.self) private var connectionsGameModel: ConnectionsGameModel
+    @Environment(MainGame.self) private var mainGame: MainGame
 
     var body: some View {
-        switch connectionsGameModel.getCurrentGamePhase() {
+        switch mainGame.getCurrentGamePhase() {
         case .setup:
             StartScreen()
-                .environment(connectionsGameModel.mainGame)
         case .playing:
             GameplayScreen()
         case .finished:
             FinishedScreen()
-                .environment(connectionsGameModel.mainGame)
         case .admiring:
             AdmiringPuzzleScreen()
-                .environment(connectionsGameModel.mainGame)
         }
     }
 }
 
 
 #Preview {
-    let connectionsGameModel: ConnectionsGameModel = ConnectionsGameModel()
+    let mainGame: MainGame = MainGame(categories: createDefaultTestCategories())
     ContentView()
-        .environment(connectionsGameModel)
+        .environment(mainGame)
 }
 

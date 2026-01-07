@@ -13,8 +13,7 @@ struct GameGridView: View {
     var body: some View {
         VStack {
             CompletedCategoriesView()
-            RemainingClueBoxesView()
-                .environment(gameGrid.remainingClueBoxes)
+            RemainingClueBoxesView(remainingClueBoxes: gameGrid.remainingClueBoxes)
         }
     }
 }
