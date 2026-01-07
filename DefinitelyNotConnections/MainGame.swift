@@ -98,19 +98,25 @@ class MainGame {
         self.popup.activateAlreadyGuessed()
     }
     
+    func submitIsClickable() -> Bool {
+        return gameGrid.remainingClueBoxes.submitIsClickable()
+    }
+    
     func submitSelection() {
-        let selectedBoxes: [ClueBox] = self.gameGrid.remainingClueBoxes.getSelectedClueBoxes()
-
-        if self.allGuesses.selectionAlreadyGuessed(selectedBoxIDs: getClueBoxIDs(clueBoxes: selectedBoxes)) {
-            self.handleAlreadyGuessed()
-        } else {
-            let guess: Guess = Guess(allCategories: self.allCategories, selectedBoxes: selectedBoxes, id: self.allGuesses.getNextGuessID())
-            self.allGuesses.addGuess(guess: guess)
+        if submitIsClickable() {
+            let selectedBoxes: [ClueBox] = self.gameGrid.remainingClueBoxes.getSelectedClueBoxes()
             
-            if guess.isCorrect() {
-                self.handleCorrectGuess(guess: guess)
+            if self.allGuesses.selectionAlreadyGuessed(selectedBoxIDs: getClueBoxIDs(clueBoxes: selectedBoxes)) {
+                self.handleAlreadyGuessed()
             } else {
-                self.handleIncorrectGuess(guess: guess)
+                let guess: Guess = Guess(allCategories: self.allCategories, selectedBoxes: selectedBoxes, id: self.allGuesses.getNextGuessID())
+                self.allGuesses.addGuess(guess: guess)
+                
+                if guess.isCorrect() {
+                    self.handleCorrectGuess(guess: guess)
+                } else {
+                    self.handleIncorrectGuess(guess: guess)
+                }
             }
         }
     }

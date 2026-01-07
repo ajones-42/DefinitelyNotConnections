@@ -39,7 +39,7 @@ class RemainingClueBoxes {
         return getSelectedClueBoxes().count
     }
     
-    func isSubmitClickable() -> Bool {
+    func submitIsClickable() -> Bool {
         return getNumSelectedClueBoxes() == 4
     }
     
@@ -47,7 +47,7 @@ class RemainingClueBoxes {
         self.clueBoxes.shuffle()
     }
     
-    func isDeselectAllClickable() -> Bool {
+    func deselectAllIsClickable() -> Bool {
         return getNumSelectedClueBoxes() > 0
     }
     

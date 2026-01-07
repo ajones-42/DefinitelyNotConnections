@@ -12,11 +12,9 @@ struct SubmitButtonView: View {
     
     var body: some View {
         Button {
-            if mainGame.gameGrid.remainingClueBoxes.isSubmitClickable() {
-                mainGame.submitSelection()
-            }
+            mainGame.submitSelection()
         } label: {
-            GameplayButtonView(text: "Submit", isClickable: mainGame.gameGrid.remainingClueBoxes.isSubmitClickable())
+            GameplayButtonView(text: "Submit", isClickable: mainGame.submitIsClickable())
                 .alert(Text("Oh go on then, have another go!"), isPresented: $mainGame.noMistakesLeft) {
                     Button("Ok") {
                         mainGame.resetNumMistakesRemaining()
