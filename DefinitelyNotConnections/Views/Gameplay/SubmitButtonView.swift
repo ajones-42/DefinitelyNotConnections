@@ -9,19 +9,16 @@ import SwiftUI
 
 struct SubmitButtonView: View {
     @Environment(ConnectionsGameModel.self) private var connectionsGameModel: ConnectionsGameModel
-    @State var showAlert: Bool = false
+    @Bindable var mainGame: MainGame
     
     var body: some View {
         Button {
             if connectionsGameModel.mainGame.gameGrid.remainingClueBoxes.isSubmitClickable() {
                 connectionsGameModel.mainGame.submitSelection()
-                if connectionsGameModel.mainGame.getNumMistakesRemaining() == 0 {
-                    showAlert = true
-                }
             }
         } label: {
             GameplayButtonView(text: "Submit", isClickable: connectionsGameModel.mainGame.gameGrid.remainingClueBoxes.isSubmitClickable())
-                .alert(Text("Oh go on then, have another go!"), isPresented: $showAlert) {
+                .alert(Text("Oh go on then, have another go!"), isPresented: $mainGame.noMistakesLeft) {
                     Button("Ok") {
                         connectionsGameModel.mainGame.resetNumMistakesRemaining()
                     }

@@ -26,7 +26,7 @@ struct MainGameView: View {
                     .environment(connectionsGameModel.mainGame.gameGrid.remainingClueBoxes)
                 DeselectAllButtonView()
                     .environment(connectionsGameModel.mainGame.gameGrid.remainingClueBoxes)
-                SubmitButtonView()
+                SubmitButtonView(mainGame: connectionsGameModel.mainGame)
             }
         }
     }
