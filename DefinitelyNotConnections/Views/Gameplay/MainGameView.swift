@@ -8,24 +8,24 @@
 import SwiftUI
 
 struct MainGameView: View {
-    @Environment(ConnectionsGameModel.self) private var connectionsGameModel: ConnectionsGameModel
+    @Environment(MainGame.self) private var mainGame: MainGame
 
     var body: some View {
         VStack {
-            PopupView(popup: connectionsGameModel.mainGame.popup)
+            PopupView(popup: mainGame.popup)
             Text("Create four groups of four!")
                 .foregroundStyle(.foreground)
             GameGridView()
                 .padding(.horizontal)
-                .environment(connectionsGameModel.mainGame.gameGrid)
+                .environment(mainGame.gameGrid)
             MistakesRemainingView()
-                .environment(connectionsGameModel.mainGame)
+                .environment(mainGame)
             HStack {
                 ShuffleButtonView()
-                    .environment(connectionsGameModel.mainGame.gameGrid.remainingClueBoxes)
+                    .environment(mainGame.gameGrid.remainingClueBoxes)
                 DeselectAllButtonView()
-                    .environment(connectionsGameModel.mainGame.gameGrid.remainingClueBoxes)
-                SubmitButtonView(mainGame: connectionsGameModel.mainGame)
+                    .environment(mainGame.gameGrid.remainingClueBoxes)
+                SubmitButtonView(mainGame: mainGame)
             }
         }
     }
