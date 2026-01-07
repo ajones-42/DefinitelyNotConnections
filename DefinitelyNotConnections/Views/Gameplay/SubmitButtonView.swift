@@ -8,18 +8,13 @@
 import SwiftUI
 
 struct SubmitButtonView: View {
-    @Bindable var mainGame: MainGame
+    @Environment(MainGame.self) private var mainGame: MainGame
     
     var body: some View {
         Button {
             mainGame.submitSelection()
         } label: {
             GameplayButtonView(text: "Submit", isClickable: mainGame.submitIsClickable())
-                .alert(Text("Oh go on then, have another go!"), isPresented: $mainGame.noMistakesLeft) {
-                    Button("Ok") {
-                        mainGame.resetNumMistakesRemaining()
-                    }
-                }
         }
     }
 }

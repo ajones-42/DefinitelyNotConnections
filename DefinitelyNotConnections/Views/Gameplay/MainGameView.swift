@@ -18,11 +18,12 @@ struct MainGameView: View {
             GameGridView()
                 .padding(.horizontal)
                 .environment(mainGame.gameGrid)
+                .overlay(NoMistakesRemainingAlert())
             MistakesRemainingView()
             HStack {
                 ShuffleButtonView(remainingClueBoxes: mainGame.gameGrid.remainingClueBoxes)
                 DeselectAllButtonView(remainingClueBoxes: mainGame.gameGrid.remainingClueBoxes)
-                SubmitButtonView(mainGame: mainGame)
+                SubmitButtonView()
             }
         }
     }
