@@ -9,21 +9,30 @@ import Foundation
 
 @Observable
 class Popup {
-    var trigger: Bool = false // Actual value doesn't matter, but must change to trigger OneAway/AlreadyGuessed.
+    var isPresented: Bool = false
     var text: String = ""
-    let oneAwayText: String = "One away!"
-    let alreadyGuessedText: String = "Already guessed!"
     
     func activate(text: String) {
         self.text = text
-        self.trigger.toggle()
+        self.isPresented = true
+    }
+    
+    func deactivate() {
+        self.isPresented = false
+    }
+    
+    func showMomentarily(duration: TimeInterval, text: String) {
+        activate(text: text)
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+            self.deactivate()
+        }
     }
     
     func activateOneAway() {
-        activate(text: self.oneAwayText)
+        showMomentarily(duration: TimeInterval(2), text: "One away!")
     }
     
     func activateAlreadyGuessed() {
-        activate(text: self.alreadyGuessedText)
+        showMomentarily(duration: TimeInterval(2), text: "Already guessed!")
     }
 }

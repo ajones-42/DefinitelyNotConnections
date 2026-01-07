@@ -18,7 +18,7 @@ struct GameplayScreen: View {
                     .environment(connectionsGameModel.mainGame.allGuesses)
             }
             Spacer()
-            MainGameView()
+            MainGameView(popup: connectionsGameModel.mainGame.popup)
             Spacer()
         }
     }
