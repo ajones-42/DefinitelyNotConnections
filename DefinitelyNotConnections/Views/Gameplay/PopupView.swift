@@ -8,18 +8,17 @@
 import SwiftUI
 
 struct PopupView: View {
-    @Binding var text: String
-    @Binding var isPresented: Bool
+    var popup: Popup
 
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 10)
                 .foregroundStyle(.foreground)
                 .frame(width: 150, height: 70)
-            Text(text)
+            Text(popup.text)
                 .foregroundStyle(.background)
         }
-        .opacity(isPresented ? 1 : 0)
+        .opacity(popup.isPresented ? 1 : 0)
     }
 }
 

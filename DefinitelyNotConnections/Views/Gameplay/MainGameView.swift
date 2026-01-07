@@ -9,11 +9,10 @@ import SwiftUI
 
 struct MainGameView: View {
     @Environment(ConnectionsGameModel.self) private var connectionsGameModel: ConnectionsGameModel
-    @Bindable var popup: Popup
 
     var body: some View {
         VStack {
-            PopupView(text: $popup.text, isPresented: $popup.isPresented)
+            PopupView(popup: connectionsGameModel.mainGame.popup)
             Text("Create four groups of four!")
                 .foregroundStyle(.foreground)
             GameGridView()
