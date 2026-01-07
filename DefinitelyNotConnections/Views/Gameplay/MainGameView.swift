@@ -19,12 +19,9 @@ struct MainGameView: View {
                 .padding(.horizontal)
                 .environment(mainGame.gameGrid)
             MistakesRemainingView()
-                .environment(mainGame)
             HStack {
-                ShuffleButtonView()
-                    .environment(mainGame.gameGrid.remainingClueBoxes)
-                DeselectAllButtonView()
-                    .environment(mainGame.gameGrid.remainingClueBoxes)
+                ShuffleButtonView(remainingClueBoxes: mainGame.gameGrid.remainingClueBoxes)
+                DeselectAllButtonView(remainingClueBoxes: mainGame.gameGrid.remainingClueBoxes)
                 SubmitButtonView(mainGame: mainGame)
             }
         }
