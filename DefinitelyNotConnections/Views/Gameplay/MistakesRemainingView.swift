@@ -11,16 +11,12 @@ struct MistakesRemainingView: View {
     @Environment(MainGame.self) private var mainGame: MainGame
     
     var body: some View {
-        let shape = Circle().frame(width: 15)
+        let shape = Circle().frame(width: 15).foregroundStyle(.foreground)
         HStack {
             Text("Mistakes remaining:")
                 .fontWeight(.semibold)
             ForEach(0...3, id: \.self) {
-                if mainGame.getNumMistakesRemaining() > $0 {
-                    shape.foregroundStyle(.foreground)
-                } else {
-                    shape.foregroundStyle(.background)
-                }
+                shape.opacity(mainGame.getNumMistakesRemaining() > $0 ? 1 : 0)
             }
         }
     }
