@@ -43,11 +43,5 @@ class ConnectionsGameModel {
         return self.mainGame.gameGrid.remainingClueBoxes.getNumSelectedClueBoxes()
     }
     
-    // Guesses
-    
-    func getLastGuessShakesBoxes() -> Bool {
-        return self.mainGame.lastGuessShakesBoxes
-    }
-    
     // Categories
 }

@@ -95,7 +95,6 @@ class MainGame {
     }
     
     func handleAlreadyGuessed() {
-        self.lastGuessShakesBoxes = true
         self.popup.activateAlreadyGuessed()
     }
     
