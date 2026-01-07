@@ -24,6 +24,7 @@ struct ClueBoxView: View {
             }
         }
         .offset(x: clueBox.shake ? -10 : 0)
+        .animation(.spring(duration: 0.3, bounce: 0.7), value: clueBox.shake)
     }
 }
 

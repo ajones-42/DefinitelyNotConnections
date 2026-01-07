@@ -37,11 +37,11 @@ class ClueBox: Identifiable, Equatable {
         self.isSelected = false
     }
     
-    func activateShake() {
+    func startShake() {
         self.shake = true
     }
     
-    func deactivateShake() {
+    func stopShake() {
         self.shake = false
     }
 }

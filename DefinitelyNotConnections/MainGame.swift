@@ -63,20 +63,18 @@ class MainGame {
         self.numMistakesRemaining = 4
     }
     
-    func activateSelectedBoxesShake() {
+    func shakeSelectedBoxes() {
         self.gameGrid.remainingClueBoxes.getSelectedClueBoxes().forEach { box in
-            box.activateShake()
+            box.startShake()
         }
-    }
-    
-    func deactivateSelectedBoxesShake() {
-        self.gameGrid.remainingClueBoxes.getSelectedClueBoxes().forEach { box in
-            box.deactivateShake()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.gameGrid.remainingClueBoxes.getSelectedClueBoxes().forEach { box in
+                box.stopShake()
+            }
         }
     }
     
     func handleCorrectGuess(guess: Guess) {
-        self.lastGuessShakesBoxes = false
         self.gameGrid.completeCategory(category: self.allCategories[guess.correctCategoryID!])
         self.gameGrid.remainingClueBoxes.removeSelectedClueBoxes()
         if self.gameGrid.completedCategories.count == 4 {
@@ -85,7 +83,7 @@ class MainGame {
     }
     
     func handleIncorrectGuess(guess: Guess) {
-        self.lastGuessShakesBoxes = true
+        shakeSelectedBoxes()
         self.madeMistake()
         if guess.oneAway {
             self.popup.activateOneAway()
