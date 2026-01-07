@@ -41,8 +41,8 @@ struct ShowMomentarily<Trigger: Equatable>: ViewModifier {
     }
 }
 
-extension View {
+/*extension View {
     func show(for delay: Duration, trigger: some Equatable) -> some View {
         modifier(ShowMomentarily(duration: delay, trigger: trigger))
     }
-}
+}*/
