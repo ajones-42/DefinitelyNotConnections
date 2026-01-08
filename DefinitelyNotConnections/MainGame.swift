@@ -25,7 +25,7 @@ class MainGame {
         self.mistakes = Mistakes()
     }
     
-    func resetGame() {
+    public func resetGame() {
         self.gamePhase = .setup
         self.gameGrid.reset()
         self.allGuesses.reset()
@@ -34,19 +34,19 @@ class MainGame {
     
     // GamePhase
     
-    func startPlaying() {
+    public func startPlaying() {
         self.gamePhase = .playing
     }
     
-    func finishPlaying() {
+    public func finishPlaying() {
         self.gamePhase = .finished
     }
     
-    func admirePuzzle() {
+    public func admirePuzzle() {
         self.gamePhase = .admiring
     }
     
-    func shakeSelectedBoxes() {
+    private func shakeSelectedBoxes() {
         self.gameGrid.remainingClueBoxes.selectedClueBoxes.forEach { box in
             box.startShake()
         }
@@ -57,7 +57,7 @@ class MainGame {
         }
     }
     
-    func handleCorrectGuess(guess: Guess) {
+    private func handleCorrectGuess(guess: Guess) {
         self.gameGrid.completeCategory(category: self.allCategories[guess.correctCategoryID!])
         self.gameGrid.remainingClueBoxes.removeSelectedClueBoxes()
         if self.gameGrid.sortedCompletedCategories.count == 4 {
@@ -65,7 +65,7 @@ class MainGame {
         }
     }
     
-    func handleIncorrectGuess(guess: Guess) {
+    private func handleIncorrectGuess(guess: Guess) {
         shakeSelectedBoxes()
         self.mistakes.madeMistake()
         if guess.oneAway {
@@ -73,28 +73,28 @@ class MainGame {
         }
     }
     
-    func handleAlreadyGuessed() {
+    private func handleAlreadyGuessed() {
         self.popup.activateAlreadyGuessed()
     }
     
-    func submitIsClickable() -> Bool {
+    public func submitIsClickable() -> Bool {
         return gameGrid.remainingClueBoxes.submitIsClickable
     }
     
-    func submitSelection() {
+    public func submitSelection() {
         if submitIsClickable() {
             let selectedBoxes: [ClueBox] = self.gameGrid.remainingClueBoxes.selectedClueBoxes
             
             if self.allGuesses.selectionAlreadyGuessed(selectedBoxIDs: getClueBoxIDs(clueBoxes: selectedBoxes)) {
-                self.handleAlreadyGuessed()
+                handleAlreadyGuessed()
             } else {
                 let guess: Guess = Guess(allCategories: self.allCategories, selectedBoxes: selectedBoxes, id: self.allGuesses.getNextGuessID())
                 self.allGuesses.addGuess(guess: guess)
                 
                 if guess.isCorrect() {
-                    self.handleCorrectGuess(guess: guess)
+                    handleCorrectGuess(guess: guess)
                 } else {
-                    self.handleIncorrectGuess(guess: guess)
+                    handleIncorrectGuess(guess: guess)
                 }
             }
         }
