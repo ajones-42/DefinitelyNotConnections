@@ -39,8 +39,4 @@ class GameGrid {
     func completeCategory(category: Category) {
         category.orderCompleted = getNextCompletedCategoryOrder()
     }
-    
-    func getCompletedCategories() -> [Category] {
-        return self.sortedCompletedCategories
-    }
 }

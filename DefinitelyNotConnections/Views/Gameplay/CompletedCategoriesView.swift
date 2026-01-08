@@ -11,7 +11,7 @@ struct CompletedCategoriesView: View {
     @Environment(GameGrid.self) private var gameGrid: GameGrid
 
     var body: some View {
-        ForEach(gameGrid.getCompletedCategories()) { category in
+        ForEach(gameGrid.sortedCompletedCategories) { category in
             CompletedCategoryView(category: category)
         }
     }
