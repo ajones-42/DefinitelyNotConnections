@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-
+@Observable
 class Category: Identifiable {
     let name: String
     var clueBoxes: [ClueBox]

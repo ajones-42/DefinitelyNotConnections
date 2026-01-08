@@ -11,22 +11,22 @@ import Foundation
 class GameGrid {
     let allCategories: [Category]
     var remainingClueBoxes: RemainingClueBoxes
-    var completedCategories: [Category]
+    var completedCategories: [Category] {
+        self.allCategories.filter( {$0.orderCompleted != nil} ).sorted(by: categoriesCompletedInIncreasingOrder)
+    }
     
     init(categories: [Category]) {
         self.allCategories = categories
         self.remainingClueBoxes = RemainingClueBoxes(clueBoxes: getAllClueBoxes(categories: self.allCategories))
-        self.completedCategories = []
     }
     
     init(allCategories: [Category], remainingClueBoxes: RemainingClueBoxes, completedCategories: [Category]) {
         self.allCategories = allCategories
         self.remainingClueBoxes = remainingClueBoxes
-        self.completedCategories = completedCategories
     }
     
     func completeCategory(category: Category) {
-        self.completedCategories.append(category)
+        category.orderCompleted = self.completedCategories.count
     }
     
     func getCompletedCategories() -> [Category] {
