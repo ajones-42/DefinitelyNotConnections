@@ -39,10 +39,6 @@ class RemainingClueBoxes {
         }
     }
     
-    func getRemainingClueBoxes() -> [ClueBox] {
-        return self.clueBoxes
-    }
-    
     func shuffleClueBoxes() {
         self.clueBoxes.shuffle()
     }
