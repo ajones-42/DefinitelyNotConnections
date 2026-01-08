@@ -53,6 +53,17 @@ class RemainingClueBoxes {
         }
     }
     
+    func shakeSelectedBoxes() {
+        self.selectedClueBoxes.forEach { box in
+            box.startShake()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.selectedClueBoxes.forEach { box in
+                box.stopShake()
+            }
+        }
+    }
+    
     func removeSelectedClueBoxes() {
         self.clueBoxes.removeAll(where: { $0.isSelected })
     }

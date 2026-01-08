@@ -46,17 +46,6 @@ class MainGame {
         self.gamePhase = .admiring
     }
     
-    private func shakeSelectedBoxes() {
-        self.gameGrid.remainingClueBoxes.selectedClueBoxes.forEach { box in
-            box.startShake()
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            self.gameGrid.remainingClueBoxes.selectedClueBoxes.forEach { box in
-                box.stopShake()
-            }
-        }
-    }
-    
     private func handleCorrectGuess(guess: Guess) {
         self.gameGrid.completeCategory(category: self.allCategories[guess.correctCategoryID!])
         self.gameGrid.remainingClueBoxes.removeSelectedClueBoxes()
@@ -66,7 +55,7 @@ class MainGame {
     }
     
     private func handleIncorrectGuess(guess: Guess) {
-        shakeSelectedBoxes()
+        self.gameGrid.remainingClueBoxes.shakeSelectedBoxes()
         self.mistakes.madeMistake()
         if guess.oneAway {
             self.popup.activateOneAway()
