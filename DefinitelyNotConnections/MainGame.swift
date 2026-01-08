@@ -12,7 +12,7 @@ class MainGame {
     let allCategories: [Category]
     var gamePhase: GamePhase
     let gameGrid: GameGrid
-    var allGuesses: AllGuesses
+    let allGuesses: AllGuesses
     var popup: Popup
     let mistakes: Mistakes
     
@@ -28,7 +28,7 @@ class MainGame {
     func resetGame() {
         self.gamePhase = .setup
         self.gameGrid.reset()
-        self.allGuesses = AllGuesses()
+        self.allGuesses.reset()
         self.mistakes.reset()
     }
     

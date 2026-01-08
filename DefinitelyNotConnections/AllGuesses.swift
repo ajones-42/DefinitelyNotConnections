@@ -14,6 +14,10 @@ class AllGuesses {
     init() {
         self.guesses = []
     }
+    
+    func reset() {
+        self.guesses = []
+    }
 
     func getGuesses() -> [Guess] {
         return self.guesses
