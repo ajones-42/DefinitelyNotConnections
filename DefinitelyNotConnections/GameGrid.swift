@@ -14,6 +14,9 @@ class GameGrid {
     var sortedCompletedCategories: [Category] {
         self.allCategories.filter( {$0.orderCompleted != nil} ).sorted(by: categoriesCompletedInIncreasingOrder)
     }
+    var numCompletedCategories: Int {
+        self.sortedCompletedCategories.count
+    }
     
     init(categories: [Category]) {
         self.allCategories = categories
