@@ -46,10 +46,6 @@ class MainGame {
         self.gamePhase = .admiring
     }
     
-    func getCurrentGamePhase() -> GamePhase {
-        return self.gamePhase
-    }
-    
     func shakeSelectedBoxes() {
         self.gameGrid.remainingClueBoxes.selectedClueBoxes.forEach { box in
             box.startShake()

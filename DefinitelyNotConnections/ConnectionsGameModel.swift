@@ -30,14 +30,4 @@ class ConnectionsGameModel {
     static func getCategories() -> [Category] {
         return createDefaultTestCategories()
     }
-    
-    // GamePhase
-    
-    func getCurrentGamePhase() -> GamePhase {
-        return self.mainGame.getCurrentGamePhase()
-    }
-    
-    // ClueBoxes
-    
-    // Categories
 }

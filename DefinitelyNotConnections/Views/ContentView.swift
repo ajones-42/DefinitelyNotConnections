@@ -11,7 +11,7 @@ struct ContentView: View {
     @Environment(MainGame.self) private var mainGame: MainGame
 
     var body: some View {
-        switch mainGame.getCurrentGamePhase() {
+        switch mainGame.gamePhase {
         case .setup:
             StartScreen()
         case .playing:
