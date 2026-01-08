@@ -25,6 +25,7 @@ class RemainingClueBoxes {
     var deselectAllIsClickable: Bool {
         self.numSelectedClueBoxes > 0
     }
+
     
     init(clueBoxes: [ClueBox]) {
         self.clueBoxes = clueBoxes
@@ -33,7 +34,7 @@ class RemainingClueBoxes {
     }
 
     func clickClueBox(clueBox: ClueBox) {
-        if (numSelectedClueBoxes < 4 || clueBox.isSelected) {
+        if (self.numSelectedClueBoxes < 4 || clueBox.isSelected) {
             clueBox.click()
         }
     }
