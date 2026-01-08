@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct NoMistakesRemainingAlert: View {
-    @Environment(MainGame.self) private var mainGame: MainGame
+    var mistakes: Mistakes
     let boxWidth: CGFloat = 320
     let boxHeight: CGFloat = 120
     
     var body: some View {
-        if mainGame.noMistakesLeft {
+        if mistakes.noMistakesLeft {
             ZStack {
                 RoundedRectangle(cornerRadius: 30)
                     .frame(width: boxWidth, height: boxHeight)
@@ -22,7 +22,7 @@ struct NoMistakesRemainingAlert: View {
                 VStack {
                     Text("Oh go on then, have another go!").foregroundStyle(.black)
                     Button {
-                        mainGame.resetNumMistakesRemaining()
+                        mistakes.reset()
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 50)
@@ -39,7 +39,7 @@ struct NoMistakesRemainingAlert: View {
     }
 }
 
-#Preview {
+/*#Preview {
     NoMistakesRemainingAlert()
         .environment(MainGame(categories: createDefaultTestCategories()))
-}
+}*/

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MistakesRemainingView: View {
-    @Environment(MainGame.self) private var mainGame: MainGame
+    var mistakes: Mistakes
     
     var body: some View {
         let shape = Circle().frame(width: 15).foregroundStyle(.foreground)
@@ -16,7 +16,7 @@ struct MistakesRemainingView: View {
             Text("Mistakes remaining:")
                 .fontWeight(.semibold)
             ForEach(0...3, id: \.self) {
-                shape.opacity(mainGame.getNumMistakesRemaining() > $0 ? 1 : 0)
+                shape.opacity(mistakes.numMistakesRemaining > $0 ? 1 : 0)
             }
         }
     }

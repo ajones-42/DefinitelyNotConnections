@@ -14,10 +14,7 @@ class MainGame {
     var gameGrid: GameGrid
     var allGuesses: AllGuesses
     var popup: Popup
-    var numMistakesRemaining: Int
-    var noMistakesLeft: Bool {
-        self.numMistakesRemaining == 0
-    }
+    let mistakes: Mistakes
     
     init(categories: [Category]) {
         self.allCategories = categories
@@ -25,14 +22,14 @@ class MainGame {
         self.gameGrid = GameGrid(categories: self.allCategories)
         self.allGuesses = AllGuesses()
         self.popup = Popup()
-        self.numMistakesRemaining = 4
+        self.mistakes = Mistakes()
     }
     
     func resetGame() {
         self.gamePhase = .setup
         self.gameGrid.reset()
         self.allGuesses = AllGuesses()
-        self.numMistakesRemaining = 4
+        self.mistakes.reset()
     }
     
     // GamePhase
@@ -51,18 +48,6 @@ class MainGame {
     
     func getCurrentGamePhase() -> GamePhase {
         return self.gamePhase
-    }
-    
-    func getNumMistakesRemaining() -> Int {
-        return self.numMistakesRemaining
-    }
-    
-    func madeMistake() {
-        self.numMistakesRemaining -= 1
-    }
-    
-    func resetNumMistakesRemaining() {
-        self.numMistakesRemaining = 4
     }
     
     func shakeSelectedBoxes() {
@@ -86,7 +71,7 @@ class MainGame {
     
     func handleIncorrectGuess(guess: Guess) {
         shakeSelectedBoxes()
-        madeMistake()
+        self.mistakes.madeMistake()
         if guess.oneAway {
             self.popup.activateOneAway()
         }

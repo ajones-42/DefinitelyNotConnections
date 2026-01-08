@@ -18,8 +18,8 @@ struct MainGameView: View {
             GameGridView()
                 .padding(.horizontal)
                 .environment(mainGame.gameGrid)
-                .overlay(NoMistakesRemainingAlert())
-            MistakesRemainingView()
+                .overlay(NoMistakesRemainingAlert(mistakes: mainGame.mistakes))
+            MistakesRemainingView(mistakes: mainGame.mistakes)
             HStack {
                 ShuffleButtonView(remainingClueBoxes: mainGame.gameGrid.remainingClueBoxes)
                 DeselectAllButtonView(remainingClueBoxes: mainGame.gameGrid.remainingClueBoxes)
