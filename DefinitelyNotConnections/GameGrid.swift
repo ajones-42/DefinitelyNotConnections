@@ -11,7 +11,7 @@ import Foundation
 class GameGrid {
     let allCategories: [Category]
     var remainingClueBoxes: RemainingClueBoxes
-    var completedCategories: [Category] {
+    var sortedCompletedCategories: [Category] {
         self.allCategories.filter( {$0.orderCompleted != nil} ).sorted(by: categoriesCompletedInIncreasingOrder)
     }
     
@@ -33,7 +33,7 @@ class GameGrid {
     }
     
     func getNextCompletedCategoryOrder() -> Int {
-        return self.completedCategories.count
+        return self.sortedCompletedCategories.count
     }
     
     func completeCategory(category: Category) {
@@ -41,6 +41,6 @@ class GameGrid {
     }
     
     func getCompletedCategories() -> [Category] {
-        return self.completedCategories
+        return self.sortedCompletedCategories
     }
 }
