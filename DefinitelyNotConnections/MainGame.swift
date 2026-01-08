@@ -13,7 +13,7 @@ class MainGame {
     var gamePhase: GamePhase
     let gameGrid: GameGrid
     let allGuesses: AllGuesses
-    var popup: Popup
+    let popup: Popup
     let mistakes: Mistakes
     
     init(categories: [Category]) {
