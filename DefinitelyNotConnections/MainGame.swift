@@ -30,7 +30,7 @@ class MainGame {
     
     func resetGame() {
         self.gamePhase = .setup
-        self.gameGrid = GameGrid(categories: self.allCategories)
+        self.gameGrid.reset()
         self.allGuesses = AllGuesses()
         self.numMistakesRemaining = 4
     }
