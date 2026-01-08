@@ -66,11 +66,11 @@ class MainGame {
     }
     
     func shakeSelectedBoxes() {
-        self.gameGrid.remainingClueBoxes.getSelectedClueBoxes().forEach { box in
+        self.gameGrid.remainingClueBoxes.selectedClueBoxes.forEach { box in
             box.startShake()
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            self.gameGrid.remainingClueBoxes.getSelectedClueBoxes().forEach { box in
+            self.gameGrid.remainingClueBoxes.selectedClueBoxes.forEach { box in
                 box.stopShake()
             }
         }
@@ -97,12 +97,12 @@ class MainGame {
     }
     
     func submitIsClickable() -> Bool {
-        return gameGrid.remainingClueBoxes.submitIsClickable()
+        return gameGrid.remainingClueBoxes.submitIsClickable
     }
     
     func submitSelection() {
         if submitIsClickable() {
-            let selectedBoxes: [ClueBox] = self.gameGrid.remainingClueBoxes.getSelectedClueBoxes()
+            let selectedBoxes: [ClueBox] = self.gameGrid.remainingClueBoxes.selectedClueBoxes
             
             if self.allGuesses.selectionAlreadyGuessed(selectedBoxIDs: getClueBoxIDs(clueBoxes: selectedBoxes)) {
                 self.handleAlreadyGuessed()

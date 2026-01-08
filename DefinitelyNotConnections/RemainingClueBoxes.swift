@@ -10,10 +10,21 @@ import Foundation
 @Observable
 class RemainingClueBoxes {
     var clueBoxes: [ClueBox]
+    var selectedClueBoxes: [ClueBox] {
+        self.clueBoxes.filter( {$0.isSelected} )
+    }
     
-    //var selectedClueBoxes: [ClueBox] {
-    //    self.clueBoxes.filter { $0.isSelected }
-    //}
+    var numSelectedClueBoxes: Int {
+        self.selectedClueBoxes.count
+    }
+    
+    var submitIsClickable: Bool {
+        self.numSelectedClueBoxes == 4
+    }
+    
+    var deselectAllIsClickable: Bool {
+        self.numSelectedClueBoxes > 0
+    }
     
     init(clueBoxes: [ClueBox]) {
         self.clueBoxes = clueBoxes
@@ -22,7 +33,7 @@ class RemainingClueBoxes {
     }
 
     func clickClueBox(clueBox: ClueBox) {
-        if (getNumSelectedClueBoxes() < 4 || clueBox.isSelected) {
+        if (numSelectedClueBoxes < 4 || clueBox.isSelected) {
             clueBox.click()
         }
     }
@@ -31,24 +42,8 @@ class RemainingClueBoxes {
         return self.clueBoxes
     }
     
-    func getSelectedClueBoxes() -> [ClueBox] {
-        return self.clueBoxes.filter { $0.isSelected }
-    }
-    
-    func getNumSelectedClueBoxes() -> Int {
-        return getSelectedClueBoxes().count
-    }
-    
-    func submitIsClickable() -> Bool {
-        return getNumSelectedClueBoxes() == 4
-    }
-    
     func shuffleClueBoxes() {
         self.clueBoxes.shuffle()
-    }
-    
-    func deselectAllIsClickable() -> Bool {
-        return getNumSelectedClueBoxes() > 0
     }
     
     func deselectAllClueBoxes() {

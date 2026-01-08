@@ -39,9 +39,5 @@ class ConnectionsGameModel {
     
     // ClueBoxes
     
-    func getNumSelectedClueBoxes() -> Int {
-        return self.mainGame.gameGrid.remainingClueBoxes.getNumSelectedClueBoxes()
-    }
-    
     // Categories
 }
