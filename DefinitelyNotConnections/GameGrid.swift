@@ -25,8 +25,12 @@ class GameGrid {
         self.remainingClueBoxes = remainingClueBoxes
     }
     
+    func getNextCompletedCategoryOrder() -> Int {
+        return self.completedCategories.count
+    }
+    
     func completeCategory(category: Category) {
-        category.orderCompleted = self.completedCategories.count
+        category.orderCompleted = getNextCompletedCategoryOrder()
     }
     
     func getCompletedCategories() -> [Category] {
