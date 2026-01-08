@@ -11,7 +11,7 @@ import Foundation
 class MainGame {
     let allCategories: [Category]
     var gamePhase: GamePhase
-    var gameGrid: GameGrid
+    let gameGrid: GameGrid
     var allGuesses: AllGuesses
     var popup: Popup
     let mistakes: Mistakes
