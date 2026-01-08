@@ -14,12 +14,10 @@ class MainGame {
     var gameGrid: GameGrid
     var allGuesses: AllGuesses
     var popup: Popup
-    var numMistakesRemaining: Int {
-        didSet {
-            self.noMistakesLeft = self.numMistakesRemaining == 0
-        }
+    var numMistakesRemaining: Int
+    var noMistakesLeft: Bool {
+        self.numMistakesRemaining == 0
     }
-    var noMistakesLeft: Bool = false
     
     init(categories: [Category]) {
         self.allCategories = categories
