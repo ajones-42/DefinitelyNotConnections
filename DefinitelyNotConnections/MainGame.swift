@@ -13,7 +13,7 @@ class MainGame {
     var gamePhase: GamePhase
     let gameGrid: GameGrid
     let allGuesses: AllGuesses
-    let popup: Popup
+    var popup: Popup
     let mistakes: Mistakes
     
     init(categories: [Category]) {
@@ -46,6 +46,13 @@ class MainGame {
         self.gamePhase = .admiring
     }
     
+    func activatePopupMomentarily(message: String, duration: TimeInterval) {
+        self.popup = Popup(message: message, isPresented: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+            self.popup = Popup()
+        }
+    }
+    
     private func handleCorrectGuess(guess: Guess) {
         self.gameGrid.completeCategory(category: self.allCategories[guess.correctCategoryID!])
         self.gameGrid.remainingClueBoxes.removeSelectedClueBoxes()
@@ -58,12 +65,12 @@ class MainGame {
         self.gameGrid.remainingClueBoxes.shakeSelectedBoxes()
         self.mistakes.madeMistake()
         if guess.oneAway {
-            self.popup.activateOneAway()
+            activatePopupMomentarily(message: "One Away!", duration: 2)
         }
     }
     
     private func handleAlreadyGuessed() {
-        self.popup.activateAlreadyGuessed()
+        activatePopupMomentarily(message: "Already guessed!", duration: 2)
     }
     
     public func submitIsClickable() -> Bool {

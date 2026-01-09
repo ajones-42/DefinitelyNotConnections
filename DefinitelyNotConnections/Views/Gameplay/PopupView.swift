@@ -15,7 +15,7 @@ struct PopupView: View {
             RoundedRectangle(cornerRadius: 10)
                 .foregroundStyle(.foreground)
                 .frame(width: 150, height: 70)
-            Text(popup.text)
+            Text(popup.message)
                 .foregroundStyle(.background)
         }
         .opacity(popup.isPresented ? 1 : 0)
