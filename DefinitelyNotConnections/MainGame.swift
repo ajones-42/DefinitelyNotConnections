@@ -13,7 +13,7 @@ class MainGame {
     var gamePhase: GamePhase
     let gameGrid: GameGrid
     let allGuesses: AllGuesses
-    var popup: Popup
+    var popup: Popup?
     let mistakes: Mistakes
     
     init(categories: [Category]) {
@@ -21,7 +21,7 @@ class MainGame {
         self.gamePhase = .setup
         self.gameGrid = GameGrid(categories: self.allCategories)
         self.allGuesses = AllGuesses()
-        self.popup = Popup()
+        self.popup = nil
         self.mistakes = Mistakes()
     }
     
@@ -47,9 +47,9 @@ class MainGame {
     }
     
     func activatePopupMomentarily(message: String, duration: TimeInterval) {
-        self.popup = Popup(message: message, isPresented: true)
+        self.popup = Popup(message: message)
         DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
-            self.popup = Popup()
+            self.popup = nil
         }
     }
     

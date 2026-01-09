@@ -9,15 +9,4 @@ import Foundation
 
 struct Popup {
     let message: String
-    let isPresented: Bool
-    
-    init(message: String, isPresented: Bool) {
-        self.message = message
-        self.isPresented = isPresented
-    }
-    
-    init() {
-        self.message = ""
-        self.isPresented = false
-    }
 }
