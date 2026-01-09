@@ -8,28 +8,13 @@
 import Foundation
 
 
-@Observable
-class Mistakes {
-    var initialNumMistakesRemaining: Int
-    var numMistakesRemaining: Int
-    var noMistakesLeft: Bool {
+struct Mistakes {
+    let numMistakesRemaining: Int
+    var outOfMistakes: Bool {
         self.numMistakesRemaining == 0
     }
     
-    init(initialNumMistakesRemaining: Int = 4) {
-        self.initialNumMistakesRemaining = initialNumMistakesRemaining
-        self.numMistakesRemaining = initialNumMistakesRemaining
-    }
-    
-    func reset() {
-        self.numMistakesRemaining = self.initialNumMistakesRemaining
-    }
-    
-    func getNumMistakesRemaining() -> Int {
-        return self.numMistakesRemaining
-    }
-    
-    func madeMistake() {
-        self.numMistakesRemaining -= 1
+    func madeMistake() -> Mistakes {
+        return Mistakes(numMistakesRemaining: self.numMistakesRemaining - 1)
     }
 }

@@ -9,27 +9,29 @@ import Foundation
 
 @Observable
 class MainGame {
+    let gameProperties: GameProperties
     let allCategories: [Category]
     var gamePhase: GamePhase
     let gameGrid: GameGrid
     let allGuesses: AllGuesses
     var popup: Popup?
-    let mistakes: Mistakes
+    var mistakes: Mistakes
     
-    init(categories: [Category]) {
+    init(gameProperties: GameProperties, categories: [Category]) {
+        self.gameProperties = gameProperties
         self.allCategories = categories
         self.gamePhase = .setup
-        self.gameGrid = GameGrid(categories: self.allCategories)
+        self.gameGrid = GameGrid(categories: categories)
         self.allGuesses = AllGuesses()
         self.popup = nil
-        self.mistakes = Mistakes()
+        self.mistakes = Mistakes(numMistakesRemaining: gameProperties.numMistakes)
     }
     
     public func resetGame() {
         self.gamePhase = .setup
         self.gameGrid.reset()
         self.allGuesses.reset()
-        self.mistakes.reset()
+        resetMistakesRemaining()
     }
     
     // GamePhase
@@ -46,7 +48,15 @@ class MainGame {
         self.gamePhase = .admiring
     }
     
-    func activatePopupMomentarily(message: String, duration: TimeInterval) {
+    public func getOutOfMistakes() -> Bool {
+        return self.mistakes.outOfMistakes
+    }
+    
+    public func resetMistakesRemaining() {
+        self.mistakes = Mistakes(numMistakesRemaining: gameProperties.numMistakes)
+    }
+    
+    private func activatePopupMomentarily(message: String, duration: TimeInterval) {
         self.popup = Popup(message: message)
         DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
             self.popup = nil
@@ -63,7 +73,7 @@ class MainGame {
     
     private func handleIncorrectGuess(guess: Guess) {
         self.gameGrid.remainingClueBoxes.shakeSelectedBoxes()
-        self.mistakes.madeMistake()
+        self.mistakes = self.mistakes.madeMistake()
         if guess.oneAway {
             activatePopupMomentarily(message: "One Away!", duration: 2)
         }
