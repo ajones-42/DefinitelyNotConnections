@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct ShuffleButtonView: View {
-    let remainingClueBoxes: RemainingClueBoxes
+    @Environment(MainGame.self) private var mainGame: MainGame
     
     var body: some View {
         Button {
-            //remainingClueBoxes.shuffleClueBoxes()
+            mainGame.shuffleClueBoxes()
         } label: {
             GameplayButtonView(text: "Shuffle", isClickable: true)
         }

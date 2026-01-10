@@ -70,15 +70,19 @@ class MainGame {
         }
     }
     
-    func clickClueBox(clueBox: ClueBox) {
+    public func clickClueBox(clueBox: ClueBox) {
         self.gameGrid = self.gameGrid.clickClueBox(clueBox: clueBox)
     }
     
-    func getSortedCompletedCategories() -> [Category] {
+    public func shuffleClueBoxes() {
+        self.gameGrid = self.gameGrid.shuffleClueBoxes()
+    }
+    
+    public func getSortedCompletedCategories() -> [Category] {
         return self.gameGrid.sortedCompletedCategories
     }
     
-    func completeCategory(category: Category) {
+    private func completeCategory(category: Category) {
         self.gameGrid = self.gameGrid.completeCategory(category: category)
     }
     
