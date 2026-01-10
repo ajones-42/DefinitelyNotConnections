@@ -14,7 +14,7 @@ struct AdmiringPuzzleScreen: View {
         VStack {
             HStack {
                 Spacer()
-                GuessesButtonView()
+                GuessesButtonView(allGuesses: mainGame.allGuesses)
             }
             Spacer()
             Text("Obvio!")

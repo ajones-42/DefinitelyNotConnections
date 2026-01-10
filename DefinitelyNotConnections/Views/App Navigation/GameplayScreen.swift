@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct GameplayScreen: View {
+    @Environment(MainGame.self) private var mainGame: MainGame
 
     var body: some View {
         VStack {
             HStack {
                 Spacer()
-                GuessesButtonView()
+                GuessesButtonView(allGuesses: mainGame.allGuesses)
             }
             Spacer()
             MainGameView()
