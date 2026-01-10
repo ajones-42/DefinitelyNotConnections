@@ -63,7 +63,7 @@ struct RemainingClueBoxes {
     }
     
     func deselectAllClueBoxes() -> RemainingClueBoxes {
-        var newClueBoxes: [ClueBox] = self.clueBoxes
+        var newClueBoxes: [ClueBox] = []
         self.clueBoxes.forEach { clueBox in
             newClueBoxes.append(clueBox.isSelected ? clueBox.deselect() : clueBox)
         }
