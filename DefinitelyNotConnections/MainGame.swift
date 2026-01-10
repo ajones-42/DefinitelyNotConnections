@@ -13,7 +13,7 @@ class MainGame {
     let allCategories: [Category]
     var gamePhase: GamePhase
     var gameGrid: GameGrid
-    let allGuesses: AllGuesses
+    var allGuesses: AllGuesses
     var popup: Popup?
     var mistakes: Mistakes
     
@@ -22,7 +22,7 @@ class MainGame {
         self.allCategories = categories
         self.gamePhase = .setup
         self.gameGrid = GameGrid(categories: categories)
-        self.allGuesses = AllGuesses()
+        self.allGuesses = AllGuesses(guesses: [])
         self.popup = nil
         self.mistakes = Mistakes(numMistakesRemaining: gameProperties.numMistakes)
     }
@@ -30,7 +30,7 @@ class MainGame {
     public func resetGame() {
         self.gamePhase = .setup
         self.gameGrid = self.gameGrid.reset()
-        self.allGuesses.reset()
+        self.allGuesses = self.allGuesses.reset()
         resetMistakesRemaining()
     }
     
@@ -50,6 +50,10 @@ class MainGame {
     
     public func getOutOfMistakes() -> Bool {
         return self.mistakes.outOfMistakes
+    }
+    
+    public func getGuesses() -> [Guess] {
+        return self.allGuesses.getGuesses()
     }
     
     public func resetMistakesRemaining() {
@@ -126,7 +130,7 @@ class MainGame {
                 handleAlreadyGuessed()
             } else {
                 let guess: Guess = Guess(allCategories: self.allCategories, selectedBoxes: selectedBoxes, id: self.allGuesses.getNextGuessID())
-                self.allGuesses.addGuess(guess: guess)
+                self.allGuesses = self.allGuesses.addGuess(guess: guess)
                 
                 if guess.isCorrect() {
                     handleCorrectGuess(guess: guess)

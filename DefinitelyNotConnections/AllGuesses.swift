@@ -7,16 +7,11 @@
 
 import Foundation
 
-@Observable
-class AllGuesses {
-    var guesses: [Guess]
+struct AllGuesses {
+    let guesses: [Guess]
     
-    init() {
-        self.guesses = []
-    }
-    
-    func reset() {
-        self.guesses = []
+    func reset() -> AllGuesses {
+        return AllGuesses(guesses: [])
     }
 
     func getGuesses() -> [Guess] {
@@ -27,8 +22,10 @@ class AllGuesses {
         return self.guesses.count
     }
     
-    func addGuess(guess: Guess) {
-        self.guesses.append(guess)
+    func addGuess(guess: Guess) -> AllGuesses {
+        var newGuesses: [Guess] = self.guesses
+        newGuesses.append(guess)
+        return AllGuesses(guesses: newGuesses)
     }
     
     func selectionAlreadyGuessed(selectedBoxIDs: [Int]) -> Bool {
