@@ -63,6 +63,13 @@ class MainGame {
         }
     }
     
+    private func shakeSelectedBoxesMomentarily(duration: TimeInterval) {
+        self.gameGrid = self.gameGrid.startShakingSelectedBoxes()
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+            self.gameGrid = self.gameGrid.stopShakingSelectedBoxes()
+        }
+    }
+    
     func clickClueBox(clueBox: ClueBox) {
         self.gameGrid = self.gameGrid.clickClueBox(clueBox: clueBox)
     }
@@ -84,7 +91,7 @@ class MainGame {
     }
     
     private func handleIncorrectGuess(guess: Guess) {
-        //self.gameGrid.remainingClueBoxes.shakeSelectedBoxes()
+        shakeSelectedBoxesMomentarily(duration: 0.1)
         self.mistakes = self.mistakes.madeMistake()
         if guess.oneAway {
             activatePopupMomentarily(message: "One Away!", duration: 2)

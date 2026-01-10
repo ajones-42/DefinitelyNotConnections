@@ -60,6 +60,14 @@ struct GameGrid {
         return GameGrid(allCategories: self.allCategories, remainingClueBoxes: self.remainingClueBoxes.clickClueBox(clueBox: clueBox))
     }
     
+    func startShakingSelectedBoxes() -> GameGrid {
+        return GameGrid(allCategories: self.allCategories, remainingClueBoxes: self.remainingClueBoxes.startShakingSelectedBoxes())
+    }
+    
+    func stopShakingSelectedBoxes() -> GameGrid {
+        return GameGrid(allCategories: self.allCategories, remainingClueBoxes: self.remainingClueBoxes.stopShakingSelectedBoxes())
+    }
+    
     //func removeSelectedClueBoxes() -> GameGrid {
         //return GameGrid(allCategories: self.allCategories, remainingClueBoxes: self.remainingClueBoxes.removeSelectedClueBoxes())
     //}

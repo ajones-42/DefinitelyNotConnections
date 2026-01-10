@@ -32,9 +32,9 @@ struct RemainingClueBoxes {
         //deselectAllClueBoxes()
     }
     
-    func updateSingleClueBox(clueBoxID: Int, newClueBox: ClueBox) -> [ClueBox] {
-        if let clueBoxIndex = self.clueBoxes.firstIndex(where: {$0.id == clueBoxID}) {
-            var newClueBoxes: [ClueBox] = self.clueBoxes
+    private func updateSingleClueBox(clueBoxes: [ClueBox], clueBoxID: Int, newClueBox: ClueBox) -> [ClueBox] {
+        if let clueBoxIndex = clueBoxes.firstIndex(where: {$0.id == clueBoxID}) {
+            var newClueBoxes: [ClueBox] = clueBoxes
             newClueBoxes[clueBoxIndex] = newClueBox
             return newClueBoxes
         } else {
@@ -44,7 +44,7 @@ struct RemainingClueBoxes {
 
     func clickClueBox(clueBox: ClueBox) -> RemainingClueBoxes {
         if (self.numSelectedClueBoxes < 4 || clueBox.isSelected) {
-            let newClueBoxes: [ClueBox] = updateSingleClueBox(clueBoxID: clueBox.id, newClueBox: clueBox.click())
+            let newClueBoxes: [ClueBox] = updateSingleClueBox(clueBoxes: self.clueBoxes, clueBoxID: clueBox.id, newClueBox: clueBox.click())
             return RemainingClueBoxes(clueBoxes: newClueBoxes)
         } else {
             return self
@@ -59,8 +59,26 @@ struct RemainingClueBoxes {
     
     func deselectAllClueBoxes() -> RemainingClueBoxes {
         var newClueBoxes: [ClueBox] = self.clueBoxes
-        for clueBox in self.clueBoxes {
+        self.clueBoxes.forEach { clueBox in
             newClueBoxes.append(clueBox.isSelected ? clueBox.deselect() : clueBox)
+        }
+        return RemainingClueBoxes(clueBoxes: newClueBoxes)
+    }
+    
+    func startShakingSelectedBoxes() -> RemainingClueBoxes {
+        //TODO make this more efficient
+        var newClueBoxes: [ClueBox] = self.clueBoxes
+        self.selectedClueBoxes.forEach { clueBox in
+            newClueBoxes = updateSingleClueBox(clueBoxes: newClueBoxes, clueBoxID: clueBox.id, newClueBox: clueBox.startShake())
+        }
+        return RemainingClueBoxes(clueBoxes: newClueBoxes)
+    }
+    
+    func stopShakingSelectedBoxes() -> RemainingClueBoxes {
+        //TODO make this more efficient
+        var newClueBoxes: [ClueBox] = self.clueBoxes
+        self.selectedClueBoxes.forEach { clueBox in
+            newClueBoxes = updateSingleClueBox(clueBoxes: newClueBoxes, clueBoxID: clueBox.id, newClueBox: clueBox.stopShake())
         }
         return RemainingClueBoxes(clueBoxes: newClueBoxes)
     }
