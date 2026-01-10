@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CompletedCategoryView: View {
-    var category: Category
+    let category: Category
     let rectangleWidth: CGFloat = 360
 
     var body: some View {

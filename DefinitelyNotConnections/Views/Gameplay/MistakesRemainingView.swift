@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MistakesRemainingView: View {
-    var mistakes: Mistakes
+    let mistakes: Mistakes
     
     var body: some View {
         let shape = Circle().frame(width: 15).foregroundStyle(.foreground)

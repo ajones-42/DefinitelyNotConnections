@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct DeselectAllButtonView: View {
-    var remainingClueBoxes: RemainingClueBoxes
+    let remainingClueBoxes: RemainingClueBoxes
     
     var body: some View {
         Button {
-            remainingClueBoxes.deselectAllClueBoxes()
+            //remainingClueBoxes.deselectAllClueBoxes()
         } label: {
             GameplayButtonView(text: "Deselect All", isClickable: remainingClueBoxes.deselectAllIsClickable)
         }

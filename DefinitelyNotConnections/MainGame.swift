@@ -12,7 +12,7 @@ class MainGame {
     let gameProperties: GameProperties
     let allCategories: [Category]
     var gamePhase: GamePhase
-    let gameGrid: GameGrid
+    var gameGrid: GameGrid
     let allGuesses: AllGuesses
     var popup: Popup?
     var mistakes: Mistakes
@@ -29,7 +29,7 @@ class MainGame {
     
     public func resetGame() {
         self.gamePhase = .setup
-        self.gameGrid.reset()
+        self.gameGrid = self.gameGrid.reset()
         self.allGuesses.reset()
         resetMistakesRemaining()
     }
@@ -63,16 +63,28 @@ class MainGame {
         }
     }
     
+    func clickClueBox(clueBox: ClueBox) {
+        self.gameGrid = self.gameGrid.clickClueBox(clueBox: clueBox)
+    }
+    
+    func getSortedCompletedCategories() -> [Category] {
+        return self.gameGrid.sortedCompletedCategories
+    }
+    
+    func completeCategory(category: Category) {
+        self.gameGrid = self.gameGrid.completeCategory(category: category)
+    }
+    
     private func handleCorrectGuess(guess: Guess) {
-        self.gameGrid.completeCategory(category: self.allCategories[guess.correctCategoryID!])
-        self.gameGrid.remainingClueBoxes.removeSelectedClueBoxes()
+        self.gameGrid = self.gameGrid.completeCategory(category: self.allCategories[guess.correctCategoryID!])
+        //self.gameGrid.removeSelectedClueBoxes()
         if self.gameGrid.numCompletedCategories == 4 {
             admirePuzzle()
         }
     }
     
     private func handleIncorrectGuess(guess: Guess) {
-        self.gameGrid.remainingClueBoxes.shakeSelectedBoxes()
+        //self.gameGrid.remainingClueBoxes.shakeSelectedBoxes()
         self.mistakes = self.mistakes.madeMistake()
         if guess.oneAway {
             activatePopupMomentarily(message: "One Away!", duration: 2)

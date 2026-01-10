@@ -7,11 +7,10 @@
 
 import Foundation
 
-@Observable
-class ClueBox: Identifiable, Equatable {
+struct ClueBox: Identifiable, Equatable {
     let text: String
-    var isSelected: Bool
-    var shake: Bool
+    let isSelected: Bool
+    let shake: Bool
     let id: Int
     
     init(text: String, isSelected: Bool, shake: Bool, id: Int) {
@@ -21,15 +20,31 @@ class ClueBox: Identifiable, Equatable {
         self.id = id
     }
     
-    convenience init(text: String, id: Int) {
+    init(text: String, id: Int) {
         self.init(text: text, isSelected: false, shake: false, id: id)
     }
     
-    static func ==(lhs: ClueBox, rhs: ClueBox) -> Bool {
-        return lhs.id == rhs.id && lhs.text == rhs.text
+    //static func ==(lhs: ClueBox, rhs: ClueBox) -> Bool {
+    //    return lhs.id == rhs.id && lhs.text == rhs.text
+    //}
+    
+    func click() -> ClueBox {
+        return ClueBox(text: self.text, isSelected: !self.isSelected, shake: self.shake, id: self.id)
     }
     
-    func click() {
+    func deselect() -> ClueBox {
+        return ClueBox(text: self.text, isSelected: false, shake: self.shake, id: self.id)
+    }
+    
+    func startShake() -> ClueBox {
+        return ClueBox(text: self.text, isSelected: self.isSelected, shake: true, id: self.id)
+    }
+    
+    func stopShake() -> ClueBox {
+        return ClueBox(text: self.text, isSelected: self.isSelected, shake: false, id: self.id)
+    }
+    
+    /*func click() {
         self.isSelected.toggle()
     }
     
@@ -43,5 +58,5 @@ class ClueBox: Identifiable, Equatable {
     
     func stopShake() {
         self.shake = false
-    }
+    }*/
 }

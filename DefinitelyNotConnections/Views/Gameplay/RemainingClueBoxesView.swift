@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct RemainingClueBoxesView: View {
-    var remainingClueBoxes: RemainingClueBoxes
+    //var remainingClueBoxes: RemainingClueBoxes
+    @Environment(MainGame.self) private var mainGame: MainGame
 
     var body: some View {
         LazyVGrid(columns: [GridItem(), GridItem(), GridItem(), GridItem()]) {
-            ForEach(remainingClueBoxes.clueBoxes) { clueBox in
+            ForEach(mainGame.gameGrid.remainingClueBoxes.clueBoxes) { clueBox in
                 ClueBoxView(clueBox: clueBox)
                     .onTapGesture {
-                        remainingClueBoxes.clickClueBox(clueBox: clueBox)
+                        mainGame.clickClueBox(clueBox: clueBox)
                     }
             }
         }

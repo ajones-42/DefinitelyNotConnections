@@ -7,9 +7,8 @@
 
 import Foundation
 
-@Observable
-class RemainingClueBoxes {
-    var clueBoxes: [ClueBox]
+struct RemainingClueBoxes {
+    let clueBoxes: [ClueBox]
     var selectedClueBoxes: [ClueBox] {
         self.clueBoxes.filter( {$0.isSelected} )
     }
@@ -29,38 +28,57 @@ class RemainingClueBoxes {
     
     init(clueBoxes: [ClueBox]) {
         self.clueBoxes = clueBoxes
-        shuffleClueBoxes()
-        deselectAllClueBoxes()
+        //shuffleClueBoxes()
+        //deselectAllClueBoxes()
+    }
+    
+    func updateSingleClueBox(clueBoxID: Int, newClueBox: ClueBox) -> [ClueBox] {
+        if let clueBoxIndex = self.clueBoxes.firstIndex(where: {$0.id == clueBoxID}) {
+            var newClueBoxes: [ClueBox] = self.clueBoxes
+            newClueBoxes[clueBoxIndex] = newClueBox
+            return newClueBoxes
+        } else {
+            return self.clueBoxes
+        }
     }
 
-    func clickClueBox(clueBox: ClueBox) {
+    func clickClueBox(clueBox: ClueBox) -> RemainingClueBoxes {
         if (self.numSelectedClueBoxes < 4 || clueBox.isSelected) {
-            clueBox.click()
+            let newClueBoxes: [ClueBox] = updateSingleClueBox(clueBoxID: clueBox.id, newClueBox: clueBox.click())
+            return RemainingClueBoxes(clueBoxes: newClueBoxes)
+        } else {
+            return self
         }
     }
     
-    func shuffleClueBoxes() {
-        self.clueBoxes.shuffle()
+    func shuffleClueBoxes() -> RemainingClueBoxes {
+        var newClueBoxes: [ClueBox] = self.clueBoxes
+        newClueBoxes.shuffle()
+        return RemainingClueBoxes(clueBoxes: newClueBoxes)
     }
     
-    func deselectAllClueBoxes() {
+    func deselectAllClueBoxes() -> RemainingClueBoxes {
+        var newClueBoxes: [ClueBox] = self.clueBoxes
         for clueBox in self.clueBoxes {
-            clueBox.deselect()
+            newClueBoxes.append(clueBox.isSelected ? clueBox.deselect() : clueBox)
         }
+        return RemainingClueBoxes(clueBoxes: newClueBoxes)
     }
     
-    func shakeSelectedBoxes() {
-        self.selectedClueBoxes.forEach { box in
-            box.startShake()
+    /*func shakeSelectedBoxes() {
+        self.selectedClueBoxes.forEach { clueBox in
+            updateClueBoxInPlace(clueBoxID: clueBox.id, newClueBox: clueBox.startShake())
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            self.selectedClueBoxes.forEach { box in
-                box.stopShake()
+            self.selectedClueBoxes.forEach { clueBox in
+                self.updateClueBoxInPlace(clueBoxID: clueBox.id, newClueBox: clueBox.stopShake())
             }
         }
-    }
+    }*/
     
-    func removeSelectedClueBoxes() {
-        self.clueBoxes.removeAll(where: { $0.isSelected })
+    func removeSelectedClueBoxes() -> RemainingClueBoxes {
+        var newClueBoxes: [ClueBox] = self.clueBoxes
+        newClueBoxes.removeAll(where: { $0.isSelected })
+        return RemainingClueBoxes(clueBoxes: newClueBoxes)
     }
 }

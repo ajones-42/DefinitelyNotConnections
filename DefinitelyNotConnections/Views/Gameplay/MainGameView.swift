@@ -17,7 +17,7 @@ struct MainGameView: View {
                 .foregroundStyle(.foreground)
             GameGridView()
                 .padding(.horizontal)
-                .environment(mainGame.gameGrid)
+                //.environment(mainGame.gameGrid)
                 .overlay(OutOfMistakesAlertView())
             MistakesRemainingView(mistakes: mainGame.mistakes)
             HStack {

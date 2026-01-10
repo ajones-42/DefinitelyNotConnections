@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PopupView: View {
-    var popup: Popup?
+    let popup: Popup?
 
     var body: some View {
         let popupBox = RoundedRectangle(cornerRadius: 10)

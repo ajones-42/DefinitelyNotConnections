@@ -8,16 +8,16 @@
 import Foundation
 import SwiftUI
 
-@Observable
-class Category: Identifiable {
+struct Category: Identifiable {
     let name: String
     let clueBoxes: [ClueBox]
     let colour: Color
     let id: Int
-    var orderCompleted: Int?
+    let orderCompleted: Int?
     
     init(name: String, clueBoxTexts: [String], colour: Color, id: Int, orderCompleted: Int? = nil) {
         self.name = name
+        // TODO remove this?
         self.clueBoxes = Category.createClueBoxes(clueBoxTexts: clueBoxTexts, offset: id)
         self.colour = colour
         self.id = id

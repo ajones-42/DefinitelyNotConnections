@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct CompletedCategoriesView: View {
-    @Environment(GameGrid.self) private var gameGrid: GameGrid
+    @Environment(MainGame.self) private var mainGame: MainGame
 
     var body: some View {
-        ForEach(gameGrid.sortedCompletedCategories) { category in
+        ForEach(mainGame.getSortedCompletedCategories()) { category in
             CompletedCategoryView(category: category)
         }
     }
