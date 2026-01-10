@@ -26,10 +26,17 @@ struct RemainingClueBoxes {
     }
 
     
+    init(clueBoxes: [ClueBox], shuffled: Bool) {
+        if shuffled {
+            self.clueBoxes = clueBoxes.shuffled()
+        } else {
+            self.clueBoxes = clueBoxes
+        }
+        //deselectAllClueBoxes()
+    }
+    
     init(clueBoxes: [ClueBox]) {
         self.clueBoxes = clueBoxes
-        //shuffleClueBoxes()
-        //deselectAllClueBoxes()
     }
     
     private func updateSingleClueBox(clueBoxes: [ClueBox], clueBoxID: Int, newClueBox: ClueBox) -> [ClueBox] {
@@ -52,9 +59,7 @@ struct RemainingClueBoxes {
     }
     
     func shuffleClueBoxes() -> RemainingClueBoxes {
-        var newClueBoxes: [ClueBox] = self.clueBoxes
-        newClueBoxes.shuffle()
-        return RemainingClueBoxes(clueBoxes: newClueBoxes)
+        return RemainingClueBoxes(clueBoxes: self.clueBoxes, shuffled: true)
     }
     
     func deselectAllClueBoxes() -> RemainingClueBoxes {
@@ -82,17 +87,6 @@ struct RemainingClueBoxes {
         }
         return RemainingClueBoxes(clueBoxes: newClueBoxes)
     }
-    
-    /*func shakeSelectedBoxes() {
-        self.selectedClueBoxes.forEach { clueBox in
-            updateClueBoxInPlace(clueBoxID: clueBox.id, newClueBox: clueBox.startShake())
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            self.selectedClueBoxes.forEach { clueBox in
-                self.updateClueBoxInPlace(clueBoxID: clueBox.id, newClueBox: clueBox.stopShake())
-            }
-        }
-    }*/
     
     func removeSelectedClueBoxes() -> RemainingClueBoxes {
         var newClueBoxes: [ClueBox] = self.clueBoxes

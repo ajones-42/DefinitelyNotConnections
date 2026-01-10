@@ -20,7 +20,7 @@ struct GameGrid {
     
     init(categories: [Category]) {
         self.allCategories = categories
-        self.remainingClueBoxes = RemainingClueBoxes(clueBoxes: getAllClueBoxes(categories: self.allCategories))
+        self.remainingClueBoxes = RemainingClueBoxes(clueBoxes: getAllClueBoxes(categories: self.allCategories), shuffled: true)
     }
     
     init(allCategories: [Category], remainingClueBoxes: RemainingClueBoxes) {
