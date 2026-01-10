@@ -43,20 +43,4 @@ struct ClueBox: Identifiable, Equatable {
     func stopShake() -> ClueBox {
         return ClueBox(text: self.text, isSelected: self.isSelected, shake: false, id: self.id)
     }
-    
-    /*func click() {
-        self.isSelected.toggle()
-    }
-    
-    func deselect() {
-        self.isSelected = false
-    }
-    
-    func startShake() {
-        self.shake = true
-    }
-    
-    func stopShake() {
-        self.shake = false
-    }*/
 }
