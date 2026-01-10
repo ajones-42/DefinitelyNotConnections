@@ -110,6 +110,10 @@ class MainGame {
         activatePopupMomentarily(message: "Already guessed!", duration: 2)
     }
     
+    public func deselectAllIsClickable() -> Bool {
+        return gameGrid.remainingClueBoxes.deselectAllIsClickable
+    }
+    
     public func submitIsClickable() -> Bool {
         return gameGrid.remainingClueBoxes.submitIsClickable
     }
