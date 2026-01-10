@@ -20,7 +20,7 @@ struct GameGrid {
     
     init(categories: [Category]) {
         self.allCategories = categories
-        self.remainingClueBoxes = RemainingClueBoxes(clueBoxes: getAllClueBoxes(categories: self.allCategories), shuffled: true)
+        self.remainingClueBoxes = RemainingClueBoxes(allClueBoxes: getAllClueBoxes(categories: self.allCategories), shuffled: true)
     }
     
     init(allCategories: [Category], remainingClueBoxes: RemainingClueBoxes) {
@@ -39,11 +39,11 @@ struct GameGrid {
     }
     
     func reset() -> GameGrid {
-        var resetCategories: [Category] = self.allCategories
+        var resetCategories: [Category] = []
         self.allCategories.forEach { category in
             resetCategories.append(Category(name: category.name, clueBoxes: category.clueBoxes, colour: category.colour, id: category.id, orderCompleted: nil))
         }
-        return GameGrid(categories: resetCategories)
+        return GameGrid(allCategories: resetCategories, remainingClueBoxes: self.remainingClueBoxes.reset())
     }
     
     func completeCategory(category: Category) -> GameGrid {
