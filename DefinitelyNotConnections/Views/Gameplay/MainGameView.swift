@@ -15,7 +15,7 @@ struct MainGameView: View {
             PopupView(popup: mainGame.popup)
             Text("Create four groups of four!")
                 .foregroundStyle(.foreground)
-            GameGridView()
+            GameGridView(gameGrid: mainGame.gameGrid)
                 .padding(.horizontal)
                 .overlay(OutOfMistakesAlertView())
             MistakesRemainingView(mistakes: mainGame.mistakes)

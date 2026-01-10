@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct RemainingClueBoxesView: View {
-    //var remainingClueBoxes: RemainingClueBoxes
     @Environment(MainGame.self) private var mainGame: MainGame
 
     var body: some View {

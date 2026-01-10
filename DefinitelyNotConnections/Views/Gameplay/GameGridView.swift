@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct GameGridView: View {
+    var gameGrid: GameGrid
     
     var body: some View {
         VStack {
-            CompletedCategoriesView()
+            CompletedCategoriesView(gameGrid: gameGrid)
             RemainingClueBoxesView()
         }
     }

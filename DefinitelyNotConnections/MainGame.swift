@@ -82,10 +82,6 @@ class MainGame {
         self.gameGrid = self.gameGrid.deselectAllClueBoxes()
     }
     
-    public func getSortedCompletedCategories() -> [Category] {
-        return self.gameGrid.sortedCompletedCategories
-    }
-    
     private func completeCategory(category: Category) {
         self.gameGrid = self.gameGrid.completeCategory(category: category)
     }
