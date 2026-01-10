@@ -71,19 +71,17 @@ struct RemainingClueBoxes {
     }
     
     func startShakingSelectedBoxes() -> RemainingClueBoxes {
-        //TODO make this more efficient
-        var newClueBoxes: [ClueBox] = self.clueBoxes
-        self.selectedClueBoxes.forEach { clueBox in
-            newClueBoxes = updateSingleClueBox(clueBoxes: newClueBoxes, clueBoxID: clueBox.id, newClueBox: clueBox.startShake())
+        var newClueBoxes: [ClueBox] = []
+        self.clueBoxes.forEach { clueBox in
+            newClueBoxes.append(selectedClueBoxes.contains(clueBox) ? clueBox.startShake() : clueBox)
         }
         return RemainingClueBoxes(clueBoxes: newClueBoxes)
     }
     
     func stopShakingSelectedBoxes() -> RemainingClueBoxes {
-        //TODO make this more efficient
-        var newClueBoxes: [ClueBox] = self.clueBoxes
-        self.selectedClueBoxes.forEach { clueBox in
-            newClueBoxes = updateSingleClueBox(clueBoxes: newClueBoxes, clueBoxID: clueBox.id, newClueBox: clueBox.stopShake())
+        var newClueBoxes: [ClueBox] = []
+        self.clueBoxes.forEach { clueBox in
+            newClueBoxes.append(selectedClueBoxes.contains(clueBox) ? clueBox.stopShake() : clueBox)
         }
         return RemainingClueBoxes(clueBoxes: newClueBoxes)
     }
