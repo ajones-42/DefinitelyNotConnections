@@ -78,6 +78,10 @@ class MainGame {
         self.gameGrid = self.gameGrid.shuffleClueBoxes()
     }
     
+    public func deselectAllClueBoxes() {
+        self.gameGrid = self.gameGrid.deselectAllClueBoxes()
+    }
+    
     public func getSortedCompletedCategories() -> [Category] {
         return self.gameGrid.sortedCompletedCategories
     }

@@ -64,6 +64,10 @@ struct GameGrid {
         return GameGrid(allCategories: self.allCategories, remainingClueBoxes: self.remainingClueBoxes.shuffleClueBoxes())
     }
     
+    func deselectAllClueBoxes() -> GameGrid {
+        return GameGrid(allCategories: self.allCategories, remainingClueBoxes: self.remainingClueBoxes.deselectAllClueBoxes())
+    }
+    
     func startShakingSelectedBoxes() -> GameGrid {
         return GameGrid(allCategories: self.allCategories, remainingClueBoxes: self.remainingClueBoxes.startShakingSelectedBoxes())
     }
