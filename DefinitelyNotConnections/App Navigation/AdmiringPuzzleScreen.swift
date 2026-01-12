@@ -21,7 +21,7 @@ struct AdmiringPuzzleScreen: View {
                 .foregroundStyle(.foreground)
                 .font(.largeTitle)
                 .fontWeight(.heavy)
-            GameGridView(gameGrid: mainGame.gameGrid)
+            GameGridView()
                 .padding(.horizontal)
             Button {
                 mainGame.finishPlaying()

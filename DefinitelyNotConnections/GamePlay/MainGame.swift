@@ -88,7 +88,6 @@ class MainGame {
     
     private func handleCorrectGuess(guess: Guess) {
         self.gameGrid = self.gameGrid.completeCategory(category: self.allCategories[guess.correctCategoryID!])
-        //self.gameGrid.removeSelectedClueBoxes()
         if self.gameGrid.categories.numCompletedCategories == 4 {
             admirePuzzle()
         }
