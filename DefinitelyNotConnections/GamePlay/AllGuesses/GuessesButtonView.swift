@@ -21,7 +21,7 @@ struct GuessesButtonView: View {
                 .padding()
         }
         .sheet(isPresented: $guessesArePresented, onDismiss: {}) {
-            GuessesView(allGuesses: allGuesses, guessesArePresented: $guessesArePresented)
+            AllGuessesView(allGuesses: allGuesses, guessesArePresented: $guessesArePresented)
                 .presentationDetents([.fraction(0.4)])
         }
     }

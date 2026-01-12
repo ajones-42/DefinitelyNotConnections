@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct GuessesView: View {
+struct AllGuessesView: View {
     var allGuesses: AllGuesses
     @Binding var guessesArePresented: Bool
 

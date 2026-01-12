@@ -30,21 +30,19 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		FA8896DC2F01986E009D9995 /* Exceptions for "DefinitelyNotConnectionsTests" folder in "DefinitelyNotConnections" target */ = {
+		FA8898D92F157536009D9995 /* Exceptions for "DefinitelyNotConnections" folder in "DefinitelyNotConnections" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Builders/CategoryBuilder.swift,
-				Builders/ClueBoxBuilder.swift,
-				Builders/GuessBuilder.swift,
+				GamePlay/GameGrid/RemainingClueBoxes/ClueBox/ClueBoxTests.swift,
+				Utils/MiscFunctionsTests.swift,
 			);
 			target = FAD88C242DEDF61200CE86B6 /* DefinitelyNotConnections */;
 		};
-		FA8896DD2F01986E009D9995 /* Exceptions for "DefinitelyNotConnectionsTests" folder in "DefinitelyNotConnectionsTests" target */ = {
+		FA8898DA2F157536009D9995 /* Exceptions for "DefinitelyNotConnections" folder in "DefinitelyNotConnectionsTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Builders/CategoryBuilder.swift,
-				Builders/ClueBoxBuilder.swift,
-				Builders/GuessBuilder.swift,
+				GamePlay/GameGrid/RemainingClueBoxes/ClueBox/ClueBoxTests.swift,
+				Utils/MiscFunctionsTests.swift,
 			);
 			target = FAD88C312DEDF61500CE86B6 /* DefinitelyNotConnectionsTests */;
 		};
@@ -53,16 +51,11 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		FAD88C272DEDF61200CE86B6 /* DefinitelyNotConnections */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = DefinitelyNotConnections;
-			sourceTree = "<group>";
-		};
-		FAD88C352DEDF61500CE86B6 /* DefinitelyNotConnectionsTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				FA8896DC2F01986E009D9995 /* Exceptions for "DefinitelyNotConnectionsTests" folder in "DefinitelyNotConnections" target */,
-				FA8896DD2F01986E009D9995 /* Exceptions for "DefinitelyNotConnectionsTests" folder in "DefinitelyNotConnectionsTests" target */,
+				FA8898D92F157536009D9995 /* Exceptions for "DefinitelyNotConnections" folder in "DefinitelyNotConnections" target */,
+				FA8898DA2F157536009D9995 /* Exceptions for "DefinitelyNotConnections" folder in "DefinitelyNotConnectionsTests" target */,
 			);
-			path = DefinitelyNotConnectionsTests;
+			path = DefinitelyNotConnections;
 			sourceTree = "<group>";
 		};
 		FAD88C3F2DEDF61500CE86B6 /* DefinitelyNotConnectionsUITests */ = {
@@ -101,7 +94,6 @@
 			isa = PBXGroup;
 			children = (
 				FAD88C272DEDF61200CE86B6 /* DefinitelyNotConnections */,
-				FAD88C352DEDF61500CE86B6 /* DefinitelyNotConnectionsTests */,
 				FAD88C3F2DEDF61500CE86B6 /* DefinitelyNotConnectionsUITests */,
 				FAD88C262DEDF61200CE86B6 /* Products */,
 			);
@@ -154,9 +146,6 @@
 			);
 			dependencies = (
 				FAD88C342DEDF61500CE86B6 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				FAD88C352DEDF61500CE86B6 /* DefinitelyNotConnectionsTests */,
 			);
 			name = DefinitelyNotConnectionsTests;
 			packageProductDependencies = (
