@@ -39,4 +39,12 @@ struct Category: Identifiable {
         }
         return tmpClueBoxes
     }
+    
+    func complete(orderCompleted: Int) -> Category {
+        return Category(name: self.name, clueBoxes: self.clueBoxes, colour: self.colour, id: self.id, orderCompleted: orderCompleted)
+    }
+    
+    func reset() -> Category {
+        return Category(name: self.name, clueBoxes: self.clueBoxes, colour: self.colour, id: self.id, orderCompleted: nil)
+    }
 }
