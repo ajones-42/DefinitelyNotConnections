@@ -34,7 +34,6 @@ struct RemainingClueBoxes {
         } else {
             self.remainingClueBoxes = remainingClueBoxes
         }
-        //deselectAllClueBoxes()
     }
     
     init(allClueBoxes: [ClueBox], shuffled: Bool) {
@@ -44,18 +43,12 @@ struct RemainingClueBoxes {
         } else {
             self.remainingClueBoxes = allClueBoxes
         }
-        //deselectAllClueBoxes()
     }
     
     init(allClueBoxes: [ClueBox], remainingClueBoxes: [ClueBox]) {
         self.allClueBoxes = allClueBoxes
         self.remainingClueBoxes = remainingClueBoxes
     }
-    
-    /*init(allClueBoxes: [ClueBox]) {
-        self.allClueBoxes = allClueBoxes
-        self.remainingClueBoxes = allClueBoxes
-    }*/
     
     func reset() -> RemainingClueBoxes {
         return RemainingClueBoxes(allClueBoxes: self.allClueBoxes, shuffled: true)
