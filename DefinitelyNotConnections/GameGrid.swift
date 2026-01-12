@@ -47,7 +47,7 @@ struct GameGrid {
     }
     
     func completeCategory(category: Category) -> GameGrid {
-        let newCategories: [Category] = updateSingleCategory(categoryID: category.id, newCategory: Category(name: category.name, clueBoxes: category.clueBoxes, colour: category.colour, id: category.id, orderCompleted: getNextCompletedCategoryOrder()))
+        let newCategories: [Category] = self.allCategories.replaced(where: {$0.id == category.id}, withResultOf: {$0.complete(orderCompleted: getNextCompletedCategoryOrder())})
         let newRemainingClueBoxes: RemainingClueBoxes = self.remainingClueBoxes.removeSelectedClueBoxes()
         return GameGrid(allCategories: newCategories, remainingClueBoxes: newRemainingClueBoxes)
     }
@@ -75,27 +75,4 @@ struct GameGrid {
     func stopShakingSelectedBoxes() -> GameGrid {
         return GameGrid(allCategories: self.allCategories, remainingClueBoxes: self.remainingClueBoxes.stopShakingSelectedBoxes())
     }
-    
-    //func removeSelectedClueBoxes() -> GameGrid {
-        //return GameGrid(allCategories: self.allCategories, remainingClueBoxes: self.remainingClueBoxes.removeSelectedClueBoxes())
-    //}
-    
-    /*func reset() {
-        self.allCategories.forEach { category in
-            category.orderCompleted = nil
-        }
-        self.remainingClueBoxes = RemainingClueBoxes(clueBoxes: getAllClueBoxes(categories: self.allCategories))
-    }
-    
-    func completeCategory(category: Category) {
-        category.orderCompleted = getNextCompletedCategoryOrder()
-    }
-    
-    func clickClueBox(clueBox: ClueBox) {
-        self.remainingClueBoxes = self.remainingClueBoxes.clickClueBox(clueBox: clueBox)
-    }
-    
-    func removeSelectedClueBoxes() {
-        self.remainingClueBoxes = self.remainingClueBoxes.removeSelectedClueBoxes()
-    }*/
 }
