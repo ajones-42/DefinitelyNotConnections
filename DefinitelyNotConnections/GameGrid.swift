@@ -28,16 +28,6 @@ struct GameGrid {
         self.remainingClueBoxes = remainingClueBoxes
     }
     
-    private func updateSingleCategory(categoryID: Int, newCategory: Category) -> [Category] {
-        if let categoryIndex = self.allCategories.firstIndex(where: {$0.id == categoryID}) {
-            var newCategories: [Category] = self.allCategories
-            newCategories[categoryIndex] = newCategory
-            return newCategories
-        } else {
-            return self.allCategories
-        }
-    }
-    
     func reset() -> GameGrid {
         let resetCategories: [Category] = self.allCategories.replaced(where: {$0.isCompleted}, withResultOf: {$0.reset()})
         return GameGrid(allCategories: resetCategories, remainingClueBoxes: self.remainingClueBoxes.reset())
