@@ -14,6 +14,9 @@ struct Category: Identifiable {
     let colour: Color
     let id: Int
     let orderCompleted: Int?
+    var isCompleted: Bool {
+        return orderCompleted != nil
+    }
     
     init(name: String, clueBoxTexts: [String], colour: Color, id: Int, orderCompleted: Int? = nil) {
         self.name = name

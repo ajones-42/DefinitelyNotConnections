@@ -12,7 +12,7 @@ struct GameGrid {
     let remainingClueBoxes: RemainingClueBoxes
 
     var sortedCompletedCategories: [Category] {
-        self.allCategories.filter( {$0.orderCompleted != nil} ).sorted(by: categoriesCompletedInIncreasingOrder)
+        self.allCategories.filter( {$0.isCompleted} ).sorted(by: categoriesCompletedInIncreasingOrder)
     }
     var numCompletedCategories: Int {
         self.sortedCompletedCategories.count
@@ -39,10 +39,7 @@ struct GameGrid {
     }
     
     func reset() -> GameGrid {
-        var resetCategories: [Category] = []
-        self.allCategories.forEach { category in
-            resetCategories.append(Category(name: category.name, clueBoxes: category.clueBoxes, colour: category.colour, id: category.id, orderCompleted: nil))
-        }
+        let resetCategories: [Category] = self.allCategories.replaced(where: {$0.isCompleted}, withResultOf: {$0.reset()})
         return GameGrid(allCategories: resetCategories, remainingClueBoxes: self.remainingClueBoxes.reset())
     }
     
