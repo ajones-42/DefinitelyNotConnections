@@ -11,7 +11,7 @@ struct CompletedCategoriesView: View {
     var gameGrid: GameGrid
 
     var body: some View {
-        ForEach(gameGrid.sortedCompletedCategories) { category in
+        ForEach(gameGrid.categories.sortedCompletedCategories) { category in
             CompletedCategoryView(category: category)
         }
     }
