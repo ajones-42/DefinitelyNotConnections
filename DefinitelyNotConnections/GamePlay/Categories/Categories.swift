@@ -19,18 +19,16 @@ struct Categories {
         self.sortedCompletedCategories.count
     }
     
+    init(categoryInfos: [CategoryInfo]) {
+        self.allCategories = categoryInfos.enumerated().map{ (index, categoryInfo) in
+            Category(id: index, categoryInfo: categoryInfo)
+        }
+        self.remainingClueBoxes = RemainingClueBoxes(categoryInfos: categoryInfos, shuffled: true)
+    }
+    
     init(allCategories: [Category], remainingClueBoxes: RemainingClueBoxes) {
         self.allCategories = allCategories
         self.remainingClueBoxes = remainingClueBoxes
-    }
-    
-    init(categoryInfos: [CategoryInfo]) {
-        var categories: [Category] = []
-        for (index, categoryInfo) in categoryInfos.enumerated() {
-            categories.append(Category(id: index, categoryInfo: categoryInfo))
-        }
-        self.allCategories = categories
-        self.remainingClueBoxes = RemainingClueBoxes(categoryInfos: categoryInfos, shuffled: true)
     }
     
     func reset() -> Categories {
