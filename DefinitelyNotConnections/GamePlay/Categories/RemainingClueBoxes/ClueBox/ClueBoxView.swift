@@ -14,7 +14,7 @@ struct ClueBoxView: View {
     var body: some View {
         ZStack {
             let shape = RoundedRectangle(cornerRadius: 20).aspectRatio(1, contentMode: .fit).frame(width: boxWidth, height: 80)
-            let text = Text(clueBox.text).font(.system(size: 13, weight: .bold, design: .rounded)).frame(maxWidth: boxWidth - 3)
+            let text = Text(clueBox.clue).font(.system(size: 13, weight: .bold, design: .rounded)).frame(maxWidth: boxWidth - 3)
             if clueBox.isSelected {
                 shape.foregroundStyle(.gray)
                 text.foregroundStyle(.black)

@@ -8,12 +8,12 @@
 import Foundation
 
 class ClueBoxBuilder {
-    var text: String = "A clue!"
+    var clue: String = "A clue!"
     var isSelected: Bool = false
     var shake: Bool = false
 
-    func withText(text: String) -> ClueBoxBuilder {
-        self.text = text
+    func withClue(clue: String) -> ClueBoxBuilder {
+        self.clue = clue
         return self
     }
 
@@ -28,6 +28,6 @@ class ClueBoxBuilder {
     }
 
     func build() -> ClueBox {
-        return ClueBox(text: self.text, isSelected: self.isSelected, shake: self.shake)
+        return ClueBox(clue: self.clue, isSelected: self.isSelected, shake: self.shake)
     }
 }
