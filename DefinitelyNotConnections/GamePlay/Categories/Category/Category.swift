@@ -27,6 +27,14 @@ struct Category: Identifiable {
         self.orderCompleted = orderCompleted
     }
     
+    init(id: Int, categoryInfo: CategoryInfo) {
+        self.name = categoryInfo.name
+        self.colour = categoryInfo.colour
+        self.id = id
+        self.clueBoxes = Category.createClueBoxes(clueBoxTexts: categoryInfo.clues, offset: id)
+        self.orderCompleted = nil
+    }
+    
     init(name: String, clueBoxes: [ClueBox], colour: Color, id: Int, orderCompleted: Int? = nil) {
         self.name = name
         self.clueBoxes = clueBoxes
