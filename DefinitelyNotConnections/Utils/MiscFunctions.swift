@@ -8,22 +8,9 @@
 import Foundation
 import SwiftUI
 
-/*func concatBoxTexts(clueBoxes: [ClueBox]) -> String {
-    let boxTexts = clueBoxes.map({ $0.text })
-    return boxTexts.joined(separator: ", ")
-}*/
-
 func concatClues(clues: [String]) -> String {
     return clues.joined(separator: ", ")
 }
-
-/*func getClueBoxIDs(clueBoxes: [ClueBox]) -> [Int] {
-    return clueBoxes.map({ $0.id })
-}*/
-
-/*func getAllClueBoxes(categories: [Category]) -> [ClueBox] {
-    return Array(categories.map({ $0.clueBoxes }).joined())
-}*/
 
 func getNumSameElementsInArrays<T: Equatable>(lhs: [T], rhs: [T]) -> Int {
     // If I ever expect one array to be much larger than the other, it may be worth finding and iterating over smaller array
