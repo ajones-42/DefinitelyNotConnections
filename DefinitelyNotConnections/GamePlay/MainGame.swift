@@ -63,10 +63,10 @@ class MainGame {
         }
     }
     
-    private func shakeSelectedBoxesMomentarily(duration: TimeInterval) {
-        self.gameGrid = self.gameGrid.startShakingSelectedBoxes()
+    private func shakeSelectedClueBoxesMomentarily(duration: TimeInterval) {
+        self.gameGrid = self.gameGrid.startShakingSelectedClueBoxes()
         DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
-            self.gameGrid = self.gameGrid.stopShakingSelectedBoxes()
+            self.gameGrid = self.gameGrid.stopShakingSelectedClueBoxes()
         }
     }
     
@@ -94,7 +94,7 @@ class MainGame {
     }
     
     private func handleIncorrectGuess(guess: Guess) {
-        shakeSelectedBoxesMomentarily(duration: 0.1)
+        shakeSelectedClueBoxesMomentarily(duration: 0.1)
         self.mistakes = self.mistakes.madeMistake()
         if guess.oneAway {
             activatePopupMomentarily(message: "One Away!", duration: 2)
@@ -106,16 +106,16 @@ class MainGame {
     }
     
     public func deselectAllIsClickable() -> Bool {
-        return gameGrid.remainingClueBoxes.deselectAllIsClickable
+        return gameGrid.categories.remainingClueBoxes.deselectAllIsClickable
     }
     
     public func submitIsClickable() -> Bool {
-        return gameGrid.remainingClueBoxes.submitIsClickable
+        return gameGrid.categories.remainingClueBoxes.submitIsClickable
     }
     
     public func submitSelection() {
         if submitIsClickable() {
-            let selectedBoxes: [ClueBox] = self.gameGrid.remainingClueBoxes.selectedClueBoxes
+            let selectedBoxes: [ClueBox] = self.gameGrid.categories.remainingClueBoxes.selectedClueBoxes
             
             if self.allGuesses.selectionAlreadyGuessed(selectedBoxIDs: getClueBoxIDs(clueBoxes: selectedBoxes)) {
                 handleAlreadyGuessed()

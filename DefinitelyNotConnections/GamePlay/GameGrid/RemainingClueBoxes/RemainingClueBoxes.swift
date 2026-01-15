@@ -72,12 +72,12 @@ struct RemainingClueBoxes {
         return RemainingClueBoxes(allClueBoxes: self.allClueBoxes, remainingClueBoxes: newClueBoxes)
     }
     
-    func startShakingSelectedBoxes() -> RemainingClueBoxes {
+    func startShakingSelectedClueBoxes() -> RemainingClueBoxes {
         let newClueBoxes: [ClueBox] = self.remainingClueBoxes.replaced(where: {$0.isSelected}, withResultOf: {$0.startShake()})
         return RemainingClueBoxes(allClueBoxes: self.allClueBoxes, remainingClueBoxes: newClueBoxes)
     }
     
-    func stopShakingSelectedBoxes() -> RemainingClueBoxes {
+    func stopShakingSelectedClueBoxes() -> RemainingClueBoxes {
         let newClueBoxes: [ClueBox] = self.remainingClueBoxes.replaced(where: {$0.isSelected}, withResultOf: {$0.stopShake()})
         return RemainingClueBoxes(allClueBoxes: self.allClueBoxes, remainingClueBoxes: newClueBoxes)
     }

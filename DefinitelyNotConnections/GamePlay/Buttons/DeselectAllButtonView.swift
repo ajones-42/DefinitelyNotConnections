@@ -14,7 +14,7 @@ struct DeselectAllButtonView: View {
         Button {
             mainGame.deselectAllClueBoxes()
         } label: {
-            GameplayButtonView(text: "Deselect All", isClickable: mainGame.gameGrid.remainingClueBoxes.deselectAllIsClickable)
+            GameplayButtonView(text: "Deselect All", isClickable: mainGame.gameGrid.categories.remainingClueBoxes.deselectAllIsClickable)
         }
     }
 }
