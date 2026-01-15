@@ -11,8 +11,7 @@ struct GameGrid {
     let categories: Categories
     
     init(categories: [Category]) {
-        let remainingClueBoxes: RemainingClueBoxes = RemainingClueBoxes(allClueBoxes: getAllClueBoxes(categories: categories), shuffled: true)
-        self.categories = Categories(allCategories: categories, remainingClueBoxes: remainingClueBoxes)
+        self.categories = Categories(allCategories: categories)
     }
     
     init(categories: Categories) {

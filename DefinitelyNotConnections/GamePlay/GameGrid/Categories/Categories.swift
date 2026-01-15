@@ -19,6 +19,16 @@ struct Categories {
         self.sortedCompletedCategories.count
     }
     
+    init(allCategories: [Category], remainingClueBoxes: RemainingClueBoxes) {
+        self.allCategories = allCategories
+        self.remainingClueBoxes = remainingClueBoxes
+    }
+    
+    init(allCategories: [Category]) {
+        self.allCategories = allCategories
+        self.remainingClueBoxes = RemainingClueBoxes(allClueBoxes: getAllClueBoxes(categories: self.allCategories), shuffled: true)
+    }
+    
     func reset() -> Categories {
         let resetCategories: [Category] = self.allCategories.replaced(where: {$0.isCompleted}, withResultOf: {$0.reset()})
         return Categories(allCategories: resetCategories, remainingClueBoxes: self.remainingClueBoxes.reset())
