@@ -45,6 +45,21 @@ struct RemainingClueBoxes {
         }
     }
     
+    init(categoryInfos: [CategoryInfo], shuffled: Bool) {
+        var clueBoxes: [ClueBox] = []
+        for (catIndex, categoryInfo) in categoryInfos.enumerated() {
+            for (clueIndex, clue) in categoryInfo.clues.enumerated() {
+                clueBoxes.append(ClueBox(text: clue, id: clueIndex+4*catIndex))
+            }
+        }
+        self.allClueBoxes = clueBoxes
+        if shuffled {
+            self.remainingClueBoxes = clueBoxes.shuffled()
+        } else {
+            self.remainingClueBoxes = clueBoxes
+        }
+    }
+    
     init(allClueBoxes: [ClueBox], remainingClueBoxes: [ClueBox]) {
         self.allClueBoxes = allClueBoxes
         self.remainingClueBoxes = remainingClueBoxes

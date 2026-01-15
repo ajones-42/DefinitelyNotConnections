@@ -8,7 +8,7 @@
 import Testing
 @testable import DefinitelyNotConnections
 
-@Test func getAllClueBoxesTest() {
+/*@Test func getAllClueBoxesTest() {
     let clueBox0: ClueBox = ClueBoxBuilder().withID(id: 0).withText(text: "Zero").build()
     let clueBox1: ClueBox = ClueBoxBuilder().withID(id: 1).withText(text: "One").build()
     let clueBox2: ClueBox = ClueBoxBuilder().withID(id: 2).withText(text: "Two").build()
@@ -17,4 +17,4 @@ import Testing
     let clueBoxes: [ClueBox] = getAllClueBoxes(categories: categories)
     #expect(clueBoxes == [clueBox0, clueBox1, clueBox2, clueBox3])
     
-}
+}*/

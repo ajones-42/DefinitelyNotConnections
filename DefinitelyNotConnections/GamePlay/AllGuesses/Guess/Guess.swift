@@ -9,20 +9,23 @@ import Foundation
 
 
 struct Guess: Identifiable {
-    let clueBoxes: [ClueBox]
+    //let clueBoxes: [ClueBox]
+    let clues: [String]
     let correctCategoryID: Int?
     let oneAway: Bool
     let id: Int
     
-    init(allCategories: [Category], selectedBoxes: [ClueBox], id: Int) {
-        self.clueBoxes = selectedBoxes
+    init(allCategories: [Category], selectedClues: [String], id: Int) {
+        //self.clueBoxes = selectedBoxes
+        self.clues = selectedClues
         self.id = id
 
         var correctCategoryIndex: Int? = nil
         var oneAway = false
         
         categoryLoop: for (categoryIndex, category) in allCategories.enumerated() {
-            let numSameSelections: Int = getNumSameElementsInArrays(lhs: getClueBoxIDs(clueBoxes: selectedBoxes), rhs: getClueBoxIDs(clueBoxes: category.clueBoxes))
+            //let numSameSelections: Int = getNumSameElementsInArrays(lhs: getClueBoxIDs(clueBoxes: selectedBoxes), rhs: getClueBoxIDs(clueBoxes: category.clueBoxes))
+            let numSameSelections: Int = getNumSameElementsInArrays(lhs: self.clues, rhs: category.clues)
             switch numSameSelections {
             case 4:
                 correctCategoryIndex = categoryIndex
@@ -42,15 +45,16 @@ struct Guess: Identifiable {
         self.oneAway = oneAway
     }
     
-    init(clueBoxes: [ClueBox], correctCategoryID: Int?, oneAway: Bool, id: Int) {
-        self.clueBoxes = clueBoxes
+    init(clues: [String], correctCategoryID: Int?, oneAway: Bool, id: Int) {
+        //self.clueBoxes = clueBoxes
+        self.clues = clues
         self.correctCategoryID = correctCategoryID
         self.oneAway = oneAway
         self.id = id
     }
     
     func getGuessText() -> String {
-        var guessText = "Guess \(self.id + 1): \(concatBoxTexts(clueBoxes: self.clueBoxes))"
+        var guessText = "Guess \(self.id + 1): \(concatClues(clues: self.clues))"
         if correctCategoryID != nil {
             guessText += " (Correct!)"
         } else if self.oneAway {

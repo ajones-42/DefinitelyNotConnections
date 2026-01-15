@@ -7,7 +7,7 @@
 
 import Foundation
 
-class GuessBuilder {
+/*class GuessBuilder {
     var clueBoxes: [ClueBox] = []
     var correctCategoryID: Int? = nil
     var oneAway: Bool = false
@@ -36,4 +36,4 @@ class GuessBuilder {
     func build() -> Guess {
         return Guess(clueBoxes: self.clueBoxes, correctCategoryID: self.correctCategoryID, oneAway: self.oneAway, id: self.id)
     }
-}
+}*/

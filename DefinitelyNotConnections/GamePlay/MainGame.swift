@@ -10,18 +10,29 @@ import Foundation
 @Observable
 class MainGame {
     let gameProperties: GameProperties
-    let allCategories: [Category]
+    //let allCategories: [Category]
     var gamePhase: GamePhase
     var categories: Categories
     var allGuesses: AllGuesses
     var popup: Popup?
     var mistakes: Mistakes
     
-    init(gameProperties: GameProperties, categories: [Category]) {
+    /*init(gameProperties: GameProperties, categories: [Category]) {
         self.gameProperties = gameProperties
         self.allCategories = categories
         self.gamePhase = .setup
         self.categories = Categories(allCategories: categories)
+        self.allGuesses = AllGuesses(guesses: [])
+        self.popup = nil
+        self.mistakes = Mistakes(numMistakesRemaining: gameProperties.numMistakes)
+    }*/
+    
+    init(gameProperties: GameProperties, categoryInfos: [CategoryInfo]) {
+        self.gameProperties = gameProperties
+        //self.allCategories = categories
+        self.gamePhase = .setup
+        //self.categories = Categories(allCategories: categories)
+        self.categories = Categories(categoryInfos: categoryInfos)
         self.allGuesses = AllGuesses(guesses: [])
         self.popup = nil
         self.mistakes = Mistakes(numMistakesRemaining: gameProperties.numMistakes)
@@ -87,7 +98,7 @@ class MainGame {
     }
     
     private func handleCorrectGuess(guess: Guess) {
-        self.categories = self.categories.completeCategory(category: self.allCategories[guess.correctCategoryID!])
+        self.categories = self.categories.completeCategory(category: self.categories.allCategories[guess.correctCategoryID!])
         if self.categories.numCompletedCategories == 4 {
             admirePuzzle()
         }
@@ -115,12 +126,13 @@ class MainGame {
     
     public func submitSelection() {
         if submitIsClickable() {
-            let selectedBoxes: [ClueBox] = self.categories.remainingClueBoxes.selectedClueBoxes
+            let selectedBoxClues: [String] = self.categories.remainingClueBoxes.selectedClueBoxes.map({$0.text})
             
-            if self.allGuesses.selectionAlreadyGuessed(selectedBoxIDs: getClueBoxIDs(clueBoxes: selectedBoxes)) {
+            //if self.allGuesses.selectionAlreadyGuessed(selectedBoxIDs: getClueBoxIDs(clueBoxes: selectedBoxes)) {
+            if self.allGuesses.selectionAlreadyGuessed(selectedBoxClues: selectedBoxClues) {
                 handleAlreadyGuessed()
             } else {
-                let guess: Guess = Guess(allCategories: self.allCategories, selectedBoxes: selectedBoxes, id: self.allGuesses.getNextGuessID())
+                let guess: Guess = Guess(allCategories: self.categories.allCategories, selectedClues: selectedBoxClues, id: self.allGuesses.getNextGuessID())
                 self.allGuesses = self.allGuesses.addGuess(guess: guess)
                 
                 if guess.isCorrect() {

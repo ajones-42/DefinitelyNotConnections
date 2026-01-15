@@ -25,9 +25,9 @@ struct ContentView: View {
 }
 
 
-#Preview {
+/*#Preview {
     let mainGame: MainGame = MainGame(gameProperties: GameProperties(), categories: createDefaultTestCategories())
     ContentView()
         .environment(mainGame)
-}
+}*/
 

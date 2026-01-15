@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class CategoryBuilder {
+/*class CategoryBuilder {
     var name: String = "A Category"
     var clueBoxTexts: [String] = ["A clue!", "Another clue!", "Yet another clue!", "Guess what, a clue!"]
     var clueBoxes: [ClueBox] = []
@@ -53,4 +53,4 @@ class CategoryBuilder {
             return Category(name: self.name, clueBoxes: self.clueBoxes, colour: self.colour, id: self.id, orderCompleted: self.orderCompleted)
         }
     }
-}
+}*/

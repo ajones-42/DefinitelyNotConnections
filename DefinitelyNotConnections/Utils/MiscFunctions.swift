@@ -8,18 +8,22 @@
 import Foundation
 import SwiftUI
 
-func concatBoxTexts(clueBoxes: [ClueBox]) -> String {
+/*func concatBoxTexts(clueBoxes: [ClueBox]) -> String {
     let boxTexts = clueBoxes.map({ $0.text })
     return boxTexts.joined(separator: ", ")
+}*/
+
+func concatClues(clues: [String]) -> String {
+    return clues.joined(separator: ", ")
 }
 
 func getClueBoxIDs(clueBoxes: [ClueBox]) -> [Int] {
     return clueBoxes.map({ $0.id })
 }
 
-func getAllClueBoxes(categories: [Category]) -> [ClueBox] {
+/*func getAllClueBoxes(categories: [Category]) -> [ClueBox] {
     return Array(categories.map({ $0.clueBoxes }).joined())
-}
+}*/
 
 func getNumSameElementsInArrays<T: Equatable>(lhs: [T], rhs: [T]) -> Int {
     // If I ever expect one array to be much larger than the other, it may be worth finding and iterating over smaller array
@@ -32,12 +36,12 @@ func getNumSameElementsInArrays<T: Equatable>(lhs: [T], rhs: [T]) -> Int {
 
 func createTestCategory(categoryNumber: Int, numCluesPerCategory: Int, colour: Color) -> Category {
     let categoryName: String = "Category \(categoryNumber)"
-    var clueBoxTexts: [String] = []
+    var clues: [String] = []
 
     for clueBoxNumber in 0...numCluesPerCategory - 1 {
-        clueBoxTexts.append("Clue \(clueBoxNumber + categoryNumber * numCluesPerCategory)")
+        clues.append("Clue \(clueBoxNumber + categoryNumber * numCluesPerCategory)")
     }
-    return Category(name: categoryName, clueBoxTexts: clueBoxTexts, colour: colour, id: categoryNumber)
+    return Category(name: categoryName, clues: clues, colour: colour, id: categoryNumber)
 }
 
 func createTestCategories(numCategories: Int, numCluesPerCategory: Int, colours: [Color]) throws -> [Category] {
@@ -61,6 +65,15 @@ func createDefaultTestCategories() -> [Category] {
         let categories: [Category] = try! createTestCategories(numCategories: numCategories, numCluesPerCategory: numCluesPerCategory, colours: colours)
         return categories
     }
+}
+
+func createDefaultTestCategoryInfos() -> [CategoryInfo] {
+    var categoryInfos: [CategoryInfo] = []
+    categoryInfos.append(CategoryInfo(name: "Category 0", colour: .yellow, clues: ["Clue 0", "Clue 1", "Clue 2", "Clue 3"]))
+    categoryInfos.append(CategoryInfo(name: "Category 1", colour: .green, clues: ["Clue 4", "Clue 5", "Clue 6", "Clue 7"]))
+    categoryInfos.append(CategoryInfo(name: "Category 2", colour: .blue, clues: ["Clue 8", "Clue 9", "Clue 10", "Clue 11"]))
+    categoryInfos.append(CategoryInfo(name: "Category 3", colour: .purple, clues: ["Clue 12", "Clue 13", "Clue 14", "Clue 15"]))
+    return categoryInfos
 }
 
 func categoriesCompletedInIncreasingOrder(category1: Category, category2: Category) -> Bool {
