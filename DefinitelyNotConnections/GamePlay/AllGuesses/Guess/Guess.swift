@@ -9,14 +9,12 @@ import Foundation
 
 
 struct Guess: Identifiable {
-    //let clueBoxes: [ClueBox]
     let clues: [String]
     let correctCategoryID: Int?
     let oneAway: Bool
     let id: Int
     
     init(allCategories: [Category], selectedClues: [String], id: Int) {
-        //self.clueBoxes = selectedBoxes
         self.clues = selectedClues
         self.id = id
 
@@ -24,7 +22,6 @@ struct Guess: Identifiable {
         var oneAway = false
         
         categoryLoop: for (categoryIndex, category) in allCategories.enumerated() {
-            //let numSameSelections: Int = getNumSameElementsInArrays(lhs: getClueBoxIDs(clueBoxes: selectedBoxes), rhs: getClueBoxIDs(clueBoxes: category.clueBoxes))
             let numSameSelections: Int = getNumSameElementsInArrays(lhs: self.clues, rhs: category.clues)
             switch numSameSelections {
             case 4:

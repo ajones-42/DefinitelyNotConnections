@@ -10,28 +10,15 @@ import Foundation
 @Observable
 class MainGame {
     let gameProperties: GameProperties
-    //let allCategories: [Category]
     var gamePhase: GamePhase
     var categories: Categories
     var allGuesses: AllGuesses
     var popup: Popup?
     var mistakes: Mistakes
     
-    /*init(gameProperties: GameProperties, categories: [Category]) {
-        self.gameProperties = gameProperties
-        self.allCategories = categories
-        self.gamePhase = .setup
-        self.categories = Categories(allCategories: categories)
-        self.allGuesses = AllGuesses(guesses: [])
-        self.popup = nil
-        self.mistakes = Mistakes(numMistakesRemaining: gameProperties.numMistakes)
-    }*/
-    
     init(gameProperties: GameProperties, categoryInfos: [CategoryInfo]) {
         self.gameProperties = gameProperties
-        //self.allCategories = categories
         self.gamePhase = .setup
-        //self.categories = Categories(allCategories: categories)
         self.categories = Categories(categoryInfos: categoryInfos)
         self.allGuesses = AllGuesses(guesses: [])
         self.popup = nil
@@ -128,7 +115,6 @@ class MainGame {
         if submitIsClickable() {
             let selectedBoxClues: [String] = self.categories.remainingClueBoxes.selectedClueBoxes.map({$0.text})
             
-            //if self.allGuesses.selectionAlreadyGuessed(selectedBoxIDs: getClueBoxIDs(clueBoxes: selectedBoxes)) {
             if self.allGuesses.selectionAlreadyGuessed(selectedBoxClues: selectedBoxClues) {
                 handleAlreadyGuessed()
             } else {

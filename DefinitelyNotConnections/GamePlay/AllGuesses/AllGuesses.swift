@@ -31,7 +31,6 @@ struct AllGuesses {
     func selectionAlreadyGuessed(selectedBoxClues: [String]) -> Bool {
         var selectionAlreadyGuessed: Bool = false
         for guess in self.getGuesses() {
-            //if getClueBoxIDs(clueBoxes: guess.clueBoxes).sorted() == selectedBoxIDs.sorted() {
             if guess.clues.sorted() == selectedBoxClues.sorted() {
                 selectionAlreadyGuessed = true
                 break

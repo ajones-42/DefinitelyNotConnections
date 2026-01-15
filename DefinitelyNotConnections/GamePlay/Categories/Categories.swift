@@ -24,11 +24,6 @@ struct Categories {
         self.remainingClueBoxes = remainingClueBoxes
     }
     
-    /*init(allCategories: [Category]) {
-        self.allCategories = allCategories
-        self.remainingClueBoxes = RemainingClueBoxes(allClueBoxes: getAllClueBoxes(categories: self.allCategories), shuffled: true)
-    }*/
-    
     init(categoryInfos: [CategoryInfo]) {
         var categories: [Category] = []
         for (index, categoryInfo) in categoryInfos.enumerated() {
