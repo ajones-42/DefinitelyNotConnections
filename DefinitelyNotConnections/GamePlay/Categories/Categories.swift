@@ -24,9 +24,18 @@ struct Categories {
         self.remainingClueBoxes = remainingClueBoxes
     }
     
-    init(allCategories: [Category]) {
+    /*init(allCategories: [Category]) {
         self.allCategories = allCategories
         self.remainingClueBoxes = RemainingClueBoxes(allClueBoxes: getAllClueBoxes(categories: self.allCategories), shuffled: true)
+    }*/
+    
+    init(categoryInfos: [CategoryInfo]) {
+        var categories: [Category] = []
+        for (index, categoryInfo) in categoryInfos.enumerated() {
+            categories.append(Category(id: index, categoryInfo: categoryInfo))
+        }
+        self.allCategories = categories
+        self.remainingClueBoxes = RemainingClueBoxes(categoryInfos: categoryInfos, shuffled: true)
     }
     
     func reset() -> Categories {
