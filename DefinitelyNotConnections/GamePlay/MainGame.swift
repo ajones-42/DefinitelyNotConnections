@@ -12,7 +12,7 @@ class MainGame {
     let gameProperties: GameProperties
     let allCategories: [Category]
     var gamePhase: GamePhase
-    var gameGrid: GameGrid
+    var categories: Categories
     var allGuesses: AllGuesses
     var popup: Popup?
     var mistakes: Mistakes
@@ -21,7 +21,7 @@ class MainGame {
         self.gameProperties = gameProperties
         self.allCategories = categories
         self.gamePhase = .setup
-        self.gameGrid = GameGrid(categories: categories)
+        self.categories = Categories(allCategories: categories)
         self.allGuesses = AllGuesses(guesses: [])
         self.popup = nil
         self.mistakes = Mistakes(numMistakesRemaining: gameProperties.numMistakes)
@@ -29,7 +29,7 @@ class MainGame {
     
     public func resetGame() {
         self.gamePhase = .setup
-        self.gameGrid = self.gameGrid.reset()
+        self.categories = self.categories.reset()
         self.allGuesses = self.allGuesses.reset()
         resetMistakesRemaining()
     }
@@ -64,31 +64,31 @@ class MainGame {
     }
     
     private func shakeSelectedClueBoxesMomentarily(duration: TimeInterval) {
-        self.gameGrid = self.gameGrid.startShakingSelectedClueBoxes()
+        self.categories = self.categories.startShakingSelectedClueBoxes()
         DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
-            self.gameGrid = self.gameGrid.stopShakingSelectedClueBoxes()
+            self.categories = self.categories.stopShakingSelectedClueBoxes()
         }
     }
     
     public func clickClueBox(clueBox: ClueBox) {
-        self.gameGrid = self.gameGrid.clickClueBox(clueBox: clueBox)
+        self.categories = self.categories.clickClueBox(clueBox: clueBox)
     }
     
     public func shuffleClueBoxes() {
-        self.gameGrid = self.gameGrid.shuffleClueBoxes()
+        self.categories = self.categories.shuffleClueBoxes()
     }
     
     public func deselectAllClueBoxes() {
-        self.gameGrid = self.gameGrid.deselectAllClueBoxes()
+        self.categories = self.categories.deselectAllClueBoxes()
     }
     
     private func completeCategory(category: Category) {
-        self.gameGrid = self.gameGrid.completeCategory(category: category)
+        self.categories = self.categories.completeCategory(category: category)
     }
     
     private func handleCorrectGuess(guess: Guess) {
-        self.gameGrid = self.gameGrid.completeCategory(category: self.allCategories[guess.correctCategoryID!])
-        if self.gameGrid.categories.numCompletedCategories == 4 {
+        self.categories = self.categories.completeCategory(category: self.allCategories[guess.correctCategoryID!])
+        if self.categories.numCompletedCategories == 4 {
             admirePuzzle()
         }
     }
@@ -106,16 +106,16 @@ class MainGame {
     }
     
     public func deselectAllIsClickable() -> Bool {
-        return gameGrid.categories.remainingClueBoxes.deselectAllIsClickable
+        return self.categories.remainingClueBoxes.deselectAllIsClickable
     }
     
     public func submitIsClickable() -> Bool {
-        return gameGrid.categories.remainingClueBoxes.submitIsClickable
+        return self.categories.remainingClueBoxes.submitIsClickable
     }
     
     public func submitSelection() {
         if submitIsClickable() {
-            let selectedBoxes: [ClueBox] = self.gameGrid.categories.remainingClueBoxes.selectedClueBoxes
+            let selectedBoxes: [ClueBox] = self.categories.remainingClueBoxes.selectedClueBoxes
             
             if self.allGuesses.selectionAlreadyGuessed(selectedBoxIDs: getClueBoxIDs(clueBoxes: selectedBoxes)) {
                 handleAlreadyGuessed()

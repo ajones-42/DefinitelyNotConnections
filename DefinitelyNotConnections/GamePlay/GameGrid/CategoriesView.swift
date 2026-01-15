@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct GameGridView: View {
+struct CategoriesView: View {
     @Environment(MainGame.self) private var mainGame: MainGame
     
     var body: some View {
         VStack {
-            CompletedCategoriesView(categories: mainGame.gameGrid.categories)
+            CompletedCategoriesView(categories: mainGame.categories)
             RemainingClueBoxesView()
         }
     }
