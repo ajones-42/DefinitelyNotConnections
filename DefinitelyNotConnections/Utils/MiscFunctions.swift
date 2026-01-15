@@ -17,9 +17,9 @@ func concatClues(clues: [String]) -> String {
     return clues.joined(separator: ", ")
 }
 
-func getClueBoxIDs(clueBoxes: [ClueBox]) -> [Int] {
+/*func getClueBoxIDs(clueBoxes: [ClueBox]) -> [Int] {
     return clueBoxes.map({ $0.id })
-}
+}*/
 
 /*func getAllClueBoxes(categories: [Category]) -> [ClueBox] {
     return Array(categories.map({ $0.clueBoxes }).joined())

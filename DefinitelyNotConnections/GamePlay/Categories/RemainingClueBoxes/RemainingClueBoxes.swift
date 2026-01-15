@@ -48,7 +48,7 @@ struct RemainingClueBoxes {
     init(categoryInfos: [CategoryInfo], shuffled: Bool) {
         let clueBoxes: [ClueBox] = categoryInfos.enumerated().flatMap { (catindex, catInfo) in
             catInfo.clues.enumerated().map { (clueindex, clue) in
-                    ClueBox(text: clue, id: clueindex+4*catindex)
+                    ClueBox(text: clue)
             }
         }
         self.allClueBoxes = clueBoxes

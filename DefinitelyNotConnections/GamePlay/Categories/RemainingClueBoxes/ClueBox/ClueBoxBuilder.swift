@@ -11,7 +11,6 @@ class ClueBoxBuilder {
     var text: String = "A clue!"
     var isSelected: Bool = false
     var shake: Bool = false
-    var id: Int = 0
 
     func withText(text: String) -> ClueBoxBuilder {
         self.text = text
@@ -28,12 +27,7 @@ class ClueBoxBuilder {
         return self
     }
 
-    func withID(id: Int) -> ClueBoxBuilder {
-        self.id = id
-        return self
-    }
-
     func build() -> ClueBox {
-        return ClueBox(text: self.text, isSelected: self.isSelected, shake: self.shake, id: self.id)
+        return ClueBox(text: self.text, isSelected: self.isSelected, shake: self.shake)
     }
 }
