@@ -10,6 +10,7 @@ import SwiftUI
 
 struct Category: Identifiable {
     let name: String
+    let clueIDs: [UUID]
     let clues: [String]
     let colour: Color
     let id: Int
@@ -18,8 +19,9 @@ struct Category: Identifiable {
         return orderCompleted != nil
     }
     
-    init(name: String, clues: [String], colour: Color, id: Int, orderCompleted: Int? = nil) {
+    init(name: String, clueIDs: [UUID], clues: [String], colour: Color, id: Int, orderCompleted: Int? = nil) {
         self.name = name
+        self.clueIDs = clueIDs
         self.clues = clues
         self.colour = colour
         self.id = id
@@ -30,15 +32,16 @@ struct Category: Identifiable {
         self.name = categoryInfo.name
         self.colour = categoryInfo.colour
         self.id = id
+        self.clueIDs = categoryInfo.clueIDs
         self.clues = categoryInfo.clues
         self.orderCompleted = nil
     }
     
     func complete(orderCompleted: Int) -> Category {
-        return Category(name: self.name, clues: self.clues, colour: self.colour, id: self.id, orderCompleted: orderCompleted)
+        return Category(name: self.name, clueIDs: self.clueIDs, clues: self.clues, colour: self.colour, id: self.id, orderCompleted: orderCompleted)
     }
     
     func reset() -> Category {
-        return Category(name: self.name, clues: self.clues, colour: self.colour, id: self.id, orderCompleted: nil)
+        return Category(name: self.name, clueIDs: self.clueIDs, clues: self.clues, colour: self.colour, id: self.id, orderCompleted: nil)
     }
 }

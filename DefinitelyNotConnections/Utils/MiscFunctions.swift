@@ -34,39 +34,6 @@ func getNumSameElementsInArrays<T: Equatable>(lhs: [T], rhs: [T]) -> Int {
     return numSameElements
 }
 
-func createTestCategory(categoryNumber: Int, numCluesPerCategory: Int, colour: Color) -> Category {
-    let categoryName: String = "Category \(categoryNumber)"
-    var clues: [String] = []
-
-    for clueBoxNumber in 0...numCluesPerCategory - 1 {
-        clues.append("Clue \(clueBoxNumber + categoryNumber * numCluesPerCategory)")
-    }
-    return Category(name: categoryName, clues: clues, colour: colour, id: categoryNumber)
-}
-
-func createTestCategories(numCategories: Int, numCluesPerCategory: Int, colours: [Color]) throws -> [Category] {
-    guard colours.count == numCategories else {
-        throw ValidationError.invalidInput
-    }
-    var categories: [Category] = []
-
-    for categoryNumber in 0...numCategories - 1 {
-        categories.append(createTestCategory(categoryNumber: categoryNumber, numCluesPerCategory: numCluesPerCategory, colour: colours[categoryNumber]))
-    }
-    return categories
-}
-
-func createDefaultTestCategories() -> [Category] {
-    let colours: [Color] = [.yellow, .green, .blue, .purple]
-    let numCategories: Int = 4
-    let numCluesPerCategory: Int = 4
-    
-    do {
-        let categories: [Category] = try! createTestCategories(numCategories: numCategories, numCluesPerCategory: numCluesPerCategory, colours: colours)
-        return categories
-    }
-}
-
 func createDefaultTestCategoryInfos() -> [CategoryInfo] {
     var categoryInfos: [CategoryInfo] = []
     categoryInfos.append(CategoryInfo(name: "Category 0", colour: .yellow, clues: ["Clue 0", "Clue 1", "Clue 2", "Clue 3"]))

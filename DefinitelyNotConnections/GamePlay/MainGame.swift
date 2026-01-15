@@ -114,11 +114,12 @@ class MainGame {
     public func submitSelection() {
         if submitIsClickable() {
             let selectedBoxClues: [String] = self.categories.remainingClueBoxes.selectedClueBoxes.map({$0.clue})
+            let selectedBoxIDs: [UUID] = self.categories.remainingClueBoxes.selectedClueBoxes.map({$0.id})
             
             if self.allGuesses.selectionAlreadyGuessed(selectedBoxClues: selectedBoxClues) {
                 handleAlreadyGuessed()
             } else {
-                let guess: Guess = Guess(allCategories: self.categories.allCategories, selectedClues: selectedBoxClues, id: self.allGuesses.getNextGuessID())
+                let guess: Guess = Guess(allCategories: self.categories.allCategories, selectedClueIDs: selectedBoxIDs, selectedClues: selectedBoxClues, id: self.allGuesses.getNextGuessID())
                 self.allGuesses = self.allGuesses.addGuess(guess: guess)
                 
                 if guess.isCorrect() {
