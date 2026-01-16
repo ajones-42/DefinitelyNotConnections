@@ -11,16 +11,17 @@ struct ClueBox: Identifiable, Equatable {
     let clue: String
     let isSelected: Bool
     let shake: Bool
-    let id: UUID = UUID()
+    let id: UUID
     
-    init(clue: String, isSelected: Bool, shake: Bool) {
+    init(clue: String, isSelected: Bool, shake: Bool, id: UUID) {
         self.clue = clue
         self.isSelected = isSelected
         self.shake = shake
+        self.id = id
     }
     
-    init(clue: String) {
-        self.init(clue: clue, isSelected: false, shake: false)
+    init(clue: String, id: UUID) {
+        self.init(clue: clue, isSelected: false, shake: false, id:id)
     }
     
     //static func ==(lhs: ClueBox, rhs: ClueBox) -> Bool {
@@ -28,18 +29,18 @@ struct ClueBox: Identifiable, Equatable {
     //}
     
     func click() -> ClueBox {
-        return ClueBox(clue: self.clue, isSelected: !self.isSelected, shake: self.shake)
+        return ClueBox(clue: self.clue, isSelected: !self.isSelected, shake: self.shake, id: self.id)
     }
     
     func deselect() -> ClueBox {
-        return ClueBox(clue: self.clue, isSelected: false, shake: self.shake)
+        return ClueBox(clue: self.clue, isSelected: false, shake: self.shake, id: self.id)
     }
     
     func startShake() -> ClueBox {
-        return ClueBox(clue: self.clue, isSelected: self.isSelected, shake: true)
+        return ClueBox(clue: self.clue, isSelected: self.isSelected, shake: true, id: self.id)
     }
     
     func stopShake() -> ClueBox {
-        return ClueBox(clue: self.clue, isSelected: self.isSelected, shake: false)
+        return ClueBox(clue: self.clue, isSelected: self.isSelected, shake: false, id: self.id)
     }
 }
