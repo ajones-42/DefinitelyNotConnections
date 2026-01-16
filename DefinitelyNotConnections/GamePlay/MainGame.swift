@@ -84,17 +84,17 @@ class MainGame {
         self.categories = self.categories.completeCategory(category: category)
     }
     
-    private func handleCorrectGuess(guess: Guess) {
-        self.categories = self.categories.completeCategory(category: self.categories.allCategories[guess.correctCategoryID!])
+    private func handleCorrectGuess(submitResult: SubmitResult) {
+        self.categories = self.categories.completeCategory(category: self.categories.allCategories[submitResult.categoryID])
         if self.categories.numCompletedCategories == 4 {
             admirePuzzle()
         }
     }
     
-    private func handleIncorrectGuess(guess: Guess) {
+    private func handleIncorrectGuess(guessOneAway: Bool) {
         shakeSelectedClueBoxesMomentarily(duration: 0.1)
         self.mistakes = self.mistakes.madeMistake()
-        if guess.oneAway {
+        if guessOneAway {
             activatePopupMomentarily(message: "One Away!", duration: 2)
         }
     }
@@ -114,18 +114,21 @@ class MainGame {
     public func submitSelection() {
         if submitIsClickable() {
             let selectedBoxClues: [String] = self.categories.remainingClueBoxes.selectedClueBoxes.map({$0.clue})
-            let selectedBoxIDs: [UUID] = self.categories.remainingClueBoxes.selectedClueBoxes.map({$0.id})
+            let selectedClueBoxIDs: [UUID] = self.categories.remainingClueBoxes.selectedClueBoxes.map({$0.id})
             
             if self.allGuesses.selectionAlreadyGuessed(selectedBoxClues: selectedBoxClues) {
                 handleAlreadyGuessed()
             } else {
-                let guess: Guess = Guess(allCategories: self.categories.allCategories, selectedClueIDs: selectedBoxIDs, selectedClues: selectedBoxClues, id: self.allGuesses.getNextGuessID())
-                self.allGuesses = self.allGuesses.addGuess(guess: guess)
-                
-                if guess.isCorrect() {
-                    handleCorrectGuess(guess: guess)
-                } else {
-                    handleIncorrectGuess(guess: guess)
+                if let bestMatch: SubmitResult = self.categories.getSubmitBestMatch(selectedClueBoxIDs: selectedClueBoxIDs) {
+                    let guessCorrect: Bool = bestMatch.numMatches == 4 ? true : false
+                    let guessOneAway: Bool = bestMatch.numMatches == 3 ? true : false
+                    let guess = Guess(clues: selectedBoxClues, clueBoxIDs: selectedClueBoxIDs, isCorrect: guessCorrect, oneAway: guessOneAway, id: self.allGuesses.getNextGuessID())
+                    self.allGuesses = self.allGuesses.addGuess(guess: guess)
+                    if guessCorrect {
+                        handleCorrectGuess(submitResult: bestMatch)
+                    } else {
+                        handleIncorrectGuess(guessOneAway: guessOneAway)
+                    }
                 }
             }
         }
