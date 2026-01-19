@@ -12,13 +12,13 @@ struct Category: Identifiable {
     let name: String
     let clueInfos: [ClueInfo]
     let colour: Color
-    let id: Int
+    let id: UUID
     let orderCompleted: Int?
     var isCompleted: Bool {
         return orderCompleted != nil
     }
     
-    init(name: String, clueInfos: [ClueInfo], colour: Color, id: Int, orderCompleted: Int? = nil) {
+    init(name: String, clueInfos: [ClueInfo], colour: Color, id: UUID, orderCompleted: Int? = nil) {
         self.name = name
         self.clueInfos = clueInfos
         self.colour = colour
@@ -29,7 +29,7 @@ struct Category: Identifiable {
     init(id: Int, categoryInfo: CategoryInfo) {
         self.name = categoryInfo.name
         self.colour = categoryInfo.colour
-        self.id = id
+        self.id = categoryInfo.id
         self.clueInfos = categoryInfo.clueInfos
         self.orderCompleted = nil
     }

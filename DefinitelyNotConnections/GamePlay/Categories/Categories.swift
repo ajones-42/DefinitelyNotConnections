@@ -40,8 +40,8 @@ struct Categories {
         return self.sortedCompletedCategories.count
     }
     
-    func completeCategory(category: Category) -> Categories {
-        let newCategories: [Category] = self.allCategories.replaced(where: {$0.id == category.id}, withResultOf: {$0.complete(orderCompleted: getNextCompletedCategoryOrder())})
+    func completeCategory(categoryID: UUID) -> Categories {
+        let newCategories: [Category] = self.allCategories.replaced(where: {$0.id == categoryID}, withResultOf: {$0.complete(orderCompleted: getNextCompletedCategoryOrder())})
         return Categories(allCategories: newCategories, allClueBoxes: self.allClueBoxes.completeSelectedClueBoxes())
     }
     

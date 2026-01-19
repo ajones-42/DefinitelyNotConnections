@@ -80,12 +80,8 @@ class MainGame {
         self.categories = self.categories.deselectAllClueBoxes()
     }
     
-    private func completeCategory(category: Category) {
-        self.categories = self.categories.completeCategory(category: category)
-    }
-    
     private func handleCorrectGuess(submitResult: SubmitResult) {
-        self.categories = self.categories.completeCategory(category: self.categories.allCategories[submitResult.categoryID])
+        self.categories = self.categories.completeCategory(categoryID: submitResult.categoryID)
         if self.categories.numCompletedCategories == 4 {
             admirePuzzle()
         }

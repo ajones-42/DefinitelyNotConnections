@@ -8,6 +8,6 @@
 import Foundation
 
 struct SubmitResult {
-    let categoryID: Int
+    let categoryID: UUID
     let numMatches: Int
 }
