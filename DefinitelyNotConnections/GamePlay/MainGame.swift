@@ -122,7 +122,7 @@ class MainGame {
                 if let bestMatch: SubmitResult = self.categories.getSubmitBestMatch(selectedClueBoxIDs: selectedClueBoxIDs) {
                     let guessCorrect: Bool = bestMatch.numMatches == 4 ? true : false
                     let guessOneAway: Bool = bestMatch.numMatches == 3 ? true : false
-                    let guess = Guess(clues: selectedBoxClues, clueBoxIDs: selectedClueBoxIDs, isCorrect: guessCorrect, oneAway: guessOneAway, id: self.allGuesses.getNextGuessID())
+                    let guess = Guess(clues: selectedBoxClues, clueBoxIDs: selectedClueBoxIDs, isCorrect: guessCorrect, oneAway: guessOneAway)
                     self.allGuesses = self.allGuesses.addGuess(guess: guess)
                     if guessCorrect {
                         handleCorrectGuess(submitResult: bestMatch)

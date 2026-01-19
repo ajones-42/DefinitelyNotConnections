@@ -13,18 +13,18 @@ struct Guess: Identifiable {
     let clues: [String]
     let isCorrect: Bool
     let oneAway: Bool
-    let id: Int
+    let id: UUID
     
-    init(clues: [String], clueBoxIDs: [UUID], isCorrect: Bool, oneAway: Bool, id: Int) {
+    init(clues: [String], clueBoxIDs: [UUID], isCorrect: Bool, oneAway: Bool) {
         self.clues = clues
         self.clueBoxIDs = clueBoxIDs
         self.isCorrect = isCorrect
         self.oneAway = oneAway
-        self.id = id
+        self.id = UUID()
     }
     
     func getGuessText() -> String {
-        var guessText = "Guess \(self.id + 1): \(concatClues(clues: self.clues))"
+        var guessText = "\(concatClues(clues: self.clues))"
         if self.isCorrect {
             guessText += " (Correct!)"
         } else if self.oneAway {

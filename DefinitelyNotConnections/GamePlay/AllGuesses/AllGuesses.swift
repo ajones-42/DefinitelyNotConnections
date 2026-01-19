@@ -18,10 +18,6 @@ struct AllGuesses {
         return self.guesses
     }
     
-    func getNextGuessID() -> Int {
-        return self.guesses.count
-    }
-    
     func addGuess(guess: Guess) -> AllGuesses {
         var newGuesses: [Guess] = self.guesses
         newGuesses.append(guess)
