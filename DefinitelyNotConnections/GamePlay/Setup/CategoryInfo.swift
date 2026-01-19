@@ -11,20 +11,18 @@ import SwiftUI
 struct CategoryInfo {
     let name: String
     let colour: Color
-    let clues: [String]
-    let clueIDs: [UUID]
+    let clueInfos: [ClueInfo]
     
-    init(name: String, colour: Color, clues: [String], clueIDs: [UUID]) {
+    init(name: String, colour: Color, clueInfos: [ClueInfo]) {
         self.name = name
         self.colour = colour
-        self.clues = clues
-        self.clueIDs = clueIDs
+        self.clueInfos = clueInfos
     }
     
     init(name: String, colour: Color, clues: [String]) {
         self.name = name
         self.colour = colour
-        self.clues = clues
-        self.clueIDs = self.clues.map( {_ in UUID()} )
+        self.clueInfos = clues.map{clue in
+                ClueInfo(clue: clue)
+        }
     }
-}
