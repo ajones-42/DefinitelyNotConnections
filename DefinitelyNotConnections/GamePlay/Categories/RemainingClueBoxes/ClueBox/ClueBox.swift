@@ -15,7 +15,7 @@ struct ClueBox: Identifiable, Equatable {
     let id: UUID
     
     init(clueInfo: ClueInfo) {
-        self.init(clue: clueInfo.clue, isCompleted: false, isSelected: false, shake: false, id:clueInfo.id)
+        self.init(clue: clueInfo.clue, isCompleted: false, isSelected: false, shake: false, id: clueInfo.id)
     }
     
     init(clue: String, isCompleted: Bool, isSelected: Bool, shake: Bool, id: UUID) {
@@ -25,10 +25,6 @@ struct ClueBox: Identifiable, Equatable {
         self.shake = shake
         self.id = id
     }
-    
-    //static func ==(lhs: ClueBox, rhs: ClueBox) -> Bool {
-    //    return lhs.id == rhs.id && lhs.text == rhs.text
-    //}
     
     func reset() -> ClueBox {
         return ClueBox(clue: self.clue, isCompleted: false, isSelected: false, shake: false, id: self.id)
