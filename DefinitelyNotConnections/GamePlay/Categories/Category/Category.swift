@@ -32,8 +32,8 @@ struct Category: Identifiable {
         self.name = categoryInfo.name
         self.colour = categoryInfo.colour
         self.id = id
-        self.clueIDs = categoryInfo.clueIDs
-        self.clues = categoryInfo.clues
+        self.clueIDs = categoryInfo.getClueIDs()
+        self.clues = categoryInfo.getClues()
         self.orderCompleted = nil
     }
     
