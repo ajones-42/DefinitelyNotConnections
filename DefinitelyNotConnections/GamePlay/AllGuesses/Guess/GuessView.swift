@@ -12,6 +12,8 @@ struct GuessView: View {
     
     var body: some View {
         Text(guess.getGuessText())
+            .foregroundStyle(.black)
+            .listRowBackground(guess.displayColour.opacity(0.7))
     }
 }
 

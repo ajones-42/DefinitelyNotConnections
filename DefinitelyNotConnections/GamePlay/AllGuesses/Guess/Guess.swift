@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import SwiftUI
 
 struct Guess: Identifiable {
     let clueBoxIDs: [UUID]
@@ -14,6 +14,15 @@ struct Guess: Identifiable {
     let isCorrect: Bool
     let isOneAway: Bool
     let id: UUID
+    var displayColour: Color {
+        if self.isCorrect {
+            return .green
+        } else if self.isOneAway {
+            return .yellow
+        } else {
+            return .red
+        }
+    }
     
     init(clues: [String], clueBoxIDs: [UUID], isCorrect: Bool, isOneAway: Bool) {
         self.clues = clues
@@ -24,12 +33,6 @@ struct Guess: Identifiable {
     }
     
     func getGuessText() -> String {
-        var guessText = "\(concatClues(clues: self.clues))"
-        if self.isCorrect {
-            guessText += " (Correct!)"
-        } else if self.isOneAway {
-            guessText += " (One away!)"
-        }
-        return guessText
+        return "\(concatClues(clues: self.clues))"
     }
 }
