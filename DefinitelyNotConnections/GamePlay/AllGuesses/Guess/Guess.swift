@@ -12,14 +12,14 @@ struct Guess: Identifiable {
     let clueBoxIDs: [UUID]
     let clues: [String]
     let isCorrect: Bool
-    let oneAway: Bool
+    let isOneAway: Bool
     let id: UUID
     
-    init(clues: [String], clueBoxIDs: [UUID], isCorrect: Bool, oneAway: Bool) {
+    init(clues: [String], clueBoxIDs: [UUID], isCorrect: Bool, isOneAway: Bool) {
         self.clues = clues
         self.clueBoxIDs = clueBoxIDs
         self.isCorrect = isCorrect
-        self.oneAway = oneAway
+        self.isOneAway = isOneAway
         self.id = UUID()
     }
     
@@ -27,7 +27,7 @@ struct Guess: Identifiable {
         var guessText = "\(concatClues(clues: self.clues))"
         if self.isCorrect {
             guessText += " (Correct!)"
-        } else if self.oneAway {
+        } else if self.isOneAway {
             guessText += " (One away!)"
         }
         return guessText
