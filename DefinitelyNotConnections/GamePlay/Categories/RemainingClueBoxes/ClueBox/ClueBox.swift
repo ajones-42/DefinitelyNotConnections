@@ -30,6 +30,10 @@ struct ClueBox: Identifiable, Equatable {
     //    return lhs.id == rhs.id && lhs.text == rhs.text
     //}
     
+    func reset() -> ClueBox {
+        return ClueBox(clue: self.clue, isCompleted: false, isSelected: false, shake: false, id: self.id)
+    }
+    
     func click() -> ClueBox {
         return ClueBox(clue: self.clue, isCompleted: self.isCompleted, isSelected: !self.isSelected, shake: self.shake, id: self.id)
     }

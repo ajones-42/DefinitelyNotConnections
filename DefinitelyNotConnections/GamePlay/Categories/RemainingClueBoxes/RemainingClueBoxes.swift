@@ -9,7 +9,9 @@ import Foundation
 
 struct RemainingClueBoxes {
     let allClueBoxes: [ClueBox]
-    let remainingClueBoxes: [ClueBox]
+    var remainingClueBoxes: [ClueBox] {
+        self.allClueBoxes.filter( {!$0.isCompleted} )
+    }
     var selectedClueBoxes: [ClueBox] {
         self.remainingClueBoxes.filter( {$0.isSelected} )
     }
@@ -27,22 +29,8 @@ struct RemainingClueBoxes {
     }
 
     
-    init(allClueBoxes: [ClueBox], remainingClueBoxes: [ClueBox], shuffled: Bool) {
-        self.allClueBoxes = allClueBoxes
-        if shuffled {
-            self.remainingClueBoxes = remainingClueBoxes.shuffled()
-        } else {
-            self.remainingClueBoxes = remainingClueBoxes
-        }
-    }
-    
     init(allClueBoxes: [ClueBox], shuffled: Bool) {
-        self.allClueBoxes = allClueBoxes
-        if shuffled {
-            self.remainingClueBoxes = allClueBoxes.shuffled()
-        } else {
-            self.remainingClueBoxes = allClueBoxes
-        }
+        self.allClueBoxes = shuffled ? allClueBoxes.shuffled() : allClueBoxes
     }
     
     init(categoryInfos: [CategoryInfo], shuffled: Bool) {
@@ -51,54 +39,46 @@ struct RemainingClueBoxes {
                 ClueBox(clueInfo: clueInfo)
             }
         }
-        self.allClueBoxes = clueBoxes
-        if shuffled {
-            self.remainingClueBoxes = clueBoxes.shuffled()
-        } else {
-            self.remainingClueBoxes = clueBoxes
-        }
-    }
-    
-    init(allClueBoxes: [ClueBox], remainingClueBoxes: [ClueBox]) {
-        self.allClueBoxes = allClueBoxes
-        self.remainingClueBoxes = remainingClueBoxes
+        self.allClueBoxes = shuffled ? clueBoxes.shuffled() : clueBoxes
     }
     
     func reset() -> RemainingClueBoxes {
-        return RemainingClueBoxes(allClueBoxes: self.allClueBoxes, shuffled: true)
+        let newClueBoxes: [ClueBox] = self.allClueBoxes.map{clueBox in
+            clueBox.reset()
+        }
+        return RemainingClueBoxes(allClueBoxes: newClueBoxes, shuffled: true)
     }
     
     func clickClueBox(clueBox: ClueBox) -> RemainingClueBoxes {
         if (self.numSelectedClueBoxes < 4 || clueBox.isSelected) {
-            let newClueBoxes: [ClueBox] = self.remainingClueBoxes.replaced(where: {$0.id == clueBox.id}, withResultOf: {$0.click()})
-            return RemainingClueBoxes(allClueBoxes: self.allClueBoxes, remainingClueBoxes: newClueBoxes)
+            let newClueBoxes: [ClueBox] = self.allClueBoxes.replaced(where: {$0.id == clueBox.id}, withResultOf: {$0.click()})
+            return RemainingClueBoxes(allClueBoxes: newClueBoxes, shuffled: false)
         } else {
             return self
         }
     }
     
     func shuffleClueBoxes() -> RemainingClueBoxes {
-        return RemainingClueBoxes(allClueBoxes: self.allClueBoxes, remainingClueBoxes: self.remainingClueBoxes, shuffled: true)
+        return RemainingClueBoxes(allClueBoxes: self.allClueBoxes, shuffled: true)
     }
     
     func deselectAllClueBoxes() -> RemainingClueBoxes {
-        let newClueBoxes: [ClueBox] = self.remainingClueBoxes.replaced(where: {$0.isSelected}, withResultOf: {$0.deselect()})
-        return RemainingClueBoxes(allClueBoxes: self.allClueBoxes, remainingClueBoxes: newClueBoxes)
+        let newClueBoxes: [ClueBox] = self.allClueBoxes.replaced(where: {$0.isSelected}, withResultOf: {$0.deselect()})
+        return RemainingClueBoxes(allClueBoxes: newClueBoxes, shuffled: false)
     }
     
     func startShakingSelectedClueBoxes() -> RemainingClueBoxes {
-        let newClueBoxes: [ClueBox] = self.remainingClueBoxes.replaced(where: {$0.isSelected}, withResultOf: {$0.startShake()})
-        return RemainingClueBoxes(allClueBoxes: self.allClueBoxes, remainingClueBoxes: newClueBoxes)
+        let newClueBoxes: [ClueBox] = self.allClueBoxes.replaced(where: {$0.isSelected}, withResultOf: {$0.startShake()})
+        return RemainingClueBoxes(allClueBoxes: newClueBoxes, shuffled: false)
     }
     
     func stopShakingSelectedClueBoxes() -> RemainingClueBoxes {
-        let newClueBoxes: [ClueBox] = self.remainingClueBoxes.replaced(where: {$0.isSelected}, withResultOf: {$0.stopShake()})
-        return RemainingClueBoxes(allClueBoxes: self.allClueBoxes, remainingClueBoxes: newClueBoxes)
+        let newClueBoxes: [ClueBox] = self.allClueBoxes.replaced(where: {$0.isSelected}, withResultOf: {$0.stopShake()})
+        return RemainingClueBoxes(allClueBoxes: newClueBoxes, shuffled: false)
     }
     
-    func removeSelectedClueBoxes() -> RemainingClueBoxes {
-        var newClueBoxes: [ClueBox] = self.remainingClueBoxes
-        newClueBoxes.removeAll(where: { $0.isSelected })
-        return RemainingClueBoxes(allClueBoxes: self.allClueBoxes, remainingClueBoxes: newClueBoxes)
+    func completeSelectedClueBoxes() -> RemainingClueBoxes {
+        let newClueBoxes: [ClueBox] = self.allClueBoxes.replaced(where: {$0.isSelected}, withResultOf: {$0.setCompleted()})
+        return RemainingClueBoxes(allClueBoxes: newClueBoxes, shuffled: true)
     }
 }

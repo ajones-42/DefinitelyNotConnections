@@ -42,7 +42,7 @@ struct Categories {
     
     func completeCategory(category: Category) -> Categories {
         let newCategories: [Category] = self.allCategories.replaced(where: {$0.id == category.id}, withResultOf: {$0.complete(orderCompleted: getNextCompletedCategoryOrder())})
-        return Categories(allCategories: newCategories, remainingClueBoxes: self.remainingClueBoxes.removeSelectedClueBoxes())
+        return Categories(allCategories: newCategories, remainingClueBoxes: self.remainingClueBoxes.completeSelectedClueBoxes())
     }
     
     func clickClueBox(clueBox: ClueBox) -> Categories {
