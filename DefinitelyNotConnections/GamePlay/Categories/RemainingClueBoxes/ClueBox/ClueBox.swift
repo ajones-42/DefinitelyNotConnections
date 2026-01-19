@@ -20,8 +20,8 @@ struct ClueBox: Identifiable, Equatable {
         self.id = id
     }
     
-    init(clue: String, id: UUID) {
-        self.init(clue: clue, isSelected: false, shake: false, id:id)
+    init(clueInfo: ClueInfo) {
+        self.init(clue: clueInfo.clue, isSelected: false, shake: false, id:clueInfo.id)
     }
     
     //static func ==(lhs: ClueBox, rhs: ClueBox) -> Bool {

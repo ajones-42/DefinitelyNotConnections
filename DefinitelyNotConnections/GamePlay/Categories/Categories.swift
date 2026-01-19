@@ -67,7 +67,7 @@ struct Categories {
     
     func getSubmitBestMatch(selectedClueBoxIDs: [UUID]) -> SubmitResult? {
         let submitResults: [SubmitResult] = self.allCategories.map { category in
-            SubmitResult(categoryID: category.id, numMatches: getNumSameElementsInArrays(lhs: selectedClueBoxIDs, rhs: category.clueIDs))
+            SubmitResult(categoryID: category.id, numMatches: getNumSameElementsInArrays(lhs: selectedClueBoxIDs, rhs: category.getClueIDs()))
         }
         return submitResults.max(by: {a, b in a.numMatches < b.numMatches})
     }

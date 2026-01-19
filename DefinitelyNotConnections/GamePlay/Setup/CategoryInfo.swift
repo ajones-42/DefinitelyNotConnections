@@ -26,12 +26,4 @@ struct CategoryInfo {
                 ClueInfo(clue: clue)
         }
     }
-    
-    func getClues() -> [String] {
-        return self.clueInfos.map( {$0.clue} )
-    }
-    
-    func getClueIDs() -> [UUID] {
-        return self.clueInfos.map( {$0.id} )
-    }
 }

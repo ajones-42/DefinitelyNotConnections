@@ -21,7 +21,7 @@ struct CompletedCategoryView: View {
                     .fontWeight(.semibold)
                     .foregroundStyle(.black)
                     .frame(maxWidth: rectangleWidth - 10)
-                Text(concatClues(clues: category.clues))
+                Text(concatClues(clues: category.getClues()))
                     .foregroundStyle(.black)
                     .frame(maxWidth: rectangleWidth - 10)
             }
