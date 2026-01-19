@@ -12,12 +12,7 @@ struct CategoryInfo {
     let name: String
     let colour: Color
     let clueInfos: [ClueInfo]
-    
-    init(name: String, colour: Color, clueInfos: [ClueInfo]) {
-        self.name = name
-        self.colour = colour
-        self.clueInfos = clueInfos
-    }
+    let id: UUID
     
     init(name: String, colour: Color, clues: [String]) {
         self.name = name
@@ -25,5 +20,6 @@ struct CategoryInfo {
         self.clueInfos = clues.map{clue in
                 ClueInfo(clue: clue)
         }
+        self.id = UUID()
     }
 }
