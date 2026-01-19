@@ -10,7 +10,7 @@ import Foundation
 
 struct Categories {
     let allCategories: [Category]
-    let remainingClueBoxes: RemainingClueBoxes
+    let allClueBoxes: AllClueBoxes
 
     var sortedCompletedCategories: [Category] {
         self.allCategories.filter( {$0.isCompleted} ).sorted(by: categoriesCompletedInIncreasingOrder)
@@ -23,17 +23,17 @@ struct Categories {
         self.allCategories = categoryInfos.enumerated().map{ (index, categoryInfo) in
             Category(id: index, categoryInfo: categoryInfo)
         }
-        self.remainingClueBoxes = RemainingClueBoxes(categoryInfos: categoryInfos, shuffled: true)
+        self.allClueBoxes = AllClueBoxes(categoryInfos: categoryInfos, shuffled: true)
     }
     
-    init(allCategories: [Category], remainingClueBoxes: RemainingClueBoxes) {
+    init(allCategories: [Category], allClueBoxes: AllClueBoxes) {
         self.allCategories = allCategories
-        self.remainingClueBoxes = remainingClueBoxes
+        self.allClueBoxes = allClueBoxes
     }
     
     func reset() -> Categories {
         let resetCategories: [Category] = self.allCategories.replaced(where: {$0.isCompleted}, withResultOf: {$0.reset()})
-        return Categories(allCategories: resetCategories, remainingClueBoxes: self.remainingClueBoxes.reset())
+        return Categories(allCategories: resetCategories, allClueBoxes: self.allClueBoxes.reset())
     }
     
     private func getNextCompletedCategoryOrder() -> Int {
@@ -42,27 +42,27 @@ struct Categories {
     
     func completeCategory(category: Category) -> Categories {
         let newCategories: [Category] = self.allCategories.replaced(where: {$0.id == category.id}, withResultOf: {$0.complete(orderCompleted: getNextCompletedCategoryOrder())})
-        return Categories(allCategories: newCategories, remainingClueBoxes: self.remainingClueBoxes.completeSelectedClueBoxes())
+        return Categories(allCategories: newCategories, allClueBoxes: self.allClueBoxes.completeSelectedClueBoxes())
     }
     
     func clickClueBox(clueBox: ClueBox) -> Categories {
-        return Categories(allCategories: self.allCategories, remainingClueBoxes: self.remainingClueBoxes.clickClueBox(clueBox: clueBox))
+        return Categories(allCategories: self.allCategories, allClueBoxes: self.allClueBoxes.clickClueBox(clueBox: clueBox))
     }
     
     func shuffleClueBoxes() -> Categories {
-        return Categories(allCategories: self.allCategories, remainingClueBoxes: self.remainingClueBoxes.shuffleClueBoxes())
+        return Categories(allCategories: self.allCategories, allClueBoxes: self.allClueBoxes.shuffleClueBoxes())
     }
     
     func deselectAllClueBoxes() -> Categories {
-        return Categories(allCategories: self.allCategories, remainingClueBoxes: self.remainingClueBoxes.deselectAllClueBoxes())
+        return Categories(allCategories: self.allCategories, allClueBoxes: self.allClueBoxes.deselectAllClueBoxes())
     }
     
     func startShakingSelectedClueBoxes() -> Categories {
-        return Categories(allCategories: self.allCategories, remainingClueBoxes: self.remainingClueBoxes.startShakingSelectedClueBoxes())
+        return Categories(allCategories: self.allCategories, allClueBoxes: self.allClueBoxes.startShakingSelectedClueBoxes())
     }
     
     func stopShakingSelectedClueBoxes() -> Categories {
-        return Categories(allCategories: self.allCategories, remainingClueBoxes: self.remainingClueBoxes.stopShakingSelectedClueBoxes())
+        return Categories(allCategories: self.allCategories, allClueBoxes: self.allClueBoxes.stopShakingSelectedClueBoxes())
     }
     
     func getSubmitBestMatch(selectedClueBoxIDs: [UUID]) -> SubmitResult? {

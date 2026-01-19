@@ -104,17 +104,17 @@ class MainGame {
     }
     
     public func deselectAllIsClickable() -> Bool {
-        return self.categories.remainingClueBoxes.deselectAllIsClickable
+        return self.categories.allClueBoxes.deselectAllIsClickable
     }
     
     public func submitIsClickable() -> Bool {
-        return self.categories.remainingClueBoxes.submitIsClickable
+        return self.categories.allClueBoxes.submitIsClickable
     }
     
     public func submitSelection() {
         if submitIsClickable() {
-            let selectedBoxClues: [String] = self.categories.remainingClueBoxes.selectedClueBoxes.map({$0.clue})
-            let selectedClueBoxIDs: [UUID] = self.categories.remainingClueBoxes.selectedClueBoxes.map({$0.id})
+            let selectedBoxClues: [String] = self.categories.allClueBoxes.selectedClueBoxes.map({$0.clue})
+            let selectedClueBoxIDs: [UUID] = self.categories.allClueBoxes.selectedClueBoxes.map({$0.id})
             
             if self.allGuesses.selectionAlreadyGuessed(selectedBoxClues: selectedBoxClues) {
                 handleAlreadyGuessed()
