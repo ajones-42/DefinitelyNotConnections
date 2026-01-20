@@ -24,11 +24,11 @@ struct Guess: Identifiable {
         }
     }
     
-    init(clues: [String], clueBoxIDs: [UUID], isCorrect: Bool, isOneAway: Bool) {
+    init(clues: [String], clueBoxIDs: [UUID], submitResult: SubmitResult) {
         self.clues = clues
         self.clueBoxIDs = clueBoxIDs
-        self.isCorrect = isCorrect
-        self.isOneAway = isOneAway
+        self.isCorrect = submitResult.isCorrect
+        self.isOneAway = submitResult.isOneAway
         self.id = UUID()
     }
     

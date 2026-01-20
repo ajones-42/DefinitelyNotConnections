@@ -65,9 +65,9 @@ struct Categories {
         return Categories(allCategories: self.allCategories, allClueBoxes: self.allClueBoxes.stopShakingSelectedClueBoxes())
     }
     
-    func getSubmitBestMatch(selectedClueBoxIDs: [UUID]) -> SubmitResult? {
+    func getSubmitBestMatch(selectedClueBoxIDs: [UUID], numCluesPerCategory: Int) -> SubmitResult? {
         let submitResults: [SubmitResult] = self.allCategories.map { category in
-            SubmitResult(categoryID: category.id, numMatches: getNumSameElementsInArrays(lhs: selectedClueBoxIDs, rhs: category.getClueIDs()))
+            SubmitResult(categoryID: category.id, numMatches: getNumSameElementsInArrays(lhs: selectedClueBoxIDs, rhs: category.getClueIDs()), numCluesPerCategory: numCluesPerCategory)
         }
         return submitResults.max(by: {a, b in a.numMatches < b.numMatches})
     }

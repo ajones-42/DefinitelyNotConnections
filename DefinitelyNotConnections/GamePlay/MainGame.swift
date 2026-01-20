@@ -115,15 +115,13 @@ class MainGame {
             if self.allGuesses.selectionAlreadyGuessed(selectedBoxClues: selectedBoxClues) {
                 handleAlreadyGuessed()
             } else {
-                if let bestMatch: SubmitResult = self.categories.getSubmitBestMatch(selectedClueBoxIDs: selectedClueBoxIDs) {
-                    let guessCorrect: Bool = bestMatch.numMatches == 4 ? true : false
-                    let guessOneAway: Bool = bestMatch.numMatches == 3 ? true : false
-                    let guess = Guess(clues: selectedBoxClues, clueBoxIDs: selectedClueBoxIDs, isCorrect: guessCorrect, isOneAway: guessOneAway)
+                if let bestMatch: SubmitResult = self.categories.getSubmitBestMatch(selectedClueBoxIDs: selectedClueBoxIDs, numCluesPerCategory: self.gameProperties.numCluesPerCategory) {
+                    let guess = Guess(clues: selectedBoxClues, clueBoxIDs: selectedClueBoxIDs, submitResult: bestMatch)
                     self.allGuesses = self.allGuesses.addGuess(guess: guess)
-                    if guessCorrect {
+                    if bestMatch.isCorrect {
                         handleCorrectGuess(submitResult: bestMatch)
                     } else {
-                        handleIncorrectGuess(guessOneAway: guessOneAway)
+                        handleIncorrectGuess(guessOneAway: bestMatch.isOneAway)
                     }
                 }
             }
