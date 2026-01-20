@@ -19,11 +19,11 @@ struct Categories {
         self.sortedCompletedCategories.count
     }
     
-    init(categoryInfos: [CategoryInfo]) {
+    init(categoryInfos: [CategoryInfo], numCluesPerCategory: Int) {
         self.allCategories = categoryInfos.enumerated().map{ (index, categoryInfo) in
             Category(id: index, categoryInfo: categoryInfo)
         }
-        self.allClueBoxes = AllClueBoxes(categoryInfos: categoryInfos, shuffled: true)
+        self.allClueBoxes = AllClueBoxes(categoryInfos: categoryInfos, numCluesPerCategory: numCluesPerCategory, shuffled: true)
     }
     
     init(allCategories: [Category], allClueBoxes: AllClueBoxes) {

@@ -19,7 +19,7 @@ class MainGame {
     init(categoryInfos: [CategoryInfo]) {
         self.gameProperties = GameProperties()
         self.gamePhase = .setup
-        self.categories = Categories(categoryInfos: categoryInfos)
+        self.categories = Categories(categoryInfos: categoryInfos, numCluesPerCategory: gameProperties.numCluesPerCategory)
         self.allGuesses = AllGuesses(guesses: [])
         self.popup = nil
         self.mistakes = Mistakes(numMistakesRemaining: gameProperties.numMistakes)
