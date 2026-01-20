@@ -16,8 +16,8 @@ class MainGame {
     var popup: Popup?
     var mistakes: Mistakes
     
-    init(gameProperties: GameProperties, categoryInfos: [CategoryInfo]) {
-        self.gameProperties = gameProperties
+    init(categoryInfos: [CategoryInfo]) {
+        self.gameProperties = GameProperties()
         self.gamePhase = .setup
         self.categories = Categories(categoryInfos: categoryInfos)
         self.allGuesses = AllGuesses(guesses: [])
