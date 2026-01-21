@@ -21,17 +21,28 @@ func getNumSameElementsInArrays<T: Equatable>(lhs: [T], rhs: [T]) -> Int {
     return numSameElements
 }
 
-func createDefaultTestCategoryInfos() -> [CategoryInfo] {
+func createDefaultClues(numCluesPerCategory: Int, categoryNumber: Int) -> [String] {
+    var clues: [String] = []
+    for clueNumber in 0...numCluesPerCategory - 1 {
+        clues.append("Clue \(numCluesPerCategory * categoryNumber + clueNumber)")
+    }
+    return clues
+}
+
+func createTestCategoryInfos(numCategories: Int, colours: [Color], numCluesPerCategory: Int) -> [CategoryInfo] {
     var categoryInfos: [CategoryInfo] = []
-    categoryInfos.append(CategoryInfo(name: "Category 0", colour: .yellow, clues: ["Clue 0", "Clue 1", "Clue 2", "Clue 3"]))
-    categoryInfos.append(CategoryInfo(name: "Category 1", colour: .green, clues: ["Clue 4", "Clue 5", "Clue 6", "Clue 7"]))
-    categoryInfos.append(CategoryInfo(name: "Category 2", colour: .blue, clues: ["Clue 8", "Clue 9", "Clue 10", "Clue 11"]))
-    categoryInfos.append(CategoryInfo(name: "Category 3", colour: .purple, clues: ["Clue 12", "Clue 13", "Clue 14", "Clue 15"]))
+    for categoryNumber in 0...numCategories - 1 {
+        categoryInfos.append(CategoryInfo(name: "Category \(categoryNumber)", colour: colours[categoryNumber], clues: createDefaultClues(numCluesPerCategory: numCluesPerCategory, categoryNumber: categoryNumber)))
+    }
     return categoryInfos
 }
 
+func createTestSetupInfo(numCategories: Int, colours: [Color], numCluesPerCategory: Int) -> SetupInfo {
+    return SetupInfo(numCluesPerCategory: numCluesPerCategory, categoryInfos: createTestCategoryInfos(numCategories: numCategories, colours: colours, numCluesPerCategory: numCluesPerCategory))
+}
+
 func createDefaultTestSetupInfo() -> SetupInfo {
-    return SetupInfo(numCluesPerCategory: 4, categoryInfos: createDefaultTestCategoryInfos())
+    return createTestSetupInfo(numCategories: 4, colours: [.yellow, .green, .blue, .purple], numCluesPerCategory: 4)
 }
 
 func categoriesCompletedInIncreasingOrder(category1: Category, category2: Category) -> Bool {
