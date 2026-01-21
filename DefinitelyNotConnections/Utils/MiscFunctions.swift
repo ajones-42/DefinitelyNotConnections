@@ -30,6 +30,10 @@ func createDefaultTestCategoryInfos() -> [CategoryInfo] {
     return categoryInfos
 }
 
+func createDefaultTestSetupInfo() -> SetupInfo {
+    return SetupInfo(numCluesPerCategory: 4, categoryInfos: createDefaultTestCategoryInfos())
+}
+
 func categoriesCompletedInIncreasingOrder(category1: Category, category2: Category) -> Bool {
     if let orderCompleted1 = category1.orderCompleted, let orderCompleted2 = category2.orderCompleted {
         return orderCompleted1 < orderCompleted2

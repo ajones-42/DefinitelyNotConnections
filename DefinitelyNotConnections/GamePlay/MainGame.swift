@@ -16,10 +16,10 @@ class MainGame {
     var popup: Popup?
     var mistakes: Mistakes
     
-    init(categoryInfos: [CategoryInfo]) {
-        self.gameProperties = GameProperties()
+    init(setupInfo: SetupInfo) {
+        self.gameProperties = GameProperties(numMistakes: 4, numCluesPerCategory: setupInfo.numCluesPerCategory)
         self.gamePhase = .setup
-        self.categories = Categories(categoryInfos: categoryInfos, numCluesPerCategory: gameProperties.numCluesPerCategory)
+        self.categories = Categories(categoryInfos: setupInfo.categoryInfos, numCluesPerCategory: setupInfo.numCluesPerCategory)
         self.allGuesses = AllGuesses(guesses: [])
         self.popup = nil
         self.mistakes = Mistakes(numMistakesRemaining: gameProperties.numMistakes)
