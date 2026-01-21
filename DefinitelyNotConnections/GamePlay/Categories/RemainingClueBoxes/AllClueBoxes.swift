@@ -28,21 +28,21 @@ struct AllClueBoxes {
     var deselectAllIsClickable: Bool {
         self.numSelectedClueBoxes > 0
     }
+    
 
-    
-    init(allClueBoxes: [ClueBox], numCluesPerCategory: Int, shuffled: Bool) {
-        self.numCluesPerCategory = numCluesPerCategory
-        self.allClueBoxes = shuffled ? allClueBoxes.shuffled() : allClueBoxes
-    }
-    
-    init(categoryInfos: [CategoryInfo], numCluesPerCategory: Int, shuffled: Bool) {
-        self.numCluesPerCategory = numCluesPerCategory
-        let clueBoxes: [ClueBox] = categoryInfos.flatMap { catInfo in
+    init(setupInfo: SetupInfo, shuffled: Bool) {
+        self.numCluesPerCategory = setupInfo.numCluesPerCategory
+        let clueBoxes: [ClueBox] = setupInfo.categoryInfos.flatMap { catInfo in
             catInfo.clueInfos.map { clueInfo in
                 ClueBox(clueInfo: clueInfo)
             }
         }
         self.allClueBoxes = shuffled ? clueBoxes.shuffled() : clueBoxes
+    }
+    
+    init(allClueBoxes: [ClueBox], numCluesPerCategory: Int, shuffled: Bool) {
+        self.numCluesPerCategory = numCluesPerCategory
+        self.allClueBoxes = shuffled ? allClueBoxes.shuffled() : allClueBoxes
     }
     
     func reset() -> AllClueBoxes {
