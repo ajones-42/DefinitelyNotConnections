@@ -7,17 +7,11 @@
 
 import Foundation
 
-/*class ClueBoxBuilder {
-    var clue: String = "A clue!"
+class ClueBoxBuilder {
+    var clueInfo: ClueInfo = ClueInfo(clue: "A clue!")
     var isCompleted: Bool = false
     var isSelected: Bool = false
     var shake: Bool = false
-    var id: UUID = UUID()
-
-    func withClue(clue: String) -> ClueBoxBuilder {
-        self.clue = clue
-        return self
-    }
     
     func withIsCompleted(isCompleted: Bool) -> ClueBoxBuilder {
         self.isCompleted = isCompleted
@@ -34,12 +28,12 @@ import Foundation
         return self
     }
     
-    func withID(id: UUID) -> ClueBoxBuilder {
-        self.id = id
+    func withClueInfo(clueInfo: ClueInfo) -> ClueBoxBuilder {
+        self.clueInfo = clueInfo
         return self
     }
 
     func build() -> ClueBox {
-        return ClueBox(clue: self.clue, isCompleted: self.isCompleted, isSelected: self.isSelected, shake: self.shake, id: self.id)
+        return ClueBox(clueInfo: self.clueInfo, isCompleted: self.isCompleted, isSelected: self.isSelected, shake: self.shake)
     }
-}*/
+}
