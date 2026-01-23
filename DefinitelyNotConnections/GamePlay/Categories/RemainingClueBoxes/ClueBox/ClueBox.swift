@@ -9,14 +9,11 @@ import Foundation
 
 struct ClueBox: Equatable {
     let clueInfo: ClueInfo
-    //let clue: String
     let isCompleted: Bool
     let isSelected: Bool
     let shake: Bool
-    //let id: UUID
     
     init(clueInfo: ClueInfo) {
-        //self.init(clue: clueInfo.clue, isCompleted: false, isSelected: false, shake: false, id: clueInfo.id)
         self.init(clueInfo: clueInfo, isCompleted: false, isSelected: false, shake: false)
     }
     
@@ -25,7 +22,6 @@ struct ClueBox: Equatable {
         self.isCompleted = isCompleted
         self.isSelected = isSelected
         self.shake = shake
-        //self.id = id
     }
     
     func reset() -> ClueBox {
