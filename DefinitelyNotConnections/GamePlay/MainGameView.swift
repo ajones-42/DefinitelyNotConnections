@@ -18,7 +18,7 @@ struct MainGameView: View {
             CategoriesView()
                 .padding(.horizontal)
                 .overlay(OutOfMistakesAlertView())
-            MistakesRemainingView(mistakes: mainGame.mistakes)
+            MistakesRemainingView()
             HStack {
                 ShuffleButtonView()
                 DeselectAllButtonView()
