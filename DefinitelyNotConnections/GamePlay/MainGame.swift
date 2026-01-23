@@ -112,7 +112,7 @@ class MainGame {
             let selectedClueInfos: [ClueInfo] = self.categories.allClueBoxes.selectedClueBoxes.map({clueBox in
                 clueBox.clueInfo})
             
-            if self.allGuesses.selectionAlreadyGuessed(selectedClueBoxIDs: selectedClueInfos.map({$0.id})) {
+            if self.allGuesses.selectionAlreadyGuessed(selectedClueBoxIDs: selectedClueInfos.map({clueInfo in clueInfo.id})) {
                 handleAlreadyGuessed()
             } else {
                 if let bestMatch: SubmitResult = self.categories.getSubmitBestMatch(selectedClueBoxIDs: selectedClueInfos.map({clueInfo in clueInfo.id}), numCluesPerCategory: self.gameProperties.numCluesPerCategory) {

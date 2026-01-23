@@ -14,7 +14,8 @@ func concatClues(clues: [String]) -> String {
 
 func getNumSameElementsInArrays<T: Equatable>(lhs: [T], rhs: [T]) -> Int {
     // If I ever expect one array to be much larger than the other, it may be worth finding and probing with the larger array
-    return lhs.map({rhs.contains($0) ? 1 : 0}).reduce(0, {x, y in
+    return lhs.map({lhElement in
+        rhs.contains(lhElement) ? 1 : 0}).reduce(0, {x, y in
         x + y
     })
 }

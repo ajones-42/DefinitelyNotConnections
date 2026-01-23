@@ -13,7 +13,9 @@ struct Categories {
     let allClueBoxes: AllClueBoxes
 
     var sortedCompletedCategories: [Category] {
-        self.allCategories.filter({$0.isCompleted}).sorted(by: categoriesCompletedInIncreasingOrder)
+        self.allCategories.filter({
+            category in category.isCompleted
+        }).sorted(by: categoriesCompletedInIncreasingOrder)
     }
     var numCompletedCategories: Int {
         self.sortedCompletedCategories.count
