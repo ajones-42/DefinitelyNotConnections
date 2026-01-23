@@ -24,13 +24,6 @@ struct AllGuesses {
     }
     
     func selectionAlreadyGuessed(selectedClueBoxIDs: [UUID]) -> Bool {
-        var selectionAlreadyGuessed: Bool = false
-        for guess in self.getGuesses() {
-            if guess.getClueIDs().sorted() == selectedClueBoxIDs.sorted() {
-                selectionAlreadyGuessed = true
-                break
-            }
-        }
-        return selectionAlreadyGuessed
+        return self.getGuesses().map({$0.clueBoxesMatchGuess(clueBoxIDs: selectedClueBoxIDs)}).contains(true)
     }
 }

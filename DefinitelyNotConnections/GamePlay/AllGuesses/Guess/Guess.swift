@@ -41,4 +41,9 @@ struct Guess: Identifiable {
     func getGuessText() -> String {
         return "\(concatClues(clues: getClues()))"
     }
+    
+    func clueBoxesMatchGuess(clueBoxIDs: [UUID]) -> Bool {
+        let guessClueBoxIDs: [UUID] = getClueIDs()
+        return getNumSameElementsInArrays(lhs: clueBoxIDs, rhs: guessClueBoxIDs) == guessClueBoxIDs.count
+    }
 }
