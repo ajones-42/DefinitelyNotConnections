@@ -19,8 +19,7 @@ struct AllGuesses {
     }
     
     func addGuess(guess: Guess) -> AllGuesses {
-        var newGuesses: [Guess] = self.guesses
-        newGuesses.append(guess)
+        let newGuesses: [Guess] = self.guesses + [guess]
         return AllGuesses(guesses: newGuesses)
     }
     
