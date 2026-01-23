@@ -24,10 +24,10 @@ struct AllGuesses {
         return AllGuesses(guesses: newGuesses)
     }
     
-    func selectionAlreadyGuessed(selectedBoxClues: [String]) -> Bool {
+    func selectionAlreadyGuessed(selectedClueBoxIDs: [UUID]) -> Bool {
         var selectionAlreadyGuessed: Bool = false
         for guess in self.getGuesses() {
-            if guess.getClues().sorted() == selectedBoxClues.sorted() {
+            if guess.getClueIDs().sorted() == selectedClueBoxIDs.sorted() {
                 selectionAlreadyGuessed = true
                 break
             }

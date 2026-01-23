@@ -111,7 +111,7 @@ class MainGame {
         if submitIsClickable() {
             let selectedClueInfos: [ClueInfo] = self.categories.allClueBoxes.selectedClueBoxes.map({$0.clueInfo})
             
-            if self.allGuesses.selectionAlreadyGuessed(selectedBoxClues: selectedClueInfos.map({$0.clue})) {
+            if self.allGuesses.selectionAlreadyGuessed(selectedClueBoxIDs: selectedClueInfos.map({$0.id})) {
                 handleAlreadyGuessed()
             } else {
                 if let bestMatch: SubmitResult = self.categories.getSubmitBestMatch(selectedClueBoxIDs: selectedClueInfos.map({$0.id}), numCluesPerCategory: self.gameProperties.numCluesPerCategory) {

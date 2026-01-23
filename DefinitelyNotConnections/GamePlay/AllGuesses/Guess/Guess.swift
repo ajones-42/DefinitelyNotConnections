@@ -30,6 +30,10 @@ struct Guess: Identifiable {
         self.id = UUID()
     }
     
+    func getClueIDs() -> [UUID] {
+        return self.clueInfos.map({$0.id})
+    }
+    
     func getClues() -> [String] {
         return self.clueInfos.map({$0.clue})
     }
