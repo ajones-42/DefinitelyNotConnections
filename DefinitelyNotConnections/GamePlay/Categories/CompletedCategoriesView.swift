@@ -11,7 +11,7 @@ struct CompletedCategoriesView: View {
     var categories: Categories
 
     var body: some View {
-        ForEach(categories.sortedCompletedCategories) { category in
+        ForEach(categories.sortedCompletedCategories) {category in
             CompletedCategoryView(category: category)
         }
     }
