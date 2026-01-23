@@ -15,8 +15,8 @@ struct MistakesRemainingView: View {
         HStack {
             Text("Mistakes remaining:")
                 .fontWeight(.semibold)
-            ForEach(0...3, id: \.self) {
-                shape.opacity(mistakes.numMistakesRemaining > $0 ? 1 : 0)
+            ForEach(0...3, id: \.self) {mistakeNumber in
+                shape.opacity(mistakes.numMistakesRemaining > mistakeNumber ? 1 : 0)
             }
         }
     }
