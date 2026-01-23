@@ -109,14 +109,13 @@ class MainGame {
     
     public func submitSelection() {
         if submitIsClickable() {
-            let selectedBoxClues: [String] = self.categories.allClueBoxes.selectedClueBoxes.map({$0.clueInfo.clue})
-            let selectedClueBoxIDs: [UUID] = self.categories.allClueBoxes.selectedClueBoxes.map({$0.clueInfo.id})
+            let selectedClueInfos: [ClueInfo] = self.categories.allClueBoxes.selectedClueBoxes.map({$0.clueInfo})
             
-            if self.allGuesses.selectionAlreadyGuessed(selectedBoxClues: selectedBoxClues) {
+            if self.allGuesses.selectionAlreadyGuessed(selectedBoxClues: selectedClueInfos.map({$0.clue})) {
                 handleAlreadyGuessed()
             } else {
-                if let bestMatch: SubmitResult = self.categories.getSubmitBestMatch(selectedClueBoxIDs: selectedClueBoxIDs, numCluesPerCategory: self.gameProperties.numCluesPerCategory) {
-                    let guess = Guess(clues: selectedBoxClues, clueBoxIDs: selectedClueBoxIDs, submitResult: bestMatch)
+                if let bestMatch: SubmitResult = self.categories.getSubmitBestMatch(selectedClueBoxIDs: selectedClueInfos.map({$0.id}), numCluesPerCategory: self.gameProperties.numCluesPerCategory) {
+                    let guess = Guess(clueInfos: selectedClueInfos, submitResult: bestMatch)
                     self.allGuesses = self.allGuesses.addGuess(guess: guess)
                     if bestMatch.isCorrect {
                         handleCorrectGuess(submitResult: bestMatch)
