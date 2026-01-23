@@ -109,8 +109,8 @@ class MainGame {
     
     public func submitSelection() {
         if submitIsClickable() {
-            let selectedBoxClues: [String] = self.categories.allClueBoxes.selectedClueBoxes.map({$0.clue})
-            let selectedClueBoxIDs: [UUID] = self.categories.allClueBoxes.selectedClueBoxes.map({$0.id})
+            let selectedBoxClues: [String] = self.categories.allClueBoxes.selectedClueBoxes.map({$0.clueInfo.clue})
+            let selectedClueBoxIDs: [UUID] = self.categories.allClueBoxes.selectedClueBoxes.map({$0.clueInfo.id})
             
             if self.allGuesses.selectionAlreadyGuessed(selectedBoxClues: selectedBoxClues) {
                 handleAlreadyGuessed()

@@ -12,7 +12,7 @@ struct RemainingClueBoxesView: View {
 
     var body: some View {
         LazyVGrid(columns: [GridItem(), GridItem(), GridItem(), GridItem()]) {
-            ForEach(mainGame.categories.allClueBoxes.remainingClueBoxes) { clueBox in
+            ForEach(mainGame.categories.allClueBoxes.remainingClueBoxes, id: \.clueInfo.id) { clueBox in
                 ClueBoxView(clueBox: clueBox)
                     .onTapGesture {
                         mainGame.clickClueBox(clueBox: clueBox)

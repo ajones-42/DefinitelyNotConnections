@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ClueInfo {
+struct ClueInfo: Equatable {
     let clue: String
     let id: UUID = UUID()
 }

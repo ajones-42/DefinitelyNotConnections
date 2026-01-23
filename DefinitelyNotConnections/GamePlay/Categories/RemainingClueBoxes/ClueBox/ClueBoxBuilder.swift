@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ClueBoxBuilder {
+/*class ClueBoxBuilder {
     var clue: String = "A clue!"
     var isCompleted: Bool = false
     var isSelected: Bool = false
@@ -42,4 +42,4 @@ class ClueBoxBuilder {
     func build() -> ClueBox {
         return ClueBox(clue: self.clue, isCompleted: self.isCompleted, isSelected: self.isSelected, shake: self.shake, id: self.id)
     }
-}
+}*/
