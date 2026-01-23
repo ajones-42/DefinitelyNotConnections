@@ -35,13 +35,13 @@ struct Category: Identifiable {
     }
     
     func getClues() -> [String] {
-        return self.clueInfos.map({ clueInfo in
+        return self.clueInfos.map({clueInfo in
             clueInfo.clue
         })
     }
     
     func getClueIDs() -> [UUID] {
-        return self.clueInfos.map({ clueInfo in
+        return self.clueInfos.map({clueInfo in
             clueInfo.id
         })
     }
