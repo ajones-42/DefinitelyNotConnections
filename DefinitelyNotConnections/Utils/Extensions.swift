@@ -9,18 +9,25 @@ import Foundation
 
 extension Array where Element: Any {
     mutating func replace(where condition: (Element) -> Bool, withResultOf generateNewElement: (Element) -> Element) {
-        self = self.map( {condition($0) ? generateNewElement($0) : $0} )
+        self = self.map({originalElement in
+            condition(originalElement) ? generateNewElement(originalElement) : originalElement
+        })
     }
 
     mutating func replace(where condition: (Element) -> Bool, with newElement: Element) {
-        self = self.map( {condition($0) ? newElement : $0} )
+        self = self.map({originalElement in
+            condition(originalElement) ? newElement : originalElement
+        })
     }
 
     func replaced(where condition: (Element) -> Bool, withResultOf generateNewElement: (Element) -> Element) -> [Element] {
-        return self.map( {condition($0) ? generateNewElement($0) : $0} )
+        return self.map({originalElement in
+            condition(originalElement) ? generateNewElement(originalElement) : originalElement
+        })
     }
     
     func replaced(where condition: (Element) -> Bool, with newElement: Element) -> [Element] {
-        return self.map( {condition($0) ? newElement : $0} )
+        return self.map({originalElement in
+            condition(originalElement) ? newElement : originalElement} )
     }
 }
