@@ -13,14 +13,14 @@ struct Categories {
     let allClueBoxes: AllClueBoxes
 
     var sortedCompletedCategories: [Category] {
-        self.allCategories.filter( {$0.isCompleted} ).sorted(by: categoriesCompletedInIncreasingOrder)
+        self.allCategories.filter({$0.isCompleted}).sorted(by: categoriesCompletedInIncreasingOrder)
     }
     var numCompletedCategories: Int {
         self.sortedCompletedCategories.count
     }
     
     init(setupInfo: SetupInfo) {
-        self.allCategories = setupInfo.categoryInfos.enumerated().map{ (index, categoryInfo) in
+        self.allCategories = setupInfo.categoryInfos.enumerated().map{(index, categoryInfo) in
             Category(id: index, categoryInfo: categoryInfo)
         }
         self.allClueBoxes = AllClueBoxes(setupInfo: setupInfo, shuffled: true)
@@ -32,7 +32,7 @@ struct Categories {
     }
     
     func reset() -> Categories {
-        let resetCategories: [Category] = self.allCategories.replaced(where: {$0.isCompleted}, withResultOf: {$0.reset()})
+        let resetCategories: [Category] = self.allCategories.replaced(where: {category in category.isCompleted}, withResultOf: {category in category.reset()})
         return Categories(allCategories: resetCategories, allClueBoxes: self.allClueBoxes.reset())
     }
     
@@ -41,7 +41,7 @@ struct Categories {
     }
     
     func completeCategory(categoryID: UUID) -> Categories {
-        let newCategories: [Category] = self.allCategories.replaced(where: {$0.id == categoryID}, withResultOf: {$0.complete(orderCompleted: getNextCompletedCategoryOrder())})
+        let newCategories: [Category] = self.allCategories.replaced(where: {category in category.id == categoryID}, withResultOf: {category in category.complete(orderCompleted: getNextCompletedCategoryOrder())})
         return Categories(allCategories: newCategories, allClueBoxes: self.allClueBoxes.completeSelectedClueBoxes())
     }
     
@@ -66,7 +66,7 @@ struct Categories {
     }
     
     func getSubmitBestMatch(selectedClueBoxIDs: [UUID], numCluesPerCategory: Int) -> SubmitResult? {
-        let submitResults: [SubmitResult] = self.allCategories.map { category in
+        let submitResults: [SubmitResult] = self.allCategories.map {category in
             SubmitResult(categoryID: category.id, numMatches: getNumSameElementsInArrays(lhs: selectedClueBoxIDs, rhs: category.getClueIDs()), numCluesPerCategory: numCluesPerCategory)
         }
         return submitResults.max(by: {a, b in a.numMatches < b.numMatches})
