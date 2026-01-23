@@ -51,4 +51,12 @@ struct ClueBox: Equatable {
     func setUncompleted() -> ClueBox {
         return ClueBox(clueInfo: self.clueInfo, isCompleted: false, isSelected: self.isSelected, shake: self.shake)
     }
+    
+    func getID() -> UUID {
+        return self.clueInfo.id
+    }
+    
+    func getClue() -> String {
+        return self.clueInfo.clue
+    }
 }
