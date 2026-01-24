@@ -8,6 +8,15 @@
 import Foundation
 
 struct SetupInfo {
-    let numCluesPerCategory: Int
     let categoryInfos: [CategoryInfo]
+    let numCluesPerCategory: Int
+    
+    init(numCluesPerCategory: Int, categoryInfos: [CategoryInfo]) {
+        self.categoryInfos = categoryInfos
+        self.numCluesPerCategory = numCluesPerCategory
+    }
+    
+    func getNumCategories() -> Int {
+        return self.categoryInfos.count
+    }
 }

@@ -17,7 +17,7 @@ class MainGame {
     var mistakes: Mistakes
     
     init(setupInfo: SetupInfo) {
-        self.gameProperties = GameProperties(numMistakes: 4, numCluesPerCategory: setupInfo.numCluesPerCategory)
+        self.gameProperties = GameProperties(numMistakes: 4, setupInfo: setupInfo)
         self.gamePhase = .setup
         self.categories = Categories(setupInfo: setupInfo)
         self.allGuesses = AllGuesses(guesses: [])
@@ -86,7 +86,7 @@ class MainGame {
     
     private func handleCorrectGuess(submitResult: SubmitResult) {
         self.categories = self.categories.completeCategory(categoryID: submitResult.categoryID)
-        if self.categories.numCompletedCategories == 4 {
+        if self.categories.numCompletedCategories == self.gameProperties.numCategories {
             admirePuzzle()
         }
     }
