@@ -48,7 +48,7 @@ struct Categories {
     }
     
     func clickClueBox(clueBox: ClueBox) -> Categories {
-        return Categories(allCategories: self.allCategories, allClueBoxes: self.allClueBoxes.clickClueBox(clueBox: clueBox))
+        return Categories(allCategories: self.allCategories, allClueBoxes: self.allClueBoxes.clickClueBox(clueBoxToClick: clueBox))
     }
     
     func shuffleClueBoxes() -> Categories {
