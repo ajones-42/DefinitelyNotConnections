@@ -24,32 +24,36 @@ struct ClueBox: Equatable {
         self.shake = shake
     }
     
+    private func recomputeClueBox(newIsCompleted: Bool, newIsSelected: Bool, newShake: Bool) -> ClueBox {
+        return ClueBox(clueInfo: self.clueInfo, isCompleted: newIsCompleted, isSelected: newIsSelected, shake: newShake)
+    }
+    
     func reset() -> ClueBox {
-        return ClueBox(clueInfo: self.clueInfo, isCompleted: false, isSelected: false, shake: false)
+        return recomputeClueBox(newIsCompleted: false, newIsSelected: false, newShake: false)
     }
     
     func click() -> ClueBox {
-        return ClueBox(clueInfo: self.clueInfo, isCompleted: self.isCompleted, isSelected: !self.isSelected, shake: self.shake)
+        return recomputeClueBox(newIsCompleted: self.isCompleted, newIsSelected: !self.isSelected, newShake: self.shake)
     }
     
     func deselect() -> ClueBox {
-        return ClueBox(clueInfo: self.clueInfo, isCompleted: self.isCompleted, isSelected: false, shake: self.shake)
+        return recomputeClueBox(newIsCompleted: self.isCompleted, newIsSelected: false, newShake: self.shake)
     }
     
     func startShake() -> ClueBox {
-        return ClueBox(clueInfo: self.clueInfo, isCompleted: self.isCompleted, isSelected: self.isSelected, shake: true)
+        return recomputeClueBox(newIsCompleted: self.isCompleted, newIsSelected: self.isSelected, newShake: true)
     }
     
     func stopShake() -> ClueBox {
-        return ClueBox(clueInfo: self.clueInfo, isCompleted: self.isCompleted, isSelected: self.isSelected, shake: false)
+        return recomputeClueBox(newIsCompleted: self.isCompleted, newIsSelected: self.isSelected, newShake: false)
     }
     
     func setCompleted() -> ClueBox {
-        return ClueBox(clueInfo: self.clueInfo, isCompleted: true, isSelected: self.isSelected, shake: self.shake)
+        return recomputeClueBox(newIsCompleted: true, newIsSelected: self.isSelected, newShake: self.shake)
     }
     
     func setUncompleted() -> ClueBox {
-        return ClueBox(clueInfo: self.clueInfo, isCompleted: false, isSelected: self.isSelected, shake: self.shake)
+        return recomputeClueBox(newIsCompleted: false, newIsSelected: self.isSelected, newShake: self.shake)
     }
     
     func getID() -> UUID {
