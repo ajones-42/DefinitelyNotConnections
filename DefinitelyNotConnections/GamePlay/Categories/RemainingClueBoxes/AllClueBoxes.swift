@@ -56,8 +56,12 @@ struct AllClueBoxes {
         return AllClueBoxes(allClueBoxes: newClueBoxes, numCluesPerCategory: self.numCluesPerCategory, shuffled: true)
     }
     
+    func clueBoxIsClickable(clueBox: ClueBox) -> Bool {
+        return self.numSelectedClueBoxes < 4 || clueBox.isSelected
+    }
+    
     func clickClueBox(clueBoxToClick: ClueBox) -> AllClueBoxes {
-        if (self.numSelectedClueBoxes < 4 || clueBoxToClick.isSelected) {
+        if clueBoxIsClickable(clueBox: clueBoxToClick) {
             let newClueBoxes: [ClueBox] = self.allClueBoxes.replaced(where: {clueBox in clueBox.getID() == clueBoxToClick.getID()}, withResultOf: {clueBox in clueBox.click()})
             return AllClueBoxes(allClueBoxes: newClueBoxes, numCluesPerCategory: self.numCluesPerCategory, shuffled: false)
         } else {
