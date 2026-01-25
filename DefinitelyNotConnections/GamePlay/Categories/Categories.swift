@@ -22,10 +22,14 @@ struct Categories {
         self.sortedCompletedCategories.count
     }
     
-    init(setupInfo: SetupInfo, gameProperties: GameProperties) {
-        self.allCategories = setupInfo.categoryInfos.enumerated().map{(index, categoryInfo) in
+    static private func setupCategories(setupInfo: SetupInfo) -> [Category] {
+        return setupInfo.categoryInfos.enumerated().map{(index, categoryInfo) in
             Category(id: index, categoryInfo: categoryInfo)
         }
+    }
+    
+    init(setupInfo: SetupInfo, gameProperties: GameProperties) {
+        self.allCategories = Categories.setupCategories(setupInfo: setupInfo)
         self.gameProperties = gameProperties
         self.allClueBoxes = AllClueBoxes(setupInfo: setupInfo, gameProperties: self.gameProperties, shuffled: true)
     }
