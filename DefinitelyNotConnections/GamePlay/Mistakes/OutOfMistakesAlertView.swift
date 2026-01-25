@@ -22,7 +22,7 @@ struct OutOfMistakesAlertView: View {
                 VStack {
                     Text("Oh go on then, have another go!").foregroundStyle(.black)
                     Button {
-                        mainGame.resetMistakesRemaining()
+                        mainGame.resetMistakes()
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 50)

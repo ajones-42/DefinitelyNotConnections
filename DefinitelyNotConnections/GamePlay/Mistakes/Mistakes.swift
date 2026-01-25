@@ -29,6 +29,10 @@ struct Mistakes {
         return Mistakes(numMistakesRemaining: numMistakesRemaining, gameProperties: self.gameProperties)
     }
     
+    func reset() -> Mistakes {
+        return recompute(numMistakesRemaining: self.gameProperties.numMistakes)
+    }
+    
     func madeMistake() -> Mistakes {
         return recompute(numMistakesRemaining: self.numMistakesRemaining - 1)
     }
