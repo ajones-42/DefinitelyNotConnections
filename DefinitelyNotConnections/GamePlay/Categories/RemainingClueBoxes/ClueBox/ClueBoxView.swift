@@ -28,3 +28,8 @@ struct ClueBoxView: View {
     }
 }
 
+
+#Preview {
+    let clueBox: ClueBox = ClueBoxBuilder().build()
+    ClueBoxView(clueBox: clueBox)
+}
