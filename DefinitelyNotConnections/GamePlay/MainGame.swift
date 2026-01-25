@@ -26,9 +26,9 @@ class MainGame {
     }
     
     public func resetGame() {
-        self.gamePhase = .setup
-        self.categories = self.categories.reset()
-        self.allGuesses = self.allGuesses.reset()
+        resetGamePhase()
+        resetCategories()
+        resetAllGuesses()
         resetMistakes()
     }
     
@@ -46,6 +46,22 @@ class MainGame {
         self.gamePhase = .admiring
     }
     
+    private func resetGamePhase() {
+        self.gamePhase = .setup
+    }
+    
+    private func resetCategories() {
+        self.categories = self.categories.reset()
+    }
+    
+    public func resetMistakes() {
+        self.mistakes = self.mistakes.reset()
+    }
+    
+    private func resetAllGuesses() {
+        self.allGuesses = self.allGuesses.reset()
+    }
+    
     public func getOutOfMistakes() -> Bool {
         return self.mistakes.outOfMistakes
     }
@@ -56,10 +72,6 @@ class MainGame {
     
     public func getNumMistakesRemaining() -> Int {
         return self.mistakes.numMistakesRemaining
-    }
-    
-    public func resetMistakes() {
-        self.mistakes = self.mistakes.reset()
     }
     
     private func activatePopupMomentarily(message: String, duration: TimeInterval) {
