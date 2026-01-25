@@ -34,7 +34,7 @@ struct Category: Identifiable {
         self.orderCompleted = nil
     }
     
-    func recomputeCategory(orderCompleted: Int?) -> Category {
+    private func recomputeCategory(orderCompleted: Int?) -> Category {
         return Category(name: self.name, clueInfos: self.clueInfos, colour: self.colour, id: self.id, orderCompleted: orderCompleted)
     }
     
