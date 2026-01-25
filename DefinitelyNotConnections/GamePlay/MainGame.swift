@@ -20,7 +20,7 @@ class MainGame {
         self.gameProperties = GameProperties(setupInfo: setupInfo)
         self.gamePhase = .setup
         self.categories = Categories(setupInfo: setupInfo, gameProperties: self.gameProperties)
-        self.allGuesses = AllGuesses(guesses: [])
+        self.allGuesses = AllGuesses()
         self.popup = nil
         self.mistakes = Mistakes(gameProperties: self.gameProperties)
     }

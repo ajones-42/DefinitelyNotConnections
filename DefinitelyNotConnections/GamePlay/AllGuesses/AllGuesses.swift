@@ -10,6 +10,14 @@ import Foundation
 struct AllGuesses {
     let guesses: [Guess]
     
+    init() {
+        self.guesses = []
+    }
+    
+    init(guesses: [Guess]) {
+        self.guesses = guesses
+    }
+    
     func reset() -> AllGuesses {
         return AllGuesses(guesses: [])
     }
