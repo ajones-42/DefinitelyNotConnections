@@ -51,6 +51,10 @@ struct Categories {
         return self.allClueBoxes.remainingClueBoxes
     }
     
+    func getSelectedClueBoxes() -> [ClueBox] {
+        return self.allClueBoxes.selectedClueBoxes
+    }
+    
     func clickClueBox(clueBox: ClueBox) -> Categories {
         return Categories(allCategories: self.allCategories, allClueBoxes: self.allClueBoxes.clickClueBox(clueBoxToClick: clueBox))
     }

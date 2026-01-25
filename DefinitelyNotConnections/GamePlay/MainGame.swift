@@ -130,7 +130,7 @@ class MainGame {
     
     public func submitSelection() {
         if getSubmitIsClickable() {
-            let selectedClueInfos: [ClueInfo] = self.categories.allClueBoxes.selectedClueBoxes.map({clueBox in
+            let selectedClueInfos: [ClueInfo] = self.categories.getSelectedClueBoxes().map({clueBox in
                 clueBox.clueInfo})
             
             if self.allGuesses.selectionAlreadyGuessed(selectedClueBoxIDs: selectedClueInfos.map({clueInfo in clueInfo.id})) {
