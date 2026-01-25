@@ -111,6 +111,10 @@ class MainGame {
         return self.categories.allClueBoxes.submitIsClickable
     }
     
+    private func getSubmitBestMatch(selectedClueInfos: [ClueInfo]) -> SubmitResult? {
+        return self.categories.getSubmitBestMatch(selectedClueBoxIDs: selectedClueInfos.map({clueInfo in clueInfo.id}), numCluesPerCategory: self.gameProperties.numCluesPerCategory)
+    }
+    
     public func submitSelection() {
         if submitIsClickable() {
             let selectedClueInfos: [ClueInfo] = self.categories.allClueBoxes.selectedClueBoxes.map({clueBox in
@@ -119,7 +123,7 @@ class MainGame {
             if self.allGuesses.selectionAlreadyGuessed(selectedClueBoxIDs: selectedClueInfos.map({clueInfo in clueInfo.id})) {
                 handleAlreadyGuessed()
             } else {
-                if let bestMatch: SubmitResult = self.categories.getSubmitBestMatch(selectedClueBoxIDs: selectedClueInfos.map({clueInfo in clueInfo.id}), numCluesPerCategory: self.gameProperties.numCluesPerCategory) {
+                if let bestMatch: SubmitResult = getSubmitBestMatch(selectedClueInfos: selectedClueInfos) {
                     let guess = Guess(clueInfos: selectedClueInfos, submitResult: bestMatch)
                     self.allGuesses = self.allGuesses.addGuess(guess: guess)
                     if bestMatch.isCorrect {
