@@ -18,10 +18,15 @@ struct SetupInfo {
         return self.categoryInfos.count
     }
     
-    func getNumCluesPerCategory() -> Int? {
+    func getNumCluesPerCategory() throws -> Int {
         let uniqueNumClues: Set<Int> = Set(self.categoryInfos.map({categoryInfo in
             categoryInfo.clueInfos.count
         }))
-        return uniqueNumClues.first
+        if uniqueNumClues.count == 1 {
+            return uniqueNumClues.first!
+        } else {
+            print("SetupInfo.getNumCluesPerCategory: Number of clues must be the same for all categories.")
+            throw ValidationError.invalidInput
+        }
     }
 }
