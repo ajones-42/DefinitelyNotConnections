@@ -72,6 +72,10 @@ class MainGame {
         }
     }
     
+    public func getRemainingClueBoxes() -> [ClueBox] {
+        return self.categories.getRemainingClueBoxes()
+    }
+    
     public func clickClueBox(clueBox: ClueBox) {
         self.categories = self.categories.clickClueBox(clueBox: clueBox)
     }
