@@ -34,6 +34,10 @@ struct Category: Identifiable {
         self.orderCompleted = nil
     }
     
+    func recomputeCategory(orderCompleted: Int?) -> Category {
+        return Category(name: self.name, clueInfos: self.clueInfos, colour: self.colour, id: self.id, orderCompleted: orderCompleted)
+    }
+    
     func getClues() -> [String] {
         return self.clueInfos.map({clueInfo in
             clueInfo.clue
@@ -47,10 +51,10 @@ struct Category: Identifiable {
     }
     
     func complete(orderCompleted: Int) -> Category {
-        return Category(name: self.name, clueInfos: self.clueInfos, colour: self.colour, id: self.id, orderCompleted: orderCompleted)
+        return recomputeCategory(orderCompleted: orderCompleted)
     }
     
     func reset() -> Category {
-        return Category(name: self.name, clueInfos: self.clueInfos, colour: self.colour, id: self.id, orderCompleted: nil)
+        return recomputeCategory(orderCompleted: nil)
     }
 }
