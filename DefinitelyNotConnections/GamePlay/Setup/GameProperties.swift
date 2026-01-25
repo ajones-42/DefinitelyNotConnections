@@ -15,6 +15,6 @@ class GameProperties {
     init(numMistakes: Int, setupInfo: SetupInfo) {
         self.numMistakes = numMistakes
         self.numCategories = setupInfo.getNumCategories()
-        self.numCluesPerCategory = setupInfo.numCluesPerCategory
+        self.numCluesPerCategory = setupInfo.getNumCluesPerCategory()!
     }
 }

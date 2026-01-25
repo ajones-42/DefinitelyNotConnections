@@ -38,7 +38,7 @@ func createTestSetupInfo(numCategories: Int, colours: [Color], numCluesPerCatego
     for categoryNumber in 0...numCategories - 1 {
         categoryInfos.append(CategoryInfo(name: "Category \(categoryNumber)", colour: colours[categoryNumber], clues: createDefaultClues(numCluesPerCategory: numCluesPerCategory, categoryNumber: categoryNumber)))
     }
-    return SetupInfo(numCluesPerCategory: numCluesPerCategory, categoryInfos: categoryInfos)
+    return SetupInfo(categoryInfos: categoryInfos)
 }
 
 func createDefaultTestSetupInfo() -> SetupInfo {

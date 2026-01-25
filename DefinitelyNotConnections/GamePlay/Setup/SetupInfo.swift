@@ -9,14 +9,19 @@ import Foundation
 
 struct SetupInfo {
     let categoryInfos: [CategoryInfo]
-    let numCluesPerCategory: Int
     
-    init(numCluesPerCategory: Int, categoryInfos: [CategoryInfo]) {
+    init(categoryInfos: [CategoryInfo]) {
         self.categoryInfos = categoryInfos
-        self.numCluesPerCategory = numCluesPerCategory
     }
     
     func getNumCategories() -> Int {
         return self.categoryInfos.count
+    }
+    
+    func getNumCluesPerCategory() -> Int? {
+        let uniqueNumClues: Set<Int> = Set(self.categoryInfos.map({categoryInfo in
+            categoryInfo.clueInfos.count
+        }))
+        return uniqueNumClues.first
     }
 }
