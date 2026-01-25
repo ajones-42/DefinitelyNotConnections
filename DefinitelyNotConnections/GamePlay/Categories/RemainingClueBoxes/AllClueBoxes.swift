@@ -57,7 +57,7 @@ struct AllClueBoxes {
     }
     
     func clueBoxIsClickable(clueBox: ClueBox) -> Bool {
-        return self.numSelectedClueBoxes < 4 || clueBox.isSelected
+        return self.numSelectedClueBoxes < self.numCluesPerCategory || clueBox.isSelected
     }
     
     func clickClueBox(clueBoxToClick: ClueBox) -> AllClueBoxes {

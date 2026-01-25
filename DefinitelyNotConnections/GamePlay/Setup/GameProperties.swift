@@ -9,14 +9,12 @@ import Foundation
 
 struct GameProperties {
     let numMistakes: Int
+    let numCategories: Int
     let numCluesPerCategory: Int
     
-    init(numMistakes: Int, numCluesPerCategory: Int) {
+    init(numMistakes: Int, setupInfo: SetupInfo) {
         self.numMistakes = numMistakes
-        self.numCluesPerCategory = numCluesPerCategory
-    }
-    
-    init() {
-        self.init(numMistakes: 4, numCluesPerCategory: 4)
+        self.numCategories = setupInfo.getNumCategories()
+        self.numCluesPerCategory = setupInfo.numCluesPerCategory
     }
 }
