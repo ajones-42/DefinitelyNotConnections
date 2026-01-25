@@ -9,7 +9,8 @@ import Foundation
 
 struct AllClueBoxes {
     let allClueBoxes: [ClueBox]
-    let numCluesPerCategory: Int
+    let gameProperties: GameProperties
+
     var remainingClueBoxes: [ClueBox] {
         self.allClueBoxes.filter({clueBox in
             !clueBox.isCompleted
@@ -26,7 +27,7 @@ struct AllClueBoxes {
     }
     
     var submitIsClickable: Bool {
-        self.numSelectedClueBoxes == self.numCluesPerCategory
+        self.numSelectedClueBoxes == self.gameProperties.numCluesPerCategory
     }
     
     var deselectAllIsClickable: Bool {
@@ -34,34 +35,34 @@ struct AllClueBoxes {
     }
     
 
-    init(setupInfo: SetupInfo, shuffled: Bool) {
-        self.numCluesPerCategory = setupInfo.numCluesPerCategory
+    init(setupInfo: SetupInfo, gameProperties: GameProperties, shuffled: Bool) {
         let clueBoxes: [ClueBox] = setupInfo.categoryInfos.flatMap { catInfo in
             catInfo.clueInfos.map { clueInfo in
                 ClueBox(clueInfo: clueInfo)
             }
         }
         self.allClueBoxes = shuffled ? clueBoxes.shuffled() : clueBoxes
+        self.gameProperties = gameProperties
     }
     
-    init(allClueBoxes: [ClueBox], numCluesPerCategory: Int, shuffled: Bool) {
-        self.numCluesPerCategory = numCluesPerCategory
+    init(allClueBoxes: [ClueBox], gameProperties: GameProperties, shuffled: Bool) {
         self.allClueBoxes = shuffled ? allClueBoxes.shuffled() : allClueBoxes
+        self.gameProperties = gameProperties
     }
     
     func reset() -> AllClueBoxes {
         let newClueBoxes: [ClueBox] = self.allClueBoxes.map{clueBox in
             clueBox.reset()
         }
-        return AllClueBoxes(allClueBoxes: newClueBoxes, numCluesPerCategory: self.numCluesPerCategory, shuffled: true)
+        return recompute(allClueBoxes: newClueBoxes, shuffled: true)
     }
     
     private func recompute(allClueBoxes: [ClueBox], shuffled: Bool) -> AllClueBoxes {
-        return AllClueBoxes(allClueBoxes: allClueBoxes, numCluesPerCategory: self.numCluesPerCategory, shuffled: shuffled)
+        return AllClueBoxes(allClueBoxes: allClueBoxes, gameProperties: self.gameProperties, shuffled: shuffled)
     }
     
     func clueBoxIsClickable(clueBox: ClueBox) -> Bool {
-        return self.numSelectedClueBoxes < self.numCluesPerCategory || clueBox.isSelected
+        return self.numSelectedClueBoxes < self.gameProperties.numCluesPerCategory || clueBox.isSelected
     }
     
     func clickClueBox(clueBoxToClick: ClueBox) -> AllClueBoxes {

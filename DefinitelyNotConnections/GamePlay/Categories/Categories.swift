@@ -26,8 +26,8 @@ struct Categories {
         self.allCategories = setupInfo.categoryInfos.enumerated().map{(index, categoryInfo) in
             Category(id: index, categoryInfo: categoryInfo)
         }
-        self.allClueBoxes = AllClueBoxes(setupInfo: setupInfo, shuffled: true)
         self.gameProperties = gameProperties
+        self.allClueBoxes = AllClueBoxes(setupInfo: setupInfo, gameProperties: self.gameProperties, shuffled: true)
     }
     
     init(allCategories: [Category], allClueBoxes: AllClueBoxes, gameProperties: GameProperties) {
