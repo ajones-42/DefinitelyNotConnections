@@ -107,12 +107,12 @@ class MainGame {
         activatePopupMomentarily(message: "Already guessed!", duration: 2)
     }
     
-    public func submitIsClickable() -> Bool {
-        return self.categories.allClueBoxes.submitIsClickable
+    public func getSubmitIsClickable() -> Bool {
+        return self.categories.getSubmitIsClickable()
     }
     
     public func submitSelection() {
-        if submitIsClickable() {
+        if getSubmitIsClickable() {
             let selectedClueInfos: [ClueInfo] = self.categories.allClueBoxes.selectedClueBoxes.map({clueBox in
                 clueBox.clueInfo})
             

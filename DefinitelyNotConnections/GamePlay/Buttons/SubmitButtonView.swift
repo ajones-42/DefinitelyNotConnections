@@ -14,7 +14,7 @@ struct SubmitButtonView: View {
         Button {
             mainGame.submitSelection()
         } label: {
-            GameplayButtonView(text: "Submit", isClickable: mainGame.submitIsClickable())
+            GameplayButtonView(text: "Submit", isClickable: mainGame.getSubmitIsClickable())
         }
     }
 }

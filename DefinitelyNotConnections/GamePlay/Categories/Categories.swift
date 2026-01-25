@@ -55,6 +55,10 @@ struct Categories {
         return Categories(allCategories: self.allCategories, allClueBoxes: self.allClueBoxes.shuffleClueBoxes())
     }
     
+    func getSubmitIsClickable() -> Bool {
+        return self.allClueBoxes.submitIsClickable
+    }
+    
     func getDeselectAllIsClickable() -> Bool {
         return self.allClueBoxes.deselectAllIsClickable
     }
