@@ -125,7 +125,7 @@ class MainGame {
     }
     
     private func getSubmitBestMatch(selectedClueInfos: [ClueInfo]) -> SubmitResult? {
-        return self.categories.getSubmitBestMatch(selectedClueBoxIDs: selectedClueInfos.map({clueInfo in clueInfo.id}), numCluesPerCategory: self.gameProperties.numCluesPerCategory)
+        return self.categories.getSubmitBestMatch(selectedClueBoxIDs: selectedClueInfos.map({clueInfo in clueInfo.id}))
     }
     
     public func submitSelection() {
