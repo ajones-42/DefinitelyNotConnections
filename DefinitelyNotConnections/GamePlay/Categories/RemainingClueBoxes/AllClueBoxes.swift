@@ -56,7 +56,7 @@ struct AllClueBoxes {
         return AllClueBoxes(allClueBoxes: newClueBoxes, numCluesPerCategory: self.numCluesPerCategory, shuffled: true)
     }
     
-    private func recomputeAllClueBoxes(allClueBoxes: [ClueBox], shuffled: Bool) -> AllClueBoxes {
+    private func recompute(allClueBoxes: [ClueBox], shuffled: Bool) -> AllClueBoxes {
         return AllClueBoxes(allClueBoxes: allClueBoxes, numCluesPerCategory: self.numCluesPerCategory, shuffled: shuffled)
     }
     
@@ -67,33 +67,33 @@ struct AllClueBoxes {
     func clickClueBox(clueBoxToClick: ClueBox) -> AllClueBoxes {
         if clueBoxIsClickable(clueBox: clueBoxToClick) {
             let newClueBoxes: [ClueBox] = self.allClueBoxes.replaced(where: {clueBox in clueBox.getID() == clueBoxToClick.getID()}, withResultOf: {clueBox in clueBox.click()})
-            return recomputeAllClueBoxes(allClueBoxes: newClueBoxes, shuffled: false)
+            return recompute(allClueBoxes: newClueBoxes, shuffled: false)
         } else {
             return self
         }
     }
     
     func shuffleClueBoxes() -> AllClueBoxes {
-        return recomputeAllClueBoxes(allClueBoxes: self.allClueBoxes, shuffled: true)
+        return recompute(allClueBoxes: self.allClueBoxes, shuffled: true)
     }
     
     func deselectAllClueBoxes() -> AllClueBoxes {
         let newClueBoxes: [ClueBox] = self.allClueBoxes.replaced(where: {clueBox in clueBox.isSelected}, withResultOf: {clueBox in clueBox.deselect()})
-        return recomputeAllClueBoxes(allClueBoxes: newClueBoxes, shuffled: false)
+        return recompute(allClueBoxes: newClueBoxes, shuffled: false)
     }
     
     func startShakingSelectedClueBoxes() -> AllClueBoxes {
         let newClueBoxes: [ClueBox] = self.allClueBoxes.replaced(where: {clueBox in clueBox.isSelected}, withResultOf: {clueBox in clueBox.startShake()})
-        return recomputeAllClueBoxes(allClueBoxes: newClueBoxes, shuffled: false)
+        return recompute(allClueBoxes: newClueBoxes, shuffled: false)
     }
     
     func stopShakingSelectedClueBoxes() -> AllClueBoxes {
         let newClueBoxes: [ClueBox] = self.allClueBoxes.replaced(where: {clueBox in clueBox.isSelected}, withResultOf: {clueBox in clueBox.stopShake()})
-        return recomputeAllClueBoxes(allClueBoxes: newClueBoxes, shuffled: false)
+        return recompute(allClueBoxes: newClueBoxes, shuffled: false)
     }
     
     func completeSelectedClueBoxes() -> AllClueBoxes {
         let newClueBoxes: [ClueBox] = self.allClueBoxes.replaced(where: {clueBox in clueBox.isSelected}, withResultOf: {clueBox in clueBox.setCompleted()})
-        return recomputeAllClueBoxes(allClueBoxes: newClueBoxes, shuffled: true)
+        return recompute(allClueBoxes: newClueBoxes, shuffled: true)
     }
 }

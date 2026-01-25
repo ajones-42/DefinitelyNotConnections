@@ -34,7 +34,7 @@ struct Category: Identifiable {
         self.orderCompleted = nil
     }
     
-    private func recomputeCategory(orderCompleted: Int?) -> Category {
+    private func recompute(orderCompleted: Int?) -> Category {
         return Category(name: self.name, clueInfos: self.clueInfos, colour: self.colour, id: self.id, orderCompleted: orderCompleted)
     }
     
@@ -51,10 +51,10 @@ struct Category: Identifiable {
     }
     
     func complete(orderCompleted: Int) -> Category {
-        return recomputeCategory(orderCompleted: orderCompleted)
+        return recompute(orderCompleted: orderCompleted)
     }
     
     func reset() -> Category {
-        return recomputeCategory(orderCompleted: nil)
+        return recompute(orderCompleted: nil)
     }
 }
