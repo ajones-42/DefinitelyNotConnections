@@ -8,12 +8,11 @@
 import Foundation
 import SwiftUI
 
-/*class CategoryBuilder {
+class CategoryBuilder {
     var name: String = "A Category"
-    var clueBoxTexts: [String] = ["A clue!", "Another clue!", "Yet another clue!", "Guess what, a clue!"]
-    var clueBoxes: [ClueBox] = []
+    var clueInfos: [ClueInfo] = []
     var colour: Color = .red
-    var id: Int = 0
+    var id: UUID = UUID()
     var orderCompleted: Int? = nil
 
     func withName(name: String) -> CategoryBuilder {
@@ -21,13 +20,8 @@ import SwiftUI
         return self
     }
     
-    func withClueBoxTexts(boxTexts: [String]) -> CategoryBuilder {
-        self.clueBoxTexts = boxTexts
-        return self
-    }
-    
-    func withClueBoxes(clueBoxes: [ClueBox]) -> CategoryBuilder {
-        self.clueBoxes = clueBoxes
+    func withClueInfos(clueInfos: [ClueInfo]) -> CategoryBuilder {
+        self.clueInfos = clueInfos
         return self
     }
     
@@ -36,7 +30,7 @@ import SwiftUI
         return self
     }
     
-    func withID(id: Int) -> CategoryBuilder {
+    func withID(id: UUID) -> CategoryBuilder {
         self.id = id
         return self
     }
@@ -47,10 +41,6 @@ import SwiftUI
     }
     
     func build() -> Category {
-        if self.clueBoxes.isEmpty {
-            return Category(name: self.name, clueBoxTexts: self.clueBoxTexts, colour: self.colour, id: self.id, orderCompleted: self.orderCompleted)
-        } else {
-            return Category(name: self.name, clueBoxes: self.clueBoxes, colour: self.colour, id: self.id, orderCompleted: self.orderCompleted)
-        }
+        return Category(name: self.name, clueInfos: self.clueInfos, colour: self.colour, id: self.id, orderCompleted: self.orderCompleted)
     }
-}*/
+}
