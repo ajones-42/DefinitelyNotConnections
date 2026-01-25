@@ -69,6 +69,10 @@ class MainGame {
         }
     }
     
+    private func deactivatePopup() {
+        self.popup = nil
+    }
+    
     private func shakeSelectedClueBoxesMomentarily(duration: TimeInterval) {
         self.categories = self.categories.startShakingSelectedClueBoxes()
         DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
@@ -130,6 +134,7 @@ class MainGame {
     
     public func submitSelection() {
         if getSubmitIsClickable() {
+            deactivatePopup()
             let selectedClueInfos: [ClueInfo] = self.categories.getSelectedClueBoxes().map({clueBox in
                 clueBox.clueInfo})
             
