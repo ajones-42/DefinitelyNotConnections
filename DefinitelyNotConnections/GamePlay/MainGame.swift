@@ -80,6 +80,10 @@ class MainGame {
         self.categories = self.categories.shuffleClueBoxes()
     }
     
+    public func getDeselectAllIsClickable() -> Bool {
+        return self.categories.getDeselectAllIsClickable()
+    }
+    
     public func deselectAllClueBoxes() {
         self.categories = self.categories.deselectAllClueBoxes()
     }
@@ -101,10 +105,6 @@ class MainGame {
     
     private func handleAlreadyGuessed() {
         activatePopupMomentarily(message: "Already guessed!", duration: 2)
-    }
-    
-    public func deselectAllIsClickable() -> Bool {
-        return self.categories.allClueBoxes.deselectAllIsClickable
     }
     
     public func submitIsClickable() -> Bool {
