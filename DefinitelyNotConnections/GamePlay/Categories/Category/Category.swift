@@ -26,7 +26,7 @@ struct Category: Identifiable {
         self.orderCompleted = orderCompleted
     }
     
-    init(id: Int, categoryInfo: CategoryInfo) {
+    init(categoryInfo: CategoryInfo) {
         self.name = categoryInfo.name
         self.colour = categoryInfo.colour
         self.id = categoryInfo.id

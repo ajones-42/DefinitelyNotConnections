@@ -23,8 +23,8 @@ struct Categories {
     }
     
     static private func setupCategories(setupInfo: SetupInfo) -> [Category] {
-        return setupInfo.categoryInfos.enumerated().map{(index, categoryInfo) in
-            Category(id: index, categoryInfo: categoryInfo)
+        return setupInfo.categoryInfos.map{categoryInfo in
+            Category(categoryInfo: categoryInfo)
         }
     }
     
