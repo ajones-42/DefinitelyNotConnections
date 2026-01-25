@@ -80,6 +80,10 @@ class MainGame {
         self.categories = self.categories.shuffleClueBoxes()
     }
     
+    public func deselectAllIsClickable() -> Bool {
+        return self.categories.allClueBoxes.deselectAllIsClickable
+    }
+    
     public func deselectAllClueBoxes() {
         self.categories = self.categories.deselectAllClueBoxes()
     }
@@ -103,8 +107,9 @@ class MainGame {
         activatePopupMomentarily(message: "Already guessed!", duration: 2)
     }
     
-    public func deselectAllIsClickable() -> Bool {
-        return self.categories.allClueBoxes.deselectAllIsClickable
+    private func addGuess(selectedClueInfos: [ClueInfo], bestMatch: SubmitResult) {
+        let guess = Guess(clueInfos: selectedClueInfos, submitResult: bestMatch)
+        self.allGuesses = self.allGuesses.addGuess(guess: guess)
     }
     
     public func submitIsClickable() -> Bool {
@@ -124,8 +129,7 @@ class MainGame {
                 handleAlreadyGuessed()
             } else {
                 if let bestMatch: SubmitResult = getSubmitBestMatch(selectedClueInfos: selectedClueInfos) {
-                    let guess = Guess(clueInfos: selectedClueInfos, submitResult: bestMatch)
-                    self.allGuesses = self.allGuesses.addGuess(guess: guess)
+                    addGuess(selectedClueInfos: selectedClueInfos, bestMatch: bestMatch)
                     if bestMatch.isCorrect {
                         handleCorrectGuess(submitResult: bestMatch)
                     } else {
