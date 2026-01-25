@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct MistakesRemainingView: View {
-    @Environment(MainGame.self) private var mainGame: MainGame
+    let mistakes: Mistakes
     
     var body: some View {
         let mistakeIndicator = Circle().frame(width: 15).foregroundStyle(.foreground)
         HStack {
             Text("Mistakes remaining:")
                 .fontWeight(.semibold)
-            ForEach(0...mainGame.getOriginalNumMistakes() - 1, id: \.self) {mistakeNumber in
-                mistakeIndicator.opacity(mainGame.getNumMistakesRemaining() > mistakeNumber ? 1 : 0)
+            ForEach(0...mistakes.getOriginalNumMistakes() - 1, id: \.self) {mistakeNumber in
+                mistakeIndicator.opacity(mistakes.numMistakesRemaining > mistakeNumber ? 1 : 0)
             }
         }
     }
