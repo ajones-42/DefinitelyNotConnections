@@ -10,11 +10,26 @@ import Foundation
 
 struct Mistakes {
     let numMistakesRemaining: Int
+    let gameProperties: GameProperties
     var outOfMistakes: Bool {
         self.numMistakesRemaining == 0
     }
     
+    init(gameProperties: GameProperties) {
+        self.gameProperties = gameProperties
+        self.numMistakesRemaining = self.gameProperties.numMistakes
+    }
+    
+    init(numMistakesRemaining: Int, gameProperties: GameProperties) {
+        self.numMistakesRemaining = numMistakesRemaining
+        self.gameProperties = gameProperties
+    }
+    
+    private func recompute(numMistakesRemaining: Int) -> Mistakes {
+        return Mistakes(numMistakesRemaining: numMistakesRemaining, gameProperties: self.gameProperties)
+    }
+    
     func madeMistake() -> Mistakes {
-        return Mistakes(numMistakesRemaining: self.numMistakesRemaining - 1)
+        return recompute(numMistakesRemaining: self.numMistakesRemaining - 1)
     }
 }

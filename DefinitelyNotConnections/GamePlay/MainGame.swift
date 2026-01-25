@@ -22,7 +22,7 @@ class MainGame {
         self.categories = Categories(setupInfo: setupInfo, gameProperties: self.gameProperties)
         self.allGuesses = AllGuesses(guesses: [])
         self.popup = nil
-        self.mistakes = Mistakes(numMistakesRemaining: gameProperties.numMistakes)
+        self.mistakes = Mistakes(gameProperties: self.gameProperties)
     }
     
     public func resetGame() {
@@ -59,7 +59,7 @@ class MainGame {
     }
     
     public func resetMistakesRemaining() {
-        self.mistakes = Mistakes(numMistakesRemaining: gameProperties.numMistakes)
+        self.mistakes = Mistakes(gameProperties: self.gameProperties)
     }
     
     private func activatePopupMomentarily(message: String, duration: TimeInterval) {
