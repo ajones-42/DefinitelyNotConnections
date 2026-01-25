@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GameProperties {
+class GameProperties {
     let numMistakes: Int
     let numCategories: Int
     let numCluesPerCategory: Int
