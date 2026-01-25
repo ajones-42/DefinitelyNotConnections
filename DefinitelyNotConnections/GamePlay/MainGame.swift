@@ -17,7 +17,7 @@ class MainGame {
     var mistakes: Mistakes
     
     init(setupInfo: SetupInfo) {
-        self.gameProperties = GameProperties(numMistakes: 4, setupInfo: setupInfo)
+        self.gameProperties = GameProperties(setupInfo: setupInfo)
         self.gamePhase = .setup
         self.categories = Categories(setupInfo: setupInfo, gameProperties: self.gameProperties)
         self.allGuesses = AllGuesses(guesses: [])

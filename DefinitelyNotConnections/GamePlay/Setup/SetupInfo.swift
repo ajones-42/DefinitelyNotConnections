@@ -9,8 +9,10 @@ import Foundation
 
 struct SetupInfo {
     let categoryInfos: [CategoryInfo]
+    let numMistakes: Int
     
-    init(categoryInfos: [CategoryInfo]) {
+    init(categoryInfos: [CategoryInfo], numMistakes: Int) {
         self.categoryInfos = categoryInfos
+        self.numMistakes = numMistakes
     }
 }

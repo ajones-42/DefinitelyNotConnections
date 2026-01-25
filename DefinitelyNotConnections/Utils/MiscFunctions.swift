@@ -28,7 +28,7 @@ func createDefaultClues(numCluesPerCategory: Int, categoryNumber: Int) -> [Strin
     return clues
 }
 
-func createTestSetupInfo(numCategories: Int, colours: [Color], numCluesPerCategory: Int) throws -> SetupInfo {
+func createTestSetupInfo(numCategories: Int, colours: [Color], numCluesPerCategory: Int) throws -> [CategoryInfo] {
     guard colours.count == numCategories else {
         print("createTestSetupInfo: Number of colours given (\(colours.count)) does not equal number of categories (\(numCategories)).")
         throw ValidationError.invalidInput
@@ -38,7 +38,7 @@ func createTestSetupInfo(numCategories: Int, colours: [Color], numCluesPerCatego
     for categoryNumber in 0...numCategories - 1 {
         categoryInfos.append(CategoryInfo(name: "Category \(categoryNumber)", colour: colours[categoryNumber], clues: createDefaultClues(numCluesPerCategory: numCluesPerCategory, categoryNumber: categoryNumber)))
     }
-    return SetupInfo(categoryInfos: categoryInfos)
+    return categoryInfos
 }
 
 func createDefaultTestSetupInfo() -> SetupInfo {
@@ -47,7 +47,8 @@ func createDefaultTestSetupInfo() -> SetupInfo {
     let numCluesPerCategory: Int = 4
     
     // Shouldn't fail anyway, but if it does I want it to crash.
-    return try! createTestSetupInfo(numCategories: numCategories, colours: colours, numCluesPerCategory: numCluesPerCategory)
+    let categoryInfos: [CategoryInfo] = try! createTestSetupInfo(numCategories: numCategories, colours: colours, numCluesPerCategory: numCluesPerCategory)
+    return SetupInfo(categoryInfos: categoryInfos, numMistakes: 4)
 }
 
 func categoriesCompletedInIncreasingOrder(category1: Category, category2: Category) -> Bool {

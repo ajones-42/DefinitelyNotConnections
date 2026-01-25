@@ -28,8 +28,8 @@ class GameProperties {
         }
     }
     
-    init(numMistakes: Int, setupInfo: SetupInfo) {
-        self.numMistakes = numMistakes
+    init(setupInfo: SetupInfo) {
+        self.numMistakes = setupInfo.numMistakes
         self.numCategories = GameProperties.getNumCategories(categoryInfos: setupInfo.categoryInfos)
         // Crash app on failure
         try! self.numCluesPerCategory = GameProperties.getNumCluesPerCategory(categoryInfos: setupInfo.categoryInfos)
