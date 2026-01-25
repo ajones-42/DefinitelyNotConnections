@@ -16,7 +16,7 @@ struct MistakesRemainingView: View {
             Text("Mistakes remaining:")
                 .fontWeight(.semibold)
             ForEach(0...mainGame.getOriginalNumMistakes() - 1, id: \.self) {mistakeNumber in
-                mistakeIndicator.opacity(mainGame.mistakes.numMistakesRemaining > mistakeNumber ? 1 : 0)
+                mistakeIndicator.opacity(mainGame.getNumMistakesRemaining() > mistakeNumber ? 1 : 0)
             }
         }
     }

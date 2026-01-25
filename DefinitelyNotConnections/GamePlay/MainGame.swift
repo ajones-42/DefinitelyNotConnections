@@ -54,6 +54,10 @@ class MainGame {
         return self.gameProperties.numMistakes
     }
     
+    public func getNumMistakesRemaining() -> Int {
+        return self.mistakes.numMistakesRemaining
+    }
+    
     public func resetMistakesRemaining() {
         self.mistakes = Mistakes(numMistakesRemaining: gameProperties.numMistakes)
     }
