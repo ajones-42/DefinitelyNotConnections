@@ -65,7 +65,7 @@ class MainGame {
     private func activatePopupMomentarily(message: String, duration: TimeInterval) {
         self.popup = Popup(message: message)
         DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
-            self.popup = nil
+            self.deactivatePopup()
         }
     }
     
