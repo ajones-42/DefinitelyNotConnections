@@ -28,8 +28,8 @@ class ClueBoxBuilder {
         return self
     }
     
-    func withClueInfo(clueInfo: ClueInfo) -> ClueBoxBuilder {
-        self.clueInfo = clueInfo
+    func withClue(clue: String) -> ClueBoxBuilder {
+        self.clueInfo = ClueInfo(clue: clue)
         return self
     }
 
