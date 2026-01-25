@@ -14,10 +14,6 @@ struct SetupInfo {
         self.categoryInfos = categoryInfos
     }
     
-    func getNumCategories() -> Int {
-        return self.categoryInfos.count
-    }
-    
     func getNumCluesPerCategory() throws -> Int {
         let uniqueNumClues: Set<Int> = Set(self.categoryInfos.map({categoryInfo in
             categoryInfo.clueInfos.count

@@ -12,9 +12,12 @@ class GameProperties {
     let numCategories: Int
     let numCluesPerCategory: Int
     
+    static private func getNumCategories(categoryInfos: [CategoryInfo]) -> Int {
+        return categoryInfos.count
+    }
     init(numMistakes: Int, setupInfo: SetupInfo) {
         self.numMistakes = numMistakes
-        self.numCategories = setupInfo.getNumCategories()
+        self.numCategories = GameProperties.getNumCategories(categoryInfos: setupInfo.categoryInfos)
         // Crash app on failure
         try! self.numCluesPerCategory = setupInfo.getNumCluesPerCategory()
     }
