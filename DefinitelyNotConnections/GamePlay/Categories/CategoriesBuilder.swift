@@ -40,11 +40,20 @@ class CategoriesBuilder {
         return self
     }
     
-    func completeAllCategories() -> CategoriesBuilder {
+    func completeFirstNCategories(n: Int) throws -> CategoriesBuilder {
+        let numCategories = self.allCategories.count
+        guard (n >= 0 && n <= numCategories) else {
+            print("CategoriesBuilder.completeFirstNCategories: Invalid value of n (\(n)). It must be greater than zero, and less than or equal to the number of categories (\(numCategories))")
+            throw ValidationError.invalidInput
+        }
         self.allCategories = self.allCategories.enumerated().map({(index, category) in
-            category.complete(orderCompleted: index)
+            index + 1 <= n ? category.complete(orderCompleted: index) : category
         })
         return self
+    }
+    
+    func completeAllCategories() -> CategoriesBuilder {
+        return try! completeFirstNCategories(n: self.gameProperties.numCategories)
     }
     
     func build() -> Categories {
