@@ -19,8 +19,10 @@ struct ShuffleButtonView: View {
     }
 }
 
-/*
+
 #Preview {
-    ShuffleButton()
+    let setupInfo: SetupInfo = createDefaultTestSetupInfo()
+    let mainGame: MainGame = MainGameBuilder(setupInfo: setupInfo).build()
+    ShuffleButtonView()
+        .environment(mainGame)
 }
-*/
