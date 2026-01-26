@@ -27,3 +27,10 @@ struct MainGameView: View {
         }
     }
 }
+
+#Preview {
+    let setupInfo: SetupInfo = createDefaultTestSetupInfo()
+    let mainGame: MainGame = MainGameBuilder(setupInfo: setupInfo).build()
+    MainGameView()
+        .environment(mainGame)
+}
