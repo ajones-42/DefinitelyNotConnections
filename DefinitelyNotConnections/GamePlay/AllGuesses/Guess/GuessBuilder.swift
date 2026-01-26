@@ -7,33 +7,33 @@
 
 import Foundation
 
-/*class GuessBuilder {
-    var clueBoxes: [ClueBox] = []
-    var correctCategoryID: Int? = nil
-    var oneAway: Bool = false
-    var id: Int = 0
+class GuessBuilder {
+    var clueInfos: [ClueInfo] = []
+    var isCorrect: Bool = false
+    var isOneAway: Bool = false
+    var id: UUID = UUID()
     
-    func withClueBoxes(clueBoxes: [ClueBox]) -> GuessBuilder {
-        self.clueBoxes = clueBoxes
+    func withClueInfos(clueInfos: [ClueInfo]) -> GuessBuilder {
+        self.clueInfos = clueInfos
         return self
     }
     
-    func withCorrectCategoryID(correctCategoryID: Int?) -> GuessBuilder {
-        self.correctCategoryID = correctCategoryID
+    func withIsCorrect(isCorrect: Bool) -> GuessBuilder {
+        self.isCorrect = isCorrect
         return self
     }
     
-    func withOneAway(oneAway: Bool) -> GuessBuilder {
-        self.oneAway = oneAway
+    func withIsOneAway(isOneAway: Bool) -> GuessBuilder {
+        self.isOneAway = isOneAway
         return self
     }
     
-    func withID(id: Int) -> GuessBuilder {
+    func withID(id: UUID) -> GuessBuilder {
         self.id = id
         return self
     }
     
     func build() -> Guess {
-        return Guess(clueBoxes: self.clueBoxes, correctCategoryID: self.correctCategoryID, oneAway: self.oneAway, id: self.id)
+        return Guess(clueInfos: self.clueInfos, isCorrect: self.isCorrect, isOneAway: self.isOneAway, id: self.id)
     }
-}*/
+}
