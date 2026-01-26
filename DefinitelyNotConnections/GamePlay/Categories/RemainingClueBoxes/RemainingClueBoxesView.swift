@@ -22,6 +22,9 @@ struct RemainingClueBoxesView: View {
     }
 }
 
-//#Preview {
-    //RemainingClueBoxesView()
-//}
+#Preview {
+    let setupInfo: SetupInfo = createDefaultTestSetupInfo()
+    let mainGame: MainGame = MainGameBuilder(setupInfo: setupInfo).build()
+    RemainingClueBoxesView()
+        .environment(mainGame)
+}
