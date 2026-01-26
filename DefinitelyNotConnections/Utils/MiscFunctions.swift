@@ -62,3 +62,9 @@ func categoriesCompletedInIncreasingOrder(category1: Category, category2: Catego
         return true
     }
 }
+
+func createClueInfosFromClues(clues: [String]) -> [ClueInfo] {
+    return clues.map({clue in
+            ClueInfo(clue: clue)
+    })
+}
