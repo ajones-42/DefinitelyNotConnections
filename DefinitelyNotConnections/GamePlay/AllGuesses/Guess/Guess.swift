@@ -30,6 +30,13 @@ struct Guess: Identifiable {
         self.id = UUID()
     }
     
+    init(clueInfos: [ClueInfo], isCorrect: Bool, isOneAway: Bool, id: UUID) {
+        self.clueInfos = clueInfos
+        self.isCorrect = isCorrect
+        self.isOneAway = isOneAway
+        self.id = id
+    }
+    
     func getClueIDs() -> [UUID] {
         return self.clueInfos.map({clueInfo in
             clueInfo.id})
