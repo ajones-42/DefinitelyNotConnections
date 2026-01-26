@@ -22,8 +22,9 @@ struct MistakesRemainingView: View {
     }
 }
 
-/*
+
 #Preview {
-    MistakesRemaining()
+    let mistakes: Mistakes = MistakesBuilder().build()
+    MistakesRemainingView(mistakes: mistakes)
 }
-*/
+
