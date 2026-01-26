@@ -19,9 +19,10 @@ struct SubmitButtonView: View {
     }
 }
 
-/*
+
 #Preview {
-    @State var model: ConnectionsGameModel = ConnectionsGameModel()
-    SubmitButton(connectionsGameModel: $model)
+    let setupInfo: SetupInfo = createDefaultTestSetupInfo()
+    let mainGame: MainGame = MainGameBuilder(setupInfo: setupInfo).build()
+    SubmitButtonView()
+        .environment(mainGame)
 }
-*/
