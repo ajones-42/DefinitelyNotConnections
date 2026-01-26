@@ -69,8 +69,8 @@ func createClueInfos(clues: [String]) -> [ClueInfo] {
     })
 }
 
-func createCategories(setupInfo: SetupInfo) -> [Category] {
-    return setupInfo.categoryInfos.map{categoryInfo in
+func createCategories(categoryInfos: [CategoryInfo]) -> [Category] {
+    return categoryInfos.map{categoryInfo in
         Category(categoryInfo: categoryInfo)
     }
 }

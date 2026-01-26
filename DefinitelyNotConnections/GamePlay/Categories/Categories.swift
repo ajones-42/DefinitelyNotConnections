@@ -23,7 +23,7 @@ struct Categories {
     }
     
     init(setupInfo: SetupInfo, gameProperties: GameProperties) {
-        self.allCategories = createCategories(setupInfo: setupInfo)
+        self.allCategories = createCategories(categoryInfos: setupInfo.categoryInfos)
         self.gameProperties = gameProperties
         self.allClueBoxes = AllClueBoxes(setupInfo: setupInfo, gameProperties: self.gameProperties, shuffled: true)
     }
