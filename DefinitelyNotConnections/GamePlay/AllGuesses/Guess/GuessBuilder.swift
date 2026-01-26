@@ -8,7 +8,7 @@
 import Foundation
 
 class GuessBuilder {
-    var clueInfos: [ClueInfo] = []
+    var clueInfos: [ClueInfo] = createClueInfosFromClues(clues: createDefaultClues(numCluesPerCategory: 4, categoryNumber: 0))
     var isCorrect: Bool = false
     var isOneAway: Bool = false
     var id: UUID = UUID()
