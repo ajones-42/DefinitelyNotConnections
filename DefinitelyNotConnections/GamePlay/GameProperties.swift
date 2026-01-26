@@ -20,12 +20,11 @@ class GameProperties {
         let uniqueNumClues: Set<Int> = Set(categoryInfos.map({categoryInfo in
             categoryInfo.clueInfos.count
         }))
-        if uniqueNumClues.count == 1 {
-            return uniqueNumClues.first!
-        } else {
+        guard uniqueNumClues.count == 1 else {
             print("GameProperties.getNumCluesPerCategory: Number of clues must be the same for all categories.")
             throw ValidationError.invalidInput
         }
+        return uniqueNumClues.first!
     }
     
     init(setupInfo: SetupInfo) {
