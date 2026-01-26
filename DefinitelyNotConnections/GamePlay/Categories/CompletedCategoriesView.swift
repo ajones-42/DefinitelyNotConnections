@@ -17,6 +17,7 @@ struct CompletedCategoriesView: View {
     }
 }
 
-//#Preview {
-    //CompletedCategoriesView()
-//}
+#Preview {
+    let categories: Categories = CategoriesBuilder().completeAllCategories().build()
+    CompletedCategoriesView(categories: categories)
+}
