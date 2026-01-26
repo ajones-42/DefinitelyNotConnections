@@ -17,6 +17,7 @@ struct GuessView: View {
     }
 }
 
-/* #Preview {
-    GuessView()
-}*/
+#Preview {
+    let guess: Guess = GuessBuilder().build()
+    GuessView(guess: guess)
+}
