@@ -27,5 +27,6 @@ struct PopupView: View {
 }
 
 #Preview {
-    PopupView(popup: Popup(message: "One away!"))
+    let popup: Popup = Popup(message: "One away!")
+    PopupView(popup: popup)
 }
