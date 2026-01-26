@@ -18,8 +18,9 @@ struct CategoriesView: View {
     }
 }
 
-/*
 #Preview {
-    ClueBoxGrid()
+    let setupInfo: SetupInfo = createDefaultTestSetupInfo()
+    let mainGame: MainGame = MainGameBuilder(setupInfo: setupInfo).build()
+    CategoriesView()
+        .environment(mainGame)
 }
-*/
