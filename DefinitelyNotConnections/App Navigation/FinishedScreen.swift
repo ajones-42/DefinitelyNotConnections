@@ -39,5 +39,8 @@ struct FinishedScreen: View {
 }
 
 #Preview {
+    let setupInfo: SetupInfo = createDefaultTestSetupInfo()
+    let mainGame: MainGame = MainGameBuilder(setupInfo: setupInfo).build()
     FinishedScreen()
+        .environment(mainGame)
 }
