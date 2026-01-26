@@ -19,8 +19,10 @@ struct DeselectAllButtonView: View {
     }
 }
 
-/*
+
 #Preview {
-    DeselectAllButton()
+    let setupInfo: SetupInfo = createDefaultTestSetupInfo()
+    let mainGame: MainGame = MainGameBuilder(setupInfo: setupInfo).build()
+    DeselectAllButtonView()
+        .environment(mainGame)
 }
-*/
