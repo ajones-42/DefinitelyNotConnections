@@ -38,8 +38,9 @@ struct AdmiringPuzzleScreen: View {
     }
 }
 
-/*#Preview {
-    let connectionsGameModel: ConnectionsGameModel = ConnectionsGameModel()
+#Preview {
+    let setupInfo: SetupInfo = createDefaultTestSetupInfo()
+    let mainGame: MainGame = MainGameBuilder(setupInfo: setupInfo).build()
     AdmiringPuzzleScreen()
-        .environment(connectionsGameModel)
-}*/
+        .environment(mainGame)
+}
