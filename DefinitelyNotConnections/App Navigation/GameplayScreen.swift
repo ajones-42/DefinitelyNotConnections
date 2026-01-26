@@ -23,9 +23,9 @@ struct GameplayScreen: View {
     }
 }
 
-/*#Preview {
-    let connectionsGameModel: ConnectionsGameModel = ConnectionsGameModel()
-    GamePlayScreen()
-        .environment(connectionsGameModel)
+#Preview {
+    let setupInfo: SetupInfo = createDefaultTestSetupInfo()
+    let mainGame: MainGame = MainGameBuilder(setupInfo: setupInfo).build()
+    GameplayScreen()
+        .environment(mainGame)
 }
-*/
