@@ -17,9 +17,7 @@ struct CategoryInfo {
     init(name: String, colour: Color, clues: [String]) {
         self.name = name
         self.colour = colour
-        self.clueInfos = clues.map{clue in
-                ClueInfo(clue: clue)
-        }
+        self.clueInfos = createClueInfosFromClues(clues: clues)
         self.id = UUID()
     }
 }
