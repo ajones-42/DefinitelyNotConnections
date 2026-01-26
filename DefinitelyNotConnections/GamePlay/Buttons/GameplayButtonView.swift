@@ -24,3 +24,7 @@ struct GameplayButtonView: View {
             }
         }
 }
+
+#Preview {
+    GameplayButtonView(text: "Do stuff", isClickable: true)
+}
