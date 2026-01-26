@@ -9,11 +9,27 @@ import Foundation
 import SwiftUI
 
 class CategoryBuilder {
-    var name: String = "A Category"
-    var clueInfos: [ClueInfo] = []
-    var colour: Color = .red
-    var id: UUID = UUID()
-    var orderCompleted: Int? = nil
+    var name: String
+    var clueInfos: [ClueInfo]
+    var colour: Color
+    var id: UUID
+    var orderCompleted: Int?
+    
+    init() {
+        self.name = "A Category"
+        self.clueInfos = []
+        self.colour = .red
+        self.id = UUID()
+        self.orderCompleted = nil
+    }
+    
+    init(categoryInfo: CategoryInfo) {
+        self.name = categoryInfo.name
+        self.colour = categoryInfo.colour
+        self.id = categoryInfo.id
+        self.clueInfos = categoryInfo.clueInfos
+        self.orderCompleted = nil
+    }
 
     func withName(name: String) -> CategoryBuilder {
         self.name = name
