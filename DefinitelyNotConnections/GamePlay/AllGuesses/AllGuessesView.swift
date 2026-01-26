@@ -33,6 +33,13 @@ struct AllGuessesView: View {
     }
 }
 
-/*#Preview {
-    GuessesView()
-}*/
+#Preview {
+    struct Preview: View {
+        let allGuesses: AllGuesses = AllGuessesBuilder().build()
+        @State var isPresented: Bool = true
+        var body: some View {
+            AllGuessesView(allGuesses: allGuesses, guessesArePresented: $isPresented)
+        }
+    }
+    return Preview()
+}
