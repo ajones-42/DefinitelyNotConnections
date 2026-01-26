@@ -36,11 +36,7 @@ struct AllClueBoxes {
     
 
     init(setupInfo: SetupInfo, gameProperties: GameProperties, shuffled: Bool) {
-        let clueBoxes: [ClueBox] = setupInfo.categoryInfos.flatMap { catInfo in
-            catInfo.clueInfos.map { clueInfo in
-                ClueBox(clueInfo: clueInfo)
-            }
-        }
+        let clueBoxes: [ClueBox] = createClueBoxes(setupInfo: setupInfo)
         self.allClueBoxes = shuffled ? clueBoxes.shuffled() : clueBoxes
         self.gameProperties = gameProperties
     }

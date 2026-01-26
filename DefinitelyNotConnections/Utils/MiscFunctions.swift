@@ -69,6 +69,14 @@ func createClueInfos(clues: [String]) -> [ClueInfo] {
     })
 }
 
+func createClueBoxes(setupInfo: SetupInfo) -> [ClueBox] {
+    return setupInfo.categoryInfos.flatMap { catInfo in
+        catInfo.clueInfos.map { clueInfo in
+            ClueBox(clueInfo: clueInfo)
+        }
+    }
+}
+
 func createCategories(categoryInfos: [CategoryInfo]) -> [Category] {
     return categoryInfos.map{categoryInfo in
         Category(categoryInfo: categoryInfo)
