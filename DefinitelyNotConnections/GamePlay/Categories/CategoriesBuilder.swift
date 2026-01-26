@@ -40,6 +40,13 @@ class CategoriesBuilder {
         return self
     }
     
+    func completeAllCategories() -> CategoriesBuilder {
+        self.allCategories = self.allCategories.enumerated().map({(index, category) in
+            category.complete(orderCompleted: index)
+        })
+        return self
+    }
+    
     func build() -> Categories {
         return Categories(allCategories: self.allCategories, allClueBoxes: self.allClueBoxes, gameProperties: self.gameProperties)
     }
