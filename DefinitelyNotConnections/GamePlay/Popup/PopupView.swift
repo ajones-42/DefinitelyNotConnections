@@ -26,7 +26,6 @@ struct PopupView: View {
     }
 }
 
-//#Preview {
-    //PopupView(text: "One away!")
-    //PopupView(text: "Already guessed!")
-//}
+#Preview {
+    PopupView(popup: Popup(message: "One away!"))
+}
