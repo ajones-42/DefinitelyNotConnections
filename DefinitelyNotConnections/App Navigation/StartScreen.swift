@@ -36,7 +36,10 @@ struct StartScreen: View {
     }
 }
 
-/*#Preview {
+#Preview {
+    let setupInfo: SetupInfo = createDefaultTestSetupInfo()
+    let mainGame: MainGame = MainGameBuilder(setupInfo: setupInfo).build()
     StartScreen()
+        .environment(mainGame)
 }
-*/
+
