@@ -39,7 +39,10 @@ struct OutOfMistakesAlertView: View {
     }
 }
 
-/*#Preview {
-    NoMistakesRemainingAlert()
-        .environment(MainGame(categories: createDefaultTestCategories()))
-}*/
+#Preview {
+    let setupInfo: SetupInfo = createDefaultTestSetupInfo()
+    let mistakes: Mistakes = MistakesBuilder().withnumMistakesRemaining(numMistakesRemaining: 0).build()
+    let mainGame: MainGame = MainGameBuilder(setupInfo: setupInfo).withMistakes(mistakes: mistakes).build()
+    OutOfMistakesAlertView()
+        .environment(mainGame)
+}
