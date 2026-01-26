@@ -25,7 +25,7 @@ class MainGame {
         self.mistakes = Mistakes(gameProperties: self.gameProperties)
     }
     
-    init(gameProperties: GameProperties, gamePhase: GamePhase, categories: Categories, allGuesses: AllGuesses, popup: Popup, mistakes: Mistakes) {
+    init(gameProperties: GameProperties, gamePhase: GamePhase, categories: Categories, allGuesses: AllGuesses, popup: Popup?, mistakes: Mistakes) {
         self.gameProperties = gameProperties
         self.gamePhase = gamePhase
         self.categories = categories
