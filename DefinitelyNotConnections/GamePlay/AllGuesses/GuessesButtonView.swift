@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GuessesButtonView: View {
-    var allGuesses: AllGuesses
+    let allGuesses: AllGuesses
     @State var guessesArePresented: Bool = false
 
     var body: some View {
