@@ -20,7 +20,7 @@ struct MainGameView: View {
                 .overlay(OutOfMistakesAlertView(mistakes: mainGame.mistakes))
             MistakesRemainingView(mistakes: mainGame.mistakes)
             HStack {
-                ShuffleButtonView()
+                ShuffleButtonView(allClueBoxes: mainGame.categories.allClueBoxes)
                 DeselectAllButtonView(allClueBoxes: mainGame.categories.allClueBoxes)
                 SubmitButtonView()
             }
