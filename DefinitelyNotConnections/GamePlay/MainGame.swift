@@ -64,7 +64,7 @@ class MainGame {
     }
     
     public func resetMistakes() {
-        self.mistakes = self.mistakes.reset()
+        self.mistakes.reset()
     }
     
     private func resetAllGuesses() {
@@ -130,7 +130,7 @@ class MainGame {
     
     private func handleIncorrectGuess(guessOneAway: Bool) {
         shakeSelectedClueBoxesMomentarily(duration: 0.1)
-        self.mistakes = self.mistakes.madeMistake()
+        self.mistakes.madeMistake()
         if guessOneAway {
             activatePopupMomentarily(message: "One Away!", duration: 2)
         }

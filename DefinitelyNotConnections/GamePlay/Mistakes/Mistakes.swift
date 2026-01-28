@@ -7,9 +7,9 @@
 
 import Foundation
 
-
-struct Mistakes {
-    let numMistakesRemaining: Int
+@Observable
+class Mistakes {
+    var numMistakesRemaining: Int
     let gameProperties: GameProperties
     var outOfMistakes: Bool {
         self.numMistakesRemaining == 0
@@ -25,16 +25,12 @@ struct Mistakes {
         self.gameProperties = gameProperties
     }
     
-    private func recompute(numMistakesRemaining: Int) -> Mistakes {
-        return Mistakes(numMistakesRemaining: numMistakesRemaining, gameProperties: self.gameProperties)
+    func reset() {
+        self.numMistakesRemaining = self.gameProperties.numMistakes
     }
     
-    func reset() -> Mistakes {
-        return recompute(numMistakesRemaining: self.gameProperties.numMistakes)
-    }
-    
-    func madeMistake() -> Mistakes {
-        return recompute(numMistakesRemaining: self.numMistakesRemaining - 1)
+    func madeMistake() {
+        return self.numMistakesRemaining -= 1
     }
     
     func getOriginalNumMistakes() -> Int {
