@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct CategoriesView: View {
-    @Environment(MainGame.self) private var mainGame: MainGame
+    let categories: Categories
     
     var body: some View {
         VStack {
-            CompletedCategoriesView(categories: mainGame.categories)
+            CompletedCategoriesView(categories: categories)
             RemainingClueBoxesView()
         }
     }
@@ -21,6 +21,6 @@ struct CategoriesView: View {
 #Preview {
     let setupInfo: SetupInfo = createDefaultTestSetupInfo()
     let mainGame: MainGame = MainGameBuilder(setupInfo: setupInfo).build()
-    CategoriesView()
+    CategoriesView(categories: mainGame.categories)
         .environment(mainGame)
 }
