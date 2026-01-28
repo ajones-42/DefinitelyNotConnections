@@ -63,24 +63,12 @@ class MainGame {
         self.categories.reset()
     }
     
-    public func resetMistakes() {
+    private func resetMistakes() {
         self.mistakes.reset()
     }
     
     private func resetAllGuesses() {
         self.allGuesses.reset()
-    }
-    
-    public func getOutOfMistakes() -> Bool {
-        return self.mistakes.outOfMistakes
-    }
-    
-    public func getOriginalNumMistakes() -> Int {
-        return self.gameProperties.numMistakes
-    }
-    
-    public func getNumMistakesRemaining() -> Int {
-        return self.mistakes.numMistakesRemaining
     }
     
     private func activatePopupMomentarily(message: String, duration: TimeInterval) {
@@ -96,14 +84,6 @@ class MainGame {
         DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
             self.categories.stopShakingSelectedClueBoxes()
         }
-    }
-    
-    public func getRemainingClueBoxes() -> [ClueBox] {
-        return self.categories.getRemainingClueBoxes()
-    }
-    
-    public func clickClueBox(clueBox: ClueBox) {
-        self.categories.clickClueBox(clueBox: clueBox)
     }
     
     public func shuffleClueBoxes() {
