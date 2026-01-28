@@ -52,32 +52,12 @@ class Categories {
         self.allClueBoxes.completeSelectedClueBoxes()
     }
     
-    func getRemainingClueBoxes() -> [ClueBox] {
-        return self.allClueBoxes.remainingClueBoxes
-    }
-    
     func getSelectedClueBoxes() -> [ClueBox] {
         return self.allClueBoxes.selectedClueBoxes
     }
     
-    func clickClueBox(clueBox: ClueBox) {
-        self.allClueBoxes.clickClueBox(clueBox: clueBox)
-    }
-    
-    func shuffleClueBoxes() {
-        self.allClueBoxes.shuffleClueBoxes()
-    }
-    
     func getSubmitIsClickable() -> Bool {
         return self.allClueBoxes.submitIsClickable
-    }
-    
-    func getDeselectAllIsClickable() -> Bool {
-        return self.allClueBoxes.deselectAllIsClickable
-    }
-    
-    func deselectAllClueBoxes() {
-        self.allClueBoxes.deselectAllClueBoxes()
     }
     
     func startShakingSelectedClueBoxes() {
