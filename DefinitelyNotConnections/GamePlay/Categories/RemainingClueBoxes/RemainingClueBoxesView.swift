@@ -15,7 +15,7 @@ struct RemainingClueBoxesView: View {
             ForEach(allClueBoxes.remainingClueBoxes, id: \.clueInfo.id) { clueBox in
                 ClueBoxView(clueBox: clueBox)
                     .onTapGesture {
-                        allClueBoxes.clickClueBox(clueBoxToClick: clueBox)
+                        allClueBoxes.clickClueBox(clueBox: clueBox)
                     }
             }
         }

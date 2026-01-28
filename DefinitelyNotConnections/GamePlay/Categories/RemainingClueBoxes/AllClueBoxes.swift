@@ -48,7 +48,7 @@ class AllClueBoxes {
     }
     
     func reset() {
-        self.allClueBoxes = self.allClueBoxes.map({clueBox in
+        self.allClueBoxes.forEach({clueBox in
             clueBox.reset()
         })
     }
@@ -57,9 +57,9 @@ class AllClueBoxes {
         return self.numSelectedClueBoxes < self.gameProperties.numCluesPerCategory || clueBox.isSelected
     }
     
-    func clickClueBox(clueBoxToClick: ClueBox) {
-        if clueBoxIsClickable(clueBox: clueBoxToClick) {
-            self.allClueBoxes = self.allClueBoxes.replaced(where: {clueBox in clueBox.getID() == clueBoxToClick.getID()}, withResultOf: {clueBox in clueBox.click()})
+    func clickClueBox(clueBox: ClueBox) {
+        if clueBoxIsClickable(clueBox: clueBox) {
+            clueBox.click()
         }
     }
     
@@ -68,22 +68,26 @@ class AllClueBoxes {
     }
     
     func deselectAllClueBoxes() {
-        self.allClueBoxes = self.allClueBoxes.map({clueBox in
+        self.allClueBoxes.forEach({clueBox in
             clueBox.deselect()
         })
     }
     
     func startShakingSelectedClueBoxes() {
-        self.allClueBoxes = self.allClueBoxes.replaced(where: {clueBox in clueBox.isSelected}, withResultOf: {clueBox in clueBox.startShake()})
+        self.selectedClueBoxes.forEach({clueBox in
+            clueBox.startShake()
+        })
     }
     
     func stopShakingSelectedClueBoxes() {
-        self.allClueBoxes = self.allClueBoxes.map({clueBox in
+        self.selectedClueBoxes.forEach({clueBox in
             clueBox.stopShake()
         })
     }
     
     func completeSelectedClueBoxes() {
-        self.allClueBoxes = self.allClueBoxes.replaced(where: {clueBox in clueBox.isSelected}, withResultOf: {clueBox in clueBox.setCompleted()})
+        self.selectedClueBoxes.forEach({clueBox in
+            clueBox.setCompleted()
+        })
     }
 }

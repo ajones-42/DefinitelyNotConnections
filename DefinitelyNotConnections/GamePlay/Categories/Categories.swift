@@ -61,7 +61,7 @@ class Categories {
     }
     
     func clickClueBox(clueBox: ClueBox) {
-        self.allClueBoxes.clickClueBox(clueBoxToClick: clueBox)
+        self.allClueBoxes.clickClueBox(clueBox: clueBox)
     }
     
     func shuffleClueBoxes() {

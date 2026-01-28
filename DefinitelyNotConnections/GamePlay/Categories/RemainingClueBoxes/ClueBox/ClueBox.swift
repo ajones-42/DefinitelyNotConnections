@@ -7,14 +7,18 @@
 
 import Foundation
 
-struct ClueBox: Equatable {
+@Observable
+class ClueBox {
     let clueInfo: ClueInfo
-    let isCompleted: Bool
-    let isSelected: Bool
-    let shake: Bool
+    private(set) var isCompleted: Bool
+    private(set) var isSelected: Bool
+    private(set) var shake: Bool
     
     init(clueInfo: ClueInfo) {
-        self.init(clueInfo: clueInfo, isCompleted: false, isSelected: false, shake: false)
+        self.clueInfo = clueInfo
+        self.isCompleted = false
+        self.isSelected = false
+        self.shake = false
     }
     
     init(clueInfo: ClueInfo, isCompleted: Bool, isSelected: Bool, shake: Bool) {
@@ -24,36 +28,30 @@ struct ClueBox: Equatable {
         self.shake = shake
     }
     
-    private func recompute(newIsCompleted: Bool, newIsSelected: Bool, newShake: Bool) -> ClueBox {
-        return ClueBox(clueInfo: self.clueInfo, isCompleted: newIsCompleted, isSelected: newIsSelected, shake: newShake)
+    func reset() {
+        self.isCompleted = false
+        self.isSelected = false
+        self.shake = false
     }
     
-    func reset() -> ClueBox {
-        return recompute(newIsCompleted: false, newIsSelected: false, newShake: false)
+    func click() {
+        self.isSelected.toggle()
     }
     
-    func click() -> ClueBox {
-        return recompute(newIsCompleted: self.isCompleted, newIsSelected: !self.isSelected, newShake: self.shake)
+    func deselect() {
+        self.isSelected = false
     }
     
-    func deselect() -> ClueBox {
-        return recompute(newIsCompleted: self.isCompleted, newIsSelected: false, newShake: self.shake)
+    func startShake() {
+        self.shake = true
     }
     
-    func startShake() -> ClueBox {
-        return recompute(newIsCompleted: self.isCompleted, newIsSelected: self.isSelected, newShake: true)
+    func stopShake() {
+        self.shake = false
     }
     
-    func stopShake() -> ClueBox {
-        return recompute(newIsCompleted: self.isCompleted, newIsSelected: self.isSelected, newShake: false)
-    }
-    
-    func setCompleted() -> ClueBox {
-        return recompute(newIsCompleted: true, newIsSelected: self.isSelected, newShake: self.shake)
-    }
-    
-    func setUncompleted() -> ClueBox {
-        return recompute(newIsCompleted: false, newIsSelected: self.isSelected, newShake: self.shake)
+    func setCompleted() {
+        self.isCompleted = true
     }
     
     func getID() -> UUID {
