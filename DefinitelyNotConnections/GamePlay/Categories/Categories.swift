@@ -35,7 +35,9 @@ class Categories {
     }
     
     func reset() {
-        self.allCategories.replace(where: {category in category.isCompleted}, withResultOf: {category in category.reset()})
+        self.allCategories.forEach({category in
+            category.reset()
+        })
         self.allClueBoxes = self.allClueBoxes.reset()
     }
     
@@ -44,7 +46,9 @@ class Categories {
     }
     
     func completeCategory(categoryID: UUID) {
-        self.allCategories = self.allCategories.replaced(where: {category in category.id == categoryID}, withResultOf: {category in category.complete(orderCompleted: getNextCompletedCategoryOrder())})
+        if let category = self.allCategories.first(where: {category in category.id == categoryID}) {
+            category.complete(orderCompleted: getNextCompletedCategoryOrder())
+        }
         self.allClueBoxes = self.allClueBoxes.completeSelectedClueBoxes()
     }
     

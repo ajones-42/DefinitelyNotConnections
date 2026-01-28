@@ -8,12 +8,13 @@
 import Foundation
 import SwiftUI
 
-struct Category: Identifiable {
+@Observable
+class Category: Identifiable {
     let name: String
     let clueInfos: [ClueInfo]
     let colour: Color
     let id: UUID
-    let orderCompleted: Int?
+    var orderCompleted: Int?
     var isCompleted: Bool {
         return orderCompleted != nil
     }
@@ -34,10 +35,6 @@ struct Category: Identifiable {
         self.orderCompleted = nil
     }
     
-    private func recompute(orderCompleted: Int?) -> Category {
-        return Category(name: self.name, clueInfos: self.clueInfos, colour: self.colour, id: self.id, orderCompleted: orderCompleted)
-    }
-    
     func getClues() -> [String] {
         return self.clueInfos.map({clueInfo in
             clueInfo.clue
@@ -50,11 +47,11 @@ struct Category: Identifiable {
         })
     }
     
-    func complete(orderCompleted: Int) -> Category {
-        return recompute(orderCompleted: orderCompleted)
+    func complete(orderCompleted: Int) {
+        self.orderCompleted = orderCompleted
     }
     
-    func reset() -> Category {
-        return recompute(orderCompleted: nil)
+    func reset() {
+        self.orderCompleted = nil
     }
 }

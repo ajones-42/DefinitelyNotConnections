@@ -46,8 +46,10 @@ class CategoriesBuilder {
             print("CategoriesBuilder.completeFirstNCategories: Invalid value of n (\(n)). It must be greater than zero, and less than or equal to the number of categories (\(numCategories))")
             throw ValidationError.invalidInput
         }
-        self.allCategories = self.allCategories.enumerated().map({(index, category) in
-            index + 1 <= n ? category.complete(orderCompleted: index) : category
+        self.allCategories.enumerated().forEach({(index, category) in
+            if index + 1 <= n {
+                category.complete(orderCompleted: index)
+            }
         })
         return self
     }
