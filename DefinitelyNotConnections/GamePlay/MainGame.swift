@@ -11,7 +11,7 @@ import Foundation
 class MainGame {
     let gameProperties: GameProperties
     var gamePhase: GamePhase
-    var categories: Categories
+    let categories: Categories
     let allGuesses: AllGuesses
     let popup: Popup
     let mistakes: Mistakes
@@ -60,7 +60,7 @@ class MainGame {
     }
     
     private func resetCategories() {
-        self.categories = self.categories.reset()
+        self.categories.reset()
     }
     
     public func resetMistakes() {
@@ -92,9 +92,9 @@ class MainGame {
     }
     
     private func shakeSelectedClueBoxesMomentarily(duration: TimeInterval) {
-        self.categories = self.categories.startShakingSelectedClueBoxes()
+        self.categories.startShakingSelectedClueBoxes()
         DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
-            self.categories = self.categories.stopShakingSelectedClueBoxes()
+            self.categories.stopShakingSelectedClueBoxes()
         }
     }
     
@@ -103,11 +103,11 @@ class MainGame {
     }
     
     public func clickClueBox(clueBox: ClueBox) {
-        self.categories = self.categories.clickClueBox(clueBox: clueBox)
+        self.categories.clickClueBox(clueBox: clueBox)
     }
     
     public func shuffleClueBoxes() {
-        self.categories = self.categories.shuffleClueBoxes()
+        self.categories.shuffleClueBoxes()
     }
     
     public func getDeselectAllIsClickable() -> Bool {
@@ -115,11 +115,11 @@ class MainGame {
     }
     
     public func deselectAllClueBoxes() {
-        self.categories = self.categories.deselectAllClueBoxes()
+        self.categories.deselectAllClueBoxes()
     }
     
     private func handleCorrectGuess(submitResult: SubmitResult) {
-        self.categories = self.categories.completeCategory(categoryID: submitResult.categoryID)
+        self.categories.completeCategory(categoryID: submitResult.categoryID)
         if self.categories.numCompletedCategories == self.gameProperties.numCategories {
             admirePuzzle()
         }
