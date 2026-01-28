@@ -90,14 +90,6 @@ class MainGame {
         self.categories.shuffleClueBoxes()
     }
     
-    public func getDeselectAllIsClickable() -> Bool {
-        return self.categories.getDeselectAllIsClickable()
-    }
-    
-    public func deselectAllClueBoxes() {
-        self.categories.deselectAllClueBoxes()
-    }
-    
     private func handleCorrectGuess(submitResult: SubmitResult) {
         self.categories.completeCategory(categoryID: submitResult.categoryID)
         if self.categories.numCompletedCategories == self.gameProperties.numCategories {
