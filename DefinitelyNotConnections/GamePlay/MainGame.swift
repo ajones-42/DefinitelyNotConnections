@@ -68,7 +68,7 @@ class MainGame {
     }
     
     private func resetAllGuesses() {
-        self.allGuesses = self.allGuesses.reset()
+        self.allGuesses.reset()
     }
     
     public func getOutOfMistakes() -> Bool {
@@ -146,7 +146,7 @@ class MainGame {
 
     private func addGuess(selectedClueInfos: [ClueInfo], bestMatch: SubmitResult) {
         let guess = Guess(clueInfos: selectedClueInfos, submitResult: bestMatch)
-        self.allGuesses = self.allGuesses.addGuess(guess: guess)
+        self.allGuesses.addGuess(guess: guess)
     }
     
     private func getSubmitBestMatch(selectedClueInfos: [ClueInfo]) -> SubmitResult? {

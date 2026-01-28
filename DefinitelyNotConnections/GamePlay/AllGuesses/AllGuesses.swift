@@ -7,8 +7,9 @@
 
 import Foundation
 
-struct AllGuesses {
-    let guesses: [Guess]
+@Observable
+class AllGuesses {
+    var guesses: [Guess]
     
     init() {
         self.guesses = []
@@ -18,17 +19,16 @@ struct AllGuesses {
         self.guesses = guesses
     }
     
-    func reset() -> AllGuesses {
-        return AllGuesses(guesses: [])
+    func reset() {
+        self.guesses = []
     }
 
     func getGuesses() -> [Guess] {
         return self.guesses
     }
     
-    func addGuess(guess: Guess) -> AllGuesses {
-        let newGuesses: [Guess] = self.guesses + [guess]
-        return AllGuesses(guesses: newGuesses)
+    func addGuess(guess: Guess) {
+        self.guesses.append(guess)
     }
     
     func selectionAlreadyGuessed(selectedClueBoxIDs: [UUID]) -> Bool {
