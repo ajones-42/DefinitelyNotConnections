@@ -21,7 +21,7 @@ struct MainGameView: View {
             MistakesRemainingView(mistakes: mainGame.mistakes)
             HStack {
                 ShuffleButtonView()
-                DeselectAllButtonView()
+                DeselectAllButtonView(allClueBoxes: mainGame.categories.allClueBoxes)
                 SubmitButtonView()
             }
         }

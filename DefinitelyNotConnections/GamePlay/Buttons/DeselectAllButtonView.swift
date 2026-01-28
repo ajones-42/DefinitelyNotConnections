@@ -8,21 +8,19 @@
 import SwiftUI
 
 struct DeselectAllButtonView: View {
-    @Environment(MainGame.self) private var mainGame: MainGame
+    let allClueBoxes: AllClueBoxes
     
     var body: some View {
         Button {
-            mainGame.deselectAllClueBoxes()
+            allClueBoxes.deselectAllClueBoxes()
         } label: {
-            GameplayButtonView(text: "Deselect All", isClickable: mainGame.getDeselectAllIsClickable())
+            GameplayButtonView(text: "Deselect All", isClickable: allClueBoxes.deselectAllIsClickable)
         }
     }
 }
 
 
 #Preview {
-    let setupInfo: SetupInfo = createDefaultTestSetupInfo()
-    let mainGame: MainGame = MainGameBuilder(setupInfo: setupInfo).build()
-    DeselectAllButtonView()
-        .environment(mainGame)
+    let allClueBoxes: AllClueBoxes = AllClueBoxesBuilder().build()
+    DeselectAllButtonView(allClueBoxes: allClueBoxes)
 }
