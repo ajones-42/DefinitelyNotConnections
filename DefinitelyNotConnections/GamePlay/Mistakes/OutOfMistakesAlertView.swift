@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct OutOfMistakesAlertView: View {
-    @Environment(MainGame.self) private var mainGame: MainGame
+    let mistakes: Mistakes
     let boxWidth: CGFloat = 320
     let boxHeight: CGFloat = 120
     
     var body: some View {
-        if mainGame.getOutOfMistakes() {
+        if mistakes.outOfMistakes {
             ZStack {
                 RoundedRectangle(cornerRadius: 30)
                     .frame(width: boxWidth, height: boxHeight)
@@ -22,7 +22,7 @@ struct OutOfMistakesAlertView: View {
                 VStack {
                     Text("Oh go on then, have another go!").foregroundStyle(.black)
                     Button {
-                        mainGame.resetMistakes()
+                        mistakes.reset()
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 50)
@@ -40,9 +40,6 @@ struct OutOfMistakesAlertView: View {
 }
 
 #Preview {
-    let setupInfo: SetupInfo = createDefaultTestSetupInfo()
     let mistakes: Mistakes = MistakesBuilder().withnumMistakesRemaining(numMistakesRemaining: 0).build()
-    let mainGame: MainGame = MainGameBuilder(setupInfo: setupInfo).withMistakes(mistakes: mistakes).build()
-    OutOfMistakesAlertView()
-        .environment(mainGame)
+    OutOfMistakesAlertView(mistakes: mistakes)
 }
