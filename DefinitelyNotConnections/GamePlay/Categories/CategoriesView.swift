@@ -13,14 +13,12 @@ struct CategoriesView: View {
     var body: some View {
         VStack {
             CompletedCategoriesView(categories: categories)
-            RemainingClueBoxesView()
+            RemainingClueBoxesView(allClueBoxes: categories.allClueBoxes)
         }
     }
 }
 
 #Preview {
-    let setupInfo: SetupInfo = createDefaultTestSetupInfo()
-    let mainGame: MainGame = MainGameBuilder(setupInfo: setupInfo).build()
-    CategoriesView(categories: mainGame.categories)
-        .environment(mainGame)
+    let categories: Categories = CategoriesBuilder().build()
+    CategoriesView(categories: categories)
 }
