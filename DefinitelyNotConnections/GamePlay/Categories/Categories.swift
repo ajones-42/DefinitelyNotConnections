@@ -38,7 +38,7 @@ class Categories {
         self.allCategories.forEach({category in
             category.reset()
         })
-        self.allClueBoxes = self.allClueBoxes.reset()
+        self.allClueBoxes.reset()
     }
     
     private func getNextCompletedCategoryOrder() -> Int {
@@ -49,7 +49,7 @@ class Categories {
         if let category = self.allCategories.first(where: {category in category.id == categoryID}) {
             category.complete(orderCompleted: getNextCompletedCategoryOrder())
         }
-        self.allClueBoxes = self.allClueBoxes.completeSelectedClueBoxes()
+        self.allClueBoxes.completeSelectedClueBoxes()
     }
     
     func getRemainingClueBoxes() -> [ClueBox] {
@@ -61,11 +61,11 @@ class Categories {
     }
     
     func clickClueBox(clueBox: ClueBox) {
-        self.allClueBoxes = self.allClueBoxes.clickClueBox(clueBoxToClick: clueBox)
+        self.allClueBoxes.clickClueBox(clueBoxToClick: clueBox)
     }
     
     func shuffleClueBoxes() {
-        self.allClueBoxes = self.allClueBoxes.shuffleClueBoxes()
+        self.allClueBoxes.shuffleClueBoxes()
     }
     
     func getSubmitIsClickable() -> Bool {
@@ -77,15 +77,15 @@ class Categories {
     }
     
     func deselectAllClueBoxes() {
-        self.allClueBoxes = self.allClueBoxes.deselectAllClueBoxes()
+        self.allClueBoxes.deselectAllClueBoxes()
     }
     
     func startShakingSelectedClueBoxes() {
-        self.allClueBoxes = self.allClueBoxes.startShakingSelectedClueBoxes()
+        self.allClueBoxes.startShakingSelectedClueBoxes()
     }
     
     func stopShakingSelectedClueBoxes() {
-        self.allClueBoxes = self.allClueBoxes.stopShakingSelectedClueBoxes()
+        self.allClueBoxes.stopShakingSelectedClueBoxes()
     }
     
     func getSubmitBestMatch(selectedClueBoxIDs: [UUID]) -> SubmitResult? {
