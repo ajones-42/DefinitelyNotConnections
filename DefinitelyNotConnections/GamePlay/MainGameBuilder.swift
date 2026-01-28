@@ -12,7 +12,7 @@ class MainGameBuilder {
     var gamePhase: GamePhase
     var categories: Categories
     var allGuesses: AllGuesses
-    var popup: Popup?
+    var popup: Popup
     var mistakes: Mistakes
     
     init(setupInfo: SetupInfo) {
@@ -20,7 +20,7 @@ class MainGameBuilder {
         self.gamePhase = .setup
         self.categories = Categories(setupInfo: setupInfo, gameProperties: self.gameProperties)
         self.allGuesses = AllGuesses()
-        self.popup = nil
+        self.popup = Popup()
         self.mistakes = Mistakes(gameProperties: self.gameProperties)
     }
     
@@ -30,7 +30,7 @@ class MainGameBuilder {
         self.gamePhase = .setup
         self.categories = Categories(setupInfo: setupInfo, gameProperties: self.gameProperties)
         self.allGuesses = AllGuesses()
-        self.popup = nil
+        self.popup = Popup()
         self.mistakes = Mistakes(gameProperties: self.gameProperties)
     }
     

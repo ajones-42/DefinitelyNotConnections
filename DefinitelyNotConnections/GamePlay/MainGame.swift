@@ -12,20 +12,20 @@ class MainGame {
     let gameProperties: GameProperties
     var gamePhase: GamePhase
     var categories: Categories
-    var allGuesses: AllGuesses
-    var popup: Popup?
-    var mistakes: Mistakes
+    let allGuesses: AllGuesses
+    let popup: Popup
+    let mistakes: Mistakes
     
     init(setupInfo: SetupInfo) {
         self.gameProperties = GameProperties(setupInfo: setupInfo)
         self.gamePhase = .setup
         self.categories = Categories(setupInfo: setupInfo, gameProperties: self.gameProperties)
         self.allGuesses = AllGuesses()
-        self.popup = nil
+        self.popup = Popup()
         self.mistakes = Mistakes(gameProperties: self.gameProperties)
     }
     
-    init(gameProperties: GameProperties, gamePhase: GamePhase, categories: Categories, allGuesses: AllGuesses, popup: Popup?, mistakes: Mistakes) {
+    init(gameProperties: GameProperties, gamePhase: GamePhase, categories: Categories, allGuesses: AllGuesses, popup: Popup, mistakes: Mistakes) {
         self.gameProperties = gameProperties
         self.gamePhase = gamePhase
         self.categories = categories
@@ -84,14 +84,11 @@ class MainGame {
     }
     
     private func activatePopupMomentarily(message: String, duration: TimeInterval) {
-        self.popup = Popup(message: message)
-        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
-            self.deactivatePopup()
-        }
+        self.popup.activateMomentarily(message: message, duration: duration)
     }
     
     private func deactivatePopup() {
-        self.popup = nil
+        self.popup.deactivate()
     }
     
     private func shakeSelectedClueBoxesMomentarily(duration: TimeInterval) {
