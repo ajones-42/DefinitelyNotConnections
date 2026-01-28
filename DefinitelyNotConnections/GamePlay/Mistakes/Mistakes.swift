@@ -9,7 +9,7 @@ import Foundation
 
 @Observable
 class Mistakes {
-    var numMistakesRemaining: Int
+    private(set) var numMistakesRemaining: Int
     let gameProperties: GameProperties
     var outOfMistakes: Bool {
         self.numMistakesRemaining == 0

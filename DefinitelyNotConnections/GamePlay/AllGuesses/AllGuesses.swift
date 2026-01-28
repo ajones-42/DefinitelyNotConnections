@@ -9,7 +9,7 @@ import Foundation
 
 @Observable
 class AllGuesses {
-    var guesses: [Guess]
+    private(set) var guesses: [Guess]
     
     init() {
         self.guesses = []
