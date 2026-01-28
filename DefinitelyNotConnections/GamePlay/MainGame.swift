@@ -86,10 +86,6 @@ class MainGame {
         }
     }
     
-    public func shuffleClueBoxes() {
-        self.categories.shuffleClueBoxes()
-    }
-    
     private func handleCorrectGuess(submitResult: SubmitResult) {
         self.categories.completeCategory(categoryID: submitResult.categoryID)
         if self.categories.numCompletedCategories == self.gameProperties.numCategories {
