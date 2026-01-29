@@ -23,6 +23,10 @@ class AllClueBoxes {
         })
     }
     
+    var selectedClueBoxIDs: [UUID] {
+        getClueBoxIDs(clueBoxes: self.selectedClueBoxes)
+    }
+    
     var numSelectedClueBoxes: Int {
         self.selectedClueBoxes.count
     }
@@ -99,7 +103,7 @@ class AllClueBoxes {
     
     func selectionAlreadyGuessed(guesses: [Guess]) -> Bool {
         return guesses.map({guess in
-            guess.clueBoxesMatchGuess(clueBoxIDs: getClueBoxIDs(clueBoxes: self.selectedClueBoxes))
+            guess.clueBoxesMatchGuess(clueBoxIDs: selectedClueBoxIDs)
         }).contains(true)
     }
 }
