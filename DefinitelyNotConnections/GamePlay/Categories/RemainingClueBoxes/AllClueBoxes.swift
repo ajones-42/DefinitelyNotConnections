@@ -57,7 +57,7 @@ class AllClueBoxes {
         })
     }
     
-    func getClueBoxIDs(clueBoxes: [ClueBox]) -> [UUID] {
+    private func getClueBoxIDs(clueBoxes: [ClueBox]) -> [UUID] {
         return clueBoxes.map({clueBox in
             clueBox.getID()
         })
