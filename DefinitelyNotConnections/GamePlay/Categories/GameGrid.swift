@@ -68,9 +68,9 @@ class GameGrid {
         self.allClueBoxes.stopShakingSelectedClueBoxes()
     }
     
-    func getSubmitBestMatch(selectedClueBoxIDs: [UUID]) -> SubmitResult? {
+    func getSubmitBestMatch() -> SubmitResult? {
         let submitResults: [SubmitResult] = self.allCategories.map {category in
-            SubmitResult(categoryID: category.id, numMatches: getNumSameElementsInArrays(lhs: selectedClueBoxIDs, rhs: category.getClueIDs()), numCluesPerCategory: self.gameProperties.numCluesPerCategory)
+            SubmitResult(categoryID: category.id, numMatches: getNumSameElementsInArrays(lhs: self.allClueBoxes.selectedClueBoxIDs, rhs: category.getClueIDs()), numCluesPerCategory: self.gameProperties.numCluesPerCategory)
         }
         return submitResults.max(by: {a, b in a.numMatches < b.numMatches})
     }

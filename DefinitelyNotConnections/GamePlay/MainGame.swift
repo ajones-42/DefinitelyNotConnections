@@ -118,8 +118,8 @@ class MainGame {
         self.allGuesses.addGuess(guess: guess)
     }
     
-    private func getSubmitBestMatch(selectedClueInfos: [ClueInfo]) -> SubmitResult? {
-        return self.gameGrid.getSubmitBestMatch(selectedClueBoxIDs: selectedClueInfos.map({clueInfo in clueInfo.id}))
+    private func getSubmitBestMatch() -> SubmitResult? {
+        return self.gameGrid.getSubmitBestMatch()
     }
     
     public func submitSelection() {
@@ -131,7 +131,7 @@ class MainGame {
             if getSelectionAlreadyGuessed() {
                 handleAlreadyGuessed()
             } else {
-                if let bestMatch: SubmitResult = getSubmitBestMatch(selectedClueInfos: selectedClueInfos) {
+                if let bestMatch: SubmitResult = getSubmitBestMatch() {
                     addGuess(selectedClueInfos: selectedClueInfos, bestMatch: bestMatch)
                     if bestMatch.isCorrect {
                         handleCorrectGuess(submitResult: bestMatch)
