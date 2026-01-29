@@ -8,7 +8,7 @@
 import Foundation
 
 class ClueBoxBuilder {
-    var clueInfo: ClueInfo = ClueInfo(clue: "A clue!")
+    var clueInfo: ClueInfo = ClueInfo(clue: "A clue!", categoryID: UUID())
     var isCompleted: Bool = false
     var isSelected: Bool = false
     var shake: Bool = false
@@ -28,8 +28,8 @@ class ClueBoxBuilder {
         return self
     }
     
-    func withClue(clue: String) -> ClueBoxBuilder {
-        self.clueInfo = ClueInfo(clue: clue)
+    func withClueInfo(clueInfo: ClueInfo) -> ClueBoxBuilder {
+        self.clueInfo = clueInfo
         return self
     }
 

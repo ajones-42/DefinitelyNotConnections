@@ -9,5 +9,12 @@ import Foundation
 
 struct ClueInfo: Equatable {
     let clue: String
-    let id: UUID = UUID()
+    let id: UUID
+    let categoryID: UUID
+    
+    init(clue: String, categoryID: UUID) {
+        self.clue = clue
+        self.id = UUID()
+        self.categoryID = categoryID
+    }
 }

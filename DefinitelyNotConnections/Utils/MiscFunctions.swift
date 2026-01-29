@@ -63,9 +63,9 @@ func categoriesCompletedInIncreasingOrder(category1: Category, category2: Catego
     }
 }
 
-func createClueInfos(clues: [String]) -> [ClueInfo] {
+func createCategoryClueInfos(clues: [String], categoryID: UUID) -> [ClueInfo] {
     return clues.map({clue in
-            ClueInfo(clue: clue)
+            ClueInfo(clue: clue, categoryID: categoryID)
     })
 }
 
