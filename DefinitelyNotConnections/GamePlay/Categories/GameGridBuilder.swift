@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CategoriesBuilder {
+class GameGridBuilder {
     var allCategories: [Category]
     var gameProperties: GameProperties
     var allClueBoxes: AllClueBoxes
@@ -25,22 +25,22 @@ class CategoriesBuilder {
         self.allClueBoxes = AllClueBoxes(setupInfo: setupInfo, gameProperties: self.gameProperties, shuffled: true)
     }
     
-    func withAllCategories(allCategories: [Category]) -> CategoriesBuilder {
+    func withAllCategories(allCategories: [Category]) -> GameGridBuilder {
         self.allCategories = allCategories
         return self
     }
     
-    func withAllClueBoxes(allClueBoxes: AllClueBoxes) -> CategoriesBuilder {
+    func withAllClueBoxes(allClueBoxes: AllClueBoxes) -> GameGridBuilder {
         self.allClueBoxes = allClueBoxes
         return self
     }
     
-    func withGameProperties(gameProperties: GameProperties) -> CategoriesBuilder {
+    func withGameProperties(gameProperties: GameProperties) -> GameGridBuilder {
         self.gameProperties = gameProperties
         return self
     }
     
-    func completeFirstNCategories(n: Int) throws -> CategoriesBuilder {
+    func completeFirstNCategories(n: Int) throws -> GameGridBuilder {
         let numCategories = self.allCategories.count
         guard (n >= 0 && n <= numCategories) else {
             print("CategoriesBuilder.completeFirstNCategories: Invalid value of n (\(n)). It must be greater than zero, and less than or equal to the number of categories (\(numCategories))")
@@ -54,11 +54,11 @@ class CategoriesBuilder {
         return self
     }
     
-    func completeAllCategories() -> CategoriesBuilder {
+    func completeAllCategories() -> GameGridBuilder {
         return try! completeFirstNCategories(n: self.gameProperties.numCategories)
     }
     
-    func build() -> Categories {
-        return Categories(allCategories: self.allCategories, allClueBoxes: self.allClueBoxes, gameProperties: self.gameProperties)
+    func build() -> GameGrid {
+        return GameGrid(allCategories: self.allCategories, allClueBoxes: self.allClueBoxes, gameProperties: self.gameProperties)
     }
 }

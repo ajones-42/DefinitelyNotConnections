@@ -10,7 +10,7 @@ import Foundation
 class MainGameBuilder {
     var gameProperties: GameProperties
     var gamePhase: GamePhase
-    var categories: Categories
+    var gameGrid: GameGrid
     var allGuesses: AllGuesses
     var popup: Popup
     var mistakes: Mistakes
@@ -18,7 +18,7 @@ class MainGameBuilder {
     init(setupInfo: SetupInfo) {
         self.gameProperties = GameProperties(setupInfo: setupInfo)
         self.gamePhase = .setup
-        self.categories = Categories(setupInfo: setupInfo, gameProperties: self.gameProperties)
+        self.gameGrid = GameGrid(setupInfo: setupInfo, gameProperties: self.gameProperties)
         self.allGuesses = AllGuesses()
         self.popup = Popup()
         self.mistakes = Mistakes(gameProperties: self.gameProperties)
@@ -28,7 +28,7 @@ class MainGameBuilder {
         let setupInfo: SetupInfo = createDefaultTestSetupInfo()
         self.gameProperties = GameProperties(setupInfo: setupInfo)
         self.gamePhase = .setup
-        self.categories = Categories(setupInfo: setupInfo, gameProperties: self.gameProperties)
+        self.gameGrid = GameGrid(setupInfo: setupInfo, gameProperties: self.gameProperties)
         self.allGuesses = AllGuesses()
         self.popup = Popup()
         self.mistakes = Mistakes(gameProperties: self.gameProperties)
@@ -44,8 +44,8 @@ class MainGameBuilder {
         return self
     }
     
-    func withCategories(categories: Categories) -> MainGameBuilder {
-        self.categories = categories
+    func withGameGrid(gameGrid: GameGrid) -> MainGameBuilder {
+        self.gameGrid = gameGrid
         return self
     }
     
@@ -65,6 +65,6 @@ class MainGameBuilder {
     }
     
     func build() -> MainGame {
-        return MainGame(gameProperties: self.gameProperties, gamePhase: self.gamePhase, categories: self.categories, allGuesses: self.allGuesses, popup: self.popup, mistakes: self.mistakes)
+        return MainGame(gameProperties: self.gameProperties, gamePhase: self.gamePhase, gameGrid: self.gameGrid, allGuesses: self.allGuesses, popup: self.popup, mistakes: self.mistakes)
     }
 }

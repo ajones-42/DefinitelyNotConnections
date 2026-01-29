@@ -8,7 +8,7 @@
 import Foundation
 
 @Observable
-class Categories {
+class GameGrid {
     private(set) var allCategories: [Category]
     private(set) var allClueBoxes: AllClueBoxes
     let gameProperties: GameProperties

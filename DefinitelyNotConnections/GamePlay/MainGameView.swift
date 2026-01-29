@@ -15,13 +15,13 @@ struct MainGameView: View {
             PopupView(popup: mainGame.popup)
             Text("Create four groups of four!")
                 .foregroundStyle(.foreground)
-            CategoriesView(categories: mainGame.categories)
+            GameGridView(gameGrid: mainGame.gameGrid)
                 .padding(.horizontal)
                 .overlay(OutOfMistakesAlertView(mistakes: mainGame.mistakes))
             MistakesRemainingView(mistakes: mainGame.mistakes)
             HStack {
-                ShuffleButtonView(allClueBoxes: mainGame.categories.allClueBoxes)
-                DeselectAllButtonView(allClueBoxes: mainGame.categories.allClueBoxes)
+                ShuffleButtonView(allClueBoxes: mainGame.gameGrid.allClueBoxes)
+                DeselectAllButtonView(allClueBoxes: mainGame.gameGrid.allClueBoxes)
                 SubmitButtonView()
             }
         }

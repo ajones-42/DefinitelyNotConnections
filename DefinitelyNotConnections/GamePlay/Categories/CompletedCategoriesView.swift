@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CompletedCategoriesView: View {
-    var categories: Categories
+    var categories: GameGrid
 
     var body: some View {
         ForEach(categories.sortedCompletedCategories) {category in
@@ -18,6 +18,6 @@ struct CompletedCategoriesView: View {
 }
 
 #Preview {
-    let categories: Categories = CategoriesBuilder().completeAllCategories().build()
+    let categories: GameGrid = GameGridBuilder().completeAllCategories().build()
     CompletedCategoriesView(categories: categories)
 }
