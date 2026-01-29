@@ -24,7 +24,6 @@ class CategoriesBuilder {
         return self
     }
     
-    //TODO move this elsewhere and also complete clueBoxes
     func completeFirstNCategories(n: Int) throws -> CategoriesBuilder {
         let numCategories = self.allCategories.count
         guard (n >= 0 && n <= numCategories) else {
