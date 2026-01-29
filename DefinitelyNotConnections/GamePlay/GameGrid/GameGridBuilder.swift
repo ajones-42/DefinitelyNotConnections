@@ -8,25 +8,25 @@
 import Foundation
 
 class GameGridBuilder {
-    var allCategories: [Category]
+    var categories: Categories
     var gameProperties: GameProperties
     var allClueBoxes: AllClueBoxes
     
     init(setupInfo: SetupInfo) {
-        self.allCategories = createCategories(categoryInfos: setupInfo.categoryInfos)
+        self.categories = Categories(setupInfo: setupInfo)
         self.gameProperties = GameProperties(setupInfo: setupInfo)
         self.allClueBoxes = AllClueBoxes(setupInfo: setupInfo, gameProperties: self.gameProperties, shuffled: true)
     }
     
     init() {
         let setupInfo: SetupInfo = createDefaultTestSetupInfo()
-        self.allCategories = createCategories(categoryInfos: setupInfo.categoryInfos)
+        self.categories = Categories(setupInfo: setupInfo)
         self.gameProperties = GameProperties(setupInfo: setupInfo)
         self.allClueBoxes = AllClueBoxes(setupInfo: setupInfo, gameProperties: self.gameProperties, shuffled: true)
     }
     
-    func withAllCategories(allCategories: [Category]) -> GameGridBuilder {
-        self.allCategories = allCategories
+    func withCategories(categories: Categories) -> GameGridBuilder {
+        self.categories = categories
         return self
     }
     
@@ -40,7 +40,7 @@ class GameGridBuilder {
         return self
     }
     
-    func completeFirstNCategories(n: Int) throws -> GameGridBuilder {
+    /*func completeFirstNCategories(n: Int) throws -> GameGridBuilder {
         let numCategories = self.allCategories.count
         guard (n >= 0 && n <= numCategories) else {
             print("CategoriesBuilder.completeFirstNCategories: Invalid value of n (\(n)). It must be greater than zero, and less than or equal to the number of categories (\(numCategories))")
@@ -56,9 +56,9 @@ class GameGridBuilder {
     
     func completeAllCategories() -> GameGridBuilder {
         return try! completeFirstNCategories(n: self.gameProperties.numCategories)
-    }
+    }*/
     
     func build() -> GameGrid {
-        return GameGrid(allCategories: self.allCategories, allClueBoxes: self.allClueBoxes, gameProperties: self.gameProperties)
+        return GameGrid(allCategories: self.categories, allClueBoxes: self.allClueBoxes, gameProperties: self.gameProperties)
     }
 }

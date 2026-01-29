@@ -12,7 +12,7 @@ struct GameGridView: View {
     
     var body: some View {
         VStack {
-            CompletedCategoriesView(categories: gameGrid) //TODO Give only Categories
+            CompletedCategoriesView(categories: gameGrid.allCategories)
             RemainingClueBoxesView(allClueBoxes: gameGrid.allClueBoxes)
         }
     }

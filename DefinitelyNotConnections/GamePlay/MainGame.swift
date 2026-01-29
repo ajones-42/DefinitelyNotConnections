@@ -88,7 +88,7 @@ class MainGame {
     
     private func handleCorrectGuess(submitResult: SubmitResult) {
         self.gameGrid.completeCategory(categoryID: submitResult.categoryID)
-        if self.gameGrid.numCompletedCategories == self.gameProperties.numCategories {
+        if self.gameGrid.getNumCompletedCategories() == self.gameProperties.numCategories {
             admirePuzzle()
         }
     }
@@ -109,8 +109,10 @@ class MainGame {
         return self.gameGrid.getSubmitIsClickable()
     }
     
-    private func getSelectionAlreadyGuessed() -> Bool {
-        return self.gameGrid.allClueBoxes.selectionAlreadyGuessed(guesses: self.allGuesses.getGuesses())
+    private func getSelectionAlreadyGuessed(selectedClueBoxIDs: [UUID], guesses: [Guess]) -> Bool {
+        return guesses.map({guess in
+                guess.clueBoxesMatchGuess(clueBoxIDs: selectedClueBoxIDs)
+            }).contains(true)
     }
 
     private func addGuess(selectedClueInfos: [ClueInfo], bestMatch: SubmitResult) {
@@ -118,8 +120,11 @@ class MainGame {
         self.allGuesses.addGuess(guess: guess)
     }
     
-    private func getSubmitBestMatch() -> SubmitResult? {
-        return self.gameGrid.getSubmitBestMatch()
+    private func getSubmitBestMatch(selectedClueBoxIDs: [UUID], categories: [Category]) -> SubmitResult? {
+        let submitResults: [SubmitResult] = categories.map {category in
+            SubmitResult(categoryID: category.id, numMatches: getNumSameElementsInArrays(lhs: selectedClueBoxIDs, rhs: category.getClueIDs()), numCluesPerCategory: self.gameProperties.numCluesPerCategory)
+        }
+        return submitResults.max(by: {a, b in a.numMatches < b.numMatches})
     }
     
     public func submitSelection() {
@@ -127,11 +132,16 @@ class MainGame {
             deactivatePopup()
             let selectedClueInfos: [ClueInfo] = self.gameGrid.getSelectedClueBoxes().map({clueBox in
                 clueBox.clueInfo})
+            let selectedClueBoxIDs = selectedClueInfos.map({clueInfo in
+                clueInfo.id
+            })
+            let allCategories = self.gameGrid.getCategories()
+            let guesses = self.allGuesses.guesses
             
-            if getSelectionAlreadyGuessed() {
+            if getSelectionAlreadyGuessed(selectedClueBoxIDs: selectedClueBoxIDs, guesses: guesses) {
                 handleAlreadyGuessed()
             } else {
-                if let bestMatch: SubmitResult = getSubmitBestMatch() {
+                if let bestMatch: SubmitResult = getSubmitBestMatch(selectedClueBoxIDs: selectedClueBoxIDs, categories: allCategories) {
                     addGuess(selectedClueInfos: selectedClueInfos, bestMatch: bestMatch)
                     if bestMatch.isCorrect {
                         handleCorrectGuess(submitResult: bestMatch)

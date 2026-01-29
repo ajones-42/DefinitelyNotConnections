@@ -100,10 +100,4 @@ class AllClueBoxes {
             clueBox.setCompleted()
         })
     }
-    
-    func selectionAlreadyGuessed(guesses: [Guess]) -> Bool {
-        return guesses.map({guess in
-            guess.clueBoxesMatchGuess(clueBoxIDs: selectedClueBoxIDs)
-        }).contains(true)
-    }
 }
