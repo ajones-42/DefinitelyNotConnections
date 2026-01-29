@@ -109,8 +109,8 @@ class MainGame {
         return self.gameGrid.getSubmitIsClickable()
     }
     
-    private func getSelectionAlreadyGuessed(selectedClueInfos: [ClueInfo]) -> Bool {
-        return self.allGuesses.selectionAlreadyGuessed(selectedClueBoxIDs: selectedClueInfos.map({clueInfo in clueInfo.id}))
+    private func getSelectionAlreadyGuessed() -> Bool {
+        return self.gameGrid.allClueBoxes.selectionAlreadyGuessed(guesses: self.allGuesses.getGuesses())
     }
 
     private func addGuess(selectedClueInfos: [ClueInfo], bestMatch: SubmitResult) {
@@ -128,7 +128,7 @@ class MainGame {
             let selectedClueInfos: [ClueInfo] = self.gameGrid.getSelectedClueBoxes().map({clueBox in
                 clueBox.clueInfo})
             
-            if getSelectionAlreadyGuessed(selectedClueInfos: selectedClueInfos) {
+            if getSelectionAlreadyGuessed() {
                 handleAlreadyGuessed()
             } else {
                 if let bestMatch: SubmitResult = getSubmitBestMatch(selectedClueInfos: selectedClueInfos) {

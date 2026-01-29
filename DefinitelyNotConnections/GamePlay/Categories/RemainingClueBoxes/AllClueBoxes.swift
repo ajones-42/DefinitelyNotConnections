@@ -53,6 +53,12 @@ class AllClueBoxes {
         })
     }
     
+    func getClueBoxIDs(clueBoxes: [ClueBox]) -> [UUID] {
+        return clueBoxes.map({clueBox in
+            clueBox.getID()
+        })
+    }
+    
     func clueBoxIsClickable(clueBox: ClueBox) -> Bool {
         return self.numSelectedClueBoxes < self.gameProperties.numCluesPerCategory || clueBox.isSelected
     }
@@ -89,5 +95,11 @@ class AllClueBoxes {
         self.selectedClueBoxes.forEach({clueBox in
             clueBox.setCompleted()
         })
+    }
+    
+    func selectionAlreadyGuessed(guesses: [Guess]) -> Bool {
+        return guesses.map({guess in
+            guess.clueBoxesMatchGuess(clueBoxIDs: getClueBoxIDs(clueBoxes: self.selectedClueBoxes))
+        }).contains(true)
     }
 }

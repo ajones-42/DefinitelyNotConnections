@@ -30,10 +30,4 @@ class AllGuesses {
     func addGuess(guess: Guess) {
         self.guesses.append(guess)
     }
-    
-    func selectionAlreadyGuessed(selectedClueBoxIDs: [UUID]) -> Bool {
-        return getGuesses().map({guess in
-            guess.clueBoxesMatchGuess(clueBoxIDs: selectedClueBoxIDs)
-        }).contains(true)
-    }
 }
