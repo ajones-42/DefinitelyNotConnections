@@ -17,7 +17,8 @@ struct CompletedCategoriesView: View {
     }
 }
 
-/*#Preview {
-    let categories: GameGrid = GameGridBuilder().completeAllCategories().build()
+#Preview {
+    let gameProperties: GameProperties = GamePropertiesBuilder().build()
+    let categories: Categories = CategoriesBuilder().completeAllCategories(gameProperties: gameProperties).build()
     CompletedCategoriesView(categories: categories)
-}*/
+}
