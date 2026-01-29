@@ -33,7 +33,7 @@
 		FA8898D92F157536009D9995 /* Exceptions for "DefinitelyNotConnections" folder in "DefinitelyNotConnections" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				GamePlay/Categories/RemainingClueBoxes/ClueBox/ClueBoxTests.swift,
+				GamePlay/GameGrid/ClueBoxes/ClueBox/ClueBoxTests.swift,
 				Utils/MiscFunctionsTests.swift,
 			);
 			target = FAD88C242DEDF61200CE86B6 /* DefinitelyNotConnections */;
@@ -41,7 +41,7 @@
 		FA8898DA2F157536009D9995 /* Exceptions for "DefinitelyNotConnections" folder in "DefinitelyNotConnectionsTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				GamePlay/Categories/RemainingClueBoxes/ClueBox/ClueBoxTests.swift,
+				GamePlay/GameGrid/ClueBoxes/ClueBox/ClueBoxTests.swift,
 				Utils/MiscFunctionsTests.swift,
 			);
 			target = FAD88C312DEDF61500CE86B6 /* DefinitelyNotConnectionsTests */;
