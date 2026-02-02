@@ -61,4 +61,8 @@ class ClueBox {
     func getClue() -> String {
         return self.clueInfo.clue
     }
+    
+    func getCategoryID() -> UUID {
+        return self.clueInfo.categoryID
+    }
 }

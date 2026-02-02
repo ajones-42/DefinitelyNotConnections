@@ -128,7 +128,7 @@ class MainGame {
     
     private func getSubmitBestMatch(selectedClueBoxes: [ClueBox]) -> SubmitResult? {
         let selectedClueBoxCategoryIDs: [UUID] = selectedClueBoxes.map({clueBox in
-            clueBox.clueInfo.categoryID
+            clueBox.getCategoryID()
         })
         let counts = selectedClueBoxCategoryIDs.reduce(into: [:]) { counts, categoryID in counts[categoryID, default: 0] += 1 }
         if let bestCategory = counts.max(by: {a, b in a.value < b.value}) {
