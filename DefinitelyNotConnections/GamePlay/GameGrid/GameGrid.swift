@@ -56,6 +56,6 @@ class GameGrid {
     
     func completeCategory(categoryID: UUID) {
         self.allCategories.completeCategory(categoryID: categoryID)
-        self.allClueBoxes.completeSelectedClueBoxes()
+        self.allClueBoxes.completeClueBoxesByCategoryID(categoryID: categoryID)
     }
 }

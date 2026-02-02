@@ -95,9 +95,11 @@ class AllClueBoxes {
         })
     }
     
-    func completeSelectedClueBoxes() {
-        self.selectedClueBoxes.forEach({clueBox in
-            clueBox.setCompleted()
+    func completeClueBoxesByCategoryID(categoryID: UUID) {
+        self.allClueBoxes.forEach({clueBox in
+            if clueBox.getCategoryID() == categoryID {
+                clueBox.setCompleted()
+            }
         })
     }
 }
