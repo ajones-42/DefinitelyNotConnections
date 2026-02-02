@@ -120,11 +120,13 @@ class MainGame {
         self.allGuesses.addGuess(guess: guess)
     }
     
-    private func getSubmitBestMatch(selectedClueBoxIDs: [UUID], categories: [Category]) -> SubmitResult? {
-        let submitResults: [SubmitResult] = categories.map {category in
-            SubmitResult(categoryID: category.id, numMatches: getNumSameElementsInArrays(lhs: selectedClueBoxIDs, rhs: category.getClueIDs()), numCluesPerCategory: self.gameProperties.numCluesPerCategory)
+    private func getSubmitBestMatch(selectedClueBoxCategoryIDs: [UUID]) -> SubmitResult? {
+        let counts = selectedClueBoxCategoryIDs.reduce(into: [:]) { counts, categoryID in counts[categoryID, default: 0] += 1 }
+        if let bestCategory = counts.max(by: {a, b in a.value < b.value}) {
+            return SubmitResult(categoryID: bestCategory.key, numMatches: bestCategory.value, numCluesPerCategory: self.gameProperties.numCluesPerCategory)
+        } else {
+            return nil
         }
-        return submitResults.max(by: {a, b in a.numMatches < b.numMatches})
     }
     
     public func submitSelection() {
@@ -135,13 +137,16 @@ class MainGame {
             let selectedClueBoxIDs = selectedClueInfos.map({clueInfo in
                 clueInfo.id
             })
+            let selectedClueBoxCategoryIDs: [UUID] = selectedClueInfos.map({clueInfo in
+                clueInfo.categoryID
+            })
             let allCategories = self.gameGrid.getCategories()
             let guesses = self.allGuesses.guesses
             
             if getSelectionAlreadyGuessed(selectedClueBoxIDs: selectedClueBoxIDs, guesses: guesses) {
                 handleAlreadyGuessed()
             } else {
-                if let bestMatch: SubmitResult = getSubmitBestMatch(selectedClueBoxIDs: selectedClueBoxIDs, categories: allCategories) {
+                if let bestMatch: SubmitResult = getSubmitBestMatch(selectedClueBoxCategoryIDs: selectedClueBoxCategoryIDs) {
                     addGuess(selectedClueInfos: selectedClueInfos, bestMatch: bestMatch)
                     if bestMatch.isCorrect {
                         handleCorrectGuess(submitResult: bestMatch)
