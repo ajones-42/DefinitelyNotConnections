@@ -140,7 +140,6 @@ class MainGame {
             let selectedClueBoxCategoryIDs: [UUID] = selectedClueInfos.map({clueInfo in
                 clueInfo.categoryID
             })
-            let allCategories = self.gameGrid.getCategories()
             let guesses = self.allGuesses.guesses
             
             if getSelectionAlreadyGuessed(selectedClueBoxIDs: selectedClueBoxIDs, guesses: guesses) {
