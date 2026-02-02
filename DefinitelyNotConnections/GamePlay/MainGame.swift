@@ -86,8 +86,8 @@ class MainGame {
         }
     }
     
-    private func handleCorrectGuess(submitResult: SubmitResult) {
-        self.gameGrid.completeCategory(categoryID: submitResult.categoryID)
+    private func handleCorrectGuess(submitBestMatch: SubmitBestMatch) {
+        self.gameGrid.completeCategory(categoryID: submitBestMatch.categoryID)
         if self.gameGrid.getNumCompletedCategories() == self.gameProperties.numCategories {
             admirePuzzle()
         }
@@ -118,21 +118,21 @@ class MainGame {
             }).contains(true)
     }
 
-    private func addGuess(selectedClueBoxes: [ClueBox], bestMatch: SubmitResult) {
+    private func addGuess(selectedClueBoxes: [ClueBox], submitBestMatch: SubmitBestMatch) {
         let selectedClueInfos: [ClueInfo] = selectedClueBoxes.map({clueBox in
             clueBox.clueInfo
         })
-        let guess = Guess(clueInfos: selectedClueInfos, submitResult: bestMatch)
+        let guess = Guess(clueInfos: selectedClueInfos, submitBestMatch: submitBestMatch)
         self.allGuesses.addGuess(guess: guess)
     }
     
-    private func getSubmitBestMatch(selectedClueBoxes: [ClueBox]) -> SubmitResult? {
+    private func getSubmitBestMatch(selectedClueBoxes: [ClueBox]) -> SubmitBestMatch? {
         let selectedClueBoxCategoryIDs: [UUID] = selectedClueBoxes.map({clueBox in
             clueBox.getCategoryID()
         })
         let counts: Dictionary<UUID, Int> = selectedClueBoxCategoryIDs.reduce(into: [:]) { counts, categoryID in counts[categoryID, default: 0] += 1 }
         if let bestCategory: Dictionary<UUID, Int>.Element = counts.max(by: {a, b in a.value < b.value}) {
-            return SubmitResult(categoryID: bestCategory.key, numMatches: bestCategory.value, numCluesPerCategory: self.gameProperties.numCluesPerCategory)
+            return SubmitBestMatch(categoryID: bestCategory.key, numMatches: bestCategory.value, numCluesPerCategory: self.gameProperties.numCluesPerCategory)
         } else {
             return nil
         }
@@ -147,12 +147,12 @@ class MainGame {
             if getSelectionAlreadyGuessed(selectedClueBoxes: selectedClueBoxes, guesses: guesses) {
                 handleAlreadyGuessed()
             } else {
-                if let bestMatch: SubmitResult = getSubmitBestMatch(selectedClueBoxes: selectedClueBoxes) {
-                    addGuess(selectedClueBoxes: selectedClueBoxes, bestMatch: bestMatch)
-                    if bestMatch.isCorrect {
-                        handleCorrectGuess(submitResult: bestMatch)
+                if let submitBestMatch: SubmitBestMatch = getSubmitBestMatch(selectedClueBoxes: selectedClueBoxes) {
+                    addGuess(selectedClueBoxes: selectedClueBoxes, submitBestMatch: submitBestMatch)
+                    if submitBestMatch.isCorrect {
+                        handleCorrectGuess(submitBestMatch: submitBestMatch)
                     } else {
-                        handleIncorrectGuess(guessOneAway: bestMatch.isOneAway)
+                        handleIncorrectGuess(guessOneAway: submitBestMatch.isOneAway)
                     }
                 }
             }

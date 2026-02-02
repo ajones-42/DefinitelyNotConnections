@@ -23,10 +23,10 @@ struct Guess: Identifiable {
         }
     }
     
-    init(clueInfos: [ClueInfo], submitResult: SubmitResult) {
+    init(clueInfos: [ClueInfo], submitBestMatch: SubmitBestMatch) {
         self.clueInfos = clueInfos
-        self.isCorrect = submitResult.isCorrect
-        self.isOneAway = submitResult.isOneAway
+        self.isCorrect = submitBestMatch.isCorrect
+        self.isOneAway = submitBestMatch.isOneAway
         self.id = UUID()
     }
     

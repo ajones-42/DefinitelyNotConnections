@@ -1,5 +1,5 @@
 //
-//  SubmitResult.swift
+//  SubmitBestMatch.swift
 //  DefinitelyNotConnections
 //
 //  Created by Alex Jones on 16.01.26.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SubmitResult {
+struct SubmitBestMatch {
     let categoryID: UUID
     let numMatches: Int
     let isCorrect: Bool
