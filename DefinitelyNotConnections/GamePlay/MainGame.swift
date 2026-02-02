@@ -80,10 +80,7 @@ class MainGame {
     }
     
     private func shakeSelectedClueBoxesMomentarily(duration: TimeInterval) {
-        self.gameGrid.startShakingSelectedClueBoxes()
-        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
-            self.gameGrid.stopShakingSelectedClueBoxes()
-        }
+        self.gameGrid.shakeSelectedClueBoxesMomentarily(duration: duration)
     }
     
     private func handleCorrectGuess(submitBestMatch: SubmitBestMatch) {

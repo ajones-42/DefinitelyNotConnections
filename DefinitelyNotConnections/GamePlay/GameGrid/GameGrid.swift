@@ -46,12 +46,8 @@ class GameGrid {
         return self.allClueBoxes.submitIsClickable
     }
     
-    func startShakingSelectedClueBoxes() {
-        self.allClueBoxes.startShakingSelectedClueBoxes()
-    }
-    
-    func stopShakingSelectedClueBoxes() {
-        self.allClueBoxes.stopShakingSelectedClueBoxes()
+    func shakeSelectedClueBoxesMomentarily(duration: TimeInterval) {
+        self.allClueBoxes.shakeSelectedClueBoxesMomentarily(duration: duration)
     }
     
     func completeCategory(categoryID: UUID) {

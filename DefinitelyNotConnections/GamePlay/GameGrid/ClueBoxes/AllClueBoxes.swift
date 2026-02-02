@@ -83,16 +83,23 @@ class AllClueBoxes {
         })
     }
     
-    func startShakingSelectedClueBoxes() {
+    private func startShakingSelectedClueBoxes() {
         self.selectedClueBoxes.forEach({clueBox in
             clueBox.startShake()
         })
     }
     
-    func stopShakingSelectedClueBoxes() {
+    private func stopShakingSelectedClueBoxes() {
         self.selectedClueBoxes.forEach({clueBox in
             clueBox.stopShake()
         })
+    }
+    
+    func shakeSelectedClueBoxesMomentarily(duration: TimeInterval) {
+        startShakingSelectedClueBoxes()
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+            self.stopShakingSelectedClueBoxes()
+        }
     }
     
     func completeClueBoxesByCategoryID(categoryID: UUID) {
