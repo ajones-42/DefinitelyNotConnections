@@ -130,8 +130,8 @@ class MainGame {
         let selectedClueBoxCategoryIDs: [UUID] = selectedClueBoxes.map({clueBox in
             clueBox.getCategoryID()
         })
-        let counts = selectedClueBoxCategoryIDs.reduce(into: [:]) { counts, categoryID in counts[categoryID, default: 0] += 1 }
-        if let bestCategory = counts.max(by: {a, b in a.value < b.value}) {
+        let counts: Dictionary<UUID, Int> = selectedClueBoxCategoryIDs.reduce(into: [:]) { counts, categoryID in counts[categoryID, default: 0] += 1 }
+        if let bestCategory: Dictionary<UUID, Int>.Element = counts.max(by: {a, b in a.value < b.value}) {
             return SubmitResult(categoryID: bestCategory.key, numMatches: bestCategory.value, numCluesPerCategory: self.gameProperties.numCluesPerCategory)
         } else {
             return nil
