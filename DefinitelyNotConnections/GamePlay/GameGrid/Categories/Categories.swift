@@ -45,3 +45,19 @@ class Categories {
         }
     }
 }
+
+// Add functions for testing
+extension Categories {
+    private func completeNCategories(n: Int) throws {
+        let totalNumCategories: Int = self.allCategories.count
+        guard (n <= totalNumCategories) else {
+            print("Categories.completeNcategories: n must be less than or equal to total number of clueBoxes (\(totalNumCategories))")
+            throw ValidationError.invalidInput
+        }
+        self.allCategories.enumerated().forEach({(index, category) in
+            if index < n - 1 {
+                category.complete(orderCompleted: index)
+            }
+        })
+    }
+}
