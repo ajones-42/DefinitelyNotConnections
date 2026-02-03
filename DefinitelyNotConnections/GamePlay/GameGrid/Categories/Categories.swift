@@ -34,6 +34,11 @@ class Categories {
         })
     }
     
+    func getCategoryIDs() -> [UUID] {
+        return self.allCategories.map({category in
+            category.id
+        })
+    }
     
     private func getNextCompletedCategoryOrder() -> Int {
         return self.sortedCompletedCategories.count
