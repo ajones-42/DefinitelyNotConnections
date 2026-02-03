@@ -20,5 +20,6 @@ struct GameGridView: View {
 
 #Preview {
     let gameGrid: GameGrid = GameGridBuilder().build()
-    GameGridView(gameGrid: gameGrid)
+    try! gameGrid.completeNCategories(n: 2)
+    return GameGridView(gameGrid: gameGrid)
 }
