@@ -120,7 +120,7 @@ extension AllClueBoxes {
             throw ValidationError.invalidInput
         }
         self.allClueBoxes.enumerated().forEach({(index, clueBox) in
-            if index < n - 1 {
+            if index < n {
                 clueBox.setCompleted()
             }
         })
@@ -133,7 +133,7 @@ extension AllClueBoxes {
             throw ValidationError.invalidInput
         }
         self.allClueBoxes.enumerated().forEach({(index, clueBox) in
-            if index < n - 1 {
+            if index < n {
                 clueBox.select()
             }
         })

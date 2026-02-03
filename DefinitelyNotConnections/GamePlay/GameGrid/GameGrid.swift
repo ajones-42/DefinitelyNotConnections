@@ -66,7 +66,7 @@ extension GameGrid {
             throw ValidationError.invalidInput
         }
         allCategoryIDs.enumerated().forEach({(index, categoryID) in
-            if index < n - 1 {
+            if index < n {
                 completeCategory(categoryID: categoryID)
             }
         })

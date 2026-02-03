@@ -60,7 +60,7 @@ extension Categories {
             throw ValidationError.invalidInput
         }
         self.allCategories.enumerated().forEach({(index, category) in
-            if index < n - 1 {
+            if index < n {
                 category.complete(orderCompleted: index)
             }
         })
