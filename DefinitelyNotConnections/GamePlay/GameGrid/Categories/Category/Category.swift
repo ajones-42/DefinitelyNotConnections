@@ -35,6 +35,10 @@ class Category: Identifiable {
         self.orderCompleted = nil
     }
     
+    func reset() {
+        self.orderCompleted = nil
+    }
+    
     func getClues() -> [String] {
         return self.clueInfos.map({clueInfo in
             clueInfo.clue
@@ -49,9 +53,5 @@ class Category: Identifiable {
     
     func complete(orderCompleted: Int) {
         self.orderCompleted = orderCompleted
-    }
-    
-    func reset() {
-        self.orderCompleted = nil
     }
 }
