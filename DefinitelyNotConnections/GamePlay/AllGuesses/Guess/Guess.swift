@@ -53,6 +53,6 @@ struct Guess: Identifiable {
     
     func clueBoxesMatchGuess(clueBoxIDs: [UUID]) -> Bool {
         let guessClueBoxIDs: [UUID] = getClueIDs()
-        return getNumSameElementsInArrays(lhs: clueBoxIDs, rhs: guessClueBoxIDs) == guessClueBoxIDs.count
+        return guessClueBoxIDs.count == clueBoxIDs.count ? getNumSameElementsInArrays(lhs: clueBoxIDs, rhs: guessClueBoxIDs) == guessClueBoxIDs.count : false
     }
 }
