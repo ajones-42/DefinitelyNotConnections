@@ -19,10 +19,24 @@ struct GuessTests {
     let clueInfo7: ClueInfo = ClueInfo(clue: "Clue7", categoryID: UUID())
     let clueInfo8: ClueInfo = ClueInfo(clue: "Clue8", categoryID: UUID())
 
-    @Test func guessMatchesClues()  {
+    @Test func testGuessMatchesClues()  {
         let clueInfos: [ClueInfo] = [clueInfo1, clueInfo2, clueInfo3, clueInfo4]
         let guess: Guess = GuessBuilder().withClueInfos(clueInfos: clueInfos).build()
-        #expect(guess.clueBoxesMatchGuess(clueBoxIDs: clueInfos.map({$0.getID()})))
+        #expect(guess.clueBoxesMatchGuess(clueBoxIDs: clueInfos.map({$0.getID()})) == true)
+    }
+    
+    @Test func testGuessMatchesNoClues() {
+        let guessClueInfos: [ClueInfo] = [clueInfo1, clueInfo2, clueInfo3, clueInfo4]
+        let guess: Guess = GuessBuilder().withClueInfos(clueInfos: guessClueInfos).build()
+        let otherClueInfoIDs: [UUID] = [clueInfo5, clueInfo6, clueInfo7, clueInfo8].map({$0.getID()})
+        #expect(guess.clueBoxesMatchGuess(clueBoxIDs: otherClueInfoIDs) == false)
+    }
+    
+    @Test func testGuessMatchesSomeClues() {
+        let guessClueInfos: [ClueInfo] = [clueInfo1, clueInfo2, clueInfo3, clueInfo4]
+        let guess: Guess = GuessBuilder().withClueInfos(clueInfos: guessClueInfos).build()
+        let otherClueInfoIDs: [UUID] = [clueInfo3, clueInfo4, clueInfo7, clueInfo8].map({$0.getID()})
+        #expect(guess.clueBoxesMatchGuess(clueBoxIDs: otherClueInfoIDs) == false)
     }
 
 }
