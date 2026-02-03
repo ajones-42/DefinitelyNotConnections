@@ -9,7 +9,7 @@ import Testing
 import Foundation
 @testable import DefinitelyNotConnections
 
-struct GuessTests {
+@Suite struct GuessTests {
     let clueInfo1: ClueInfo = ClueInfo(clue: "Clue1", categoryID: UUID())
     let clueInfo2: ClueInfo = ClueInfo(clue: "Clue2", categoryID: UUID())
     let clueInfo3: ClueInfo = ClueInfo(clue: "Clue3", categoryID: UUID())
@@ -39,4 +39,17 @@ struct GuessTests {
         #expect(guess.clueBoxesMatchGuess(clueBoxIDs: otherClueInfoIDs) == false)
     }
 
+    @Test func testGuessHasMoreClueBoxes() {
+        let guessClueInfos: [ClueInfo] = [clueInfo1, clueInfo2, clueInfo3, clueInfo4, clueInfo5]
+        let guess: Guess = GuessBuilder().withClueInfos(clueInfos: guessClueInfos).build()
+        let otherClueInfoIDs: [UUID] = [clueInfo1, clueInfo2, clueInfo3, clueInfo4].map({$0.getID()})
+        #expect(guess.clueBoxesMatchGuess(clueBoxIDs: otherClueInfoIDs) == false)
+    }
+    
+    @Test func testGuessHasFewerClueBoxes() {
+        let guessClueInfos: [ClueInfo] = [clueInfo1, clueInfo2, clueInfo3]
+        let guess: Guess = GuessBuilder().withClueInfos(clueInfos: guessClueInfos).build()
+        let otherClueInfoIDs: [UUID] = [clueInfo1, clueInfo2, clueInfo3, clueInfo4].map({$0.getID()})
+        #expect(guess.clueBoxesMatchGuess(clueBoxIDs: otherClueInfoIDs) == false)
+    }
 }
