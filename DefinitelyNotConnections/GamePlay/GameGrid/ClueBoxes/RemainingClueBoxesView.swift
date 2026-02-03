@@ -19,6 +19,7 @@ struct RemainingClueBoxesView: View {
                     }
             }
         }
+        .padding(.horizontal)
     }
 }
 

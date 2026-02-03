@@ -16,7 +16,6 @@ struct MainGameView: View {
             Text("Create four groups of four!")
                 .foregroundStyle(.foreground)
             GameGridView(gameGrid: mainGame.gameGrid)
-                .padding(.horizontal)
                 .overlay(OutOfMistakesAlertView(mistakes: mainGame.mistakes))
             MistakesRemainingView(mistakes: mainGame.mistakes)
             HStack {
