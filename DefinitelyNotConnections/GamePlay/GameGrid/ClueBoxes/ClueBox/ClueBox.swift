@@ -38,6 +38,10 @@ class ClueBox {
         self.isSelected.toggle()
     }
     
+    func select() {
+        self.isSelected = true
+    }
+    
     func deselect() {
         self.isSelected = false
     }
