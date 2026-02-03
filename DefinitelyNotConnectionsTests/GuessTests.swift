@@ -22,7 +22,7 @@ struct GuessTests {
     @Test func guessMatchesClues()  {
         let clueInfos: [ClueInfo] = [clueInfo1, clueInfo2, clueInfo3, clueInfo4]
         let guess: Guess = GuessBuilder().withClueInfos(clueInfos: clueInfos).build()
-        #expect(guess.clueBoxesMatchGuess(clueBoxIDs: clueInfos.map({$0.id})))
+        #expect(guess.clueBoxesMatchGuess(clueBoxIDs: clueInfos.map({$0.getID()})))
     }
 
 }
