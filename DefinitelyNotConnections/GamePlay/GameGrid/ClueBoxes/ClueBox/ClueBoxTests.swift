@@ -40,25 +40,25 @@ import Testing
     
     @Test func ShakeStillClueBox() {
         let clueBox: ClueBox = stillClueBox
-        clueBox.activateShake()
+        clueBox.startShake()
         #expect(clueBox.shake == true)
     }
     
     @Test func ShakeShakingClueBox() {
         let clueBox: ClueBox = shakingClueBox
-        clueBox.activateShake()
+        clueBox.startShake()
         #expect(clueBox.shake == true)
     }
     
     @Test func UnshakeStillClueBox() {
         let clueBox: ClueBox = stillClueBox
-        clueBox.deactivateShake()
+        clueBox.stopShake()
         #expect(clueBox.shake == false)
     }
     
     @Test func UnshakeShakingClueBox() {
         let clueBox: ClueBox = shakingClueBox
-        clueBox.deactivateShake()
+        clueBox.stopShake()
         #expect(clueBox.shake == false)
     }
 }
