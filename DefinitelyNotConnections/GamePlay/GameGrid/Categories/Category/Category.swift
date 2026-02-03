@@ -41,13 +41,13 @@ class Category: Identifiable {
     
     func getClues() -> [String] {
         return self.clueInfos.map({clueInfo in
-            clueInfo.clue
+            clueInfo.getClue()
         })
     }
     
     func getClueIDs() -> [UUID] {
         return self.clueInfos.map({clueInfo in
-            clueInfo.id
+            clueInfo.getID()
         })
     }
     

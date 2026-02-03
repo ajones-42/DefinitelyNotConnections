@@ -59,14 +59,14 @@ class ClueBox {
     }
     
     func getID() -> UUID {
-        return self.clueInfo.id
+        return self.clueInfo.getID()
     }
     
     func getClue() -> String {
-        return self.clueInfo.clue
+        return self.clueInfo.getClue()
     }
     
     func getCategoryID() -> UUID {
-        return self.clueInfo.categoryID
+        return self.clueInfo.getCategoryID()
     }
 }
