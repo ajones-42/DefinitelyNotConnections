@@ -39,12 +39,12 @@ struct Guess: Identifiable {
     
     func getClueIDs() -> [UUID] {
         return self.clueInfos.map({clueInfo in
-            clueInfo.id})
+            clueInfo.getID()})
     }
     
     func getClues() -> [String] {
         return self.clueInfos.map({clueInfo in
-            clueInfo.clue})
+            clueInfo.getClue()})
     }
     
     func getGuessText() -> String {

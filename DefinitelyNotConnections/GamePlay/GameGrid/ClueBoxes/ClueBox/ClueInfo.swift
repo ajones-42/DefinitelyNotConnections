@@ -17,4 +17,16 @@ struct ClueInfo: Equatable {
         self.id = UUID()
         self.categoryID = categoryID
     }
+    
+    func getID() -> UUID {
+        return self.id
+    }
+    
+    func getClue() -> String {
+        return self.clue
+    }
+    
+    func getCategoryID() -> UUID {
+        return self.categoryID
+    }
 }

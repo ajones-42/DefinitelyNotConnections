@@ -108,7 +108,7 @@ class MainGame {
     
     private func getSelectionAlreadyGuessed(selectedClueBoxes: [ClueBox], guesses: [Guess]) -> Bool {
         let selectedClueBoxIDs: [UUID] = selectedClueBoxes.map({clueBox in
-            clueBox.clueInfo.id
+            clueBox.getID()
         })
         return guesses.map({guess in
                 guess.clueBoxesMatchGuess(clueBoxIDs: selectedClueBoxIDs)
