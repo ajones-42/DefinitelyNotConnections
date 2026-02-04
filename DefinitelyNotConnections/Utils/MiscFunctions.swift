@@ -28,7 +28,7 @@ func createDefaultClues(numCluesPerCategory: Int, categoryNumber: Int) -> [Strin
     return clues
 }
 
-func createTestSetupInfo(numCategories: Int, colours: [Color], numCluesPerCategory: Int) throws -> [CategoryInfo] {
+func createTestCategoryInfos(numCategories: Int, colours: [Color], numCluesPerCategory: Int) throws -> [CategoryInfo] {
     guard colours.count == numCategories else {
         print("createTestSetupInfo: Number of colours given (\(colours.count)) does not equal number of categories (\(numCategories)).")
         throw ValidationError.invalidInput
@@ -47,7 +47,7 @@ func createDefaultTestSetupInfo() -> SetupInfo {
     let numCluesPerCategory: Int = 4
     
     // Shouldn't fail anyway, but if it does I want it to crash.
-    let categoryInfos: [CategoryInfo] = try! createTestSetupInfo(numCategories: numCategories, colours: colours, numCluesPerCategory: numCluesPerCategory)
+    let categoryInfos: [CategoryInfo] = try! createTestCategoryInfos(numCategories: numCategories, colours: colours, numCluesPerCategory: numCluesPerCategory)
     return SetupInfo(categoryInfos: categoryInfos, numMistakes: 4)
 }
 

@@ -31,7 +31,7 @@ struct CompletedCategoryView: View {
 
 
 #Preview {
-    let categoryInfo: CategoryInfo = try! createTestSetupInfo(numCategories: 1, colours: [.green], numCluesPerCategory: 4).first!
+    let categoryInfo: CategoryInfo = try! createTestCategoryInfos(numCategories: 1, colours: [.green], numCluesPerCategory: 4).first!
     let category: Category = CategoryBuilder(categoryInfo: categoryInfo).build()
     CompletedCategoryView(category: category)
 }
