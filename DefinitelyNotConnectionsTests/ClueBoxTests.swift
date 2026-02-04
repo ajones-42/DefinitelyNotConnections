@@ -9,95 +9,88 @@ import Testing
 @testable import DefinitelyNotConnections
 
 @Suite struct ClueBoxTests {
-    let selectedClueBox: ClueBox = ClueBoxBuilder().withIsSelected(isSelected: true).build()
-    let unselectedClueBox: ClueBox = ClueBoxBuilder().withIsSelected(isSelected: false).build()
-    let shakingClueBox: ClueBox = ClueBoxBuilder().withShake(shake: true).build()
-    let stillClueBox: ClueBox = ClueBoxBuilder().withShake(shake: false).build()
-    let completedClueBox: ClueBox = ClueBoxBuilder().withIsCompleted(isCompleted: true).build()
-    let uncompletedClueBox: ClueBox = ClueBoxBuilder().withIsCompleted(isCompleted: false).build()
-    let selectedCompletedShakingClueBox: ClueBox = ClueBoxBuilder().withIsSelected(isSelected: true).withIsCompleted(isCompleted: true).withShake(shake: true).build()
     
     // Reset
     @Test func resetClueBox() {
-        let clueBox: ClueBox = selectedCompletedShakingClueBox
+        let clueBox: ClueBox = ClueBoxBuilder().withIsSelected(isSelected: true).withIsCompleted(isCompleted: true).withShake(shake: true).build()
         clueBox.reset()
         #expect(clueBox.isSelected == false && clueBox.isCompleted == false && clueBox.shake == false)
     }
 
     // Click
     @Test func clickSelectedClueBox() {
-        let clueBox: ClueBox = selectedClueBox
+        let clueBox: ClueBox = ClueBoxBuilder().withIsSelected(isSelected: true).build()
         clueBox.click()
         #expect(clueBox.isSelected == false)
     }
     
     @Test func clickUnselectedClueBox() {
-        let clueBox: ClueBox = unselectedClueBox
+        let clueBox: ClueBox = ClueBoxBuilder().withIsSelected(isSelected: false).build()
         clueBox.click()
         #expect(clueBox.isSelected == true)
     }
     
     // Deselect
     @Test func deselectSelectedClueBox() {
-        let clueBox: ClueBox = selectedClueBox
+        let clueBox: ClueBox = ClueBoxBuilder().withIsSelected(isSelected: true).build()
         clueBox.deselect()
         #expect(clueBox.isSelected == false)
     }
     
     @Test func deselectUnselectedClueBox() {
-        let clueBox: ClueBox = unselectedClueBox
+        let clueBox: ClueBox = ClueBoxBuilder().withIsSelected(isSelected: false).build()
         clueBox.deselect()
         #expect(clueBox.isSelected == false)
     }
     
     // Select
     @Test func selectSelectedClueBox() {
-        let clueBox: ClueBox = selectedClueBox
+        let clueBox: ClueBox = ClueBoxBuilder().withIsSelected(isSelected: true).build()
         clueBox.select()
         #expect(clueBox.isSelected == true)
     }
     
     @Test func selectUnselectedClueBox() {
-        let clueBox: ClueBox = unselectedClueBox
+        let clueBox: ClueBox = ClueBoxBuilder().withIsSelected(isSelected: false).build()
         clueBox.select()
         #expect(clueBox.isSelected == true)
     }
     
     // Shake
     @Test func shakeStillClueBox() {
-        let clueBox: ClueBox = stillClueBox
+        let clueBox: ClueBox = ClueBoxBuilder().withShake(shake: false).build()
         clueBox.startShake()
         #expect(clueBox.shake == true)
     }
     
     @Test func shakeShakingClueBox() {
-        let clueBox: ClueBox = shakingClueBox
+        let clueBox: ClueBox = ClueBoxBuilder().withShake(shake: true).build()
         clueBox.startShake()
         #expect(clueBox.shake == true)
     }
     
     // Stop shake
     @Test func unshakeStillClueBox() {
-        let clueBox: ClueBox = stillClueBox
+        let clueBox: ClueBox = ClueBoxBuilder().withShake(shake: false).build()
         clueBox.stopShake()
         #expect(clueBox.shake == false)
     }
     
     @Test func unshakeShakingClueBox() {
-        let clueBox: ClueBox = shakingClueBox
+        let clueBox: ClueBox = ClueBoxBuilder().withShake(shake: true).build()
         clueBox.stopShake()
         #expect(clueBox.shake == false)
     }
     
     // Set completed
     @Test func completeUncompletedClueBox() {
-        let clueBox: ClueBox = uncompletedClueBox
+        let clueBox: ClueBox = ClueBoxBuilder().withIsCompleted(isCompleted: false).build()
         clueBox.setCompleted()
         #expect(clueBox.isCompleted == true)
     }
     
     @Test func completeCompleteClueBox() {
-        let clueBox: ClueBox = completedClueBox
+        let clueBox: ClueBox = ClueBoxBuilder().withIsCompleted(isCompleted: true).build()
         clueBox.setCompleted()
         #expect(clueBox.isCompleted == true)
     }
