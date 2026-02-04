@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct Guess: Identifiable {
+struct Guess: Identifiable, Equatable {
     let clueInfos: [ClueInfo]
     let isCorrect: Bool
     let isOneAway: Bool

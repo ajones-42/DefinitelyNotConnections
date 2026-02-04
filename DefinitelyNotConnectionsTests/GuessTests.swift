@@ -52,4 +52,10 @@ import Foundation
         let otherClueInfoIDs: [UUID] = [clueInfo1, clueInfo2, clueInfo3, clueInfo4].map({$0.getID()})
         #expect(guess.clueBoxesMatchGuess(clueBoxIDs: otherClueInfoIDs) == false)
     }
+    
+    @Test func testDifferentGuessesNotEquated() {
+        let guess1: Guess = GuessBuilder().build()
+        let guess2: Guess = GuessBuilder().build()
+        #expect(guess1 != guess2)
+    }
 }
