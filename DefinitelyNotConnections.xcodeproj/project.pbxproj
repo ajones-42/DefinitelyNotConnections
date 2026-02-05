@@ -29,16 +29,6 @@
 		FAD88C3C2DEDF61500CE86B6 /* DefinitelyNotConnectionsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DefinitelyNotConnectionsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		FA8898D92F157536009D9995 /* Exceptions for "DefinitelyNotConnections" folder in "DefinitelyNotConnections" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Utils/MiscFunctionsTests.swift,
-			);
-			target = FAD88C242DEDF61200CE86B6 /* DefinitelyNotConnections */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		FAD562072F3265B000591A70 /* DefinitelyNotConnectionsTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
@@ -47,9 +37,6 @@
 		};
 		FAD88C272DEDF61200CE86B6 /* DefinitelyNotConnections */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				FA8898D92F157536009D9995 /* Exceptions for "DefinitelyNotConnections" folder in "DefinitelyNotConnections" target */,
-			);
 			path = DefinitelyNotConnections;
 			sourceTree = "<group>";
 		};
