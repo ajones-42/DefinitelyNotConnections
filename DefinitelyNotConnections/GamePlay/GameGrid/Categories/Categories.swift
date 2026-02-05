@@ -40,12 +40,16 @@ class Categories {
         })
     }
     
+    private func findCategoryByID(categoryID: UUID) -> Category? {
+        return self.allCategories.first(where: {category in category.id == categoryID})
+    }
+    
     private func getNextCompletedCategoryOrder() -> Int {
         return self.numCompletedCategories
     }
     
     func completeCategory(categoryID: UUID) {
-        if let category = self.allCategories.first(where: {category in category.id == categoryID}) {
+        if let category = findCategoryByID(categoryID: categoryID) {
             category.complete(orderCompleted: getNextCompletedCategoryOrder())
         }
     }
