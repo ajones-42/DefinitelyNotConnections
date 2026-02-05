@@ -41,7 +41,7 @@ class Categories {
     }
     
     private func getNextCompletedCategoryOrder() -> Int {
-        return self.sortedCompletedCategories.count
+        return self.numCompletedCategories
     }
     
     func completeCategory(categoryID: UUID) {
