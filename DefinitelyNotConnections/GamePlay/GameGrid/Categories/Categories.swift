@@ -53,10 +53,10 @@ class Categories {
 
 // Add functions for testing
 extension Categories {
-    private func completeNCategories(n: Int) throws {
+    internal func completeFirstNCategories(n: Int) throws {
         let totalNumCategories: Int = self.allCategories.count
-        guard (n <= totalNumCategories) else {
-            print("Categories.completeNcategories: n must be less than or equal to total number of clueBoxes (\(totalNumCategories))")
+        guard (n >= 0 && n <= totalNumCategories) else {
+            print("Categories.completeNcategories: n must be positive, and less than or equal to total number of clueBoxes (\(totalNumCategories))")
             throw ValidationError.invalidInput
         }
         self.allCategories.enumerated().forEach({(index, category) in

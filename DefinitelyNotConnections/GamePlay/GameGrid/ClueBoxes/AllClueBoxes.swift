@@ -115,8 +115,8 @@ class AllClueBoxes {
 extension AllClueBoxes {
     private func completeNClueBoxes(n: Int) throws {
         let totalNumClueBoxes: Int = self.allClueBoxes.count
-        guard (n <= totalNumClueBoxes) else {
-            print("AllClueBoxes.completeNClueBoxes: n must be less than or equal to total number of clueBoxes (\(totalNumClueBoxes))")
+        guard (n >= 0 && n <= totalNumClueBoxes) else {
+            print("AllClueBoxes.completeNClueBoxes: n must be positive, and less than or equal to total number of clueBoxes (\(totalNumClueBoxes))")
             throw ValidationError.invalidInput
         }
         self.allClueBoxes.enumerated().forEach({(index, clueBox) in
@@ -128,8 +128,8 @@ extension AllClueBoxes {
     
     private func selectNClueBoxes(n: Int) throws {
         let totalNumClueBoxes: Int = self.allClueBoxes.count
-        guard (n <= totalNumClueBoxes) else {
-            print("AllClueBoxes.selectNClueBoxes: n must be less than or equal to total number of clueBoxes (\(totalNumClueBoxes))")
+        guard (n >= 0 && n <= totalNumClueBoxes) else {
+            print("AllClueBoxes.selectNClueBoxes: n must be positive, and less than or equal to total number of clueBoxes (\(totalNumClueBoxes))")
             throw ValidationError.invalidInput
         }
         self.allClueBoxes.enumerated().forEach({(index, clueBox) in
