@@ -20,6 +20,6 @@ struct CompletedCategoriesView: View {
 #Preview {
     let gameProperties: GameProperties = GamePropertiesBuilder().build()
     let categories: Categories = CategoriesBuilder().build()
-    categories.completeFirstNCategories(n: gameProperties.numCategories)
+    try! categories.completeFirstNCategories(n: gameProperties.numCategories)
     return CompletedCategoriesView(categories: categories)
 }
