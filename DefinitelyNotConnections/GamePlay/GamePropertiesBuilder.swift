@@ -9,25 +9,25 @@ import Foundation
 
 class GamePropertiesBuilder {
     var numMistakes: Int = 4
-    var numCategories: Int = 4
-    var numCluesPerCategory: Int = 4
+    var numConnectionsCategories: Int = 4
+    var numCluesPerConnectionsCategory: Int = 4
     
     func withNumMistakes(numMistakes: Int) -> GamePropertiesBuilder {
         self.numMistakes = numMistakes
         return self
     }
     
-    func withNumCategories(numCategories: Int) -> GamePropertiesBuilder {
-        self.numCategories = numCategories
+    func withNumConnectionsCategories(numConnectionsCategories: Int) -> GamePropertiesBuilder {
+        self.numConnectionsCategories = numConnectionsCategories
         return self
     }
     
-    func withNumCluesPerCategory(numCluesPerCategory: Int) -> GamePropertiesBuilder {
-        self.numCluesPerCategory = numCluesPerCategory
+    func withNumCluesPerConnectionsCategory(numCluesPerConnectionsCategory: Int) -> GamePropertiesBuilder {
+        self.numCluesPerConnectionsCategory = numCluesPerConnectionsCategory
         return self
     }
     
     func build() -> GameProperties {
-        return GameProperties(numMistakes: self.numMistakes, numCategories: self.numCategories, numCluesPerCategory: self.numCluesPerCategory)
+        return GameProperties(numMistakes: self.numMistakes, numConnectionsCategories: self.numConnectionsCategories, numCluesPerConnectionsCategory: self.numCluesPerConnectionsCategory)
     }
 }

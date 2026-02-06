@@ -1,5 +1,5 @@
 //
-//  CategoriesBuilder.swift
+//  ConnectionsCategoriesBuilder.swift
 //  DefinitelyNotConnections
 //
 //  Created by Alex Jones on 29.01.26.
@@ -7,24 +7,24 @@
 
 import Foundation
 
-class CategoriesBuilder {
-    var allCategories: [Category]
+class ConnectionsCategoriesBuilder {
+    var allConnectionsCategories: [ConnectionsCategory]
     
     init(setupInfo: SetupInfo) {
-        self.allCategories = createCategories(categoryInfos: setupInfo.categoryInfos)
+        self.allConnectionsCategories = createConnectionsCategories(connectionsCategoryInfos: setupInfo.connectionsCategoryInfos)
     }
     
     init() {
         let setupInfo: SetupInfo = createDefaultTestSetupInfo()
-        self.allCategories = createCategories(categoryInfos: setupInfo.categoryInfos)
+        self.allConnectionsCategories = createConnectionsCategories(connectionsCategoryInfos: setupInfo.connectionsCategoryInfos)
     }
     
-    func withAllCategories(allCategories: [Category]) -> CategoriesBuilder {
-        self.allCategories = allCategories
+    func withAllConnectionsCategories(allConnectionsCategories: [ConnectionsCategory]) -> ConnectionsCategoriesBuilder {
+        self.allConnectionsCategories = allConnectionsCategories
         return self
     }
     
-    func build() -> Categories {
-        return Categories(allCategories: self.allCategories)
+    func build() -> ConnectionsCategories {
+        return ConnectionsCategories(allConnectionsCategories: self.allConnectionsCategories)
     }
 }

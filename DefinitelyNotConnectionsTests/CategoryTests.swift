@@ -1,5 +1,5 @@
 //
-//  CategoryTests.swift
+//  ConnectionsCategoryTests.swift
 //  DefinitelyNotConnections
 //
 //  Created by Alex Jones on 03.02.26.
@@ -8,27 +8,27 @@
 import Testing
 @testable import DefinitelyNotConnections
 
-@Suite struct CategoryTests {
+@Suite struct ConnectionsCategoryTests {
     // Reset
-    @Test func resetCompletedCategory() {
-        let category: Category = CategoryBuilder().withOrderCompleted(orderCompleted: 0).build()
-        category.reset()
+    @Test func resetCompletedConnectionsCategory() {
+        let connectionsCategory: ConnectionsCategory = ConnectionsCategoryBuilder().withOrderCompleted(orderCompleted: 0).build()
+        connectionsCategory.reset()
 
-        #expect(category.isCompleted == false)
+        #expect(connectionsCategory.isCompleted == false)
     }
     
-    @Test func resetUncompletedCategory() {
-        let category: Category = CategoryBuilder().withOrderCompleted(orderCompleted: nil).build()
-        category.reset()
+    @Test func resetUncompletedConnectionsCategory() {
+        let connectionsCategory: ConnectionsCategory = ConnectionsCategoryBuilder().withOrderCompleted(orderCompleted: nil).build()
+        connectionsCategory.reset()
 
-        #expect(category.isCompleted == false)
+        #expect(connectionsCategory.isCompleted == false)
     }
     
     // Complete
-    @Test func completeUncompletedCategory() {
-        let category: Category = CategoryBuilder().withOrderCompleted(orderCompleted: nil).build()
-        category.complete(orderCompleted: 0)
+    @Test func completeUncompletedConnectionsCategory() {
+        let connectionsCategory: ConnectionsCategory = ConnectionsCategoryBuilder().withOrderCompleted(orderCompleted: nil).build()
+        connectionsCategory.complete(orderCompleted: 0)
 
-        #expect(category.isCompleted == true)
+        #expect(connectionsCategory.isCompleted == true)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  CategoryBuilder.swift
+//  ConnectionsCategoryBuilder.swift
 //  DefinitelyNotConnections
 //
 //  Created by Alexander Jones on 19.07.25.
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class CategoryBuilder {
+class ConnectionsCategoryBuilder {
     var name: String
     var clueInfos: [ClueInfo]
     var colour: Color
@@ -16,47 +16,47 @@ class CategoryBuilder {
     var orderCompleted: Int?
     
     init() {
-        self.name = "A Category"
+        self.name = "A ConnectionsCategory"
         self.clueInfos = []
         self.colour = .red
         self.id = UUID()
         self.orderCompleted = nil
     }
     
-    init(categoryInfo: CategoryInfo) {
-        self.name = categoryInfo.name
-        self.colour = categoryInfo.colour
-        self.id = categoryInfo.id
-        self.clueInfos = categoryInfo.clueInfos
+    init(connectionsCategoryInfo: ConnectionsCategoryInfo) {
+        self.name = connectionsCategoryInfo.name
+        self.colour = connectionsCategoryInfo.colour
+        self.id = connectionsCategoryInfo.id
+        self.clueInfos = connectionsCategoryInfo.clueInfos
         self.orderCompleted = nil
     }
 
-    func withName(name: String) -> CategoryBuilder {
+    func withName(name: String) -> ConnectionsCategoryBuilder {
         self.name = name
         return self
     }
     
-    func withClueInfos(clueInfos: [ClueInfo]) -> CategoryBuilder {
+    func withClueInfos(clueInfos: [ClueInfo]) -> ConnectionsCategoryBuilder {
         self.clueInfos = clueInfos
         return self
     }
     
-    func withColour(colour: Color) -> CategoryBuilder {
+    func withColour(colour: Color) -> ConnectionsCategoryBuilder {
         self.colour = colour
         return self
     }
     
-    func withID(id: UUID) -> CategoryBuilder {
+    func withID(id: UUID) -> ConnectionsCategoryBuilder {
         self.id = id
         return self
     }
     
-    func withOrderCompleted(orderCompleted: Int?) -> CategoryBuilder {
+    func withOrderCompleted(orderCompleted: Int?) -> ConnectionsCategoryBuilder {
         self.orderCompleted = orderCompleted
         return self
     }
     
-    func build() -> Category {
-        return Category(name: self.name, clueInfos: self.clueInfos, colour: self.colour, id: self.id, orderCompleted: self.orderCompleted)
+    func build() -> ConnectionsCategory {
+        return ConnectionsCategory(name: self.name, clueInfos: self.clueInfos, colour: self.colour, id: self.id, orderCompleted: self.orderCompleted)
     }
 }

@@ -8,11 +8,11 @@
 import Foundation
 
 struct SetupInfo {
-    let categoryInfos: [CategoryInfo]
+    let connectionsCategoryInfos: [ConnectionsCategoryInfo]
     let numMistakes: Int
     
-    init(categoryInfos: [CategoryInfo], numMistakes: Int) {
-        self.categoryInfos = categoryInfos
+    init(connectionsCategoryInfos: [ConnectionsCategoryInfo], numMistakes: Int) {
+        self.connectionsCategoryInfos = connectionsCategoryInfos
         self.numMistakes = numMistakes
     }
 }

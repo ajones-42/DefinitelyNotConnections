@@ -1,5 +1,5 @@
 //
-//  CompletedCategoriesView.swift
+//  CompletedConnectionsCategoriesView.swift
 //  DefinitelyNotConnections
 //
 //  Created by Alex Jones on 05.01.26.
@@ -7,19 +7,19 @@
 
 import SwiftUI
 
-struct CompletedCategoriesView: View {
-    var categories: Categories
+struct CompletedConnectionsCategoriesView: View {
+    var connectionsCategories: ConnectionsCategories
 
     var body: some View {
-        ForEach(categories.sortedCompletedCategories) {category in
-            CompletedCategoryView(category: category)
+        ForEach(connectionsCategories.sortedCompletedConnectionsCategories) {connectionsCategory in
+            CompletedConnectionsCategoryView(connectionsCategory: connectionsCategory)
         }
     }
 }
 
 #Preview {
     let gameProperties: GameProperties = GamePropertiesBuilder().build()
-    let categories: Categories = CategoriesBuilder().build()
-    try! categories.completeFirstNCategories(n: gameProperties.numCategories)
-    return CompletedCategoriesView(categories: categories)
+    let connectionsCategories: ConnectionsCategories = ConnectionsCategoriesBuilder().build()
+    try! connectionsCategories.completeFirstNConnectionsCategories(n: gameProperties.numConnectionsCategories)
+    return CompletedConnectionsCategoriesView(connectionsCategories: connectionsCategories)
 }

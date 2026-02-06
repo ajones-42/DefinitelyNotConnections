@@ -66,7 +66,7 @@ class ClueBox {
         return self.clueInfo.getClue()
     }
     
-    func getCategoryID() -> UUID {
-        return self.clueInfo.getCategoryID()
+    func getConnectionsCategoryID() -> UUID {
+        return self.clueInfo.getConnectionsCategoryID()
     }
 }

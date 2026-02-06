@@ -9,19 +9,19 @@ import Foundation
 
 class GameProperties {
     let numMistakes: Int
-    let numCategories: Int
-    let numCluesPerCategory: Int
+    let numConnectionsCategories: Int
+    let numCluesPerConnectionsCategory: Int
     
-    static private func getNumCategories(categoryInfos: [CategoryInfo]) -> Int {
-        return categoryInfos.count
+    static private func getNumConnectionsCategories(connectionsCategoryInfos: [ConnectionsCategoryInfo]) -> Int {
+        return connectionsCategoryInfos.count
     }
     
-    static private func getNumCluesPerCategory(categoryInfos: [CategoryInfo]) throws -> Int {
-        let uniqueNumClues: Set<Int> = Set(categoryInfos.map({categoryInfo in
-            categoryInfo.clueInfos.count
+    static private func getNumCluesPerConnectionsCategory(connectionsCategoryInfos: [ConnectionsCategoryInfo]) throws -> Int {
+        let uniqueNumClues: Set<Int> = Set(connectionsCategoryInfos.map({connectionsCategoryInfo in
+            connectionsCategoryInfo.clueInfos.count
         }))
         guard uniqueNumClues.count == 1 else {
-            print("GameProperties.getNumCluesPerCategory: Number of clues must be the same for all categories.")
+            print("GameProperties.getNumCluesPerConnectionsCategory: Number of clues must be the same for all categories.")
             throw ValidationError.invalidInput
         }
         return uniqueNumClues.first!
@@ -29,14 +29,14 @@ class GameProperties {
     
     init(setupInfo: SetupInfo) {
         self.numMistakes = setupInfo.numMistakes
-        self.numCategories = GameProperties.getNumCategories(categoryInfos: setupInfo.categoryInfos)
+        self.numConnectionsCategories = GameProperties.getNumConnectionsCategories(connectionsCategoryInfos: setupInfo.connectionsCategoryInfos)
         // Crash app on failure
-        try! self.numCluesPerCategory = GameProperties.getNumCluesPerCategory(categoryInfos: setupInfo.categoryInfos)
+        try! self.numCluesPerConnectionsCategory = GameProperties.getNumCluesPerConnectionsCategory(connectionsCategoryInfos: setupInfo.connectionsCategoryInfos)
     }
     
-    init(numMistakes: Int, numCategories: Int, numCluesPerCategory: Int) {
+    init(numMistakes: Int, numConnectionsCategories: Int, numCluesPerConnectionsCategory: Int) {
         self.numMistakes = numMistakes
-        self.numCategories = numCategories
-        self.numCluesPerCategory = numCluesPerCategory
+        self.numConnectionsCategories = numConnectionsCategories
+        self.numCluesPerConnectionsCategory = numCluesPerConnectionsCategory
     }
 }

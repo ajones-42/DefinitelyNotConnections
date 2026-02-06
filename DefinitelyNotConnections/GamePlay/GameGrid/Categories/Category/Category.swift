@@ -1,5 +1,5 @@
 //
-//  Category.swift
+//  ConnectionsCategory.swift
 //  DefinitelyNotConnections
 //
 //  Created by Alexander Jones on 30.06.25.
@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 @Observable
-class Category: Identifiable {
+class ConnectionsCategory: Identifiable {
     let name: String
     let clueInfos: [ClueInfo]
     let colour: Color
@@ -27,11 +27,11 @@ class Category: Identifiable {
         self.orderCompleted = orderCompleted
     }
     
-    init(categoryInfo: CategoryInfo) {
-        self.name = categoryInfo.name
-        self.colour = categoryInfo.colour
-        self.id = categoryInfo.id
-        self.clueInfos = categoryInfo.clueInfos
+    init(connectionsCategoryInfo: ConnectionsCategoryInfo) {
+        self.name = connectionsCategoryInfo.name
+        self.colour = connectionsCategoryInfo.colour
+        self.id = connectionsCategoryInfo.id
+        self.clueInfos = connectionsCategoryInfo.clueInfos
         self.orderCompleted = nil
     }
     

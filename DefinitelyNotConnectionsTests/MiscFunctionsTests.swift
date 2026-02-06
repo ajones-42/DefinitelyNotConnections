@@ -10,35 +10,35 @@ import Testing
 
 struct MiscFunctionsTests {
 
-    // categoriesCompletedInIncreasingOrder()
-    @Test func testCategoriesCompletedInIncreasingOrder() {
-        let category1: Category = CategoryBuilder().withOrderCompleted(orderCompleted: 1).build()
-        let category2: Category = CategoryBuilder().withOrderCompleted(orderCompleted: 2).build()
-        #expect(categoriesCompletedInIncreasingOrder(category1: category1, category2: category2) == true)
+    // connectionsCategoriesCompletedInIncreasingOrder()
+    @Test func testConnectionsCategoriesCompletedInIncreasingOrder() {
+        let connectionsCategory1: ConnectionsCategory = ConnectionsCategoryBuilder().withOrderCompleted(orderCompleted: 1).build()
+        let connectionsCategory2: ConnectionsCategory = ConnectionsCategoryBuilder().withOrderCompleted(orderCompleted: 2).build()
+        #expect(connectionsCategoriesCompletedInIncreasingOrder(connectionsCategory1: connectionsCategory1, connectionsCategory2: connectionsCategory2) == true)
     }
     
-    @Test func testCategoriesNotCompletedInIncreasingOrder() {
-        let category1: Category = CategoryBuilder().withOrderCompleted(orderCompleted: 1).build()
-        let category2: Category = CategoryBuilder().withOrderCompleted(orderCompleted: 2).build()
-        #expect(categoriesCompletedInIncreasingOrder(category1: category2, category2: category1) == false)
+    @Test func testConnectionsCategoriesNotCompletedInIncreasingOrder() {
+        let connectionsCategory1: ConnectionsCategory = ConnectionsCategoryBuilder().withOrderCompleted(orderCompleted: 1).build()
+        let connectionsCategory2: ConnectionsCategory = ConnectionsCategoryBuilder().withOrderCompleted(orderCompleted: 2).build()
+        #expect(connectionsCategoriesCompletedInIncreasingOrder(connectionsCategory1: connectionsCategory2, connectionsCategory2: connectionsCategory1) == false)
     }
     
-    @Test func testCategoriesCompletedInIncreasingOrderFirstUncomplete() {
-        let category1: Category = CategoryBuilder().withOrderCompleted(orderCompleted: nil).build()
-        let category2: Category = CategoryBuilder().withOrderCompleted(orderCompleted: 2).build()
-        #expect(categoriesCompletedInIncreasingOrder(category1: category1, category2: category2) == false)
+    @Test func testConnectionsCategoriesCompletedInIncreasingOrderFirstUncomplete() {
+        let connectionsCategory1: ConnectionsCategory = ConnectionsCategoryBuilder().withOrderCompleted(orderCompleted: nil).build()
+        let connectionsCategory2: ConnectionsCategory = ConnectionsCategoryBuilder().withOrderCompleted(orderCompleted: 2).build()
+        #expect(connectionsCategoriesCompletedInIncreasingOrder(connectionsCategory1: connectionsCategory1, connectionsCategory2: connectionsCategory2) == false)
     }
     
-    @Test func testCategoriesCompletedInIncreasingOrderSecondUncomplete() {
-        let category1: Category = CategoryBuilder().withOrderCompleted(orderCompleted: 1).build()
-        let category2: Category = CategoryBuilder().withOrderCompleted(orderCompleted: nil).build()
-        #expect(categoriesCompletedInIncreasingOrder(category1: category1, category2: category2) == true)
+    @Test func testConnectionsCategoriesCompletedInIncreasingOrderSecondUncomplete() {
+        let connectionsCategory1: ConnectionsCategory = ConnectionsCategoryBuilder().withOrderCompleted(orderCompleted: 1).build()
+        let connectionsCategory2: ConnectionsCategory = ConnectionsCategoryBuilder().withOrderCompleted(orderCompleted: nil).build()
+        #expect(connectionsCategoriesCompletedInIncreasingOrder(connectionsCategory1: connectionsCategory1, connectionsCategory2: connectionsCategory2) == true)
     }
     
-    @Test func testCategoriesCompletedInIncreasingOrderNeitherCompleteOrderIrrelevant() {
-        let category1: Category = CategoryBuilder().withOrderCompleted(orderCompleted: nil).build()
-        let category2: Category = CategoryBuilder().withOrderCompleted(orderCompleted: nil).build()
-        #expect(categoriesCompletedInIncreasingOrder(category1: category1, category2: category2) == categoriesCompletedInIncreasingOrder(category1: category2, category2: category1))
+    @Test func testConnectionsCategoriesCompletedInIncreasingOrderNeitherCompleteOrderIrrelevant() {
+        let connectionsCategory1: ConnectionsCategory = ConnectionsCategoryBuilder().withOrderCompleted(orderCompleted: nil).build()
+        let connectionsCategory2: ConnectionsCategory = ConnectionsCategoryBuilder().withOrderCompleted(orderCompleted: nil).build()
+        #expect(connectionsCategoriesCompletedInIncreasingOrder(connectionsCategory1: connectionsCategory1, connectionsCategory2: connectionsCategory2) == connectionsCategoriesCompletedInIncreasingOrder(connectionsCategory1: connectionsCategory2, connectionsCategory2: connectionsCategory1))
     }
 
 }

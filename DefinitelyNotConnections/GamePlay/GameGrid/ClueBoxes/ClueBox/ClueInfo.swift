@@ -10,12 +10,12 @@ import Foundation
 struct ClueInfo: Equatable {
     let clue: String
     let id: UUID
-    let categoryID: UUID
+    let connectionsCategoryID: UUID
     
-    init(clue: String, categoryID: UUID) {
+    init(clue: String, connectionsCategoryID: UUID) {
         self.clue = clue
         self.id = UUID()
-        self.categoryID = categoryID
+        self.connectionsCategoryID = connectionsCategoryID
     }
     
     func getID() -> UUID {
@@ -26,7 +26,7 @@ struct ClueInfo: Equatable {
         return self.clue
     }
     
-    func getCategoryID() -> UUID {
-        return self.categoryID
+    func getConnectionsCategoryID() -> UUID {
+        return self.connectionsCategoryID
     }
 }

@@ -36,7 +36,7 @@ class MainGame {
     
     public func resetGame() {
         resetGamePhase()
-        resetCategories()
+        resetConnectionsCategories()
         resetAllGuesses()
         resetMistakes()
     }
@@ -59,7 +59,7 @@ class MainGame {
         self.gamePhase = .setup
     }
     
-    private func resetCategories() {
+    private func resetConnectionsCategories() {
         self.gameGrid.reset()
     }
     
@@ -84,8 +84,8 @@ class MainGame {
     }
     
     private func handleCorrectGuess(submitBestMatch: SubmitBestMatch) {
-        self.gameGrid.completeCategory(categoryID: submitBestMatch.categoryID)
-        if self.gameGrid.getNumCompletedCategories() == self.gameProperties.numCategories {
+        self.gameGrid.completeConnectionsCategory(connectionsCategoryID: submitBestMatch.connectionsCategoryID)
+        if self.gameGrid.getNumCompletedConnectionsCategories() == self.gameProperties.numConnectionsCategories {
             admirePuzzle()
         }
     }
@@ -124,12 +124,12 @@ class MainGame {
     }
     
     private func getSubmitBestMatch(selectedClueBoxes: [ClueBox]) -> SubmitBestMatch? {
-        let selectedClueBoxCategoryIDs: [UUID] = selectedClueBoxes.map({clueBox in
-            clueBox.getCategoryID()
+        let selectedClueBoxConnectionsCategoryIDs: [UUID] = selectedClueBoxes.map({clueBox in
+            clueBox.getConnectionsCategoryID()
         })
-        let counts: Dictionary<UUID, Int> = selectedClueBoxCategoryIDs.reduce(into: [:]) { counts, categoryID in counts[categoryID, default: 0] += 1 }
-        if let bestCategory: Dictionary<UUID, Int>.Element = counts.max(by: {a, b in a.value < b.value}) {
-            return SubmitBestMatch(categoryID: bestCategory.key, numMatches: bestCategory.value, numCluesPerCategory: self.gameProperties.numCluesPerCategory)
+        let counts: Dictionary<UUID, Int> = selectedClueBoxConnectionsCategoryIDs.reduce(into: [:]) { counts, connectionsCategoryID in counts[connectionsCategoryID, default: 0] += 1 }
+        if let bestConnectionsCategory: Dictionary<UUID, Int>.Element = counts.max(by: {a, b in a.value < b.value}) {
+            return SubmitBestMatch(connectionsCategoryID: bestConnectionsCategory.key, numMatches: bestConnectionsCategory.value, numCluesPerConnectionsCategory: self.gameProperties.numCluesPerConnectionsCategory)
         } else {
             return nil
         }

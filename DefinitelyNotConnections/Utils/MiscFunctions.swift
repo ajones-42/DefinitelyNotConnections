@@ -20,65 +20,65 @@ func getNumSameElementsInArrays<T: Equatable>(lhs: [T], rhs: [T]) -> Int {
     })
 }
 
-func createDefaultClues(numCluesPerCategory: Int, categoryNumber: Int) -> [String] {
+func createDefaultClues(numCluesPerConnectionsCategory: Int, connectionsCategoryNumber: Int) -> [String] {
     var clues: [String] = []
-    for clueNumber in 0...numCluesPerCategory - 1 {
-        clues.append("Clue \(numCluesPerCategory * categoryNumber + clueNumber)")
+    for clueNumber in 0...numCluesPerConnectionsCategory - 1 {
+        clues.append("Clue \(numCluesPerConnectionsCategory * connectionsCategoryNumber + clueNumber)")
     }
     return clues
 }
 
-func createTestCategoryInfos(numCategories: Int, colours: [Color], numCluesPerCategory: Int) throws -> [CategoryInfo] {
-    guard colours.count == numCategories else {
-        print("createTestSetupInfo: Number of colours given (\(colours.count)) does not equal number of categories (\(numCategories)).")
+func createTestConnectionsCategoryInfos(numConnectionsCategories: Int, colours: [Color], numCluesPerConnectionsCategory: Int) throws -> [ConnectionsCategoryInfo] {
+    guard colours.count == numConnectionsCategories else {
+        print("createTestSetupInfo: Number of colours given (\(colours.count)) does not equal number of connectionsCategories (\(numConnectionsCategories)).")
         throw ValidationError.invalidInput
     }
 
-    var categoryInfos: [CategoryInfo] = []
-    for categoryNumber in 0...numCategories - 1 {
-        categoryInfos.append(CategoryInfo(name: "Category \(categoryNumber)", colour: colours[categoryNumber], clues: createDefaultClues(numCluesPerCategory: numCluesPerCategory, categoryNumber: categoryNumber)))
+    var connectionsCategoryInfos: [ConnectionsCategoryInfo] = []
+    for connectionsCategoryNumber in 0...numConnectionsCategories - 1 {
+        connectionsCategoryInfos.append(ConnectionsCategoryInfo(name: "Category \(connectionsCategoryNumber)", colour: colours[connectionsCategoryNumber], clues: createDefaultClues(numCluesPerConnectionsCategory: numCluesPerConnectionsCategory, connectionsCategoryNumber: connectionsCategoryNumber)))
     }
-    return categoryInfos
+    return connectionsCategoryInfos
 }
 
 func createDefaultTestSetupInfo() -> SetupInfo {
-    let numCategories: Int = 4
+    let numConnectionsCategories: Int = 4
     let colours: [Color] = [.yellow, .green, .blue, .purple]
-    let numCluesPerCategory: Int = 4
+    let numCluesPerConnectionsCategory: Int = 4
     
     // Shouldn't fail anyway, but if it does I want it to crash.
-    let categoryInfos: [CategoryInfo] = try! createTestCategoryInfos(numCategories: numCategories, colours: colours, numCluesPerCategory: numCluesPerCategory)
-    return SetupInfo(categoryInfos: categoryInfos, numMistakes: 4)
+    let connectionsCategoryInfos: [ConnectionsCategoryInfo] = try! createTestConnectionsCategoryInfos(numConnectionsCategories: numConnectionsCategories, colours: colours, numCluesPerConnectionsCategory: numCluesPerConnectionsCategory)
+    return SetupInfo(connectionsCategoryInfos: connectionsCategoryInfos, numMistakes: 4)
 }
 
-func categoriesCompletedInIncreasingOrder(category1: Category, category2: Category) -> Bool {
-    if let orderCompleted1 = category1.orderCompleted, let orderCompleted2 = category2.orderCompleted {
+func connectionsCategoriesCompletedInIncreasingOrder(connectionsCategory1: ConnectionsCategory, connectionsCategory2: ConnectionsCategory) -> Bool {
+    if let orderCompleted1 = connectionsCategory1.orderCompleted, let orderCompleted2 = connectionsCategory2.orderCompleted {
         return orderCompleted1 < orderCompleted2
-    } else if category1.isCompleted {
+    } else if connectionsCategory1.isCompleted {
         return true
-    } else if category2.isCompleted {
+    } else if connectionsCategory2.isCompleted {
         return false
     } else {
         return true
     }
 }
 
-func createCategoryClueInfos(clues: [String], categoryID: UUID) -> [ClueInfo] {
+func createConnectionsCategoryClueInfos(clues: [String], connectionsCategoryID: UUID) -> [ClueInfo] {
     return clues.map({clue in
-            ClueInfo(clue: clue, categoryID: categoryID)
+            ClueInfo(clue: clue, connectionsCategoryID: connectionsCategoryID)
     })
 }
 
 func createClueBoxes(setupInfo: SetupInfo) -> [ClueBox] {
-    return setupInfo.categoryInfos.flatMap { catInfo in
+    return setupInfo.connectionsCategoryInfos.flatMap { catInfo in
         catInfo.clueInfos.map { clueInfo in
             ClueBox(clueInfo: clueInfo)
         }
     }
 }
 
-func createCategories(categoryInfos: [CategoryInfo]) -> [Category] {
-    return categoryInfos.map{categoryInfo in
-        Category(categoryInfo: categoryInfo)
+func createConnectionsCategories(connectionsCategoryInfos: [ConnectionsCategoryInfo]) -> [ConnectionsCategory] {
+    return connectionsCategoryInfos.map{connectionsCategoryInfo in
+        ConnectionsCategory(connectionsCategoryInfo: connectionsCategoryInfo)
     }
 }

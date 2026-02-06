@@ -1,5 +1,5 @@
 //
-//  ClueBoxGrid.swift
+//  GameGridView.swift
 //  DefinitelyNotConnections
 //
 //  Created by Alexander Jones on 02.06.25.
@@ -12,7 +12,7 @@ struct GameGridView: View {
     
     var body: some View {
         VStack {
-            CompletedCategoriesView(categories: gameGrid.allCategories)
+            CompletedConnectionsCategoriesView(connectionsCategories: gameGrid.allConnectionsCategories)
             RemainingClueBoxesView(allClueBoxes: gameGrid.allClueBoxes)
         }
     }
@@ -20,6 +20,6 @@ struct GameGridView: View {
 
 #Preview {
     let gameGrid: GameGrid = GameGridBuilder().build()
-    try! gameGrid.completeNCategories(n: 2)
+    try! gameGrid.completeNConnectionsCategories(n: 2)
     return GameGridView(gameGrid: gameGrid)
 }

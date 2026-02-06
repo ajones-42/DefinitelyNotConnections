@@ -1,5 +1,5 @@
 //
-//  CompletedCategory.swift
+//  CompletedConnectionsCategory.swift
 //  DefinitelyNotConnections
 //
 //  Created by Alexander Jones on 09.06.25.
@@ -7,21 +7,21 @@
 
 import SwiftUI
 
-struct CompletedCategoryView: View {
-    let category: Category
+struct CompletedConnectionsCategoryView: View {
+    let connectionsCategory: ConnectionsCategory
     let rectangleWidth: CGFloat = 360
 
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 20)
                 .frame(width: rectangleWidth, height: 80)
-                .foregroundStyle(category.colour)
+                .foregroundStyle(connectionsCategory.colour)
             VStack {
-                Text(category.name)
+                Text(connectionsCategory.name)
                     .fontWeight(.semibold)
                     .foregroundStyle(.black)
                     .frame(maxWidth: rectangleWidth - 10)
-                Text(concatClues(clues: category.getClues()))
+                Text(concatClues(clues: connectionsCategory.getClues()))
                     .foregroundStyle(.black)
                     .frame(maxWidth: rectangleWidth - 10)
             }
@@ -31,8 +31,8 @@ struct CompletedCategoryView: View {
 
 
 #Preview {
-    let categoryInfo: CategoryInfo = try! createTestCategoryInfos(numCategories: 1, colours: [.green], numCluesPerCategory: 4).first!
-    let category: Category = CategoryBuilder(categoryInfo: categoryInfo).build()
-    CompletedCategoryView(category: category)
+    let connectionsCategoryInfo: ConnectionsCategoryInfo = try! createTestConnectionsCategoryInfos(numConnectionsCategories: 1, colours: [.green], numCluesPerConnectionsCategory: 4).first!
+    let connectionsCategory: ConnectionsCategory = ConnectionsCategoryBuilder(connectionsCategoryInfo: connectionsCategoryInfo).build()
+    CompletedConnectionsCategoryView(connectionsCategory: connectionsCategory)
 }
 

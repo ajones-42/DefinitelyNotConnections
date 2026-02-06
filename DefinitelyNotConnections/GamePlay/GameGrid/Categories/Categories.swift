@@ -1,5 +1,5 @@
 //
-//  Categories.swift
+//  ConnectionsCategories.swift
 //  DefinitelyNotConnections
 //
 //  Created by Alex Jones on 29.01.26.
@@ -8,64 +8,64 @@
 import Foundation
 
 @Observable
-class Categories {
-    private(set) var allCategories: [Category]
+class ConnectionsCategories {
+    private(set) var allConnectionsCategories: [ConnectionsCategory]
     
-    var sortedCompletedCategories: [Category] {
-        self.allCategories.filter({
-            category in category.isCompleted
-        }).sorted(by: categoriesCompletedInIncreasingOrder)
+    var sortedCompletedConnectionsCategories: [ConnectionsCategory] {
+        self.allConnectionsCategories.filter({
+            connectionsCategory in connectionsCategory.isCompleted
+        }).sorted(by: connectionsCategoriesCompletedInIncreasingOrder)
     }
-    var numCompletedCategories: Int {
-        self.sortedCompletedCategories.count
+    var numCompletedConnectionsCategories: Int {
+        self.sortedCompletedConnectionsCategories.count
     }
     
     init(setupInfo: SetupInfo) {
-        self.allCategories = createCategories(categoryInfos: setupInfo.categoryInfos)
+        self.allConnectionsCategories = createConnectionsCategories(connectionsCategoryInfos: setupInfo.connectionsCategoryInfos)
     }
     
-    init(allCategories: [Category]) {
-        self.allCategories = allCategories
+    init(allConnectionsCategories: [ConnectionsCategory]) {
+        self.allConnectionsCategories = allConnectionsCategories
     }
     
     func reset() {
-        self.allCategories.forEach({category in
-            category.reset()
+        self.allConnectionsCategories.forEach({connectionsCategory in
+            connectionsCategory.reset()
         })
     }
     
-    func getCategoryIDs() -> [UUID] {
-        return self.allCategories.map({category in
-            category.id
+    func getConnectionsCategoryIDs() -> [UUID] {
+        return self.allConnectionsCategories.map({connectionsCategory in
+            connectionsCategory.id
         })
     }
     
-    private func findCategoryByID(categoryID: UUID) -> Category? {
-        return self.allCategories.first(where: {category in category.id == categoryID})
+    private func findConnectionsCategoryByID(connectionsCategoryID: UUID) -> ConnectionsCategory? {
+        return self.allConnectionsCategories.first(where: {connectionsCategory in connectionsCategory.id == connectionsCategoryID})
     }
     
-    private func getNextCompletedCategoryOrder() -> Int {
-        return self.numCompletedCategories
+    private func getNextCompletedConnectionsCategoryOrder() -> Int {
+        return self.numCompletedConnectionsCategories
     }
     
-    func completeCategory(categoryID: UUID) {
-        if let category = findCategoryByID(categoryID: categoryID) {
-            category.complete(orderCompleted: getNextCompletedCategoryOrder())
+    func completeConnectionsCategory(connectionsCategoryID: UUID) {
+        if let connectionsCategory = findConnectionsCategoryByID(connectionsCategoryID: connectionsCategoryID) {
+            connectionsCategory.complete(orderCompleted: getNextCompletedConnectionsCategoryOrder())
         }
     }
 }
 
 // Add functions for testing
-extension Categories {
-    internal func completeFirstNCategories(n: Int) throws {
-        let totalNumCategories: Int = self.allCategories.count
-        guard (n >= 0 && n <= totalNumCategories) else {
-            print("Categories.completeNcategories: n must be positive, and less than or equal to total number of clueBoxes (\(totalNumCategories))")
+extension ConnectionsCategories {
+    internal func completeFirstNConnectionsCategories(n: Int) throws {
+        let totalNumConnectionsCategories: Int = self.allConnectionsCategories.count
+        guard (n >= 0 && n <= totalNumConnectionsCategories) else {
+            print("ConnectionsCategories.completeNConnectionsCategories: n must be positive, and less than or equal to total number of clueBoxes (\(totalNumConnectionsCategories))")
             throw ValidationError.invalidInput
         }
-        self.allCategories.enumerated().forEach({(index, category) in
+        self.allConnectionsCategories.enumerated().forEach({(index, connectionsCategory) in
             if index < n {
-                category.complete(orderCompleted: index)
+                connectionsCategory.complete(orderCompleted: index)
             }
         })
     }

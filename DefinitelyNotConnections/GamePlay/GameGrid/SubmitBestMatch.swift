@@ -8,15 +8,15 @@
 import Foundation
 
 struct SubmitBestMatch {
-    let categoryID: UUID
+    let connectionsCategoryID: UUID
     let numMatches: Int
     let isCorrect: Bool
     let isOneAway: Bool
     
-    init(categoryID: UUID, numMatches: Int, numCluesPerCategory: Int) {
-        self.categoryID = categoryID
+    init(connectionsCategoryID: UUID, numMatches: Int, numCluesPerConnectionsCategory: Int) {
+        self.connectionsCategoryID = connectionsCategoryID
         self.numMatches = numMatches
-        self.isCorrect = numMatches == numCluesPerCategory
-        self.isOneAway = numMatches == numCluesPerCategory - 1
+        self.isCorrect = numMatches == numCluesPerConnectionsCategory
+        self.isOneAway = numMatches == numCluesPerConnectionsCategory - 1
     }
 }

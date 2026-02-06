@@ -1,5 +1,5 @@
 //
-//  CategoryInfo.swift
+//  ConnectionsCategoryInfo.swift
 //  DefinitelyNotConnections
 //
 //  Created by Alex Jones on 15.01.26.
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct CategoryInfo {
+struct ConnectionsCategoryInfo {
     let name: String
     let colour: Color
     let clueInfos: [ClueInfo]
@@ -18,6 +18,6 @@ struct CategoryInfo {
         self.name = name
         self.colour = colour
         self.id = UUID()
-        self.clueInfos = createCategoryClueInfos(clues: clues, categoryID: self.id)
+        self.clueInfos = createConnectionsCategoryClueInfos(clues: clues, connectionsCategoryID: self.id)
     }
 }

@@ -32,7 +32,7 @@ class AllClueBoxes {
     }
     
     var submitIsClickable: Bool {
-        self.numSelectedClueBoxes == self.gameProperties.numCluesPerCategory
+        self.numSelectedClueBoxes == self.gameProperties.numCluesPerConnectionsCategory
     }
     
     var deselectAllIsClickable: Bool {
@@ -64,7 +64,7 @@ class AllClueBoxes {
     }
     
     func clueBoxIsClickable(clueBox: ClueBox) -> Bool {
-        return self.numSelectedClueBoxes < self.gameProperties.numCluesPerCategory || clueBox.isSelected
+        return self.numSelectedClueBoxes < self.gameProperties.numCluesPerConnectionsCategory || clueBox.isSelected
     }
     
     func clickClueBox(clueBox: ClueBox) {
@@ -102,9 +102,9 @@ class AllClueBoxes {
         }
     }
     
-    func completeClueBoxesByCategoryID(categoryID: UUID) {
+    func completeClueBoxesByConnectionsCategoryID(connectionsCategoryID: UUID) {
         self.allClueBoxes.forEach({clueBox in
-            if clueBox.getCategoryID() == categoryID {
+            if clueBox.getConnectionsCategoryID() == connectionsCategoryID {
                 clueBox.setCompleted()
             }
         })

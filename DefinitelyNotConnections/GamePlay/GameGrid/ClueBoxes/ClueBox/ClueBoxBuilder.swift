@@ -8,7 +8,7 @@
 import Foundation
 
 class ClueBoxBuilder {
-    var clueInfo: ClueInfo = ClueInfo(clue: "A clue!", categoryID: UUID())
+    var clueInfo: ClueInfo = ClueInfo(clue: "A clue!", connectionsCategoryID: UUID())
     var isCompleted: Bool = false
     var isSelected: Bool = false
     var shake: Bool = false

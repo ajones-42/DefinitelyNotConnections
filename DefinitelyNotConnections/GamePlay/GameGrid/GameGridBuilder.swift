@@ -1,5 +1,5 @@
 //
-//  CategoriesBuilder.swift
+//  ConnectionsCategoriesBuilder.swift
 //  DefinitelyNotConnections
 //
 //  Created by Alex Jones on 26.01.26.
@@ -8,24 +8,24 @@
 import Foundation
 
 class GameGridBuilder {
-    var categories: Categories
+    var categories: ConnectionsCategories
     var gameProperties: GameProperties
     var allClueBoxes: AllClueBoxes
     
     init(setupInfo: SetupInfo) {
-        self.categories = Categories(setupInfo: setupInfo)
+        self.categories = ConnectionsCategories(setupInfo: setupInfo)
         self.gameProperties = GameProperties(setupInfo: setupInfo)
         self.allClueBoxes = AllClueBoxes(setupInfo: setupInfo, gameProperties: self.gameProperties, shuffled: true)
     }
     
     init() {
         let setupInfo: SetupInfo = createDefaultTestSetupInfo()
-        self.categories = Categories(setupInfo: setupInfo)
+        self.categories = ConnectionsCategories(setupInfo: setupInfo)
         self.gameProperties = GameProperties(setupInfo: setupInfo)
         self.allClueBoxes = AllClueBoxes(setupInfo: setupInfo, gameProperties: self.gameProperties, shuffled: true)
     }
     
-    func withCategories(categories: Categories) -> GameGridBuilder {
+    func withConnectionsCategories(categories: ConnectionsCategories) -> GameGridBuilder {
         self.categories = categories
         return self
     }
@@ -41,6 +41,6 @@ class GameGridBuilder {
     }
     
     func build() -> GameGrid {
-        return GameGrid(allCategories: self.categories, allClueBoxes: self.allClueBoxes, gameProperties: self.gameProperties)
+        return GameGrid(allConnectionsCategories: self.categories, allClueBoxes: self.allClueBoxes, gameProperties: self.gameProperties)
     }
 }

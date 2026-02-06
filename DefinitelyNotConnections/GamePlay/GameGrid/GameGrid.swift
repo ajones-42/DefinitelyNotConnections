@@ -1,5 +1,5 @@
 //
-//  Categories.swift
+//  ConnectionsCategories.swift
 //  DefinitelyNotConnections
 //
 //  Created by Alex Jones on 12.01.26.
@@ -9,24 +9,24 @@ import Foundation
 
 @Observable
 class GameGrid {
-    private(set) var allCategories: Categories
+    private(set) var allConnectionsCategories: ConnectionsCategories
     private(set) var allClueBoxes: AllClueBoxes
     let gameProperties: GameProperties
     
     init(setupInfo: SetupInfo, gameProperties: GameProperties) {
-        self.allCategories = Categories(setupInfo: setupInfo)
+        self.allConnectionsCategories = ConnectionsCategories(setupInfo: setupInfo)
         self.gameProperties = gameProperties
         self.allClueBoxes = AllClueBoxes(setupInfo: setupInfo, gameProperties: self.gameProperties, shuffled: true)
     }
     
-    init(allCategories: Categories, allClueBoxes: AllClueBoxes, gameProperties: GameProperties) {
-        self.allCategories = allCategories
+    init(allConnectionsCategories: ConnectionsCategories, allClueBoxes: AllClueBoxes, gameProperties: GameProperties) {
+        self.allConnectionsCategories = allConnectionsCategories
         self.allClueBoxes = allClueBoxes
         self.gameProperties = gameProperties
     }
     
     func reset() {
-        self.allCategories.reset()
+        self.allConnectionsCategories.reset()
         self.allClueBoxes.reset()
     }
     
@@ -34,12 +34,12 @@ class GameGrid {
         return self.allClueBoxes.selectedClueBoxes
     }
     
-    func getCategories() -> [Category] {
-        return self.allCategories.allCategories
+    func getConnectionsCategories() -> [ConnectionsCategory] {
+        return self.allConnectionsCategories.allConnectionsCategories
     }
     
-    func getNumCompletedCategories() -> Int {
-        return self.allCategories.numCompletedCategories
+    func getNumCompletedConnectionsCategories() -> Int {
+        return self.allConnectionsCategories.numCompletedConnectionsCategories
     }
     
     func getSubmitIsClickable() -> Bool {
@@ -50,24 +50,24 @@ class GameGrid {
         self.allClueBoxes.shakeSelectedClueBoxesMomentarily(duration: duration)
     }
     
-    func completeCategory(categoryID: UUID) {
-        self.allCategories.completeCategory(categoryID: categoryID)
-        self.allClueBoxes.completeClueBoxesByCategoryID(categoryID: categoryID)
+    func completeConnectionsCategory(connectionsCategoryID: UUID) {
+        self.allConnectionsCategories.completeConnectionsCategory(connectionsCategoryID: connectionsCategoryID)
+        self.allClueBoxes.completeClueBoxesByConnectionsCategoryID(connectionsCategoryID: connectionsCategoryID)
     }
 }
 
 // Add functions for testing
 extension GameGrid {
-    func completeNCategories(n: Int) throws {
-        let allCategoryIDs: [UUID] = self.allCategories.getCategoryIDs()
-        let totalNumCategories: Int = allCategoryIDs.count
-        guard (n >= 0 && n <= totalNumCategories) else {
-            print("GameGrid.completeNCategories: n must be positive, and less than or equal to total number of clueBoxes (\(totalNumCategories))")
+    func completeNConnectionsCategories(n: Int) throws {
+        let allConnectionsCategoryIDs: [UUID] = self.allConnectionsCategories.getConnectionsCategoryIDs()
+        let totalNumConnectionsCategories: Int = allConnectionsCategoryIDs.count
+        guard (n >= 0 && n <= totalNumConnectionsCategories) else {
+            print("GameGrid.completeNConnectionsCategories: n must be positive, and less than or equal to total number of clueBoxes (\(totalNumConnectionsCategories))")
             throw ValidationError.invalidInput
         }
-        allCategoryIDs.enumerated().forEach({(index, categoryID) in
+        allConnectionsCategoryIDs.enumerated().forEach({(index, connectionsCategoryID) in
             if index < n {
-                completeCategory(categoryID: categoryID)
+                completeConnectionsCategory(connectionsCategoryID: connectionsCategoryID)
             }
         })
     }
