@@ -9,6 +9,17 @@ import Testing
 @testable import DefinitelyNotConnections
 
 @Suite struct ConnectionsCategoryTests {
+    // isCompleted
+    @Test func testIsCompleted() {
+        let connectionsCategory: ConnectionsCategory = ConnectionsCategoryBuilder().withOrderCompleted(orderCompleted: 0).build()
+        #expect(connectionsCategory.isCompleted == true)
+    }
+    
+    @Test func testIsNotCompleted() {
+        let connectionsCategory: ConnectionsCategory = ConnectionsCategoryBuilder().withOrderCompleted(orderCompleted: nil).build()
+        #expect(connectionsCategory.isCompleted == false)
+    }
+
     // Reset
     @Test func resetCompletedConnectionsCategory() {
         let connectionsCategory: ConnectionsCategory = ConnectionsCategoryBuilder().withOrderCompleted(orderCompleted: 0).build()
