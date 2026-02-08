@@ -6,9 +6,17 @@
 //
 
 import Testing
+import Foundation
 @testable import DefinitelyNotConnections
 
 @Suite struct ClueBoxTests {
+    
+    // Get ID
+    @Test func testGetID() {
+        let clueBoxID: UUID = UUID()
+        let clueBox: ClueBox = ClueBoxBuilder().withClueInfo(clueInfo: ClueInfo(clue: "A clue!", id: clueBoxID, connectionsCategoryID: UUID())).build()
+        #expect(clueBox.getID() == clueBoxID)
+    }
     
     // Reset
     @Test func resetClueBox() {

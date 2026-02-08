@@ -18,6 +18,12 @@ struct ClueInfo: Equatable {
         self.connectionsCategoryID = connectionsCategoryID
     }
     
+    init(clue: String, id: UUID, connectionsCategoryID: UUID) {
+        self.clue = clue
+        self.id = id
+        self.connectionsCategoryID = connectionsCategoryID
+    }
+    
     func getID() -> UUID {
         return self.id
     }
