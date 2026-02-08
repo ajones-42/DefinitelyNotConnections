@@ -63,7 +63,7 @@ class AllClueBoxes {
         })
     }
     
-    func clueBoxIsClickable(clueBox: ClueBox) -> Bool {
+    private func clueBoxIsClickable(clueBox: ClueBox) -> Bool {
         return self.numSelectedClueBoxes < self.gameProperties.numCluesPerConnectionsCategory || clueBox.isSelected
     }
     
