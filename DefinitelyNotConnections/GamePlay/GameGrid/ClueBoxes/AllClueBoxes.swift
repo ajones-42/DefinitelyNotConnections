@@ -126,6 +126,11 @@ extension AllClueBoxes {
         })
     }
     
+    internal func completeAllClueBoxes() throws {
+        let totalNumClueBoxes: Int = self.allClueBoxes.count
+        try! completeNClueBoxes(n: totalNumClueBoxes)
+    }
+    
     internal func selectNClueBoxes(n: Int) throws {
         let totalNumClueBoxes: Int = self.allClueBoxes.count
         guard (n >= 0 && n <= totalNumClueBoxes && n <= self.gameProperties.numCluesPerConnectionsCategory) else {
@@ -137,6 +142,11 @@ extension AllClueBoxes {
                 clueBox.select()
             }
         })
+    }
+    
+    internal func selectAllClueBoxes() throws {
+        let totalNumClueBoxes: Int = self.allClueBoxes.count
+        try! selectNClueBoxes(n: totalNumClueBoxes)
     }
 }
     
