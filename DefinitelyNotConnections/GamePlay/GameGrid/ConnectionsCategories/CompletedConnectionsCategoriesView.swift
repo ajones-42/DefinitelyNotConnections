@@ -19,7 +19,6 @@ struct CompletedConnectionsCategoriesView: View {
 
 #Preview {
     let gameProperties: GameProperties = GamePropertiesBuilder().build()
-    let connectionsCategories: ConnectionsCategories = ConnectionsCategoriesBuilder().build()
-    try! connectionsCategories.completeFirstNConnectionsCategories(n: gameProperties.numConnectionsCategories)
+    let connectionsCategories: ConnectionsCategories = try! ConnectionsCategoriesBuilder().withCompleteAllConnectionsCategories().build()
     return CompletedConnectionsCategoriesView(connectionsCategories: connectionsCategories)
 }

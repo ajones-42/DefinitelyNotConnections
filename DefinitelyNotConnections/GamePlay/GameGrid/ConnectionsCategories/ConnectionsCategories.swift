@@ -54,19 +54,3 @@ class ConnectionsCategories {
         }
     }
 }
-
-// Add functions for testing
-extension ConnectionsCategories {
-    internal func completeFirstNConnectionsCategories(n: Int) throws {
-        let totalNumConnectionsCategories: Int = self.allConnectionsCategories.count
-        guard (n >= 0 && n <= totalNumConnectionsCategories) else {
-            print("ConnectionsCategories.completeNConnectionsCategories: n must be positive, and less than or equal to total number of clueBoxes (\(totalNumConnectionsCategories))")
-            throw ValidationError.invalidInput
-        }
-        self.allConnectionsCategories.enumerated().forEach({(index, connectionsCategory) in
-            if index < n {
-                connectionsCategory.complete(orderCompleted: index)
-            }
-        })
-    }
-}

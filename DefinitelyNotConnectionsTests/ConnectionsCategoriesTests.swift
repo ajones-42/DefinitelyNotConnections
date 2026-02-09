@@ -59,50 +59,10 @@ import Foundation
         let connectionsCategories: ConnectionsCategories = ConnectionsCategoriesBuilder().withAllConnectionsCategories(allConnectionsCategories: connectionsCategoryList).build()
         #expect(connectionsCategories.sortedCompletedConnectionsCategories.first === connectionsCategoryList[1] && connectionsCategories.sortedCompletedConnectionsCategories.last === connectionsCategoryList.first)
     }
-    
-    // completeNConnectionsCategories
-    @Test func testcompleteZeroConnectionsCategories() {
-        let connectionsCategories: ConnectionsCategories = ConnectionsCategoriesBuilder().build()
-        #expect(throws: Never.self) {
-            try connectionsCategories.completeFirstNConnectionsCategories(n: 0)
-        }
-        #expect(connectionsCategories.numCompletedConnectionsCategories == 0)
-    }
-
-    @Test func testcompleteOneConnectionsCategory() {
-        let connectionsCategories: ConnectionsCategories = ConnectionsCategoriesBuilder().build()
-        #expect(throws: Never.self) {
-            try connectionsCategories.completeFirstNConnectionsCategories(n: 1)
-        }
-        #expect(connectionsCategories.numCompletedConnectionsCategories == 1)
-    }
-    
-    @Test func testcompleteAllConnectionsCategories() {
-        let connectionsCategories: ConnectionsCategories = ConnectionsCategoriesBuilder().build()
-        #expect(throws: Never.self) {
-            try connectionsCategories.completeFirstNConnectionsCategories(n: 4)
-        }
-        #expect(connectionsCategories.numCompletedConnectionsCategories == 4)
-    }
-    
-    @Test func testcompleteTooManyConnectionsCategories() {
-        let connectionsCategories: ConnectionsCategories = ConnectionsCategoriesBuilder().build()
-        #expect(throws: ValidationError.invalidInput.self) {
-            try connectionsCategories.completeFirstNConnectionsCategories(n: 5)
-        }
-    }
-    
-    @Test func testcompleteNegativeConnectionsCategories() {
-        let connectionsCategories: ConnectionsCategories = ConnectionsCategoriesBuilder().build()
-        #expect(throws: ValidationError.invalidInput.self) {
-            try connectionsCategories.completeFirstNConnectionsCategories(n: -1)
-        }
-    }
 
     // Reset
     @Test func testResetAllCompletedConnectionsCategories() {
-        let connectionsCategories: ConnectionsCategories = ConnectionsCategoriesBuilder().build()
-        try! connectionsCategories.completeFirstNConnectionsCategories(n: 4)
+        let connectionsCategories: ConnectionsCategories = try! ConnectionsCategoriesBuilder().withCompleteAllConnectionsCategories().build()
         connectionsCategories.reset()
         #expect(connectionsCategories.numCompletedConnectionsCategories == 0)
     }
@@ -114,8 +74,7 @@ import Foundation
     }
     
     @Test func testResetSomeCompletedConnectionsCategories() {
-        let connectionsCategories: ConnectionsCategories = ConnectionsCategoriesBuilder().build()
-        try! connectionsCategories.completeFirstNConnectionsCategories(n: 2)
+        let connectionsCategories: ConnectionsCategories = try! ConnectionsCategoriesBuilder().withNCompletedConnectionsCategories(n: 2).build()
         connectionsCategories.reset()
         #expect(connectionsCategories.numCompletedConnectionsCategories == 0)
     }
