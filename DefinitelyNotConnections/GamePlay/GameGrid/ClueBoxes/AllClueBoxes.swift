@@ -126,7 +126,7 @@ extension AllClueBoxes {
         })
     }
     
-    internal func completeAllClueBoxes() throws {
+    internal func completeAllClueBoxes() {
         let totalNumClueBoxes: Int = self.allClueBoxes.count
         try! completeNClueBoxes(n: totalNumClueBoxes)
     }
@@ -144,7 +144,7 @@ extension AllClueBoxes {
         })
     }
     
-    internal func selectAllClueBoxes() throws {
+    internal func selectAllClueBoxes() {
         let totalNumClueBoxes: Int = self.allClueBoxes.count
         try! selectNClueBoxes(n: totalNumClueBoxes)
     }
