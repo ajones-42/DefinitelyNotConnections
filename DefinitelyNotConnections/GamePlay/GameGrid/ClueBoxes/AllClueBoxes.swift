@@ -110,44 +110,5 @@ class AllClueBoxes {
         })
     }
 }
-
-// Add functions for testing
-extension AllClueBoxes {
-    internal func completeNClueBoxes(n: Int) throws {
-        let totalNumClueBoxes: Int = self.allClueBoxes.count
-        guard (n >= 0 && n <= totalNumClueBoxes) else {
-            print("AllClueBoxes.completeNClueBoxes: n must be positive, and less than or equal to total number of clueBoxes (\(totalNumClueBoxes))")
-            throw ValidationError.invalidInput
-        }
-        self.allClueBoxes.enumerated().forEach({(index, clueBox) in
-            if index < n {
-                clueBox.setCompleted()
-            }
-        })
-    }
-    
-    internal func completeAllClueBoxes() {
-        let totalNumClueBoxes: Int = self.allClueBoxes.count
-        try! completeNClueBoxes(n: totalNumClueBoxes)
-    }
-    
-    internal func selectNClueBoxes(n: Int) throws {
-        let totalNumClueBoxes: Int = self.allClueBoxes.count
-        guard (n >= 0 && n <= totalNumClueBoxes && n <= self.gameProperties.numCluesPerConnectionsCategory) else {
-            print("AllClueBoxes.selectNClueBoxes: n must be positive, less than or equal to total number of clueBoxes (\(totalNumClueBoxes)), and less than or equal to the number of clues per category \(self.gameProperties.numCluesPerConnectionsCategory).")
-            throw ValidationError.invalidInput
-        }
-        self.allClueBoxes.enumerated().forEach({(index, clueBox) in
-            if index < n {
-                clueBox.select()
-            }
-        })
-    }
-    
-    internal func selectAllClueBoxes() {
-        let totalNumClueBoxes: Int = self.allClueBoxes.count
-        try! selectNClueBoxes(n: totalNumClueBoxes)
-    }
-}
     
     
