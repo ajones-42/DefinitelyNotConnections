@@ -19,6 +19,6 @@ struct GameGridView: View {
 }
 
 #Preview {
-    let gameGrid: GameGrid = GameGridBuilder().withNCompletedConnectionsCategories(n: 2).build()
+    let gameGrid: GameGrid = try! GameGridBuilder().withNCompletedConnectionsCategories(n: 2).build()
     GameGridView(gameGrid: gameGrid)
 }
