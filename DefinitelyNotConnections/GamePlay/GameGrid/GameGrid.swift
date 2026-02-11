@@ -55,20 +55,3 @@ class GameGrid {
         self.allClueBoxes.completeClueBoxesByConnectionsCategoryID(connectionsCategoryID: connectionsCategoryID)
     }
 }
-
-// Add functions for testing
-extension GameGrid {
-    func completeNConnectionsCategories(n: Int) throws {
-        let allConnectionsCategoryIDs: [UUID] = self.allConnectionsCategories.getConnectionsCategoryIDs()
-        let totalNumConnectionsCategories: Int = allConnectionsCategoryIDs.count
-        guard (n >= 0 && n <= totalNumConnectionsCategories) else {
-            print("GameGrid.completeNConnectionsCategories: n must be positive, and less than or equal to total number of clueBoxes (\(totalNumConnectionsCategories))")
-            throw ValidationError.invalidInput
-        }
-        allConnectionsCategoryIDs.enumerated().forEach({(index, connectionsCategoryID) in
-            if index < n {
-                completeConnectionsCategory(connectionsCategoryID: connectionsCategoryID)
-            }
-        })
-    }
-}
