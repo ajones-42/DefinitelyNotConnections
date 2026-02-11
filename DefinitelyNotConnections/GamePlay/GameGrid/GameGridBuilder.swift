@@ -8,25 +8,29 @@
 import Foundation
 
 class GameGridBuilder {
-    var categories: ConnectionsCategories
+    var connectionsCategories: ConnectionsCategories
     var gameProperties: GameProperties
     var allClueBoxes: AllClueBoxes
+    var numCompletedConnectionsCategories: Int = 0
+    var completeAllConnectionsCategories: Bool = false
+    var numSelectedClueBoxes: Int = 0
+    var selectAllClueBoxes: Bool = false
     
     init(setupInfo: SetupInfo) {
-        self.categories = ConnectionsCategories(setupInfo: setupInfo)
+        self.connectionsCategories = ConnectionsCategories(setupInfo: setupInfo)
         self.gameProperties = GameProperties(setupInfo: setupInfo)
         self.allClueBoxes = AllClueBoxes(setupInfo: setupInfo, gameProperties: self.gameProperties, shuffled: true)
     }
     
     init() {
         let setupInfo: SetupInfo = createDefaultTestSetupInfo()
-        self.categories = ConnectionsCategories(setupInfo: setupInfo)
+        self.connectionsCategories = ConnectionsCategories(setupInfo: setupInfo)
         self.gameProperties = GameProperties(setupInfo: setupInfo)
         self.allClueBoxes = AllClueBoxes(setupInfo: setupInfo, gameProperties: self.gameProperties, shuffled: true)
     }
     
-    func withConnectionsCategories(categories: ConnectionsCategories) -> GameGridBuilder {
-        self.categories = categories
+    func withConnectionsCategories(connectionsCategories: ConnectionsCategories) -> GameGridBuilder {
+        self.connectionsCategories = connectionsCategories
         return self
     }
     
@@ -41,6 +45,6 @@ class GameGridBuilder {
     }
     
     func build() -> GameGrid {
-        return GameGrid(allConnectionsCategories: self.categories, allClueBoxes: self.allClueBoxes, gameProperties: self.gameProperties)
+        let gameGrid: GameGrid = GameGrid(allConnectionsCategories: self.connectionsCategories, allClueBoxes: self.allClueBoxes, gameProperties: self.gameProperties)
     }
 }

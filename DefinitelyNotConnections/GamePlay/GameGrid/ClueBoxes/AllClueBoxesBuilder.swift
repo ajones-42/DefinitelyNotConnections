@@ -27,7 +27,8 @@ extension AllClueBoxes {
         try! completeNClueBoxes(n: totalNumClueBoxes)
     }
     
-    fileprivate func selectNClueBoxes(n: Int) throws {
+    // These can't be fileprivate or GameGrid(Builder) has to reimplement them
+    internal func selectNClueBoxes(n: Int) throws {
         let totalNumClueBoxes: Int = self.allClueBoxes.count
         guard (n >= 0 && n <= totalNumClueBoxes && n <= self.gameProperties.numCluesPerConnectionsCategory) else {
             print("AllClueBoxes.selectNClueBoxes: n must be positive, less than or equal to total number of clueBoxes (\(totalNumClueBoxes)), and less than or equal to the number of clues per category \(self.gameProperties.numCluesPerConnectionsCategory).")
@@ -40,7 +41,7 @@ extension AllClueBoxes {
         })
     }
     
-    fileprivate func selectAllClueBoxes() {
+    internal func selectAllClueBoxes() {
         let totalNumClueBoxes: Int = self.allClueBoxes.count
         try! selectNClueBoxes(n: totalNumClueBoxes)
     }
