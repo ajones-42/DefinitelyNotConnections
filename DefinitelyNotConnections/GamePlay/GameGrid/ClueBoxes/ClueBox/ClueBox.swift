@@ -8,7 +8,7 @@
 import Foundation
 
 @Observable
-class ClueBox: Equatable {
+class ClueBox: Equatable, Comparable {
     let clueInfo: ClueInfo
     private(set) var isCompleted: Bool
     private(set) var isSelected: Bool
@@ -28,8 +28,12 @@ class ClueBox: Equatable {
         self.shake = shake
     }
     
-    static func ==(clueBox1: ClueBox, clueBox2: ClueBox) -> Bool{
+    static func ==(clueBox1: ClueBox, clueBox2: ClueBox) -> Bool {
         return clueBox1.clueInfo == clueBox2.clueInfo
+    }
+    
+    static func <(clueBox1: ClueBox, clueBox2: ClueBox) -> Bool {
+        return clueBox1.getID() < clueBox2.getID()
     }
     
     func reset() {
