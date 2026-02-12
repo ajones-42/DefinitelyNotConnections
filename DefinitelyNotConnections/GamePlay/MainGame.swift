@@ -79,8 +79,8 @@ class MainGame {
         self.popup.deactivate()
     }
     
-    private func shakeSelectedClueBoxesMomentarily(duration: TimeInterval) {
-        self.gameGrid.shakeSelectedClueBoxesMomentarily(duration: duration)
+    private func shakeSelectedRemainingClueBoxesMomentarily(duration: TimeInterval) {
+        self.gameGrid.shakeSelectedRemainingClueBoxesMomentarily(duration: duration)
     }
     
     private func handleCorrectGuess(submitBestMatch: SubmitBestMatch) {
@@ -91,7 +91,7 @@ class MainGame {
     }
     
     private func handleIncorrectGuess(guessOneAway: Bool) {
-        shakeSelectedClueBoxesMomentarily(duration: 0.1)
+        shakeSelectedRemainingClueBoxesMomentarily(duration: 0.1)
         self.mistakes.madeMistake()
         if guessOneAway {
             activatePopupMomentarily(message: "One Away!", duration: 2)
@@ -106,8 +106,8 @@ class MainGame {
         return self.gameGrid.getSubmitIsClickable()
     }
     
-    private func getSelectionAlreadyGuessed(selectedClueBoxes: [ClueBox], guesses: [Guess]) -> Bool {
-        let selectedClueBoxIDs: [UUID] = selectedClueBoxes.map({clueBox in
+    private func getSelectionAlreadyGuessed(selectedRemainingClueBoxes: [ClueBox], guesses: [Guess]) -> Bool {
+        let selectedClueBoxIDs: [UUID] = selectedRemainingClueBoxes.map({clueBox in
             clueBox.getID()
         })
         return guesses.map({guess in
@@ -115,16 +115,16 @@ class MainGame {
             }).contains(true)
     }
 
-    private func addGuess(selectedClueBoxes: [ClueBox], submitBestMatch: SubmitBestMatch) {
-        let selectedClueInfos: [ClueInfo] = selectedClueBoxes.map({clueBox in
+    private func addGuess(selectedRemainingClueBoxes: [ClueBox], submitBestMatch: SubmitBestMatch) {
+        let selectedClueInfos: [ClueInfo] = selectedRemainingClueBoxes.map({clueBox in
             clueBox.clueInfo
         })
         let guess = Guess(clueInfos: selectedClueInfos, submitBestMatch: submitBestMatch)
         self.allGuesses.addGuess(guess: guess)
     }
     
-    private func getSubmitBestMatch(selectedClueBoxes: [ClueBox]) -> SubmitBestMatch? {
-        let selectedClueBoxConnectionsCategoryIDs: [UUID] = selectedClueBoxes.map({clueBox in
+    private func getSubmitBestMatch(selectedRemainingClueBoxes: [ClueBox]) -> SubmitBestMatch? {
+        let selectedClueBoxConnectionsCategoryIDs: [UUID] = selectedRemainingClueBoxes.map({clueBox in
             clueBox.getConnectionsCategoryID()
         })
         let counts: Dictionary<UUID, Int> = selectedClueBoxConnectionsCategoryIDs.reduce(into: [:]) { counts, connectionsCategoryID in counts[connectionsCategoryID, default: 0] += 1 }
@@ -138,14 +138,14 @@ class MainGame {
     public func submitSelection() {
         if getSubmitIsClickable() {
             deactivatePopup()
-            let selectedClueBoxes: [ClueBox] = self.gameGrid.getSelectedClueBoxes()
+            let selectedRemainingClueBoxes: [ClueBox] = self.gameGrid.getSelectedRemainingClueBoxes()
             let guesses = self.allGuesses.guesses
             
-            if getSelectionAlreadyGuessed(selectedClueBoxes: selectedClueBoxes, guesses: guesses) {
+            if getSelectionAlreadyGuessed(selectedRemainingClueBoxes: selectedRemainingClueBoxes, guesses: guesses) {
                 handleAlreadyGuessed()
             } else {
-                if let submitBestMatch: SubmitBestMatch = getSubmitBestMatch(selectedClueBoxes: selectedClueBoxes) {
-                    addGuess(selectedClueBoxes: selectedClueBoxes, submitBestMatch: submitBestMatch)
+                if let submitBestMatch: SubmitBestMatch = getSubmitBestMatch(selectedRemainingClueBoxes: selectedRemainingClueBoxes) {
+                    addGuess(selectedRemainingClueBoxes: selectedRemainingClueBoxes, submitBestMatch: submitBestMatch)
                     if submitBestMatch.isCorrect {
                         handleCorrectGuess(submitBestMatch: submitBestMatch)
                     } else {

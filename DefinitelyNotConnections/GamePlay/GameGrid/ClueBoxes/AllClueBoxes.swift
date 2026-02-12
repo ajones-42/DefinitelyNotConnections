@@ -17,26 +17,26 @@ class AllClueBoxes {
             !clueBox.isCompleted
         })
     }
-    var selectedClueBoxes: [ClueBox] {
+    var selectedRemainingClueBoxes: [ClueBox] {
         self.remainingClueBoxes.filter({ clueBox in
             clueBox.isSelected
         })
     }
     
     var selectedClueBoxIDs: [UUID] {
-        getClueBoxIDs(clueBoxes: self.selectedClueBoxes)
+        getClueBoxIDs(clueBoxes: self.selectedRemainingClueBoxes)
     }
     
-    var numSelectedClueBoxes: Int {
-        self.selectedClueBoxes.count
+    var numSelectedRemainingClueBoxes: Int {
+        self.selectedRemainingClueBoxes.count
     }
     
     var submitIsClickable: Bool {
-        self.numSelectedClueBoxes == self.gameProperties.numCluesPerConnectionsCategory
+        self.numSelectedRemainingClueBoxes == self.gameProperties.numCluesPerConnectionsCategory
     }
     
     var deselectAllIsClickable: Bool {
-        self.numSelectedClueBoxes > 0
+        self.numSelectedRemainingClueBoxes > 0
     }
     
 
@@ -64,7 +64,7 @@ class AllClueBoxes {
     }
     
     private func clueBoxIsClickable(clueBox: ClueBox) -> Bool {
-        return self.numSelectedClueBoxes < self.gameProperties.numCluesPerConnectionsCategory || clueBox.isSelected
+        return self.numSelectedRemainingClueBoxes < self.gameProperties.numCluesPerConnectionsCategory || clueBox.isSelected
     }
     
     func clickClueBox(clueBox: ClueBox) {
@@ -83,22 +83,22 @@ class AllClueBoxes {
         })
     }
     
-    private func startShakingSelectedClueBoxes() {
-        self.selectedClueBoxes.forEach({clueBox in
+    private func startShakingSelectedRemainingClueBoxes() {
+        self.selectedRemainingClueBoxes.forEach({clueBox in
             clueBox.startShake()
         })
     }
     
-    private func stopShakingSelectedClueBoxes() {
-        self.selectedClueBoxes.forEach({clueBox in
+    private func stopShakingSelectedRemainingClueBoxes() {
+        self.selectedRemainingClueBoxes.forEach({clueBox in
             clueBox.stopShake()
         })
     }
     
-    func shakeSelectedClueBoxesMomentarily(duration: TimeInterval) {
-        startShakingSelectedClueBoxes()
+    func shakeSelectedRemainingClueBoxesMomentarily(duration: TimeInterval) {
+        startShakingSelectedRemainingClueBoxes()
         DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
-            self.stopShakingSelectedClueBoxes()
+            self.stopShakingSelectedRemainingClueBoxes()
         }
     }
     

@@ -30,8 +30,8 @@ class GameGrid {
         self.allClueBoxes.reset()
     }
     
-    func getSelectedClueBoxes() -> [ClueBox] {
-        return self.allClueBoxes.selectedClueBoxes
+    func getSelectedRemainingClueBoxes() -> [ClueBox] {
+        return self.allClueBoxes.selectedRemainingClueBoxes
     }
     
     func getConnectionsCategories() -> [ConnectionsCategory] {
@@ -46,8 +46,8 @@ class GameGrid {
         return self.allClueBoxes.submitIsClickable
     }
     
-    func shakeSelectedClueBoxesMomentarily(duration: TimeInterval) {
-        self.allClueBoxes.shakeSelectedClueBoxesMomentarily(duration: duration)
+    func shakeSelectedRemainingClueBoxesMomentarily(duration: TimeInterval) {
+        self.allClueBoxes.shakeSelectedRemainingClueBoxesMomentarily(duration: duration)
     }
     
     func completeConnectionsCategory(connectionsCategoryID: UUID) {
