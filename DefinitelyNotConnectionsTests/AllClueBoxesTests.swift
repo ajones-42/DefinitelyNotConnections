@@ -438,7 +438,7 @@ import Foundation
         let clueBox: ClueBox = ClueBoxBuilder().withClueInfo(clueInfo: ClueInfo(clue: "Clueee", connectionsCategoryID: categoryID)).build()
         let allClueBoxes: AllClueBoxes = AllClueBoxesBuilder().withAllClueBoxes(allClueBoxes: [clueBox]).build()
         #expect(throws: ValidationError.unknownConnectionsCategoryID) {
-            try allClueBoxes.completeClueBoxesByConnectionsCategoryID(connectionsCategoryID: categoryID)
+            try allClueBoxes.completeClueBoxesByConnectionsCategoryID(connectionsCategoryID: UUID())
         }
         #expect(allClueBoxes.numRemainingClueBoxes == 1 && allClueBoxes.remainingClueBoxes.first! === clueBox)
     }
