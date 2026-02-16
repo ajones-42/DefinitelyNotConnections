@@ -46,7 +46,7 @@ import Foundation
         let connectionsCategoryID2: UUID = try! #require(connectionsCategoryInfos.last?.id)
         let setupInfo: SetupInfo = SetupInfo(connectionsCategoryInfos: connectionsCategoryInfos, numMistakes: 4)
         let gameGrid: GameGrid = try! GameGridBuilder(setupInfo: setupInfo).withSelectAllClueBoxes().build()
-        gameGrid.completeConnectionsCategory(connectionsCategoryID: connectionsCategoryID1)
+        try! gameGrid.completeConnectionsCategory(connectionsCategoryID: connectionsCategoryID1)
         #expect(gameGrid.getNumCompletedConnectionsCategories() == 1 && gameGrid.allClueBoxes.numRemainingClueBoxes == 4)
         #expect(gameGrid.getSelectedRemainingClueBoxes().allSatisfy({$0.getConnectionsCategoryID() == connectionsCategoryID2}))
     }
@@ -57,8 +57,8 @@ import Foundation
         let connectionsCategoryID2: UUID = try! #require(connectionsCategoryInfos.last?.id)
         let setupInfo: SetupInfo = SetupInfo(connectionsCategoryInfos: connectionsCategoryInfos, numMistakes: 4)
         let gameGrid: GameGrid = try! GameGridBuilder(setupInfo: setupInfo).withSelectAllClueBoxes().build()
-        gameGrid.completeConnectionsCategory(connectionsCategoryID: connectionsCategoryID1)
-        gameGrid.completeConnectionsCategory(connectionsCategoryID: connectionsCategoryID1)
+        try! gameGrid.completeConnectionsCategory(connectionsCategoryID: connectionsCategoryID1)
+        try! gameGrid.completeConnectionsCategory(connectionsCategoryID: connectionsCategoryID1)
         #expect(gameGrid.getNumCompletedConnectionsCategories() == 1 && gameGrid.allClueBoxes.numRemainingClueBoxes == 4)
         #expect(gameGrid.getSelectedRemainingClueBoxes().allSatisfy({$0.getConnectionsCategoryID() == connectionsCategoryID2}))
     }
@@ -69,7 +69,9 @@ import Foundation
         let connectionsCategoryID2: UUID = try! #require(connectionsCategoryInfos.last?.id)
         let setupInfo: SetupInfo = SetupInfo(connectionsCategoryInfos: connectionsCategoryInfos, numMistakes: 4)
         let gameGrid: GameGrid = try! GameGridBuilder(setupInfo: setupInfo).withSelectAllClueBoxes().build()
-        gameGrid.completeConnectionsCategory(connectionsCategoryID: UUID())
+        #expect(throws: ValidationError.unknownConnectionsCategoryID) {
+            try gameGrid.completeConnectionsCategory(connectionsCategoryID: UUID())
+        }
         #expect(gameGrid.getNumCompletedConnectionsCategories() == 0 && gameGrid.allClueBoxes.numRemainingClueBoxes == 8)
         #expect(gameGrid.getSelectedRemainingClueBoxes().allSatisfy({$0.getConnectionsCategoryID() == connectionsCategoryID1 || $0.getConnectionsCategoryID() == connectionsCategoryID2}))
     }

@@ -48,9 +48,12 @@ class ConnectionsCategories {
         return self.numCompletedConnectionsCategories
     }
     
-    func completeConnectionsCategory(connectionsCategoryID: UUID) {
+    func completeConnectionsCategory(connectionsCategoryID: UUID) throws {
         if let connectionsCategory = findConnectionsCategoryByID(connectionsCategoryID: connectionsCategoryID) {
             connectionsCategory.complete(orderCompleted: getNextCompletedConnectionsCategoryOrder())
+        } else {
+            print("ConnectionsCategory.completeConnectionsCategory: Could not find category with ID \(connectionsCategoryID).")
+            throw ValidationError.unknownConnectionsCategoryID
         }
     }
 }

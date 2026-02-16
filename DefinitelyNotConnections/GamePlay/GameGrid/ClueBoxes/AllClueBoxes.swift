@@ -107,12 +107,18 @@ class AllClueBoxes {
         }
     }
     
-    func completeClueBoxesByConnectionsCategoryID(connectionsCategoryID: UUID) {
+    func completeClueBoxesByConnectionsCategoryID(connectionsCategoryID: UUID) throws {
+        var numCompletedClueBoxes: Int = 0
         self.allClueBoxes.forEach({clueBox in
             if clueBox.getConnectionsCategoryID() == connectionsCategoryID {
                 clueBox.setCompleted()
+                numCompletedClueBoxes += 1
             }
         })
+        if numCompletedClueBoxes == 0 {
+            print("AllClueBoxes.completeClueBoxesByConnectionsCategoryID: Could not find any clue boxes with category ID \(connectionsCategoryID).")
+            throw ValidationError.unknownConnectionsCategoryID
+        }
     }
 }
     

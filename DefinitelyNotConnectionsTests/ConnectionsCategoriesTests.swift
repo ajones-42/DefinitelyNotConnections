@@ -86,7 +86,7 @@ import Foundation
             ConnectionsCategoryBuilder(connectionsCategoryInfo: connectionsCategoryInfo).build()
         })
         let connectionsCategories: ConnectionsCategories = ConnectionsCategoriesBuilder().withAllConnectionsCategories(allConnectionsCategories: connectionsCategoryList).build()
-        connectionsCategories.completeConnectionsCategory(connectionsCategoryID: connectionsCategoryList[0].id)
+        try! connectionsCategories.completeConnectionsCategory(connectionsCategoryID: connectionsCategoryList[0].id)
         #expect(connectionsCategories.numCompletedConnectionsCategories == 1)
     }
 
@@ -96,8 +96,8 @@ import Foundation
             ConnectionsCategoryBuilder(connectionsCategoryInfo: connectionsCategoryInfo).build()
         })
         let connectionsCategories: ConnectionsCategories = ConnectionsCategoriesBuilder().withAllConnectionsCategories(allConnectionsCategories: connectionsCategoryList).build()
-        connectionsCategories.completeConnectionsCategory(connectionsCategoryID: connectionsCategoryList[0].id)
-        connectionsCategories.completeConnectionsCategory(connectionsCategoryID: connectionsCategoryList[1].id)
+        try! connectionsCategories.completeConnectionsCategory(connectionsCategoryID: connectionsCategoryList[0].id)
+        try! connectionsCategories.completeConnectionsCategory(connectionsCategoryID: connectionsCategoryList[1].id)
         #expect(connectionsCategories.numCompletedConnectionsCategories == 2)
     }
     
@@ -107,14 +107,16 @@ import Foundation
             ConnectionsCategoryBuilder(connectionsCategoryInfo: connectionsCategoryInfo).build()
         })
         let connectionsCategories: ConnectionsCategories = ConnectionsCategoriesBuilder().withAllConnectionsCategories(allConnectionsCategories: connectionsCategoryList).build()
-        connectionsCategories.completeConnectionsCategory(connectionsCategoryID: connectionsCategoryList[0].id)
-        connectionsCategories.completeConnectionsCategory(connectionsCategoryID: connectionsCategoryList[0].id)
+        try! connectionsCategories.completeConnectionsCategory(connectionsCategoryID: connectionsCategoryList[0].id)
+        try! connectionsCategories.completeConnectionsCategory(connectionsCategoryID: connectionsCategoryList[0].id)
         #expect(connectionsCategories.numCompletedConnectionsCategories == 1)
     }
 
     @Test func testCompleteUnknownConnectionsCategory() {
         let connectionsCategories: ConnectionsCategories = ConnectionsCategoriesBuilder().build()
-        connectionsCategories.completeConnectionsCategory(connectionsCategoryID: UUID())
+        #expect(throws: ValidationError.unknownConnectionsCategoryID) {
+            try connectionsCategories.completeConnectionsCategory(connectionsCategoryID: UUID())
+        }
         #expect(connectionsCategories.numCompletedConnectionsCategories == 0)
     }
     
@@ -125,8 +127,8 @@ import Foundation
             ConnectionsCategoryBuilder(connectionsCategoryInfo: connectionsCategoryInfo).build()
         })
         let connectionsCategories: ConnectionsCategories = ConnectionsCategoriesBuilder().withAllConnectionsCategories(allConnectionsCategories: connectionsCategoryList).build()
-        connectionsCategories.completeConnectionsCategory(connectionsCategoryID: connectionsCategoryList[0].id)
-        connectionsCategories.completeConnectionsCategory(connectionsCategoryID: connectionsCategoryList[1].id)
+        try! connectionsCategories.completeConnectionsCategory(connectionsCategoryID: connectionsCategoryList[0].id)
+        try! connectionsCategories.completeConnectionsCategory(connectionsCategoryID: connectionsCategoryList[1].id)
         #expect(connectionsCategories.sortedCompletedConnectionsCategories.first === connectionsCategoryList.first && connectionsCategories.sortedCompletedConnectionsCategories.last === connectionsCategoryList[1])
     }
     
@@ -136,8 +138,8 @@ import Foundation
             ConnectionsCategoryBuilder(connectionsCategoryInfo: connectionsCategoryInfo).build()
         })
         let connectionsCategories: ConnectionsCategories = ConnectionsCategoriesBuilder().withAllConnectionsCategories(allConnectionsCategories: connectionsCategoryList).build()
-        connectionsCategories.completeConnectionsCategory(connectionsCategoryID: connectionsCategoryList[1].id)
-        connectionsCategories.completeConnectionsCategory(connectionsCategoryID: connectionsCategoryList[0].id)
+        try! connectionsCategories.completeConnectionsCategory(connectionsCategoryID: connectionsCategoryList[1].id)
+        try! connectionsCategories.completeConnectionsCategory(connectionsCategoryID: connectionsCategoryList[0].id)
         #expect(connectionsCategories.sortedCompletedConnectionsCategories.first === connectionsCategoryList[1] && connectionsCategories.sortedCompletedConnectionsCategories.last === connectionsCategoryList[0])
     }
 }

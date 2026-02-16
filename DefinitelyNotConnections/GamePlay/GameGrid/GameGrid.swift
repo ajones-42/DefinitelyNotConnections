@@ -50,8 +50,13 @@ class GameGrid {
         self.allClueBoxes.shakeSelectedRemainingClueBoxesMomentarily(duration: duration)
     }
     
-    func completeConnectionsCategory(connectionsCategoryID: UUID) {
-        self.allConnectionsCategories.completeConnectionsCategory(connectionsCategoryID: connectionsCategoryID)
-        self.allClueBoxes.completeClueBoxesByConnectionsCategoryID(connectionsCategoryID: connectionsCategoryID)
+    func completeConnectionsCategory(connectionsCategoryID: UUID) throws {
+        do {
+            try self.allConnectionsCategories.completeConnectionsCategory(connectionsCategoryID: connectionsCategoryID)
+            try self.allClueBoxes.completeClueBoxesByConnectionsCategoryID(connectionsCategoryID: connectionsCategoryID)
+        } catch {
+            print("GameGrid.completeConnectionsCategory: Could not complete category with ID \(connectionsCategoryID).")
+            throw error
+        }
     }
 }

@@ -16,11 +16,19 @@ extension GameGrid {
             print("GameGrid.completeNConnectionsCategories: n must be positive, and less than or equal to total number of clueBoxes (\(totalNumConnectionsCategories))")
             throw ValidationError.invalidInput
         }
-        allConnectionsCategoryIDs.enumerated().forEach({(index, connectionsCategoryID) in
-            if index < n {
-                completeConnectionsCategory(connectionsCategoryID: connectionsCategoryID)
-            }
-        })
+        do {
+            try allConnectionsCategoryIDs.enumerated().forEach({(index, connectionsCategoryID) in
+                if index < n {
+                    do {
+                        try completeConnectionsCategory(connectionsCategoryID: connectionsCategoryID)
+                    } catch {
+                        throw error
+                    }
+                }
+            })
+        } catch {
+            throw error
+        }
     }
     
     fileprivate func completeAllConnectionsCategories() {

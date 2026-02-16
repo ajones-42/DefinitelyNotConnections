@@ -84,9 +84,13 @@ class MainGame {
     }
     
     private func handleCorrectGuess(submitBestMatch: SubmitBestMatch) {
-        self.gameGrid.completeConnectionsCategory(connectionsCategoryID: submitBestMatch.connectionsCategoryID)
-        if self.gameGrid.getNumCompletedConnectionsCategories() == self.gameProperties.numConnectionsCategories {
-            admirePuzzle()
+        do {
+            try self.gameGrid.completeConnectionsCategory(connectionsCategoryID: submitBestMatch.connectionsCategoryID)
+            if self.gameGrid.getNumCompletedConnectionsCategories() == self.gameProperties.numConnectionsCategories {
+                admirePuzzle()
+            }
+        } catch {
+            print("MainGame.handleCorrectGuess: Unable to complete connections category")
         }
     }
     
