@@ -58,7 +58,9 @@ import Foundation
         let setupInfo: SetupInfo = SetupInfo(connectionsCategoryInfos: connectionsCategoryInfos, numMistakes: 4)
         let gameGrid: GameGrid = try! GameGridBuilder(setupInfo: setupInfo).withSelectAllClueBoxes().build()
         try! gameGrid.completeConnectionsCategory(connectionsCategoryID: connectionsCategoryID1)
-        try! gameGrid.completeConnectionsCategory(connectionsCategoryID: connectionsCategoryID1)
+        #expect(throws: ValidationError.alreadyCompletedConnectionsCategory) {
+            try gameGrid.completeConnectionsCategory(connectionsCategoryID: connectionsCategoryID1)
+        }
         #expect(gameGrid.getNumCompletedConnectionsCategories() == 1 && gameGrid.allClueBoxes.numRemainingClueBoxes == 4)
         #expect(gameGrid.getSelectedRemainingClueBoxes().allSatisfy({$0.getConnectionsCategoryID() == connectionsCategoryID2}))
     }
