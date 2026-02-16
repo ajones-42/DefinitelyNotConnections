@@ -29,8 +29,16 @@ class Mistakes {
         self.numMistakesRemaining = self.gameProperties.numMistakes
     }
     
-    func madeMistake() {
-        return self.numMistakesRemaining -= 1
+    func setToZeroMistakesRemaining() {
+        self.numMistakesRemaining = 0
+    }
+    
+    func madeMistake() throws {
+        guard self.numMistakesRemaining >= 1 else {
+            print("Mistakes.madeMistake: Already at \(self.numMistakesRemaining) mistakes remaining. Can't go below 0.")
+            throw ValidationError.invalidNumMistakesRemaining
+        }
+        self.numMistakesRemaining -= 1
     }
     
     func getOriginalNumMistakes() -> Int {
