@@ -108,14 +108,18 @@ class AllClueBoxes {
     }
     
     func completeClueBoxesByConnectionsCategoryID(connectionsCategoryID: UUID) throws {
-        var numCompletedClueBoxes: Int = 0
-        self.allClueBoxes.forEach({clueBox in
+        var completedAtLeastOneClueBox: Bool = false
+        try self.allClueBoxes.forEach({clueBox in
             if clueBox.getConnectionsCategoryID() == connectionsCategoryID {
-                clueBox.setCompleted()
-                numCompletedClueBoxes += 1
+                if clueBox.isCompleted {
+                    throw ValidationError.alreadyCompletedConnectionsCategory
+                } else {
+                    clueBox.setCompleted()
+                    completedAtLeastOneClueBox = true
+                }
             }
         })
-        if numCompletedClueBoxes == 0 {
+        if !completedAtLeastOneClueBox {
             print("AllClueBoxes.completeClueBoxesByConnectionsCategoryID: Could not find any clue boxes with category ID \(connectionsCategoryID).")
             throw ValidationError.unknownConnectionsCategoryID
         }

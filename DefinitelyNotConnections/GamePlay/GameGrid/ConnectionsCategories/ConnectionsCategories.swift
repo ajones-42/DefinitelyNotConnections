@@ -50,6 +50,10 @@ class ConnectionsCategories {
     
     func completeConnectionsCategory(connectionsCategoryID: UUID) throws {
         if let connectionsCategory = findConnectionsCategoryByID(connectionsCategoryID: connectionsCategoryID) {
+            if connectionsCategory.isCompleted {
+                print("ConnectionsCategory.completeConnectionsCategory: Category with ID \(connectionsCategoryID) is already completed.")
+                throw ValidationError.alreadyCompletedConnectionsCategory
+            }
             connectionsCategory.complete(orderCompleted: getNextCompletedConnectionsCategoryOrder())
         } else {
             print("ConnectionsCategory.completeConnectionsCategory: Could not find category with ID \(connectionsCategoryID).")

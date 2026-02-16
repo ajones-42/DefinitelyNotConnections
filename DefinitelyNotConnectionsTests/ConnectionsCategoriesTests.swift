@@ -108,7 +108,9 @@ import Foundation
         })
         let connectionsCategories: ConnectionsCategories = ConnectionsCategoriesBuilder().withAllConnectionsCategories(allConnectionsCategories: connectionsCategoryList).build()
         try! connectionsCategories.completeConnectionsCategory(connectionsCategoryID: connectionsCategoryList[0].id)
-        try! connectionsCategories.completeConnectionsCategory(connectionsCategoryID: connectionsCategoryList[0].id)
+        #expect(throws: ValidationError.alreadyCompletedConnectionsCategory) {
+            try connectionsCategories.completeConnectionsCategory(connectionsCategoryID: connectionsCategoryList[0].id)
+        }
         #expect(connectionsCategories.numCompletedConnectionsCategories == 1)
     }
 
