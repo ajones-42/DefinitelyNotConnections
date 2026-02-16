@@ -421,4 +421,35 @@ import Foundation
             clueBox.isSelected == false
         }))
     }
+    
+    // Complete Connections Category
+    @Test func testCompleteConnectionsCategory() {
+        let categoryID1: UUID = UUID()
+        let categoryID2: UUID = UUID()
+        let clueBox1: ClueBox = ClueBoxBuilder().withClueInfo(clueInfo: ClueInfo(clue: "Clueee", connectionsCategoryID: categoryID1)).build()
+        let clueBox2: ClueBox = ClueBoxBuilder().withClueInfo(clueInfo: ClueInfo(clue: "Hmm", connectionsCategoryID: categoryID2)).build()
+        let allClueBoxes: AllClueBoxes = AllClueBoxesBuilder().withAllClueBoxes(allClueBoxes: [clueBox1, clueBox2]).build()
+        try! allClueBoxes.completeClueBoxesByConnectionsCategoryID(connectionsCategoryID: categoryID1)
+        #expect(allClueBoxes.numRemainingClueBoxes == 1 && allClueBoxes.remainingClueBoxes.first! === clueBox2)
+    }
+
+    @Test func testCompleteUnknownConnectionsCategory() {
+        let categoryID: UUID = UUID()
+        let clueBox: ClueBox = ClueBoxBuilder().withClueInfo(clueInfo: ClueInfo(clue: "Clueee", connectionsCategoryID: categoryID)).build()
+        let allClueBoxes: AllClueBoxes = AllClueBoxesBuilder().withAllClueBoxes(allClueBoxes: [clueBox]).build()
+        #expect(throws: ValidationError.unknownConnectionsCategoryID) {
+            try allClueBoxes.completeClueBoxesByConnectionsCategoryID(connectionsCategoryID: categoryID)
+        }
+        #expect(allClueBoxes.numRemainingClueBoxes == 1 && allClueBoxes.remainingClueBoxes.first! === clueBox)
+    }
+    
+    @Test func testCompleteCompletedConnectionsCategory() {
+        let categoryID1: UUID = UUID()
+        let categoryID2: UUID = UUID()
+        let clueBox1: ClueBox = ClueBoxBuilder().withClueInfo(clueInfo: ClueInfo(clue: "Clueee", connectionsCategoryID: categoryID1)).withIsCompleted(isCompleted: true).build()
+        let clueBox2: ClueBox = ClueBoxBuilder().withClueInfo(clueInfo: ClueInfo(clue: "Hmm", connectionsCategoryID: categoryID2)).build()
+        let allClueBoxes: AllClueBoxes = AllClueBoxesBuilder().withAllClueBoxes(allClueBoxes: [clueBox1, clueBox2]).build()
+        try! allClueBoxes.completeClueBoxesByConnectionsCategoryID(connectionsCategoryID: categoryID1)
+        #expect(allClueBoxes.numRemainingClueBoxes == 1 && allClueBoxes.remainingClueBoxes.first! === clueBox2)
+    }
 }
