@@ -96,7 +96,12 @@ class MainGame {
     
     private func handleIncorrectGuess(guessOneAway: Bool) {
         shakeSelectedRemainingClueBoxesMomentarily(duration: 0.1)
-        self.mistakes.madeMistake()
+        do {
+            try self.mistakes.madeMistake()
+        } catch {
+            print("MainGame.handleIncorrectGuess: Could not subtract from mistakes. Setting to 0 remaining mistakrs.")
+            self.mistakes.setToZeroMistakesRemaining()
+        }
         if guessOneAway {
             activatePopupMomentarily(message: "One Away!", duration: 2)
         }
