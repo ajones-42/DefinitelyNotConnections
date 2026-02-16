@@ -15,21 +15,21 @@ import Foundation
         let clueBox1: ClueBox = ClueBoxBuilder().withIsCompleted(isCompleted: false).build()
         let clueBox2: ClueBox = ClueBoxBuilder().withIsCompleted(isCompleted: false).build()
         let allClueBoxes: AllClueBoxes = AllClueBoxesBuilder().withAllClueBoxes(allClueBoxes: [clueBox1, clueBox2]).build()
-        #expect(allClueBoxes.remainingClueBoxes.count == 2)
+        #expect(allClueBoxes.numRemainingClueBoxes == 2)
     }
     
     @Test func testRemainingClueBoxesNone() {
         let clueBox1: ClueBox = ClueBoxBuilder().withIsCompleted(isCompleted: true).build()
         let clueBox2: ClueBox = ClueBoxBuilder().withIsCompleted(isCompleted: true).build()
         let allClueBoxes: AllClueBoxes = AllClueBoxesBuilder().withAllClueBoxes(allClueBoxes: [clueBox1, clueBox2]).build()
-        #expect(allClueBoxes.remainingClueBoxes.isEmpty)
+        #expect(allClueBoxes.numRemainingClueBoxes == 0)
     }
     
     @Test func testRemainingClueBoxesSome() {
         let clueBox1: ClueBox = ClueBoxBuilder().withIsCompleted(isCompleted: false).build()
         let clueBox2: ClueBox = ClueBoxBuilder().withIsCompleted(isCompleted: true).build()
         let allClueBoxes: AllClueBoxes = AllClueBoxesBuilder().withAllClueBoxes(allClueBoxes: [clueBox1, clueBox2]).build()
-        #expect(allClueBoxes.remainingClueBoxes.count == 1 && allClueBoxes.remainingClueBoxes.first === clueBox1)
+        #expect(allClueBoxes.numRemainingClueBoxes == 1 && allClueBoxes.remainingClueBoxes.first === clueBox1)
     }
     
     // NumSelectedRemainingClueBoxes

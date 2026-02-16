@@ -17,6 +17,11 @@ class AllClueBoxes {
             !clueBox.isCompleted
         })
     }
+
+    var numRemainingClueBoxes: Int {
+        self.remainingClueBoxes.count
+    }
+
     var selectedRemainingClueBoxes: [ClueBox] {
         self.remainingClueBoxes.filter({ clueBox in
             clueBox.isSelected
