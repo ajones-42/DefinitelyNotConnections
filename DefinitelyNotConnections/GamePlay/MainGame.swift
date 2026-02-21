@@ -114,22 +114,17 @@ class MainGame {
     public func getSubmitIsClickable() -> Bool {
         return self.gameGrid.getSubmitIsClickable()
     }
-    
-    private func getSelectionAlreadyGuessed(selectedRemainingClueBoxes: [ClueBox], guesses: [Guess]) -> Bool {
-        let selectedClueBoxIDs: [UUID] = selectedRemainingClueBoxes.map({clueBox in
-            clueBox.getID()
-        })
-        return guesses.map({guess in
-                guess.clueBoxesMatchGuess(clueBoxIDs: selectedClueBoxIDs)
-            }).contains(true)
-    }
 
-    private func addGuess(selectedRemainingClueBoxes: [ClueBox], submitBestMatch: SubmitBestMatch) {
+    private func addGuess(selectedRemainingClueBoxes: [ClueBox], submitBestMatch: SubmitBestMatch) throws {
         let selectedClueInfos: [ClueInfo] = selectedRemainingClueBoxes.map({clueBox in
             clueBox.clueInfo
         })
         let guess = Guess(clueInfos: selectedClueInfos, submitBestMatch: submitBestMatch)
-        self.allGuesses.addGuess(guess: guess)
+        do {
+            try self.allGuesses.addGuess(guess: guess)
+        } catch {
+            throw error
+        }
     }
     
     private func getSubmitBestMatch(selectedRemainingClueBoxes: [ClueBox]) throws -> SubmitBestMatch {
@@ -149,22 +144,19 @@ class MainGame {
         if getSubmitIsClickable() {
             deactivatePopup()
             let selectedRemainingClueBoxes: [ClueBox] = self.gameGrid.getSelectedRemainingClueBoxes()
-            let guesses = self.allGuesses.guesses
-            
-            if getSelectionAlreadyGuessed(selectedRemainingClueBoxes: selectedRemainingClueBoxes, guesses: guesses) {
-                handleAlreadyGuessed()
-            } else {
-                do {
-                    let submitBestMatch: SubmitBestMatch = try getSubmitBestMatch(selectedRemainingClueBoxes: selectedRemainingClueBoxes)
-                    addGuess(selectedRemainingClueBoxes: selectedRemainingClueBoxes, submitBestMatch: submitBestMatch)
-                    if submitBestMatch.isCorrect {
-                        handleCorrectGuess(submitBestMatch: submitBestMatch)
-                    } else {
-                        handleIncorrectGuess(guessOneAway: submitBestMatch.isOneAway)
-                    }
-                } catch {
-                    print("MainGame.submitSelection: Could not handle submit.")
+
+            do {
+                let submitBestMatch: SubmitBestMatch = try getSubmitBestMatch(selectedRemainingClueBoxes: selectedRemainingClueBoxes)
+                try addGuess(selectedRemainingClueBoxes: selectedRemainingClueBoxes, submitBestMatch: submitBestMatch)
+                if submitBestMatch.isCorrect {
+                    handleCorrectGuess(submitBestMatch: submitBestMatch)
+                } else {
+                    handleIncorrectGuess(guessOneAway: submitBestMatch.isOneAway)
                 }
+            } catch ValidationError.alreadyGuessed {
+                handleAlreadyGuessed()
+            } catch {
+                print("MainGame.submitSelection: Could not handle submit.")
             }
         }
     }

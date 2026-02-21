@@ -55,4 +55,10 @@ struct Guess: Identifiable, Equatable {
         let guessClueBoxIDs: [UUID] = getClueIDs()
         return guessClueBoxIDs.count == clueBoxIDs.count ? getNumSameElementsInArrays(lhs: clueBoxIDs, rhs: guessClueBoxIDs) == guessClueBoxIDs.count : false
     }
+    
+    func containsSameCluesAs(guess: Guess) -> Bool {
+        let theseClueInfos: Set<String> = Set(getClues())
+        let thoseClueInfos: Set<String> = Set(guess.getClues())
+        return theseClueInfos == thoseClueInfos
+    }
 }

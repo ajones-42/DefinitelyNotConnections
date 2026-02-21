@@ -27,7 +27,17 @@ class AllGuesses {
         return self.guesses
     }
     
-    func addGuess(guess: Guess) {
-        self.guesses.append(guess)
+    func notAlreadyGuessed(newGuess: Guess) -> Bool {
+        self.guesses.allSatisfy({ guess in
+            !guess.containsSameCluesAs(guess: newGuess)
+        })
+    }
+    
+    func addGuess(guess: Guess) throws {
+        if notAlreadyGuessed(newGuess: guess) {
+            self.guesses.append(guess)
+        } else {
+            throw ValidationError.alreadyGuessed
+        }
     }
 }
