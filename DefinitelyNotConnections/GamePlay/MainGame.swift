@@ -132,7 +132,7 @@ class MainGame {
         self.allGuesses.addGuess(guess: guess)
     }
     
-    private func getSubmitBestMatch(selectedRemainingClueBoxes: [ClueBox]) -> SubmitBestMatch? {
+    private func getSubmitBestMatch(selectedRemainingClueBoxes: [ClueBox]) throws -> SubmitBestMatch {
         let selectedClueBoxConnectionsCategoryIDs: [UUID] = selectedRemainingClueBoxes.map({clueBox in
             clueBox.getConnectionsCategoryID()
         })
@@ -140,7 +140,8 @@ class MainGame {
         if let bestConnectionsCategory: Dictionary<UUID, Int>.Element = counts.max(by: {a, b in a.value < b.value}) {
             return SubmitBestMatch(connectionsCategoryID: bestConnectionsCategory.key, numMatches: bestConnectionsCategory.value, numCluesPerConnectionsCategory: self.gameProperties.numCluesPerConnectionsCategory)
         } else {
-            return nil
+            print("MainGame.getSubmitBestMatch: Could not find best matching Connections category.")
+            throw ValidationError.submissionError
         }
     }
     
@@ -153,13 +154,16 @@ class MainGame {
             if getSelectionAlreadyGuessed(selectedRemainingClueBoxes: selectedRemainingClueBoxes, guesses: guesses) {
                 handleAlreadyGuessed()
             } else {
-                if let submitBestMatch: SubmitBestMatch = getSubmitBestMatch(selectedRemainingClueBoxes: selectedRemainingClueBoxes) {
+                do {
+                    let submitBestMatch: SubmitBestMatch = try getSubmitBestMatch(selectedRemainingClueBoxes: selectedRemainingClueBoxes)
                     addGuess(selectedRemainingClueBoxes: selectedRemainingClueBoxes, submitBestMatch: submitBestMatch)
                     if submitBestMatch.isCorrect {
                         handleCorrectGuess(submitBestMatch: submitBestMatch)
                     } else {
                         handleIncorrectGuess(guessOneAway: submitBestMatch.isOneAway)
                     }
+                } catch {
+                    print("MainGame.submitSelection: Could not handle submit.")
                 }
             }
         }

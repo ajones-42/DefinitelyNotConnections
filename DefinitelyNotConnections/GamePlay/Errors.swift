@@ -12,4 +12,5 @@ enum ValidationError: Error {
     case unknownConnectionsCategoryID
     case alreadyCompletedConnectionsCategory
     case invalidNumMistakesRemaining
+    case submissionError
 }
