@@ -115,8 +115,12 @@ class MainGame {
         return self.gameGrid.getSubmitIsClickable()
     }
     
+    private func getNumMatchesPerConnectionsCategory(selectedClueBoxConnectionsCategoryIDs: [UUID]) -> Dictionary<UUID, Int> {
+        return selectedClueBoxConnectionsCategoryIDs.reduce(into: [:]) { counts, connectionsCategoryID in counts[connectionsCategoryID, default: 0] += 1 }
+    }
+    
     private func getBestMatchConnectionsCategory(selectedClueBoxConnectionsCategoryIDs: [UUID]) throws -> Dictionary<UUID, Int>.Element {
-        let numMatchesPerConnectionsCategory: Dictionary<UUID, Int> = selectedClueBoxConnectionsCategoryIDs.reduce(into: [:]) { counts, connectionsCategoryID in counts[connectionsCategoryID, default: 0] += 1 }
+        let numMatchesPerConnectionsCategory: Dictionary<UUID, Int> = getNumMatchesPerConnectionsCategory(selectedClueBoxConnectionsCategoryIDs: selectedClueBoxConnectionsCategoryIDs)
         if let bestMatchConnectionsCategory: Dictionary<UUID, Int>.Element = numMatchesPerConnectionsCategory.max(by: {a, b in a.value < b.value}) {
             return bestMatchConnectionsCategory
         } else {
