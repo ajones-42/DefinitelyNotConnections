@@ -115,11 +115,8 @@ class MainGame {
         return self.gameGrid.getSubmitIsClickable()
     }
 
-    private func addGuess(selectedRemainingClueBoxes: [ClueBox], submitBestMatch: SubmitBestMatch) throws {
-        let selectedClueInfos: [ClueInfo] = selectedRemainingClueBoxes.map({clueBox in
-            clueBox.clueInfo
-        })
-        let guess = Guess(clueInfos: selectedClueInfos, submitBestMatch: submitBestMatch)
+    private func createAndAddGuess(selectedRemainingClueBoxInfos: [ClueInfo], submitBestMatch: SubmitBestMatch) throws {
+        let guess = Guess(clueInfos: selectedRemainingClueBoxInfos, submitBestMatch: submitBestMatch)
         do {
             try self.allGuesses.addGuess(guess: guess)
         } catch {
@@ -127,10 +124,7 @@ class MainGame {
         }
     }
     
-    private func getSubmitBestMatch(selectedRemainingClueBoxes: [ClueBox]) throws -> SubmitBestMatch {
-        let selectedClueBoxConnectionsCategoryIDs: [UUID] = selectedRemainingClueBoxes.map({clueBox in
-            clueBox.getConnectionsCategoryID()
-        })
+    private func getSubmitBestMatch(selectedClueBoxConnectionsCategoryIDs: [UUID]) throws -> SubmitBestMatch {
         let counts: Dictionary<UUID, Int> = selectedClueBoxConnectionsCategoryIDs.reduce(into: [:]) { counts, connectionsCategoryID in counts[connectionsCategoryID, default: 0] += 1 }
         if let bestConnectionsCategory: Dictionary<UUID, Int>.Element = counts.max(by: {a, b in a.value < b.value}) {
             return SubmitBestMatch(connectionsCategoryID: bestConnectionsCategory.key, numMatches: bestConnectionsCategory.value, numCluesPerConnectionsCategory: self.gameProperties.numCluesPerConnectionsCategory)
@@ -146,8 +140,8 @@ class MainGame {
             let selectedRemainingClueBoxes: [ClueBox] = self.gameGrid.getSelectedRemainingClueBoxes()
 
             do {
-                let submitBestMatch: SubmitBestMatch = try getSubmitBestMatch(selectedRemainingClueBoxes: selectedRemainingClueBoxes)
-                try addGuess(selectedRemainingClueBoxes: selectedRemainingClueBoxes, submitBestMatch: submitBestMatch)
+                let submitBestMatch: SubmitBestMatch = try getSubmitBestMatch(selectedClueBoxConnectionsCategoryIDs: selectedRemainingClueBoxes.map({$0.getConnectionsCategoryID()}))
+                try createAndAddGuess(selectedRemainingClueBoxInfos: selectedRemainingClueBoxes.map({$0.clueInfo}), submitBestMatch: submitBestMatch)
                 if submitBestMatch.isCorrect {
                     handleCorrectGuess(submitBestMatch: submitBestMatch)
                 } else {
