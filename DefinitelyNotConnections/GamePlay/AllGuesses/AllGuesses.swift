@@ -33,6 +33,15 @@ class AllGuesses {
         })
     }
     
+    func createAndAddGuess(selectedRemainingClueBoxInfos: [ClueInfo], submitBestMatch: SubmitBestMatch) throws {
+        let guess = Guess(clueInfos: selectedRemainingClueBoxInfos, submitBestMatch: submitBestMatch)
+        do {
+            try self.addGuess(guess: guess)
+        } catch {
+            throw error
+        }
+    }
+    
     func addGuess(guess: Guess) throws {
         if notAlreadyGuessed(newGuess: guess) {
             self.guesses.append(guess)

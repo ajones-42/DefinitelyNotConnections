@@ -114,15 +114,6 @@ class MainGame {
     public func getSubmitIsClickable() -> Bool {
         return self.gameGrid.getSubmitIsClickable()
     }
-
-    private func createAndAddGuess(selectedRemainingClueBoxInfos: [ClueInfo], submitBestMatch: SubmitBestMatch) throws {
-        let guess = Guess(clueInfos: selectedRemainingClueBoxInfos, submitBestMatch: submitBestMatch)
-        do {
-            try self.allGuesses.addGuess(guess: guess)
-        } catch {
-            throw error
-        }
-    }
     
     private func getSubmitBestMatch(selectedClueBoxConnectionsCategoryIDs: [UUID]) throws -> SubmitBestMatch {
         let counts: Dictionary<UUID, Int> = selectedClueBoxConnectionsCategoryIDs.reduce(into: [:]) { counts, connectionsCategoryID in counts[connectionsCategoryID, default: 0] += 1 }
@@ -141,7 +132,7 @@ class MainGame {
 
             do {
                 let submitBestMatch: SubmitBestMatch = try getSubmitBestMatch(selectedClueBoxConnectionsCategoryIDs: selectedRemainingClueBoxes.map({$0.getConnectionsCategoryID()}))
-                try createAndAddGuess(selectedRemainingClueBoxInfos: selectedRemainingClueBoxes.map({$0.clueInfo}), submitBestMatch: submitBestMatch)
+                try self.allGuesses.createAndAddGuess(selectedRemainingClueBoxInfos: selectedRemainingClueBoxes.map({$0.clueInfo}), submitBestMatch: submitBestMatch)
                 if submitBestMatch.isCorrect {
                     handleCorrectGuess(submitBestMatch: submitBestMatch)
                 } else {
