@@ -10,14 +10,6 @@ import Foundation
 @testable import DefinitelyNotConnections
 
 @Suite struct GuessTests {
-    let clueInfo1: ClueInfo = ClueInfo(clue: "Clue1", connectionsCategoryID: UUID())
-    let clueInfo2: ClueInfo = ClueInfo(clue: "Clue2", connectionsCategoryID: UUID())
-    let clueInfo3: ClueInfo = ClueInfo(clue: "Clue3", connectionsCategoryID: UUID())
-    let clueInfo4: ClueInfo = ClueInfo(clue: "Clue4", connectionsCategoryID: UUID())
-    let clueInfo5: ClueInfo = ClueInfo(clue: "Clue5", connectionsCategoryID: UUID())
-    let clueInfo6: ClueInfo = ClueInfo(clue: "Clue6", connectionsCategoryID: UUID())
-    let clueInfo7: ClueInfo = ClueInfo(clue: "Clue7", connectionsCategoryID: UUID())
-    let clueInfo8: ClueInfo = ClueInfo(clue: "Clue8", connectionsCategoryID: UUID())
     
     // Guess (doesn't) match(es) clueBoxes
 
