@@ -117,8 +117,8 @@ class MainGame {
     
     private func getSubmitBestMatch(selectedClueBoxConnectionsCategoryIDs: [UUID]) throws -> SubmitBestMatch {
         let counts: Dictionary<UUID, Int> = selectedClueBoxConnectionsCategoryIDs.reduce(into: [:]) { counts, connectionsCategoryID in counts[connectionsCategoryID, default: 0] += 1 }
-        if let bestConnectionsCategory: Dictionary<UUID, Int>.Element = counts.max(by: {a, b in a.value < b.value}) {
-            return SubmitBestMatch(connectionsCategoryID: bestConnectionsCategory.key, numMatches: bestConnectionsCategory.value, numCluesPerConnectionsCategory: self.gameProperties.numCluesPerConnectionsCategory)
+        if let bestMatchConnectionsCategory: Dictionary<UUID, Int>.Element = counts.max(by: {a, b in a.value < b.value}) {
+            return SubmitBestMatch(connectionsCategoryID: bestMatchConnectionsCategory.key, numMatches: bestMatchConnectionsCategory.value, numCluesPerConnectionsCategory: self.gameProperties.numCluesPerConnectionsCategory)
         } else {
             print("MainGame.getSubmitBestMatch: Could not find best matching Connections category.")
             throw ValidationError.submissionError
