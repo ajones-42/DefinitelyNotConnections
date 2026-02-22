@@ -14,19 +14,11 @@
 			remoteGlobalIDString = FAD88C242DEDF61200CE86B6;
 			remoteInfo = DefinitelyNotConnections;
 		};
-		FAD88C3D2DEDF61500CE86B6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FAD88C1D2DEDF61200CE86B6 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = FAD88C242DEDF61200CE86B6;
-			remoteInfo = DefinitelyNotConnections;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		FAD562062F3265B000591A70 /* DefinitelyNotConnectionsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DefinitelyNotConnectionsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD88C252DEDF61200CE86B6 /* DefinitelyNotConnections.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DefinitelyNotConnections.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		FAD88C3C2DEDF61500CE86B6 /* DefinitelyNotConnectionsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DefinitelyNotConnectionsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -62,13 +54,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FAD88C392DEDF61500CE86B6 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -86,7 +71,6 @@
 			isa = PBXGroup;
 			children = (
 				FAD88C252DEDF61200CE86B6 /* DefinitelyNotConnections.app */,
-				FAD88C3C2DEDF61500CE86B6 /* DefinitelyNotConnectionsUITests.xctest */,
 				FAD562062F3265B000591A70 /* DefinitelyNotConnectionsTests.xctest */,
 			);
 			name = Products;
@@ -140,29 +124,6 @@
 			productReference = FAD88C252DEDF61200CE86B6 /* DefinitelyNotConnections.app */;
 			productType = "com.apple.product-type.application";
 		};
-		FAD88C3B2DEDF61500CE86B6 /* DefinitelyNotConnectionsUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = FAD88C4C2DEDF61500CE86B6 /* Build configuration list for PBXNativeTarget "DefinitelyNotConnectionsUITests" */;
-			buildPhases = (
-				FAD88C382DEDF61500CE86B6 /* Sources */,
-				FAD88C392DEDF61500CE86B6 /* Frameworks */,
-				FAD88C3A2DEDF61500CE86B6 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				FAD88C3E2DEDF61500CE86B6 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				FAD88C3F2DEDF61500CE86B6 /* DefinitelyNotConnectionsUITests */,
-			);
-			name = DefinitelyNotConnectionsUITests;
-			packageProductDependencies = (
-			);
-			productName = DefinitelyNotConnectionsUITests;
-			productReference = FAD88C3C2DEDF61500CE86B6 /* DefinitelyNotConnectionsUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -181,10 +142,6 @@
 					FAD88C242DEDF61200CE86B6 = {
 						CreatedOnToolsVersion = 16.4;
 					};
-					FAD88C3B2DEDF61500CE86B6 = {
-						CreatedOnToolsVersion = 16.4;
-						TestTargetID = FAD88C242DEDF61200CE86B6;
-					};
 				};
 			};
 			buildConfigurationList = FAD88C202DEDF61200CE86B6 /* Build configuration list for PBXProject "DefinitelyNotConnections" */;
@@ -202,7 +159,6 @@
 			projectRoot = "";
 			targets = (
 				FAD88C242DEDF61200CE86B6 /* DefinitelyNotConnections */,
-				FAD88C3B2DEDF61500CE86B6 /* DefinitelyNotConnectionsUITests */,
 				FAD562052F3265B000591A70 /* DefinitelyNotConnectionsTests */,
 			);
 		};
@@ -217,13 +173,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		FAD88C232DEDF61200CE86B6 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FAD88C3A2DEDF61500CE86B6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -247,13 +196,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FAD88C382DEDF61500CE86B6 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -261,11 +203,6 @@
 			isa = PBXTargetDependency;
 			target = FAD88C242DEDF61200CE86B6 /* DefinitelyNotConnections */;
 			targetProxy = FAD5620A2F3265B000591A70 /* PBXContainerItemProxy */;
-		};
-		FAD88C3E2DEDF61500CE86B6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = FAD88C242DEDF61200CE86B6 /* DefinitelyNotConnections */;
-			targetProxy = FAD88C3D2DEDF61500CE86B6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -488,38 +425,6 @@
 			};
 			name = Release;
 		};
-		FAD88C4D2DEDF61500CE86B6 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = name.alexanderjones.DefinitelyNotConnectionsUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = DefinitelyNotConnections;
-			};
-			name = Debug;
-		};
-		FAD88C4E2DEDF61500CE86B6 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = name.alexanderjones.DefinitelyNotConnectionsUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = DefinitelyNotConnections;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -546,15 +451,6 @@
 			buildConfigurations = (
 				FAD88C472DEDF61500CE86B6 /* Debug */,
 				FAD88C482DEDF61500CE86B6 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		FAD88C4C2DEDF61500CE86B6 /* Build configuration list for PBXNativeTarget "DefinitelyNotConnectionsUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				FAD88C4D2DEDF61500CE86B6 /* Debug */,
-				FAD88C4E2DEDF61500CE86B6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
