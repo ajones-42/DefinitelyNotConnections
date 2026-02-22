@@ -28,7 +28,7 @@ import Testing
     @Test func testAddGuessToEmptyGuesses() {
         let allGuesses: AllGuesses = AllGuessesBuilder().withGuesses(guesses: []).build()
         let newGuess: Guess = GuessBuilder().build()
-        allGuesses.addGuess(guess: newGuess)
+        try! allGuesses.addGuess(guess: newGuess)
 
         #expect(allGuesses.guesses.count == 1 && allGuesses.guesses.last == newGuess)
     }
@@ -36,7 +36,7 @@ import Testing
     @Test func testAddGuess() {
         let allGuesses: AllGuesses = AllGuessesBuilder().withGuesses(guesses: [GuessBuilder().build()]).build()
         let newGuess: Guess = GuessBuilder().build()
-        allGuesses.addGuess(guess: newGuess)
+        try! allGuesses.addGuess(guess: newGuess)
 
         #expect(allGuesses.guesses.count == 2 && allGuesses.guesses.last == newGuess)
     }
