@@ -8,7 +8,7 @@
 import Testing
 @testable import DefinitelyNotConnections
 
-struct MiscFunctionsTests {
+@Suite struct MiscFunctionsTests {
 
     // connectionsCategoriesCompletedInIncreasingOrder()
     @Test func testConnectionsCategoriesCompletedInIncreasingOrder() {
