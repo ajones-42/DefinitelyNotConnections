@@ -32,11 +32,6 @@
 			path = DefinitelyNotConnections;
 			sourceTree = "<group>";
 		};
-		FAD88C3F2DEDF61500CE86B6 /* DefinitelyNotConnectionsUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = DefinitelyNotConnectionsUITests;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,7 +56,6 @@
 			isa = PBXGroup;
 			children = (
 				FAD88C272DEDF61200CE86B6 /* DefinitelyNotConnections */,
-				FAD88C3F2DEDF61500CE86B6 /* DefinitelyNotConnectionsUITests */,
 				FAD562072F3265B000591A70 /* DefinitelyNotConnectionsTests */,
 				FAD88C262DEDF61200CE86B6 /* Products */,
 			);
