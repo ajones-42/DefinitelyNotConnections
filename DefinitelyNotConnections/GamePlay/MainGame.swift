@@ -115,13 +115,22 @@ class MainGame {
         return self.gameGrid.getSubmitIsClickable()
     }
     
-    private func getSubmitBestMatch(selectedClueBoxConnectionsCategoryIDs: [UUID]) throws -> SubmitBestMatch {
-        let counts: Dictionary<UUID, Int> = selectedClueBoxConnectionsCategoryIDs.reduce(into: [:]) { counts, connectionsCategoryID in counts[connectionsCategoryID, default: 0] += 1 }
-        if let bestMatchConnectionsCategory: Dictionary<UUID, Int>.Element = counts.max(by: {a, b in a.value < b.value}) {
-            return SubmitBestMatch(connectionsCategoryID: bestMatchConnectionsCategory.key, numMatches: bestMatchConnectionsCategory.value, numCluesPerConnectionsCategory: self.gameProperties.numCluesPerConnectionsCategory)
+    private func getBestMatchConnectionsCategory(selectedClueBoxConnectionsCategoryIDs: [UUID]) throws -> Dictionary<UUID, Int>.Element {
+        let numMatchesPerConnectionsCategory: Dictionary<UUID, Int> = selectedClueBoxConnectionsCategoryIDs.reduce(into: [:]) { counts, connectionsCategoryID in counts[connectionsCategoryID, default: 0] += 1 }
+        if let bestMatchConnectionsCategory: Dictionary<UUID, Int>.Element = numMatchesPerConnectionsCategory.max(by: {a, b in a.value < b.value}) {
+            return bestMatchConnectionsCategory
         } else {
-            print("MainGame.getSubmitBestMatch: Could not find best matching Connections category.")
+            print("MainGame.getBestMatchConnectionsCategory: Could not find best matching Connections category.")
             throw ValidationError.submissionError
+        }
+    }
+    
+    private func getSubmitBestMatch(selectedClueBoxConnectionsCategoryIDs: [UUID]) throws -> SubmitBestMatch {
+        do {
+            let bestMatchConnectionsCategory: Dictionary<UUID, Int>.Element = try getBestMatchConnectionsCategory(selectedClueBoxConnectionsCategoryIDs: selectedClueBoxConnectionsCategoryIDs)
+            return SubmitBestMatch(connectionsCategoryID: bestMatchConnectionsCategory.key, numMatches: bestMatchConnectionsCategory.value, numCluesPerConnectionsCategory: self.gameProperties.numCluesPerConnectionsCategory)
+        } catch {
+            throw error
         }
     }
     
