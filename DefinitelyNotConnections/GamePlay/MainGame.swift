@@ -132,7 +132,8 @@ class MainGame {
 
             do {
                 let submitBestMatch: SubmitBestMatch = try getSubmitBestMatch(selectedClueBoxConnectionsCategoryIDs: selectedRemainingClueBoxes.map({$0.getConnectionsCategoryID()}))
-                try self.allGuesses.createAndAddGuess(selectedRemainingClueBoxInfos: selectedRemainingClueBoxes.map({$0.clueInfo}), submitBestMatch: submitBestMatch)
+                let guess = Guess(clueInfos: selectedRemainingClueBoxes.map({$0.clueInfo}), submitBestMatch: submitBestMatch)
+                try self.allGuesses.addGuess(guess: guess)
                 if submitBestMatch.isCorrect {
                     handleCorrectGuess(submitBestMatch: submitBestMatch)
                 } else {
