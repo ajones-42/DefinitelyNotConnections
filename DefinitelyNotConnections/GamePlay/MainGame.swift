@@ -90,7 +90,7 @@ class MainGame {
                 admirePuzzle()
             }
         } catch {
-            print("MainGame.handleCorrectGuess: Unable to complete connections category")
+            print("MainGame.handleCorrectGuess: Unable to complete connections category with ID \(submitBestMatch.connectionsCategoryID)")
         }
     }
     
@@ -99,7 +99,7 @@ class MainGame {
         do {
             try self.mistakes.madeMistake()
         } catch {
-            print("MainGame.handleIncorrectGuess: Could not subtract from mistakes. Setting to 0 remaining mistakrs.")
+            print("MainGame.handleIncorrectGuess: Could not decrement mistakes. Setting to 0 remaining mistakes.")
             self.mistakes.setToZeroMistakesRemaining()
         }
         if guessOneAway {
