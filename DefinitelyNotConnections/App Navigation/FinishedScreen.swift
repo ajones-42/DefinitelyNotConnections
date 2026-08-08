@@ -15,7 +15,7 @@ struct FinishedScreen: View {
             Color.purple
                 .ignoresSafeArea()
             VStack {
-                Text("YOU DID IT!")
+                Text("YOU DID IT AGAIN!")
                     .foregroundStyle(.black)
                     .font(.largeTitle)
                     .fontWeight(.heavy)

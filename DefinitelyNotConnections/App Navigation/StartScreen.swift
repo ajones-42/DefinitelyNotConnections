@@ -15,7 +15,7 @@ struct StartScreen: View {
             Color.purple
                 .ignoresSafeArea()
             VStack {
-                Text("11th August, 2025")
+                Text("11th August, 2026")
                     .foregroundStyle(.black)
                     .font(.largeTitle)
                     .fontWeight(.heavy)
@@ -26,7 +26,7 @@ struct StartScreen: View {
                 } label: {
                     AppNavigationButton(text: "Play", boxColour: .black, textColour: .white)
                 }
-                Text("No. 1")
+                Text("No. 2")
                     .foregroundStyle(.black)
                 Text("By Dr. Sir Master Lord Alexander Jones")
                     .foregroundStyle(.black)

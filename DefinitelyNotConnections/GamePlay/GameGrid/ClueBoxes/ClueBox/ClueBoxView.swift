@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ClueBoxView: View {
     let clueBox: ClueBox
-    let boxWidth: CGFloat = 80
+    let boxWidth: CGFloat = 90
     
     var body: some View {
         ZStack {
