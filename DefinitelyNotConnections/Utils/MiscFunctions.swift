@@ -51,13 +51,9 @@ func createDefaultTestSetupInfo() -> SetupInfo {
     return SetupInfo(categoryInfos: categoryInfos, numMistakes: 4)
 }
 
-func createSetupInfo() -> SetupInfo {
-    let yellowCategoryInfo : CategoryInfo = CategoryInfo(name: "Alex's Titles", colour: .yellow, clues: ["OCEAN COOKIE", "BABOUSHY", "BABY MAN", "STINKEPUH"])
-    let greenCategoryInfo : CategoryInfo = CategoryInfo(name: "Who Caro Really Is", colour: .green, clues: ["MASHED POTATO", "LOUISE", "BOB", "FRANCESCA"])
-    let blueCategoryInfo : CategoryInfo = CategoryInfo(name: "Key Lyrics Of Caro's Bops", colour: .blue, clues: ["NOSE", "HEAT", "COOK", "TEETH"])
-    let purpleCategoryInfo : CategoryInfo = CategoryInfo(name: "Potential Nicknames For Our Potential Children", colour: .purple, clues: ["JAN", "BROOK", "EGG", "BRINE"])
-    let allCategoryInfos: [CategoryInfo] = [yellowCategoryInfo, greenCategoryInfo, blueCategoryInfo, purpleCategoryInfo]
-    return SetupInfo(categoryInfos: allCategoryInfos, numMistakes: 4)
+func createRealSetupInfo(year: Int) -> SetupInfo {
+    let categoryInfos: [CategoryInfo] = getRealCategories(year: year)!
+    return SetupInfo(categoryInfos: categoryInfos, numMistakes: 4)
 }
 
 func categoriesCompletedInIncreasingOrder(category1: Category, category2: Category) -> Bool {

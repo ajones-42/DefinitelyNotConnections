@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct DefinitelyNotConnectionsApp: App {
-    @State private var mainGame: MainGame = MainGame(setupInfo: createSetupInfo())
+    @State private var mainGame: MainGame = MainGame(setupInfo: createRealSetupInfo(year: 2))
     
     var body: some Scene {
         WindowGroup {
